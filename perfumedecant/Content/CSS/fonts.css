@@ -1,0 +1,26 @@
+
+/* FONTS */
+@import url(https://fonts.googleapis.com/css?family=Roboto:400,100,100italic,300,300italic,400italic,500,700,500italic,700italic,900,900italic);
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,600,600italic,700,800,400italic);
+@import url(https://fonts.googleapis.com/css?family=Raleway:400,800,900,700,600,500,300,200,100);
+
+@font-face {
+    font-family: 'Parastoo';
+    src: url('../Fonts/Parastoo.eot');
+    src: url('../Fonts/Parastoo.eot?#iefix') format('embedded-opentype'), url('../Fonts/Parastoo.woff') format('woff'), url('../Fonts/Parastoo.woff2') format('woff2'), url('../Fonts/Parastoo.ttf') format('truetype');
+    font-weight: bold;
+}
+
+@font-face {
+    font-family: 'Parastoo-Bold';
+    src: url('../Fonts/Parastoo-Bold.eot');
+    src: url('../Fonts/Parastoo-Bold.eot?#iefix') format('embedded-opentype'), url('../Fonts/Parastoo-Bold.woff') format('woff'), url('../Fonts/Parastoo-Bold.woff2') format('woff2'), url('../Fonts/Parastoo-Bold.ttf') format('truetype');
+    font-weight: bold;
+}
+
+@font-face {
+    font-family: 'aseman';
+    src: url('../Fonts/aseman.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
