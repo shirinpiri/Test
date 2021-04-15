@@ -6386,7 +6386,7 @@ a.default-btn {
         }
 
             .product-details-content .pro-details-social ul li:last-child {
-                margin-right: 0px;
+                margin-left: 0px;
             }
 
             .product-details-content .pro-details-social ul li a {
@@ -6548,7 +6548,7 @@ a.default-btn {
 
 .product-tab-list-2 a {
     display: inline-block;
-    margin-right: 23px;
+    margin-left: 23px;
 }
 
 @media only screen and (max-width: 767px) {
