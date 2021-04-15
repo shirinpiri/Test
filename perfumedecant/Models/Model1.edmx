@@ -1,0 +1,1651 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="PerfumeDecant_DBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Tbl_Article">
+          <Key>
+            <PropertyRef Name="Article_ID" />
+          </Key>
+          <Property Name="Article_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Article_Title" Type="nvarchar(max)" />
+          <Property Name="Article_Path" Type="nvarchar" MaxLength="200" />
+        </EntityType>
+        <EntityType Name="Tbl_Bill">
+          <Key>
+            <PropertyRef Name="Bill_ID" />
+          </Key>
+          <Property Name="Bill_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Bill_Date" Type="datetime" />
+          <Property Name="Bill_PayPrice" Type="int" />
+          <Property Name="Bill_PostType_ID" Type="int" />
+          <Property Name="Bill_InvoiceNumber" Type="nvarchar" MaxLength="150" />
+          <Property Name="Bill_RefID" Type="int" />
+          <Property Name="Bill_TransNo" Type="nvarchar" MaxLength="150" />
+          <Property Name="Bill_Status" Type="bit" />
+          <Property Name="Bill_TrackingCode" Type="nvarchar" MaxLength="150" />
+          <Property Name="Bill_RefNo" Type="nvarchar" MaxLength="150" />
+          <Property Name="Bill_Off" Type="int" />
+          <Property Name="Bill_OtherPrice" Type="int" />
+          <Property Name="Bill_PostStatus_ID" Type="int" />
+        </EntityType>
+        <EntityType Name="Tbl_Brand">
+          <Key>
+            <PropertyRef Name="Brand_ID" />
+          </Key>
+          <Property Name="Brand_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Brand_Title" Type="nvarchar" MaxLength="200" />
+          <Property Name="Brand_ImageIndex" Type="nvarchar" MaxLength="200" />
+        </EntityType>
+        <EntityType Name="Tbl_Category">
+          <Key>
+            <PropertyRef Name="Category_ID" />
+          </Key>
+          <Property Name="Category_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Category_Title" Type="nvarchar" MaxLength="200" />
+        </EntityType>
+        <EntityType Name="Tbl_City">
+          <Key>
+            <PropertyRef Name="City_ID" />
+          </Key>
+          <Property Name="City_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="City_Title" Type="nvarchar" MaxLength="150" />
+          <Property Name="City_State_ID" Type="int" />
+        </EntityType>
+        <EntityType Name="Tbl_Cologne">
+          <Key>
+            <PropertyRef Name="Cologne_ID" />
+          </Key>
+          <Property Name="Cologne_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Cologne_Perfume_ID" Type="int" />
+          <Property Name="Cologne_AllCount" Type="int" />
+          <Property Name="Cologne_PricePerUnit" Type="int" />
+          <Property Name="Cologne_Weight" Type="int" />
+        </EntityType>
+        <EntityType Name="Tbl_CompanySample">
+          <Key>
+            <PropertyRef Name="CompanySample_ID" />
+          </Key>
+          <Property Name="CompanySample_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CompanySample_Perfume_ID" Type="int" />
+          <Property Name="CompanySample_AllCount" Type="int" />
+          <Property Name="CompanySample_Price" Type="int" />
+          <Property Name="CompanySample_Weight" Type="float" />
+        </EntityType>
+        <EntityType Name="Tbl_EmailMessage">
+          <Key>
+            <PropertyRef Name="Email_ID" />
+          </Key>
+          <Property Name="Email_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Email_Subject" Type="nvarchar" MaxLength="200" />
+          <Property Name="Email_Body" Type="nvarchar(max)" />
+          <Property Name="Email_Email" Type="nvarchar" MaxLength="200" />
+          <Property Name="Emai_Password" Type="nvarchar" MaxLength="150" />
+        </EntityType>
+        <EntityType Name="Tbl_HandySample">
+          <Key>
+            <PropertyRef Name="HandySample_ID" />
+          </Key>
+          <Property Name="HandySample_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="HandySample_Perfume_ID" Type="int" />
+          <Property Name="HandySample_AllWeight" Type="int" />
+          <Property Name="HandySample_PricePerMil" Type="int" />
+        </EntityType>
+        <EntityType Name="Tbl_InterimBill">
+          <Key>
+            <PropertyRef Name="InterimBill_ID" />
+          </Key>
+          <Property Name="InterimBill_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="InterimBill_Date" Type="datetime" />
+          <Property Name="InterimBill_Category_ID" Type="int" />
+          <Property Name="InterimBill_Perfume_ID" Type="int" />
+          <Property Name="InterimBill_Count" Type="int" />
+          <Property Name="InterimBill_Weight" Type="float" />
+          <Property Name="InterimBill_Price" Type="int" />
+          <Property Name="InterimBill_InvoiceNum" Type="int" />
+          <Property Name="InterimBill_ExpDate" Type="datetime" />
+          <Property Name="InterimBill_User_ID" Type="int" />
+          <Property Name="InterimBill_Status" Type="bit" />
+        </EntityType>
+        <EntityType Name="Tbl_News">
+          <Key>
+            <PropertyRef Name="News_ID" />
+          </Key>
+          <Property Name="News_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="News_Title" Type="nvarchar(max)" />
+          <Property Name="News_Description" Type="nvarchar(max)" />
+          <Property Name="News_Date" Type="datetime" />
+          <Property Name="News_ImageIndex" Type="nvarchar" MaxLength="150" />
+        </EntityType>
+        <EntityType Name="Tbl_Perfume">
+          <Key>
+            <PropertyRef Name="Perfume_ID" />
+          </Key>
+          <Property Name="Perfume_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Perfume_Name" Type="nvarchar(max)" />
+          <Property Name="Perfume_Brand_ID" Type="int" />
+          <Property Name="Perfume_ImageIndex" Type="nvarchar" MaxLength="150" />
+          <Property Name="Perfume_Perfumer" Type="nvarchar" MaxLength="150" />
+          <Property Name="Perfume_Country" Type="nvarchar" MaxLength="150" />
+          <Property Name="Perfume_TemperOfPerfume" Type="nvarchar(max)" />
+          <Property Name="Perfume_Gender" Type="nvarchar" MaxLength="150" />
+          <Property Name="Perfume_OlfactionGroups" Type="nvarchar(max)" />
+          <Property Name="Perfume_Type_ID" Type="int" />
+          <Property Name="Perfume_Notes" Type="nvarchar(max)" />
+          <Property Name="Perfume_SpecialOffer" Type="bit" />
+          <Property Name="Perfume_Description" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="Tbl_PerfumeImages">
+          <Key>
+            <PropertyRef Name="PerfumeImages_ID" />
+          </Key>
+          <Property Name="PerfumeImages_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PerfumeImages_Perfume_ID" Type="int" />
+          <Property Name="PerfumeImages_ImageIndex" Type="nvarchar" MaxLength="200" />
+        </EntityType>
+        <EntityType Name="Tbl_PerfumeSeason">
+          <Key>
+            <PropertyRef Name="PerfumeSeason_ID" />
+          </Key>
+          <Property Name="PerfumeSeason_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PerfumeSeason_Perfume_ID" Type="int" />
+          <Property Name="PerfumeSeason_Season_ID" Type="int" />
+        </EntityType>
+        <EntityType Name="Tbl_PerfumeType">
+          <Key>
+            <PropertyRef Name="PerfumeType_ID" />
+          </Key>
+          <Property Name="PerfumeType_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PerfumeType_Title" Type="nvarchar" MaxLength="200" />
+        </EntityType>
+        <EntityType Name="Tbl_PostStatus">
+          <Key>
+            <PropertyRef Name="PostStatus_ID" />
+          </Key>
+          <Property Name="PostStatus_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PostStatus_Title" Type="nvarchar" MaxLength="150" />
+        </EntityType>
+        <EntityType Name="Tbl_PostType">
+          <Key>
+            <PropertyRef Name="PostType_ID" />
+          </Key>
+          <Property Name="PostType_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PostType_Title" Type="nvarchar" MaxLength="150" />
+          <Property Name="PostType_Price" Type="int" />
+        </EntityType>
+        <EntityType Name="Tbl_ResetPasswordRequests">
+          <Key>
+            <PropertyRef Name="ResetPass_ID" />
+          </Key>
+          <Property Name="ResetPass_ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="ResetPass_User_ID" Type="int" Nullable="false" />
+          <Property Name="ResetPass_Date" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Tbl_Role">
+          <Key>
+            <PropertyRef Name="Role_ID" />
+          </Key>
+          <Property Name="Role_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Role_Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="Role_Title" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Tbl_Season">
+          <Key>
+            <PropertyRef Name="Season_ID" />
+          </Key>
+          <Property Name="Season_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Season_Title" Type="nvarchar" MaxLength="150" />
+          <Property Name="Season_ImageIndex" Type="nvarchar" MaxLength="200" />
+        </EntityType>
+        <EntityType Name="Tbl_Services">
+          <Key>
+            <PropertyRef Name="Services_ID" />
+          </Key>
+          <Property Name="Services_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Services_Title" Type="nvarchar" MaxLength="200" />
+          <Property Name="Services_Description" Type="nvarchar(max)" />
+          <Property Name="Services_ImageIndex" Type="nvarchar" MaxLength="200" />
+          <Property Name="Services_SiteServiceID" Type="int" />
+        </EntityType>
+        <EntityType Name="Tbl_SiteService">
+          <Key>
+            <PropertyRef Name="SiteService_ID" />
+          </Key>
+          <Property Name="SiteService_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SiteService_Title" Type="nvarchar" MaxLength="150" />
+          <Property Name="SiteService_Description" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="Tbl_Slide">
+          <Key>
+            <PropertyRef Name="Slide_ID" />
+          </Key>
+          <Property Name="Slide_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Slide_Title" Type="nvarchar" MaxLength="200" />
+          <Property Name="Slide_ImageIndex" Type="nvarchar" MaxLength="200" />
+        </EntityType>
+        <EntityType Name="Tbl_State">
+          <Key>
+            <PropertyRef Name="State_ID" />
+          </Key>
+          <Property Name="State_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="State_Title" Type="nvarchar" MaxLength="150" />
+        </EntityType>
+        <EntityType Name="Tbl_User">
+          <Key>
+            <PropertyRef Name="User_ID" />
+          </Key>
+          <Property Name="User_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="User_NameFamily" Type="nvarchar" MaxLength="150" />
+          <Property Name="User_Username" Type="nvarchar" MaxLength="150" />
+          <Property Name="User_Email" Type="nvarchar" MaxLength="100" />
+          <Property Name="User_Password" Type="nvarchar" MaxLength="150" />
+          <Property Name="User_Address" Type="nvarchar(max)" />
+          <Property Name="User_City_ID" Type="int" />
+          <Property Name="User_PostalCode" Type="nvarchar" MaxLength="15" />
+          <Property Name="User_Tel" Type="nvarchar" MaxLength="20" />
+          <Property Name="User_Gender" Type="nvarchar" MaxLength="50" />
+          <Property Name="User_Birthday" Type="nvarchar" MaxLength="50" />
+          <Property Name="User_Mobile" Type="nvarchar" MaxLength="15" />
+          <Property Name="User_Date" Type="datetime" />
+          <Property Name="User_Active" Type="bit" />
+          <Property Name="User_Role_ID" Type="int" />
+          <Property Name="User_NationalCode" Type="nvarchar" MaxLength="50" />
+          <Property Name="User_ImageIndex" Type="nvarchar" MaxLength="150" />
+        </EntityType>
+        <EntityType Name="Tbl_UserBills">
+          <Key>
+            <PropertyRef Name="UserBills_ID" />
+          </Key>
+          <Property Name="UserBills_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserBills_InterimBill_ID" Type="int" />
+          <Property Name="UserBills_Bill_ID" Type="int" />
+        </EntityType>
+        <Association Name="FK_Tbl_Bill_Tbl_PostStatus">
+          <End Role="Tbl_PostStatus" Type="Self.Tbl_PostStatus" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Tbl_Bill" Type="Self.Tbl_Bill" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_PostStatus">
+              <PropertyRef Name="PostStatus_ID" />
+            </Principal>
+            <Dependent Role="Tbl_Bill">
+              <PropertyRef Name="Bill_PostStatus_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tbl_Bill_Tbl_PostType">
+          <End Role="Tbl_PostType" Type="Self.Tbl_PostType" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Tbl_Bill" Type="Self.Tbl_Bill" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_PostType">
+              <PropertyRef Name="PostType_ID" />
+            </Principal>
+            <Dependent Role="Tbl_Bill">
+              <PropertyRef Name="Bill_PostType_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tbl_City_Tbl_State">
+          <End Role="Tbl_State" Type="Self.Tbl_State" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Tbl_City" Type="Self.Tbl_City" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_State">
+              <PropertyRef Name="State_ID" />
+            </Principal>
+            <Dependent Role="Tbl_City">
+              <PropertyRef Name="City_State_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tbl_Cologne_Tbl_Perfume">
+          <End Role="Tbl_Perfume" Type="Self.Tbl_Perfume" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Tbl_Cologne" Type="Self.Tbl_Cologne" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_Perfume">
+              <PropertyRef Name="Perfume_ID" />
+            </Principal>
+            <Dependent Role="Tbl_Cologne">
+              <PropertyRef Name="Cologne_Perfume_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tbl_CompanySample_Tbl_Perfume">
+          <End Role="Tbl_Perfume" Type="Self.Tbl_Perfume" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Tbl_CompanySample" Type="Self.Tbl_CompanySample" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_Perfume">
+              <PropertyRef Name="Perfume_ID" />
+            </Principal>
+            <Dependent Role="Tbl_CompanySample">
+              <PropertyRef Name="CompanySample_Perfume_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tbl_HandySample_Tbl_Perfume">
+          <End Role="Tbl_Perfume" Type="Self.Tbl_Perfume" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Tbl_HandySample" Type="Self.Tbl_HandySample" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_Perfume">
+              <PropertyRef Name="Perfume_ID" />
+            </Principal>
+            <Dependent Role="Tbl_HandySample">
+              <PropertyRef Name="HandySample_Perfume_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tbl_InterimBill_Tbl_Category">
+          <End Role="Tbl_Category" Type="Self.Tbl_Category" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Tbl_InterimBill" Type="Self.Tbl_InterimBill" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_Category">
+              <PropertyRef Name="Category_ID" />
+            </Principal>
+            <Dependent Role="Tbl_InterimBill">
+              <PropertyRef Name="InterimBill_Category_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tbl_InterimBill_Tbl_Perfume">
+          <End Role="Tbl_Perfume" Type="Self.Tbl_Perfume" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Tbl_InterimBill" Type="Self.Tbl_InterimBill" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_Perfume">
+              <PropertyRef Name="Perfume_ID" />
+            </Principal>
+            <Dependent Role="Tbl_InterimBill">
+              <PropertyRef Name="InterimBill_Perfume_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tbl_InterimBill_Tbl_User">
+          <End Role="Tbl_User" Type="Self.Tbl_User" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Tbl_InterimBill" Type="Self.Tbl_InterimBill" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_User">
+              <PropertyRef Name="User_ID" />
+            </Principal>
+            <Dependent Role="Tbl_InterimBill">
+              <PropertyRef Name="InterimBill_User_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tbl_Perfume_Tbl_Brand">
+          <End Role="Tbl_Brand" Type="Self.Tbl_Brand" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Tbl_Perfume" Type="Self.Tbl_Perfume" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_Brand">
+              <PropertyRef Name="Brand_ID" />
+            </Principal>
+            <Dependent Role="Tbl_Perfume">
+              <PropertyRef Name="Perfume_Brand_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tbl_Perfume_Tbl_PerfumeType">
+          <End Role="Tbl_PerfumeType" Type="Self.Tbl_PerfumeType" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Tbl_Perfume" Type="Self.Tbl_Perfume" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_PerfumeType">
+              <PropertyRef Name="PerfumeType_ID" />
+            </Principal>
+            <Dependent Role="Tbl_Perfume">
+              <PropertyRef Name="Perfume_Type_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tbl_PerfumeImages_Tbl_Perfume">
+          <End Role="Tbl_Perfume" Type="Self.Tbl_Perfume" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Tbl_PerfumeImages" Type="Self.Tbl_PerfumeImages" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_Perfume">
+              <PropertyRef Name="Perfume_ID" />
+            </Principal>
+            <Dependent Role="Tbl_PerfumeImages">
+              <PropertyRef Name="PerfumeImages_Perfume_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tbl_PerfumeSeason_Tbl_Perfume">
+          <End Role="Tbl_Perfume" Type="Self.Tbl_Perfume" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Tbl_PerfumeSeason" Type="Self.Tbl_PerfumeSeason" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_Perfume">
+              <PropertyRef Name="Perfume_ID" />
+            </Principal>
+            <Dependent Role="Tbl_PerfumeSeason">
+              <PropertyRef Name="PerfumeSeason_Perfume_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tbl_PerfumeSeason_Tbl_Season">
+          <End Role="Tbl_Season" Type="Self.Tbl_Season" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Tbl_PerfumeSeason" Type="Self.Tbl_PerfumeSeason" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_Season">
+              <PropertyRef Name="Season_ID" />
+            </Principal>
+            <Dependent Role="Tbl_PerfumeSeason">
+              <PropertyRef Name="PerfumeSeason_Season_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tbl_ResetPasswordRequests_Tbl_User">
+          <End Role="Tbl_User" Type="Self.Tbl_User" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Tbl_ResetPasswordRequests" Type="Self.Tbl_ResetPasswordRequests" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_User">
+              <PropertyRef Name="User_ID" />
+            </Principal>
+            <Dependent Role="Tbl_ResetPasswordRequests">
+              <PropertyRef Name="ResetPass_User_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tbl_Services_Tbl_SiteService">
+          <End Role="Tbl_SiteService" Type="Self.Tbl_SiteService" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Tbl_Services" Type="Self.Tbl_Services" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_SiteService">
+              <PropertyRef Name="SiteService_ID" />
+            </Principal>
+            <Dependent Role="Tbl_Services">
+              <PropertyRef Name="Services_SiteServiceID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tbl_User_Tbl_City">
+          <End Role="Tbl_City" Type="Self.Tbl_City" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Tbl_User" Type="Self.Tbl_User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_City">
+              <PropertyRef Name="City_ID" />
+            </Principal>
+            <Dependent Role="Tbl_User">
+              <PropertyRef Name="User_City_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tbl_User_Tbl_Role">
+          <End Role="Tbl_Role" Type="Self.Tbl_Role" Multiplicity="0..1" />
+          <End Role="Tbl_User" Type="Self.Tbl_User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_Role">
+              <PropertyRef Name="Role_ID" />
+            </Principal>
+            <Dependent Role="Tbl_User">
+              <PropertyRef Name="User_Role_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tbl_UserBills_Tbl_Bill">
+          <End Role="Tbl_Bill" Type="Self.Tbl_Bill" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Tbl_UserBills" Type="Self.Tbl_UserBills" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_Bill">
+              <PropertyRef Name="Bill_ID" />
+            </Principal>
+            <Dependent Role="Tbl_UserBills">
+              <PropertyRef Name="UserBills_Bill_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tbl_UserBills_Tbl_InterimBill">
+          <End Role="Tbl_InterimBill" Type="Self.Tbl_InterimBill" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Tbl_UserBills" Type="Self.Tbl_UserBills" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_InterimBill">
+              <PropertyRef Name="InterimBill_ID" />
+            </Principal>
+            <Dependent Role="Tbl_UserBills">
+              <PropertyRef Name="UserBills_InterimBill_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="PerfumeDecant_DBModelStoreContainer">
+          <EntitySet Name="Tbl_Article" EntityType="Self.Tbl_Article" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tbl_Bill" EntityType="Self.Tbl_Bill" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tbl_Brand" EntityType="Self.Tbl_Brand" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tbl_Category" EntityType="Self.Tbl_Category" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tbl_City" EntityType="Self.Tbl_City" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tbl_Cologne" EntityType="Self.Tbl_Cologne" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tbl_CompanySample" EntityType="Self.Tbl_CompanySample" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tbl_EmailMessage" EntityType="Self.Tbl_EmailMessage" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tbl_HandySample" EntityType="Self.Tbl_HandySample" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tbl_InterimBill" EntityType="Self.Tbl_InterimBill" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tbl_News" EntityType="Self.Tbl_News" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tbl_Perfume" EntityType="Self.Tbl_Perfume" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tbl_PerfumeImages" EntityType="Self.Tbl_PerfumeImages" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tbl_PerfumeSeason" EntityType="Self.Tbl_PerfumeSeason" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tbl_PerfumeType" EntityType="Self.Tbl_PerfumeType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tbl_PostStatus" EntityType="Self.Tbl_PostStatus" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tbl_PostType" EntityType="Self.Tbl_PostType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tbl_ResetPasswordRequests" EntityType="Self.Tbl_ResetPasswordRequests" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tbl_Role" EntityType="Self.Tbl_Role" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tbl_Season" EntityType="Self.Tbl_Season" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tbl_Services" EntityType="Self.Tbl_Services" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tbl_SiteService" EntityType="Self.Tbl_SiteService" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tbl_Slide" EntityType="Self.Tbl_Slide" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tbl_State" EntityType="Self.Tbl_State" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tbl_User" EntityType="Self.Tbl_User" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tbl_UserBills" EntityType="Self.Tbl_UserBills" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Tbl_Bill_Tbl_PostStatus" Association="Self.FK_Tbl_Bill_Tbl_PostStatus">
+            <End Role="Tbl_PostStatus" EntitySet="Tbl_PostStatus" />
+            <End Role="Tbl_Bill" EntitySet="Tbl_Bill" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tbl_Bill_Tbl_PostType" Association="Self.FK_Tbl_Bill_Tbl_PostType">
+            <End Role="Tbl_PostType" EntitySet="Tbl_PostType" />
+            <End Role="Tbl_Bill" EntitySet="Tbl_Bill" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tbl_City_Tbl_State" Association="Self.FK_Tbl_City_Tbl_State">
+            <End Role="Tbl_State" EntitySet="Tbl_State" />
+            <End Role="Tbl_City" EntitySet="Tbl_City" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tbl_Cologne_Tbl_Perfume" Association="Self.FK_Tbl_Cologne_Tbl_Perfume">
+            <End Role="Tbl_Perfume" EntitySet="Tbl_Perfume" />
+            <End Role="Tbl_Cologne" EntitySet="Tbl_Cologne" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tbl_CompanySample_Tbl_Perfume" Association="Self.FK_Tbl_CompanySample_Tbl_Perfume">
+            <End Role="Tbl_Perfume" EntitySet="Tbl_Perfume" />
+            <End Role="Tbl_CompanySample" EntitySet="Tbl_CompanySample" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tbl_HandySample_Tbl_Perfume" Association="Self.FK_Tbl_HandySample_Tbl_Perfume">
+            <End Role="Tbl_Perfume" EntitySet="Tbl_Perfume" />
+            <End Role="Tbl_HandySample" EntitySet="Tbl_HandySample" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tbl_InterimBill_Tbl_Category" Association="Self.FK_Tbl_InterimBill_Tbl_Category">
+            <End Role="Tbl_Category" EntitySet="Tbl_Category" />
+            <End Role="Tbl_InterimBill" EntitySet="Tbl_InterimBill" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tbl_InterimBill_Tbl_Perfume" Association="Self.FK_Tbl_InterimBill_Tbl_Perfume">
+            <End Role="Tbl_Perfume" EntitySet="Tbl_Perfume" />
+            <End Role="Tbl_InterimBill" EntitySet="Tbl_InterimBill" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tbl_InterimBill_Tbl_User" Association="Self.FK_Tbl_InterimBill_Tbl_User">
+            <End Role="Tbl_User" EntitySet="Tbl_User" />
+            <End Role="Tbl_InterimBill" EntitySet="Tbl_InterimBill" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tbl_Perfume_Tbl_Brand" Association="Self.FK_Tbl_Perfume_Tbl_Brand">
+            <End Role="Tbl_Brand" EntitySet="Tbl_Brand" />
+            <End Role="Tbl_Perfume" EntitySet="Tbl_Perfume" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tbl_Perfume_Tbl_PerfumeType" Association="Self.FK_Tbl_Perfume_Tbl_PerfumeType">
+            <End Role="Tbl_PerfumeType" EntitySet="Tbl_PerfumeType" />
+            <End Role="Tbl_Perfume" EntitySet="Tbl_Perfume" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tbl_PerfumeImages_Tbl_Perfume" Association="Self.FK_Tbl_PerfumeImages_Tbl_Perfume">
+            <End Role="Tbl_Perfume" EntitySet="Tbl_Perfume" />
+            <End Role="Tbl_PerfumeImages" EntitySet="Tbl_PerfumeImages" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tbl_PerfumeSeason_Tbl_Perfume" Association="Self.FK_Tbl_PerfumeSeason_Tbl_Perfume">
+            <End Role="Tbl_Perfume" EntitySet="Tbl_Perfume" />
+            <End Role="Tbl_PerfumeSeason" EntitySet="Tbl_PerfumeSeason" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tbl_PerfumeSeason_Tbl_Season" Association="Self.FK_Tbl_PerfumeSeason_Tbl_Season">
+            <End Role="Tbl_Season" EntitySet="Tbl_Season" />
+            <End Role="Tbl_PerfumeSeason" EntitySet="Tbl_PerfumeSeason" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tbl_ResetPasswordRequests_Tbl_User" Association="Self.FK_Tbl_ResetPasswordRequests_Tbl_User">
+            <End Role="Tbl_User" EntitySet="Tbl_User" />
+            <End Role="Tbl_ResetPasswordRequests" EntitySet="Tbl_ResetPasswordRequests" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tbl_Services_Tbl_SiteService" Association="Self.FK_Tbl_Services_Tbl_SiteService">
+            <End Role="Tbl_SiteService" EntitySet="Tbl_SiteService" />
+            <End Role="Tbl_Services" EntitySet="Tbl_Services" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tbl_User_Tbl_City" Association="Self.FK_Tbl_User_Tbl_City">
+            <End Role="Tbl_City" EntitySet="Tbl_City" />
+            <End Role="Tbl_User" EntitySet="Tbl_User" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tbl_User_Tbl_Role" Association="Self.FK_Tbl_User_Tbl_Role">
+            <End Role="Tbl_Role" EntitySet="Tbl_Role" />
+            <End Role="Tbl_User" EntitySet="Tbl_User" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tbl_UserBills_Tbl_Bill" Association="Self.FK_Tbl_UserBills_Tbl_Bill">
+            <End Role="Tbl_Bill" EntitySet="Tbl_Bill" />
+            <End Role="Tbl_UserBills" EntitySet="Tbl_UserBills" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tbl_UserBills_Tbl_InterimBill" Association="Self.FK_Tbl_UserBills_Tbl_InterimBill">
+            <End Role="Tbl_InterimBill" EntitySet="Tbl_InterimBill" />
+            <End Role="Tbl_UserBills" EntitySet="Tbl_UserBills" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="PerfumeDecant_DBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Tbl_Article">
+          <Key>
+            <PropertyRef Name="Article_ID" />
+          </Key>
+          <Property Name="Article_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Article_Title" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Article_Path" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Tbl_Bill">
+          <Key>
+            <PropertyRef Name="Bill_ID" />
+          </Key>
+          <Property Name="Bill_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Bill_Date" Type="DateTime" Precision="3" />
+          <Property Name="Bill_PayPrice" Type="Int32" />
+          <Property Name="Bill_PostType_ID" Type="Int32" />
+          <Property Name="Bill_InvoiceNumber" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="Bill_RefID" Type="Int32" />
+          <Property Name="Bill_TransNo" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="Bill_Status" Type="Boolean" />
+          <Property Name="Bill_TrackingCode" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="Bill_RefNo" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="Bill_Off" Type="Int32" />
+          <Property Name="Bill_OtherPrice" Type="Int32" />
+          <Property Name="Bill_PostStatus_ID" Type="Int32" />
+          <NavigationProperty Name="Tbl_PostStatus" Relationship="Self.FK_Tbl_Bill_Tbl_PostStatus" FromRole="Tbl_Bill" ToRole="Tbl_PostStatus" />
+          <NavigationProperty Name="Tbl_PostType" Relationship="Self.FK_Tbl_Bill_Tbl_PostType" FromRole="Tbl_Bill" ToRole="Tbl_PostType" />
+          <NavigationProperty Name="Tbl_UserBills" Relationship="Self.FK_Tbl_UserBills_Tbl_Bill" FromRole="Tbl_Bill" ToRole="Tbl_UserBills" />
+        </EntityType>
+        <EntityType Name="Tbl_Brand">
+          <Key>
+            <PropertyRef Name="Brand_ID" />
+          </Key>
+          <Property Name="Brand_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Brand_Title" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Brand_ImageIndex" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Tbl_Perfume" Relationship="Self.FK_Tbl_Perfume_Tbl_Brand" FromRole="Tbl_Brand" ToRole="Tbl_Perfume" />
+        </EntityType>
+        <EntityType Name="Tbl_Category">
+          <Key>
+            <PropertyRef Name="Category_ID" />
+          </Key>
+          <Property Name="Category_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Category_Title" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Tbl_InterimBill" Relationship="Self.FK_Tbl_InterimBill_Tbl_Category" FromRole="Tbl_Category" ToRole="Tbl_InterimBill" />
+        </EntityType>
+        <EntityType Name="Tbl_City">
+          <Key>
+            <PropertyRef Name="City_ID" />
+          </Key>
+          <Property Name="City_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="City_Title" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="City_State_ID" Type="Int32" />
+          <NavigationProperty Name="Tbl_State" Relationship="Self.FK_Tbl_City_Tbl_State" FromRole="Tbl_City" ToRole="Tbl_State" />
+          <NavigationProperty Name="Tbl_User" Relationship="Self.FK_Tbl_User_Tbl_City" FromRole="Tbl_City" ToRole="Tbl_User" />
+        </EntityType>
+        <EntityType Name="Tbl_Cologne">
+          <Key>
+            <PropertyRef Name="Cologne_ID" />
+          </Key>
+          <Property Name="Cologne_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Cologne_Perfume_ID" Type="Int32" />
+          <Property Name="Cologne_AllCount" Type="Int32" />
+          <Property Name="Cologne_PricePerUnit" Type="Int32" />
+          <Property Name="Cologne_Weight" Type="Int32" />
+          <NavigationProperty Name="Tbl_Perfume" Relationship="Self.FK_Tbl_Cologne_Tbl_Perfume" FromRole="Tbl_Cologne" ToRole="Tbl_Perfume" />
+        </EntityType>
+        <EntityType Name="Tbl_CompanySample">
+          <Key>
+            <PropertyRef Name="CompanySample_ID" />
+          </Key>
+          <Property Name="CompanySample_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CompanySample_Perfume_ID" Type="Int32" />
+          <Property Name="CompanySample_AllCount" Type="Int32" />
+          <Property Name="CompanySample_Price" Type="Int32" />
+          <Property Name="CompanySample_Weight" Type="Double" />
+          <NavigationProperty Name="Tbl_Perfume" Relationship="Self.FK_Tbl_CompanySample_Tbl_Perfume" FromRole="Tbl_CompanySample" ToRole="Tbl_Perfume" />
+        </EntityType>
+        <EntityType Name="Tbl_EmailMessage">
+          <Key>
+            <PropertyRef Name="Email_ID" />
+          </Key>
+          <Property Name="Email_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Email_Subject" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Email_Body" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Email_Email" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Emai_Password" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Tbl_HandySample">
+          <Key>
+            <PropertyRef Name="HandySample_ID" />
+          </Key>
+          <Property Name="HandySample_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="HandySample_Perfume_ID" Type="Int32" />
+          <Property Name="HandySample_AllWeight" Type="Int32" />
+          <Property Name="HandySample_PricePerMil" Type="Int32" />
+          <NavigationProperty Name="Tbl_Perfume" Relationship="Self.FK_Tbl_HandySample_Tbl_Perfume" FromRole="Tbl_HandySample" ToRole="Tbl_Perfume" />
+        </EntityType>
+        <EntityType Name="Tbl_InterimBill">
+          <Key>
+            <PropertyRef Name="InterimBill_ID" />
+          </Key>
+          <Property Name="InterimBill_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="InterimBill_Date" Type="DateTime" Precision="3" />
+          <Property Name="InterimBill_Category_ID" Type="Int32" />
+          <Property Name="InterimBill_Perfume_ID" Type="Int32" />
+          <Property Name="InterimBill_Count" Type="Int32" />
+          <Property Name="InterimBill_Weight" Type="Double" />
+          <Property Name="InterimBill_Price" Type="Int32" />
+          <Property Name="InterimBill_InvoiceNum" Type="Int32" />
+          <Property Name="InterimBill_ExpDate" Type="DateTime" Precision="3" />
+          <Property Name="InterimBill_User_ID" Type="Int32" />
+          <Property Name="InterimBill_Status" Type="Boolean" />
+          <NavigationProperty Name="Tbl_Category" Relationship="Self.FK_Tbl_InterimBill_Tbl_Category" FromRole="Tbl_InterimBill" ToRole="Tbl_Category" />
+          <NavigationProperty Name="Tbl_Perfume" Relationship="Self.FK_Tbl_InterimBill_Tbl_Perfume" FromRole="Tbl_InterimBill" ToRole="Tbl_Perfume" />
+          <NavigationProperty Name="Tbl_User" Relationship="Self.FK_Tbl_InterimBill_Tbl_User" FromRole="Tbl_InterimBill" ToRole="Tbl_User" />
+          <NavigationProperty Name="Tbl_UserBills" Relationship="Self.FK_Tbl_UserBills_Tbl_InterimBill" FromRole="Tbl_InterimBill" ToRole="Tbl_UserBills" />
+        </EntityType>
+        <EntityType Name="Tbl_News">
+          <Key>
+            <PropertyRef Name="News_ID" />
+          </Key>
+          <Property Name="News_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="News_Title" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="News_Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="News_Date" Type="DateTime" Precision="3" />
+          <Property Name="News_ImageIndex" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Tbl_Perfume">
+          <Key>
+            <PropertyRef Name="Perfume_ID" />
+          </Key>
+          <Property Name="Perfume_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Perfume_Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Perfume_Brand_ID" Type="Int32" />
+          <Property Name="Perfume_ImageIndex" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="Perfume_Perfumer" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="Perfume_Country" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="Perfume_TemperOfPerfume" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Perfume_Gender" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="Perfume_OlfactionGroups" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Perfume_Type_ID" Type="Int32" />
+          <Property Name="Perfume_Notes" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Perfume_SpecialOffer" Type="Boolean" />
+          <Property Name="Perfume_Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Tbl_Brand" Relationship="Self.FK_Tbl_Perfume_Tbl_Brand" FromRole="Tbl_Perfume" ToRole="Tbl_Brand" />
+          <NavigationProperty Name="Tbl_Cologne" Relationship="Self.FK_Tbl_Cologne_Tbl_Perfume" FromRole="Tbl_Perfume" ToRole="Tbl_Cologne" />
+          <NavigationProperty Name="Tbl_CompanySample" Relationship="Self.FK_Tbl_CompanySample_Tbl_Perfume" FromRole="Tbl_Perfume" ToRole="Tbl_CompanySample" />
+          <NavigationProperty Name="Tbl_HandySample" Relationship="Self.FK_Tbl_HandySample_Tbl_Perfume" FromRole="Tbl_Perfume" ToRole="Tbl_HandySample" />
+          <NavigationProperty Name="Tbl_InterimBill" Relationship="Self.FK_Tbl_InterimBill_Tbl_Perfume" FromRole="Tbl_Perfume" ToRole="Tbl_InterimBill" />
+          <NavigationProperty Name="Tbl_PerfumeType" Relationship="Self.FK_Tbl_Perfume_Tbl_PerfumeType" FromRole="Tbl_Perfume" ToRole="Tbl_PerfumeType" />
+          <NavigationProperty Name="Tbl_PerfumeImages" Relationship="Self.FK_Tbl_PerfumeImages_Tbl_Perfume" FromRole="Tbl_Perfume" ToRole="Tbl_PerfumeImages" />
+          <NavigationProperty Name="Tbl_PerfumeSeason" Relationship="Self.FK_Tbl_PerfumeSeason_Tbl_Perfume" FromRole="Tbl_Perfume" ToRole="Tbl_PerfumeSeason" />
+        </EntityType>
+        <EntityType Name="Tbl_PerfumeImages">
+          <Key>
+            <PropertyRef Name="PerfumeImages_ID" />
+          </Key>
+          <Property Name="PerfumeImages_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PerfumeImages_Perfume_ID" Type="Int32" />
+          <Property Name="PerfumeImages_ImageIndex" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Tbl_Perfume" Relationship="Self.FK_Tbl_PerfumeImages_Tbl_Perfume" FromRole="Tbl_PerfumeImages" ToRole="Tbl_Perfume" />
+        </EntityType>
+        <EntityType Name="Tbl_PerfumeSeason">
+          <Key>
+            <PropertyRef Name="PerfumeSeason_ID" />
+          </Key>
+          <Property Name="PerfumeSeason_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PerfumeSeason_Perfume_ID" Type="Int32" />
+          <Property Name="PerfumeSeason_Season_ID" Type="Int32" />
+          <NavigationProperty Name="Tbl_Perfume" Relationship="Self.FK_Tbl_PerfumeSeason_Tbl_Perfume" FromRole="Tbl_PerfumeSeason" ToRole="Tbl_Perfume" />
+          <NavigationProperty Name="Tbl_Season" Relationship="Self.FK_Tbl_PerfumeSeason_Tbl_Season" FromRole="Tbl_PerfumeSeason" ToRole="Tbl_Season" />
+        </EntityType>
+        <EntityType Name="Tbl_PerfumeType">
+          <Key>
+            <PropertyRef Name="PerfumeType_ID" />
+          </Key>
+          <Property Name="PerfumeType_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PerfumeType_Title" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Tbl_Perfume" Relationship="Self.FK_Tbl_Perfume_Tbl_PerfumeType" FromRole="Tbl_PerfumeType" ToRole="Tbl_Perfume" />
+        </EntityType>
+        <EntityType Name="Tbl_PostStatus">
+          <Key>
+            <PropertyRef Name="PostStatus_ID" />
+          </Key>
+          <Property Name="PostStatus_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PostStatus_Title" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Tbl_Bill" Relationship="Self.FK_Tbl_Bill_Tbl_PostStatus" FromRole="Tbl_PostStatus" ToRole="Tbl_Bill" />
+        </EntityType>
+        <EntityType Name="Tbl_PostType">
+          <Key>
+            <PropertyRef Name="PostType_ID" />
+          </Key>
+          <Property Name="PostType_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PostType_Title" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="PostType_Price" Type="Int32" />
+          <NavigationProperty Name="Tbl_Bill" Relationship="Self.FK_Tbl_Bill_Tbl_PostType" FromRole="Tbl_PostType" ToRole="Tbl_Bill" />
+        </EntityType>
+        <EntityType Name="Tbl_ResetPasswordRequests">
+          <Key>
+            <PropertyRef Name="ResetPass_ID" />
+          </Key>
+          <Property Name="ResetPass_ID" Type="Guid" Nullable="false" />
+          <Property Name="ResetPass_User_ID" Type="Int32" Nullable="false" />
+          <Property Name="ResetPass_Date" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Tbl_User" Relationship="Self.FK_Tbl_ResetPasswordRequests_Tbl_User" FromRole="Tbl_ResetPasswordRequests" ToRole="Tbl_User" />
+        </EntityType>
+        <EntityType Name="Tbl_Role">
+          <Key>
+            <PropertyRef Name="Role_ID" />
+          </Key>
+          <Property Name="Role_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Role_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Role_Title" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Tbl_User" Relationship="Self.FK_Tbl_User_Tbl_Role" FromRole="Tbl_Role" ToRole="Tbl_User" />
+        </EntityType>
+        <EntityType Name="Tbl_Season">
+          <Key>
+            <PropertyRef Name="Season_ID" />
+          </Key>
+          <Property Name="Season_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Season_Title" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="Season_ImageIndex" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Tbl_PerfumeSeason" Relationship="Self.FK_Tbl_PerfumeSeason_Tbl_Season" FromRole="Tbl_Season" ToRole="Tbl_PerfumeSeason" />
+        </EntityType>
+        <EntityType Name="Tbl_Services">
+          <Key>
+            <PropertyRef Name="Services_ID" />
+          </Key>
+          <Property Name="Services_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Services_Title" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Services_Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Services_ImageIndex" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Services_SiteServiceID" Type="Int32" />
+          <NavigationProperty Name="Tbl_SiteService" Relationship="Self.FK_Tbl_Services_Tbl_SiteService" FromRole="Tbl_Services" ToRole="Tbl_SiteService" />
+        </EntityType>
+        <EntityType Name="Tbl_SiteService">
+          <Key>
+            <PropertyRef Name="SiteService_ID" />
+          </Key>
+          <Property Name="SiteService_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SiteService_Title" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="SiteService_Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Tbl_Services" Relationship="Self.FK_Tbl_Services_Tbl_SiteService" FromRole="Tbl_SiteService" ToRole="Tbl_Services" />
+        </EntityType>
+        <EntityType Name="Tbl_Slide">
+          <Key>
+            <PropertyRef Name="Slide_ID" />
+          </Key>
+          <Property Name="Slide_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Slide_Title" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Slide_ImageIndex" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Tbl_State">
+          <Key>
+            <PropertyRef Name="State_ID" />
+          </Key>
+          <Property Name="State_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="State_Title" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Tbl_City" Relationship="Self.FK_Tbl_City_Tbl_State" FromRole="Tbl_State" ToRole="Tbl_City" />
+        </EntityType>
+        <EntityType Name="Tbl_User">
+          <Key>
+            <PropertyRef Name="User_ID" />
+          </Key>
+          <Property Name="User_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="User_NameFamily" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="User_Username" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="User_Email" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="User_Password" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="User_Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="User_City_ID" Type="Int32" />
+          <Property Name="User_PostalCode" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="User_Tel" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="User_Gender" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="User_Birthday" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="User_Mobile" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="User_Date" Type="DateTime" Precision="3" />
+          <Property Name="User_Active" Type="Boolean" />
+          <Property Name="User_Role_ID" Type="Int32" />
+          <Property Name="User_NationalCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="User_ImageIndex" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Tbl_City" Relationship="Self.FK_Tbl_User_Tbl_City" FromRole="Tbl_User" ToRole="Tbl_City" />
+          <NavigationProperty Name="Tbl_InterimBill" Relationship="Self.FK_Tbl_InterimBill_Tbl_User" FromRole="Tbl_User" ToRole="Tbl_InterimBill" />
+          <NavigationProperty Name="Tbl_ResetPasswordRequests" Relationship="Self.FK_Tbl_ResetPasswordRequests_Tbl_User" FromRole="Tbl_User" ToRole="Tbl_ResetPasswordRequests" />
+          <NavigationProperty Name="Tbl_Role" Relationship="Self.FK_Tbl_User_Tbl_Role" FromRole="Tbl_User" ToRole="Tbl_Role" />
+        </EntityType>
+        <EntityType Name="Tbl_UserBills">
+          <Key>
+            <PropertyRef Name="UserBills_ID" />
+          </Key>
+          <Property Name="UserBills_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserBills_InterimBill_ID" Type="Int32" />
+          <Property Name="UserBills_Bill_ID" Type="Int32" />
+          <NavigationProperty Name="Tbl_Bill" Relationship="Self.FK_Tbl_UserBills_Tbl_Bill" FromRole="Tbl_UserBills" ToRole="Tbl_Bill" />
+          <NavigationProperty Name="Tbl_InterimBill" Relationship="Self.FK_Tbl_UserBills_Tbl_InterimBill" FromRole="Tbl_UserBills" ToRole="Tbl_InterimBill" />
+        </EntityType>
+        <Association Name="FK_Tbl_Bill_Tbl_PostStatus">
+          <End Role="Tbl_PostStatus" Type="Self.Tbl_PostStatus" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Tbl_Bill" Type="Self.Tbl_Bill" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_PostStatus">
+              <PropertyRef Name="PostStatus_ID" />
+            </Principal>
+            <Dependent Role="Tbl_Bill">
+              <PropertyRef Name="Bill_PostStatus_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tbl_Bill_Tbl_PostType">
+          <End Role="Tbl_PostType" Type="Self.Tbl_PostType" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Tbl_Bill" Type="Self.Tbl_Bill" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_PostType">
+              <PropertyRef Name="PostType_ID" />
+            </Principal>
+            <Dependent Role="Tbl_Bill">
+              <PropertyRef Name="Bill_PostType_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tbl_UserBills_Tbl_Bill">
+          <End Role="Tbl_Bill" Type="Self.Tbl_Bill" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Tbl_UserBills" Type="Self.Tbl_UserBills" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_Bill">
+              <PropertyRef Name="Bill_ID" />
+            </Principal>
+            <Dependent Role="Tbl_UserBills">
+              <PropertyRef Name="UserBills_Bill_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tbl_Perfume_Tbl_Brand">
+          <End Role="Tbl_Brand" Type="Self.Tbl_Brand" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Tbl_Perfume" Type="Self.Tbl_Perfume" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_Brand">
+              <PropertyRef Name="Brand_ID" />
+            </Principal>
+            <Dependent Role="Tbl_Perfume">
+              <PropertyRef Name="Perfume_Brand_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tbl_InterimBill_Tbl_Category">
+          <End Role="Tbl_Category" Type="Self.Tbl_Category" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Tbl_InterimBill" Type="Self.Tbl_InterimBill" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_Category">
+              <PropertyRef Name="Category_ID" />
+            </Principal>
+            <Dependent Role="Tbl_InterimBill">
+              <PropertyRef Name="InterimBill_Category_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tbl_City_Tbl_State">
+          <End Role="Tbl_State" Type="Self.Tbl_State" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Tbl_City" Type="Self.Tbl_City" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_State">
+              <PropertyRef Name="State_ID" />
+            </Principal>
+            <Dependent Role="Tbl_City">
+              <PropertyRef Name="City_State_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tbl_User_Tbl_City">
+          <End Role="Tbl_City" Type="Self.Tbl_City" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Tbl_User" Type="Self.Tbl_User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_City">
+              <PropertyRef Name="City_ID" />
+            </Principal>
+            <Dependent Role="Tbl_User">
+              <PropertyRef Name="User_City_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tbl_Cologne_Tbl_Perfume">
+          <End Role="Tbl_Perfume" Type="Self.Tbl_Perfume" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Tbl_Cologne" Type="Self.Tbl_Cologne" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_Perfume">
+              <PropertyRef Name="Perfume_ID" />
+            </Principal>
+            <Dependent Role="Tbl_Cologne">
+              <PropertyRef Name="Cologne_Perfume_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tbl_CompanySample_Tbl_Perfume">
+          <End Role="Tbl_Perfume" Type="Self.Tbl_Perfume" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Tbl_CompanySample" Type="Self.Tbl_CompanySample" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_Perfume">
+              <PropertyRef Name="Perfume_ID" />
+            </Principal>
+            <Dependent Role="Tbl_CompanySample">
+              <PropertyRef Name="CompanySample_Perfume_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tbl_HandySample_Tbl_Perfume">
+          <End Role="Tbl_Perfume" Type="Self.Tbl_Perfume" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Tbl_HandySample" Type="Self.Tbl_HandySample" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_Perfume">
+              <PropertyRef Name="Perfume_ID" />
+            </Principal>
+            <Dependent Role="Tbl_HandySample">
+              <PropertyRef Name="HandySample_Perfume_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tbl_InterimBill_Tbl_Perfume">
+          <End Role="Tbl_Perfume" Type="Self.Tbl_Perfume" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Tbl_InterimBill" Type="Self.Tbl_InterimBill" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_Perfume">
+              <PropertyRef Name="Perfume_ID" />
+            </Principal>
+            <Dependent Role="Tbl_InterimBill">
+              <PropertyRef Name="InterimBill_Perfume_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tbl_InterimBill_Tbl_User">
+          <End Role="Tbl_User" Type="Self.Tbl_User" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Tbl_InterimBill" Type="Self.Tbl_InterimBill" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_User">
+              <PropertyRef Name="User_ID" />
+            </Principal>
+            <Dependent Role="Tbl_InterimBill">
+              <PropertyRef Name="InterimBill_User_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tbl_UserBills_Tbl_InterimBill">
+          <End Role="Tbl_InterimBill" Type="Self.Tbl_InterimBill" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Tbl_UserBills" Type="Self.Tbl_UserBills" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_InterimBill">
+              <PropertyRef Name="InterimBill_ID" />
+            </Principal>
+            <Dependent Role="Tbl_UserBills">
+              <PropertyRef Name="UserBills_InterimBill_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tbl_Perfume_Tbl_PerfumeType">
+          <End Role="Tbl_PerfumeType" Type="Self.Tbl_PerfumeType" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Tbl_Perfume" Type="Self.Tbl_Perfume" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_PerfumeType">
+              <PropertyRef Name="PerfumeType_ID" />
+            </Principal>
+            <Dependent Role="Tbl_Perfume">
+              <PropertyRef Name="Perfume_Type_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tbl_PerfumeImages_Tbl_Perfume">
+          <End Role="Tbl_Perfume" Type="Self.Tbl_Perfume" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Tbl_PerfumeImages" Type="Self.Tbl_PerfumeImages" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_Perfume">
+              <PropertyRef Name="Perfume_ID" />
+            </Principal>
+            <Dependent Role="Tbl_PerfumeImages">
+              <PropertyRef Name="PerfumeImages_Perfume_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tbl_PerfumeSeason_Tbl_Perfume">
+          <End Role="Tbl_Perfume" Type="Self.Tbl_Perfume" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Tbl_PerfumeSeason" Type="Self.Tbl_PerfumeSeason" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_Perfume">
+              <PropertyRef Name="Perfume_ID" />
+            </Principal>
+            <Dependent Role="Tbl_PerfumeSeason">
+              <PropertyRef Name="PerfumeSeason_Perfume_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tbl_PerfumeSeason_Tbl_Season">
+          <End Role="Tbl_Season" Type="Self.Tbl_Season" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Tbl_PerfumeSeason" Type="Self.Tbl_PerfumeSeason" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_Season">
+              <PropertyRef Name="Season_ID" />
+            </Principal>
+            <Dependent Role="Tbl_PerfumeSeason">
+              <PropertyRef Name="PerfumeSeason_Season_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tbl_ResetPasswordRequests_Tbl_User">
+          <End Role="Tbl_User" Type="Self.Tbl_User" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Tbl_ResetPasswordRequests" Type="Self.Tbl_ResetPasswordRequests" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_User">
+              <PropertyRef Name="User_ID" />
+            </Principal>
+            <Dependent Role="Tbl_ResetPasswordRequests">
+              <PropertyRef Name="ResetPass_User_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tbl_User_Tbl_Role">
+          <End Role="Tbl_Role" Type="Self.Tbl_Role" Multiplicity="0..1" />
+          <End Role="Tbl_User" Type="Self.Tbl_User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_Role">
+              <PropertyRef Name="Role_ID" />
+            </Principal>
+            <Dependent Role="Tbl_User">
+              <PropertyRef Name="User_Role_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tbl_Services_Tbl_SiteService">
+          <End Role="Tbl_SiteService" Type="Self.Tbl_SiteService" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Tbl_Services" Type="Self.Tbl_Services" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_SiteService">
+              <PropertyRef Name="SiteService_ID" />
+            </Principal>
+            <Dependent Role="Tbl_Services">
+              <PropertyRef Name="Services_SiteServiceID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="PD_DB" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Tbl_Article" EntityType="Self.Tbl_Article" />
+          <EntitySet Name="Tbl_Bill" EntityType="Self.Tbl_Bill" />
+          <EntitySet Name="Tbl_Brand" EntityType="Self.Tbl_Brand" />
+          <EntitySet Name="Tbl_Category" EntityType="Self.Tbl_Category" />
+          <EntitySet Name="Tbl_City" EntityType="Self.Tbl_City" />
+          <EntitySet Name="Tbl_Cologne" EntityType="Self.Tbl_Cologne" />
+          <EntitySet Name="Tbl_CompanySample" EntityType="Self.Tbl_CompanySample" />
+          <EntitySet Name="Tbl_EmailMessage" EntityType="Self.Tbl_EmailMessage" />
+          <EntitySet Name="Tbl_HandySample" EntityType="Self.Tbl_HandySample" />
+          <EntitySet Name="Tbl_InterimBill" EntityType="Self.Tbl_InterimBill" />
+          <EntitySet Name="Tbl_News" EntityType="Self.Tbl_News" />
+          <EntitySet Name="Tbl_Perfume" EntityType="Self.Tbl_Perfume" />
+          <EntitySet Name="Tbl_PerfumeImages" EntityType="Self.Tbl_PerfumeImages" />
+          <EntitySet Name="Tbl_PerfumeSeason" EntityType="Self.Tbl_PerfumeSeason" />
+          <EntitySet Name="Tbl_PerfumeType" EntityType="Self.Tbl_PerfumeType" />
+          <EntitySet Name="Tbl_PostStatus" EntityType="Self.Tbl_PostStatus" />
+          <EntitySet Name="Tbl_PostType" EntityType="Self.Tbl_PostType" />
+          <EntitySet Name="Tbl_ResetPasswordRequests" EntityType="Self.Tbl_ResetPasswordRequests" />
+          <EntitySet Name="Tbl_Role" EntityType="Self.Tbl_Role" />
+          <EntitySet Name="Tbl_Season" EntityType="Self.Tbl_Season" />
+          <EntitySet Name="Tbl_Services" EntityType="Self.Tbl_Services" />
+          <EntitySet Name="Tbl_SiteService" EntityType="Self.Tbl_SiteService" />
+          <EntitySet Name="Tbl_Slide" EntityType="Self.Tbl_Slide" />
+          <EntitySet Name="Tbl_State" EntityType="Self.Tbl_State" />
+          <EntitySet Name="Tbl_User" EntityType="Self.Tbl_User" />
+          <EntitySet Name="Tbl_UserBills" EntityType="Self.Tbl_UserBills" />
+          <AssociationSet Name="FK_Tbl_Bill_Tbl_PostStatus" Association="Self.FK_Tbl_Bill_Tbl_PostStatus">
+            <End Role="Tbl_PostStatus" EntitySet="Tbl_PostStatus" />
+            <End Role="Tbl_Bill" EntitySet="Tbl_Bill" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tbl_Bill_Tbl_PostType" Association="Self.FK_Tbl_Bill_Tbl_PostType">
+            <End Role="Tbl_PostType" EntitySet="Tbl_PostType" />
+            <End Role="Tbl_Bill" EntitySet="Tbl_Bill" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tbl_UserBills_Tbl_Bill" Association="Self.FK_Tbl_UserBills_Tbl_Bill">
+            <End Role="Tbl_Bill" EntitySet="Tbl_Bill" />
+            <End Role="Tbl_UserBills" EntitySet="Tbl_UserBills" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tbl_Perfume_Tbl_Brand" Association="Self.FK_Tbl_Perfume_Tbl_Brand">
+            <End Role="Tbl_Brand" EntitySet="Tbl_Brand" />
+            <End Role="Tbl_Perfume" EntitySet="Tbl_Perfume" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tbl_InterimBill_Tbl_Category" Association="Self.FK_Tbl_InterimBill_Tbl_Category">
+            <End Role="Tbl_Category" EntitySet="Tbl_Category" />
+            <End Role="Tbl_InterimBill" EntitySet="Tbl_InterimBill" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tbl_City_Tbl_State" Association="Self.FK_Tbl_City_Tbl_State">
+            <End Role="Tbl_State" EntitySet="Tbl_State" />
+            <End Role="Tbl_City" EntitySet="Tbl_City" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tbl_User_Tbl_City" Association="Self.FK_Tbl_User_Tbl_City">
+            <End Role="Tbl_City" EntitySet="Tbl_City" />
+            <End Role="Tbl_User" EntitySet="Tbl_User" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tbl_Cologne_Tbl_Perfume" Association="Self.FK_Tbl_Cologne_Tbl_Perfume">
+            <End Role="Tbl_Perfume" EntitySet="Tbl_Perfume" />
+            <End Role="Tbl_Cologne" EntitySet="Tbl_Cologne" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tbl_CompanySample_Tbl_Perfume" Association="Self.FK_Tbl_CompanySample_Tbl_Perfume">
+            <End Role="Tbl_Perfume" EntitySet="Tbl_Perfume" />
+            <End Role="Tbl_CompanySample" EntitySet="Tbl_CompanySample" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tbl_HandySample_Tbl_Perfume" Association="Self.FK_Tbl_HandySample_Tbl_Perfume">
+            <End Role="Tbl_Perfume" EntitySet="Tbl_Perfume" />
+            <End Role="Tbl_HandySample" EntitySet="Tbl_HandySample" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tbl_InterimBill_Tbl_Perfume" Association="Self.FK_Tbl_InterimBill_Tbl_Perfume">
+            <End Role="Tbl_Perfume" EntitySet="Tbl_Perfume" />
+            <End Role="Tbl_InterimBill" EntitySet="Tbl_InterimBill" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tbl_InterimBill_Tbl_User" Association="Self.FK_Tbl_InterimBill_Tbl_User">
+            <End Role="Tbl_User" EntitySet="Tbl_User" />
+            <End Role="Tbl_InterimBill" EntitySet="Tbl_InterimBill" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tbl_UserBills_Tbl_InterimBill" Association="Self.FK_Tbl_UserBills_Tbl_InterimBill">
+            <End Role="Tbl_InterimBill" EntitySet="Tbl_InterimBill" />
+            <End Role="Tbl_UserBills" EntitySet="Tbl_UserBills" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tbl_Perfume_Tbl_PerfumeType" Association="Self.FK_Tbl_Perfume_Tbl_PerfumeType">
+            <End Role="Tbl_PerfumeType" EntitySet="Tbl_PerfumeType" />
+            <End Role="Tbl_Perfume" EntitySet="Tbl_Perfume" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tbl_PerfumeImages_Tbl_Perfume" Association="Self.FK_Tbl_PerfumeImages_Tbl_Perfume">
+            <End Role="Tbl_Perfume" EntitySet="Tbl_Perfume" />
+            <End Role="Tbl_PerfumeImages" EntitySet="Tbl_PerfumeImages" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tbl_PerfumeSeason_Tbl_Perfume" Association="Self.FK_Tbl_PerfumeSeason_Tbl_Perfume">
+            <End Role="Tbl_Perfume" EntitySet="Tbl_Perfume" />
+            <End Role="Tbl_PerfumeSeason" EntitySet="Tbl_PerfumeSeason" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tbl_PerfumeSeason_Tbl_Season" Association="Self.FK_Tbl_PerfumeSeason_Tbl_Season">
+            <End Role="Tbl_Season" EntitySet="Tbl_Season" />
+            <End Role="Tbl_PerfumeSeason" EntitySet="Tbl_PerfumeSeason" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tbl_ResetPasswordRequests_Tbl_User" Association="Self.FK_Tbl_ResetPasswordRequests_Tbl_User">
+            <End Role="Tbl_User" EntitySet="Tbl_User" />
+            <End Role="Tbl_ResetPasswordRequests" EntitySet="Tbl_ResetPasswordRequests" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tbl_User_Tbl_Role" Association="Self.FK_Tbl_User_Tbl_Role">
+            <End Role="Tbl_Role" EntitySet="Tbl_Role" />
+            <End Role="Tbl_User" EntitySet="Tbl_User" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tbl_Services_Tbl_SiteService" Association="Self.FK_Tbl_Services_Tbl_SiteService">
+            <End Role="Tbl_SiteService" EntitySet="Tbl_SiteService" />
+            <End Role="Tbl_Services" EntitySet="Tbl_Services" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="PerfumeDecant_DBModelStoreContainer" CdmEntityContainer="PD_DB">
+          <EntitySetMapping Name="Tbl_Article">
+            <EntityTypeMapping TypeName="PerfumeDecant_DBModel.Tbl_Article">
+              <MappingFragment StoreEntitySet="Tbl_Article">
+                <ScalarProperty Name="Article_ID" ColumnName="Article_ID" />
+                <ScalarProperty Name="Article_Title" ColumnName="Article_Title" />
+                <ScalarProperty Name="Article_Path" ColumnName="Article_Path" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tbl_Bill">
+            <EntityTypeMapping TypeName="PerfumeDecant_DBModel.Tbl_Bill">
+              <MappingFragment StoreEntitySet="Tbl_Bill">
+                <ScalarProperty Name="Bill_ID" ColumnName="Bill_ID" />
+                <ScalarProperty Name="Bill_Date" ColumnName="Bill_Date" />
+                <ScalarProperty Name="Bill_PayPrice" ColumnName="Bill_PayPrice" />
+                <ScalarProperty Name="Bill_PostType_ID" ColumnName="Bill_PostType_ID" />
+                <ScalarProperty Name="Bill_InvoiceNumber" ColumnName="Bill_InvoiceNumber" />
+                <ScalarProperty Name="Bill_RefID" ColumnName="Bill_RefID" />
+                <ScalarProperty Name="Bill_TransNo" ColumnName="Bill_TransNo" />
+                <ScalarProperty Name="Bill_Status" ColumnName="Bill_Status" />
+                <ScalarProperty Name="Bill_TrackingCode" ColumnName="Bill_TrackingCode" />
+                <ScalarProperty Name="Bill_RefNo" ColumnName="Bill_RefNo" />
+                <ScalarProperty Name="Bill_Off" ColumnName="Bill_Off" />
+                <ScalarProperty Name="Bill_OtherPrice" ColumnName="Bill_OtherPrice" />
+                <ScalarProperty Name="Bill_PostStatus_ID" ColumnName="Bill_PostStatus_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tbl_Brand">
+            <EntityTypeMapping TypeName="PerfumeDecant_DBModel.Tbl_Brand">
+              <MappingFragment StoreEntitySet="Tbl_Brand">
+                <ScalarProperty Name="Brand_ID" ColumnName="Brand_ID" />
+                <ScalarProperty Name="Brand_Title" ColumnName="Brand_Title" />
+                <ScalarProperty Name="Brand_ImageIndex" ColumnName="Brand_ImageIndex" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tbl_Category">
+            <EntityTypeMapping TypeName="PerfumeDecant_DBModel.Tbl_Category">
+              <MappingFragment StoreEntitySet="Tbl_Category">
+                <ScalarProperty Name="Category_ID" ColumnName="Category_ID" />
+                <ScalarProperty Name="Category_Title" ColumnName="Category_Title" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tbl_City">
+            <EntityTypeMapping TypeName="PerfumeDecant_DBModel.Tbl_City">
+              <MappingFragment StoreEntitySet="Tbl_City">
+                <ScalarProperty Name="City_ID" ColumnName="City_ID" />
+                <ScalarProperty Name="City_Title" ColumnName="City_Title" />
+                <ScalarProperty Name="City_State_ID" ColumnName="City_State_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tbl_Cologne">
+            <EntityTypeMapping TypeName="PerfumeDecant_DBModel.Tbl_Cologne">
+              <MappingFragment StoreEntitySet="Tbl_Cologne">
+                <ScalarProperty Name="Cologne_ID" ColumnName="Cologne_ID" />
+                <ScalarProperty Name="Cologne_Perfume_ID" ColumnName="Cologne_Perfume_ID" />
+                <ScalarProperty Name="Cologne_AllCount" ColumnName="Cologne_AllCount" />
+                <ScalarProperty Name="Cologne_PricePerUnit" ColumnName="Cologne_PricePerUnit" />
+                <ScalarProperty Name="Cologne_Weight" ColumnName="Cologne_Weight" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tbl_CompanySample">
+            <EntityTypeMapping TypeName="PerfumeDecant_DBModel.Tbl_CompanySample">
+              <MappingFragment StoreEntitySet="Tbl_CompanySample">
+                <ScalarProperty Name="CompanySample_ID" ColumnName="CompanySample_ID" />
+                <ScalarProperty Name="CompanySample_Perfume_ID" ColumnName="CompanySample_Perfume_ID" />
+                <ScalarProperty Name="CompanySample_AllCount" ColumnName="CompanySample_AllCount" />
+                <ScalarProperty Name="CompanySample_Price" ColumnName="CompanySample_Price" />
+                <ScalarProperty Name="CompanySample_Weight" ColumnName="CompanySample_Weight" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tbl_EmailMessage">
+            <EntityTypeMapping TypeName="PerfumeDecant_DBModel.Tbl_EmailMessage">
+              <MappingFragment StoreEntitySet="Tbl_EmailMessage">
+                <ScalarProperty Name="Email_ID" ColumnName="Email_ID" />
+                <ScalarProperty Name="Email_Subject" ColumnName="Email_Subject" />
+                <ScalarProperty Name="Email_Body" ColumnName="Email_Body" />
+                <ScalarProperty Name="Email_Email" ColumnName="Email_Email" />
+                <ScalarProperty Name="Emai_Password" ColumnName="Emai_Password" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tbl_HandySample">
+            <EntityTypeMapping TypeName="PerfumeDecant_DBModel.Tbl_HandySample">
+              <MappingFragment StoreEntitySet="Tbl_HandySample">
+                <ScalarProperty Name="HandySample_ID" ColumnName="HandySample_ID" />
+                <ScalarProperty Name="HandySample_Perfume_ID" ColumnName="HandySample_Perfume_ID" />
+                <ScalarProperty Name="HandySample_AllWeight" ColumnName="HandySample_AllWeight" />
+                <ScalarProperty Name="HandySample_PricePerMil" ColumnName="HandySample_PricePerMil" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tbl_InterimBill">
+            <EntityTypeMapping TypeName="PerfumeDecant_DBModel.Tbl_InterimBill">
+              <MappingFragment StoreEntitySet="Tbl_InterimBill">
+                <ScalarProperty Name="InterimBill_ID" ColumnName="InterimBill_ID" />
+                <ScalarProperty Name="InterimBill_Date" ColumnName="InterimBill_Date" />
+                <ScalarProperty Name="InterimBill_Category_ID" ColumnName="InterimBill_Category_ID" />
+                <ScalarProperty Name="InterimBill_Perfume_ID" ColumnName="InterimBill_Perfume_ID" />
+                <ScalarProperty Name="InterimBill_Count" ColumnName="InterimBill_Count" />
+                <ScalarProperty Name="InterimBill_Weight" ColumnName="InterimBill_Weight" />
+                <ScalarProperty Name="InterimBill_Price" ColumnName="InterimBill_Price" />
+                <ScalarProperty Name="InterimBill_InvoiceNum" ColumnName="InterimBill_InvoiceNum" />
+                <ScalarProperty Name="InterimBill_ExpDate" ColumnName="InterimBill_ExpDate" />
+                <ScalarProperty Name="InterimBill_User_ID" ColumnName="InterimBill_User_ID" />
+                <ScalarProperty Name="InterimBill_Status" ColumnName="InterimBill_Status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tbl_News">
+            <EntityTypeMapping TypeName="PerfumeDecant_DBModel.Tbl_News">
+              <MappingFragment StoreEntitySet="Tbl_News">
+                <ScalarProperty Name="News_ID" ColumnName="News_ID" />
+                <ScalarProperty Name="News_Title" ColumnName="News_Title" />
+                <ScalarProperty Name="News_Description" ColumnName="News_Description" />
+                <ScalarProperty Name="News_Date" ColumnName="News_Date" />
+                <ScalarProperty Name="News_ImageIndex" ColumnName="News_ImageIndex" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tbl_Perfume">
+            <EntityTypeMapping TypeName="PerfumeDecant_DBModel.Tbl_Perfume">
+              <MappingFragment StoreEntitySet="Tbl_Perfume">
+                <ScalarProperty Name="Perfume_ID" ColumnName="Perfume_ID" />
+                <ScalarProperty Name="Perfume_Name" ColumnName="Perfume_Name" />
+                <ScalarProperty Name="Perfume_Brand_ID" ColumnName="Perfume_Brand_ID" />
+                <ScalarProperty Name="Perfume_ImageIndex" ColumnName="Perfume_ImageIndex" />
+                <ScalarProperty Name="Perfume_Perfumer" ColumnName="Perfume_Perfumer" />
+                <ScalarProperty Name="Perfume_Country" ColumnName="Perfume_Country" />
+                <ScalarProperty Name="Perfume_TemperOfPerfume" ColumnName="Perfume_TemperOfPerfume" />
+                <ScalarProperty Name="Perfume_Gender" ColumnName="Perfume_Gender" />
+                <ScalarProperty Name="Perfume_OlfactionGroups" ColumnName="Perfume_OlfactionGroups" />
+                <ScalarProperty Name="Perfume_Type_ID" ColumnName="Perfume_Type_ID" />
+                <ScalarProperty Name="Perfume_Notes" ColumnName="Perfume_Notes" />
+                <ScalarProperty Name="Perfume_SpecialOffer" ColumnName="Perfume_SpecialOffer" />
+                <ScalarProperty Name="Perfume_Description" ColumnName="Perfume_Description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tbl_PerfumeImages">
+            <EntityTypeMapping TypeName="PerfumeDecant_DBModel.Tbl_PerfumeImages">
+              <MappingFragment StoreEntitySet="Tbl_PerfumeImages">
+                <ScalarProperty Name="PerfumeImages_ID" ColumnName="PerfumeImages_ID" />
+                <ScalarProperty Name="PerfumeImages_Perfume_ID" ColumnName="PerfumeImages_Perfume_ID" />
+                <ScalarProperty Name="PerfumeImages_ImageIndex" ColumnName="PerfumeImages_ImageIndex" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tbl_PerfumeSeason">
+            <EntityTypeMapping TypeName="PerfumeDecant_DBModel.Tbl_PerfumeSeason">
+              <MappingFragment StoreEntitySet="Tbl_PerfumeSeason">
+                <ScalarProperty Name="PerfumeSeason_ID" ColumnName="PerfumeSeason_ID" />
+                <ScalarProperty Name="PerfumeSeason_Perfume_ID" ColumnName="PerfumeSeason_Perfume_ID" />
+                <ScalarProperty Name="PerfumeSeason_Season_ID" ColumnName="PerfumeSeason_Season_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tbl_PerfumeType">
+            <EntityTypeMapping TypeName="PerfumeDecant_DBModel.Tbl_PerfumeType">
+              <MappingFragment StoreEntitySet="Tbl_PerfumeType">
+                <ScalarProperty Name="PerfumeType_ID" ColumnName="PerfumeType_ID" />
+                <ScalarProperty Name="PerfumeType_Title" ColumnName="PerfumeType_Title" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tbl_PostStatus">
+            <EntityTypeMapping TypeName="PerfumeDecant_DBModel.Tbl_PostStatus">
+              <MappingFragment StoreEntitySet="Tbl_PostStatus">
+                <ScalarProperty Name="PostStatus_ID" ColumnName="PostStatus_ID" />
+                <ScalarProperty Name="PostStatus_Title" ColumnName="PostStatus_Title" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tbl_PostType">
+            <EntityTypeMapping TypeName="PerfumeDecant_DBModel.Tbl_PostType">
+              <MappingFragment StoreEntitySet="Tbl_PostType">
+                <ScalarProperty Name="PostType_ID" ColumnName="PostType_ID" />
+                <ScalarProperty Name="PostType_Title" ColumnName="PostType_Title" />
+                <ScalarProperty Name="PostType_Price" ColumnName="PostType_Price" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tbl_ResetPasswordRequests">
+            <EntityTypeMapping TypeName="PerfumeDecant_DBModel.Tbl_ResetPasswordRequests">
+              <MappingFragment StoreEntitySet="Tbl_ResetPasswordRequests">
+                <ScalarProperty Name="ResetPass_ID" ColumnName="ResetPass_ID" />
+                <ScalarProperty Name="ResetPass_User_ID" ColumnName="ResetPass_User_ID" />
+                <ScalarProperty Name="ResetPass_Date" ColumnName="ResetPass_Date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tbl_Role">
+            <EntityTypeMapping TypeName="PerfumeDecant_DBModel.Tbl_Role">
+              <MappingFragment StoreEntitySet="Tbl_Role">
+                <ScalarProperty Name="Role_ID" ColumnName="Role_ID" />
+                <ScalarProperty Name="Role_Name" ColumnName="Role_Name" />
+                <ScalarProperty Name="Role_Title" ColumnName="Role_Title" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tbl_Season">
+            <EntityTypeMapping TypeName="PerfumeDecant_DBModel.Tbl_Season">
+              <MappingFragment StoreEntitySet="Tbl_Season">
+                <ScalarProperty Name="Season_ID" ColumnName="Season_ID" />
+                <ScalarProperty Name="Season_Title" ColumnName="Season_Title" />
+                <ScalarProperty Name="Season_ImageIndex" ColumnName="Season_ImageIndex" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tbl_Services">
+            <EntityTypeMapping TypeName="PerfumeDecant_DBModel.Tbl_Services">
+              <MappingFragment StoreEntitySet="Tbl_Services">
+                <ScalarProperty Name="Services_ID" ColumnName="Services_ID" />
+                <ScalarProperty Name="Services_Title" ColumnName="Services_Title" />
+                <ScalarProperty Name="Services_Description" ColumnName="Services_Description" />
+                <ScalarProperty Name="Services_ImageIndex" ColumnName="Services_ImageIndex" />
+                <ScalarProperty Name="Services_SiteServiceID" ColumnName="Services_SiteServiceID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tbl_SiteService">
+            <EntityTypeMapping TypeName="PerfumeDecant_DBModel.Tbl_SiteService">
+              <MappingFragment StoreEntitySet="Tbl_SiteService">
+                <ScalarProperty Name="SiteService_ID" ColumnName="SiteService_ID" />
+                <ScalarProperty Name="SiteService_Title" ColumnName="SiteService_Title" />
+                <ScalarProperty Name="SiteService_Description" ColumnName="SiteService_Description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tbl_Slide">
+            <EntityTypeMapping TypeName="PerfumeDecant_DBModel.Tbl_Slide">
+              <MappingFragment StoreEntitySet="Tbl_Slide">
+                <ScalarProperty Name="Slide_ID" ColumnName="Slide_ID" />
+                <ScalarProperty Name="Slide_Title" ColumnName="Slide_Title" />
+                <ScalarProperty Name="Slide_ImageIndex" ColumnName="Slide_ImageIndex" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tbl_State">
+            <EntityTypeMapping TypeName="PerfumeDecant_DBModel.Tbl_State">
+              <MappingFragment StoreEntitySet="Tbl_State">
+                <ScalarProperty Name="State_ID" ColumnName="State_ID" />
+                <ScalarProperty Name="State_Title" ColumnName="State_Title" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tbl_User">
+            <EntityTypeMapping TypeName="PerfumeDecant_DBModel.Tbl_User">
+              <MappingFragment StoreEntitySet="Tbl_User">
+                <ScalarProperty Name="User_ID" ColumnName="User_ID" />
+                <ScalarProperty Name="User_NameFamily" ColumnName="User_NameFamily" />
+                <ScalarProperty Name="User_Username" ColumnName="User_Username" />
+                <ScalarProperty Name="User_Email" ColumnName="User_Email" />
+                <ScalarProperty Name="User_Password" ColumnName="User_Password" />
+                <ScalarProperty Name="User_Address" ColumnName="User_Address" />
+                <ScalarProperty Name="User_City_ID" ColumnName="User_City_ID" />
+                <ScalarProperty Name="User_PostalCode" ColumnName="User_PostalCode" />
+                <ScalarProperty Name="User_Tel" ColumnName="User_Tel" />
+                <ScalarProperty Name="User_Gender" ColumnName="User_Gender" />
+                <ScalarProperty Name="User_Birthday" ColumnName="User_Birthday" />
+                <ScalarProperty Name="User_Mobile" ColumnName="User_Mobile" />
+                <ScalarProperty Name="User_Date" ColumnName="User_Date" />
+                <ScalarProperty Name="User_Active" ColumnName="User_Active" />
+                <ScalarProperty Name="User_Role_ID" ColumnName="User_Role_ID" />
+                <ScalarProperty Name="User_NationalCode" ColumnName="User_NationalCode" />
+                <ScalarProperty Name="User_ImageIndex" ColumnName="User_ImageIndex" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tbl_UserBills">
+            <EntityTypeMapping TypeName="PerfumeDecant_DBModel.Tbl_UserBills">
+              <MappingFragment StoreEntitySet="Tbl_UserBills">
+                <ScalarProperty Name="UserBills_ID" ColumnName="UserBills_ID" />
+                <ScalarProperty Name="UserBills_InterimBill_ID" ColumnName="UserBills_InterimBill_ID" />
+                <ScalarProperty Name="UserBills_Bill_ID" ColumnName="UserBills_Bill_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

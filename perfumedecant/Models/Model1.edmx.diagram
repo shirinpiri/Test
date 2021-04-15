@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="ef9d2237b92c4f079539b773c331bfc1" Name="Diagram1">
+        <EntityTypeShape EntityType="PerfumeDecant_DBModel.Tbl_Article" Width="1.5" PointX="0.75" PointY="1.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="PerfumeDecant_DBModel.Tbl_Bill" Width="1.5" PointX="8.25" PointY="29.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="PerfumeDecant_DBModel.Tbl_Brand" Width="1.5" PointX="0.75" PointY="10.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="PerfumeDecant_DBModel.Tbl_Category" Width="1.5" PointX="6" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="PerfumeDecant_DBModel.Tbl_City" Width="1.5" PointX="3.75" PointY="23.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="PerfumeDecant_DBModel.Tbl_Cologne" Width="1.5" PointX="5.25" PointY="6.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="PerfumeDecant_DBModel.Tbl_CompanySample" Width="1.5" PointX="5.25" PointY="9.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="PerfumeDecant_DBModel.Tbl_EmailMessage" Width="1.5" PointX="2.75" PointY="1.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="PerfumeDecant_DBModel.Tbl_HandySample" Width="1.5" PointX="5.25" PointY="12.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="PerfumeDecant_DBModel.Tbl_InterimBill" Width="1.5" PointX="8.25" PointY="9.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="PerfumeDecant_DBModel.Tbl_News" Width="1.5" PointX="0.75" PointY="4.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="PerfumeDecant_DBModel.Tbl_Perfume" Width="1.5" PointX="3" PointY="8.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="PerfumeDecant_DBModel.Tbl_PerfumeImages" Width="1.5" PointX="5.25" PointY="19.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="PerfumeDecant_DBModel.Tbl_PerfumeSeason" Width="1.5" PointX="8.25" PointY="6.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="PerfumeDecant_DBModel.Tbl_PerfumeType" Width="1.5" PointX="0.75" PointY="7.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="PerfumeDecant_DBModel.Tbl_PostStatus" Width="1.5" PointX="6" PointY="29.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="PerfumeDecant_DBModel.Tbl_PostType" Width="1.5" PointX="6" PointY="31.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="PerfumeDecant_DBModel.Tbl_ResetPasswordRequests" Width="1.5" PointX="8.25" PointY="24.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="PerfumeDecant_DBModel.Tbl_Role" Width="1.5" PointX="3.75" PointY="26.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="PerfumeDecant_DBModel.Tbl_Season" Width="1.5" PointX="6" PointY="3.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="PerfumeDecant_DBModel.Tbl_Services" Width="1.5" PointX="11" PointY="1.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="PerfumeDecant_DBModel.Tbl_SiteService" Width="1.5" PointX="8.75" PointY="2" IsExpanded="true" />
+        <EntityTypeShape EntityType="PerfumeDecant_DBModel.Tbl_Slide" Width="1.5" PointX="10.75" PointY="5.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="PerfumeDecant_DBModel.Tbl_State" Width="1.5" PointX="1.5" PointY="23.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="PerfumeDecant_DBModel.Tbl_User" Width="1.5" PointX="6" PointY="23.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="PerfumeDecant_DBModel.Tbl_UserBills" Width="1.5" PointX="10.5" PointY="10.5" IsExpanded="true" />
+        <AssociationConnector Association="PerfumeDecant_DBModel.FK_Tbl_Bill_Tbl_PostStatus" ManuallyRouted="false" />
+        <AssociationConnector Association="PerfumeDecant_DBModel.FK_Tbl_Bill_Tbl_PostType" ManuallyRouted="false" />
+        <AssociationConnector Association="PerfumeDecant_DBModel.FK_Tbl_UserBills_Tbl_Bill" ManuallyRouted="false" />
+        <AssociationConnector Association="PerfumeDecant_DBModel.FK_Tbl_Perfume_Tbl_Brand" ManuallyRouted="false" />
+        <AssociationConnector Association="PerfumeDecant_DBModel.FK_Tbl_InterimBill_Tbl_Category" ManuallyRouted="false" />
+        <AssociationConnector Association="PerfumeDecant_DBModel.FK_Tbl_City_Tbl_State" ManuallyRouted="false" />
+        <AssociationConnector Association="PerfumeDecant_DBModel.FK_Tbl_User_Tbl_City" ManuallyRouted="false" />
+        <AssociationConnector Association="PerfumeDecant_DBModel.FK_Tbl_Cologne_Tbl_Perfume" ManuallyRouted="false" />
+        <AssociationConnector Association="PerfumeDecant_DBModel.FK_Tbl_CompanySample_Tbl_Perfume" ManuallyRouted="false" />
+        <AssociationConnector Association="PerfumeDecant_DBModel.FK_Tbl_HandySample_Tbl_Perfume" ManuallyRouted="false" />
+        <AssociationConnector Association="PerfumeDecant_DBModel.FK_Tbl_InterimBill_Tbl_Perfume" ManuallyRouted="false" />
+        <AssociationConnector Association="PerfumeDecant_DBModel.FK_Tbl_InterimBill_Tbl_User" ManuallyRouted="false" />
+        <AssociationConnector Association="PerfumeDecant_DBModel.FK_Tbl_UserBills_Tbl_InterimBill" ManuallyRouted="false" />
+        <AssociationConnector Association="PerfumeDecant_DBModel.FK_Tbl_Perfume_Tbl_PerfumeType" ManuallyRouted="false" />
+        <AssociationConnector Association="PerfumeDecant_DBModel.FK_Tbl_PerfumeImages_Tbl_Perfume" ManuallyRouted="false" />
+        <AssociationConnector Association="PerfumeDecant_DBModel.FK_Tbl_PerfumeSeason_Tbl_Perfume" ManuallyRouted="false" />
+        <AssociationConnector Association="PerfumeDecant_DBModel.FK_Tbl_PerfumeSeason_Tbl_Season" ManuallyRouted="false" />
+        <AssociationConnector Association="PerfumeDecant_DBModel.FK_Tbl_ResetPasswordRequests_Tbl_User" ManuallyRouted="false" />
+        <AssociationConnector Association="PerfumeDecant_DBModel.FK_Tbl_User_Tbl_Role" ManuallyRouted="false" />
+        <AssociationConnector Association="PerfumeDecant_DBModel.FK_Tbl_Services_Tbl_SiteService" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
