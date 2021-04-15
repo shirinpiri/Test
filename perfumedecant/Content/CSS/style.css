@@ -1974,7 +1974,7 @@ a.default-btn {
 }
 
 .logo {
-    margin-top: 32px;
+    margin-top: 10px;
 }
 
 @media only screen and (min-width: 768px) and (max-width: 991px) {
@@ -2234,7 +2234,7 @@ a.default-btn {
 }
 
 .main-menu nav ul li > a {
-    font-size: 15px;
+    font-size: 12px;
     color: #555252;
     font-weight: 500;
     letter-spacing: .8px;
@@ -8396,6 +8396,7 @@ a.default-btn {
 .copyright p {
     color: #313131;
     letter-spacing: .9px;
+    text-align:right;
 }
 
     .copyright p a {
@@ -8412,10 +8413,12 @@ a.default-btn {
     color: #313131;
     margin: 0 0 16px;
     line-height: 1;
+    text-align:right;
 }
 
 .footer-widget .footer-list ul li {
     margin: 0 0 11px;
+    text-align:right;
 }
 
     .footer-widget .footer-list ul li:last-child {
