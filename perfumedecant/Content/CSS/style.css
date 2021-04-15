@@ -1,45 +1,11 @@
-/*-----------------------------------------------------------------------------------
 
-    Template Name: Flone - Minimalist eCommerce Bootstrap 4 Template
-    Version: 1
+@font-face {
+    font-family: 'Yekan';
+    src: url('../Fonts/Yekan.eot');
+    src: url('../Fonts/Yekan.eot?#iefix') format('embedded-opentype'), url('../Fonts/Yekan.woff') format('woff'), url('../Fonts/Yekan.ttf') format('truetype');
+    font-weight: bold;
+}
 
------------------------------------------------------------------------------------
-    
-    CSS INDEX
-    ===================
-	
-    1. Template default CSS
-    2. Header style
-    3. Slider style
-    4. Support style
-    5. Section title style
-    6. Product style
-    7. Blog style
-    8. Footer style
-    9. Banner style
-    10. Suscribe style
-    11. About style
-    12. instagram style
-    13. Testimonial style
-    14. Brand logo style
-    15. Timer style
-    16. Breadcrumb style
-    17. Sidebar style
-    18. Shop page
-    19. Product details page
-    20. Cart page
-    21. Checkout page
-    22. contact Page
-    23. Blog Details Page
-    24. login register Page
-    25. My account Page
-    
------------------------------------------------------------------------------------*/
-/*----------------------------------------*/
-/*  1. Template default CSS
-/*----------------------------------------*/
-/*-- Google Font --*/
-@import url("https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900");
 /*-- Common Style --*/
 *,
 *::after,
@@ -60,7 +26,6 @@ body {
     font-style: normal;
     font-weight: 400;
     direction: rtl;
-    font-family: "Parastoo", sans-serif;
     color: #000;
 }
 
@@ -71,7 +36,6 @@ h4,
 h5,
 h6 {
     color: #000000;
-    font-family: "Parastoo", sans-serif;
     font-weight: 400;
     margin-top: 0;
 }
@@ -82,7 +46,6 @@ p {
     line-height: 24px;
     color: #333;
     margin-bottom: 15px;
-    font-family: "Parastoo", sans-serif;
 }
 
 h1 {
@@ -2333,16 +2296,14 @@ a.default-btn {
     line-height: 75px;
 }
 
-.stick ,
+.stick .logo,
 .stick .header-right-wrap {
     margin-top: 22px;
 }
 
-.logo{
-    margin-top:5px;
-}
 @media only screen and (min-width: 768px) and (max-width: 991px) {
-    .stick .logo, .stick .header-right-wrap {
+    .stick .logo,
+    .stick .header-right-wrap {
         margin-top: 0px;
     }
 }
@@ -6645,6 +6606,10 @@ a.default-btn {
             font-size: 14px;
         }
 
+.product-filter {
+    text-align: right;
+}
+
 .product-filter-wrapper {
     background-color: #fff;
     -webkit-box-shadow: 0 0 6px rgba(0, 0, 0, 0.1);
@@ -6681,7 +6646,7 @@ a.default-btn {
         bottom: 0;
         content: "";
         height: 1px;
-        left: 0;
+        right: 0;
         position: absolute;
         width: 20px;
     }
@@ -8839,7 +8804,7 @@ a.default-btn {
     color: #915342;
     font-weight: 600;
     margin: 0;
-    font-family: 'Cormorant Garamond';
+    font-family: Yekan;
 }
 
 @media only screen and (min-width: 768px) and (max-width: 991px) {
@@ -8859,7 +8824,7 @@ a.default-btn {
     color: #010101;
     margin: 3px 0 58px;
     font-weight: 600;
-    font-family: 'Cormorant Garamond';
+    font-family: 'Yekan';
 }
 
 @media only screen and (min-width: 992px) and (max-width: 1199px) {
@@ -9027,7 +8992,7 @@ a.default-btn {
     font-size: 48px;
     color: #915342;
     margin: 0;
-    font-family: 'Cormorant Garamond';
+    font-family: 'Yekan';
 }
 
 @media only screen and (min-width: 768px) and (max-width: 991px) {
@@ -9046,7 +9011,7 @@ a.default-btn {
     font-size: 24px;
     color: #010101;
     font-weight: 500;
-    font-family: 'Cormorant Garamond';
+    font-family: 'Yekan';
     margin: 22px 0 94px;
 }
 
@@ -10049,6 +10014,7 @@ a.default-btn {
     justify-content: space-between;
     -webkit-box-align: center;
     -ms-flex-align: center;
+    direction: ltr;
     align-items: center;
 }
 
@@ -10153,6 +10119,7 @@ a.default-btn {
 .shop-list-wrap .shop-list-content h3 {
     font-size: 24px;
     color: #010101;
+    text-align: right;
     margin: 0;
 }
 
@@ -10173,6 +10140,8 @@ a.default-btn {
 
 .shop-list-wrap .shop-list-content .product-list-price {
     margin: 13px 0 22px;
+    text-align: right;
+    direction: ltr;
 }
 
 @media only screen and (max-width: 767px) {
@@ -10242,6 +10211,7 @@ a.default-btn {
     margin: 15px 0 40px;
     line-height: 28px;
     font-size: 15px;
+    text-align: justify;
     color: #8f8f8f;
 }
 
@@ -11012,6 +10982,7 @@ a.default-btn {
 h3.cart-page-title {
     font-size: 20px;
     font-weight: 500;
+    text-align: right;
     margin: 0 0 15px;
 }
 
@@ -11442,6 +11413,7 @@ h3.cart-page-title {
 }
 
 .grand-totall .title-wrap {
+    text-align: right;
     position: relative;
 }
 
@@ -11464,7 +11436,7 @@ h3.cart-page-title {
         font-size: 18px;
         font-weight: 500;
         margin: 0;
-        padding-right: 18px;
+        padding-left: 18px;
     }
 
     .grand-totall .title-wrap .section-bg-gary-cart {
@@ -11474,12 +11446,13 @@ h3.cart-page-title {
     }
 
 .grand-totall h5 {
+    text-align: right;
     font-size: 14px;
     margin: 36px 0 27px;
 }
 
     .grand-totall h5 span {
-        float: right;
+        float: left;
         font-size: 18px;
         font-weight: 500;
     }
@@ -11502,6 +11475,7 @@ h3.cart-page-title {
 
         .grand-totall .total-shipping ul li {
             color: #242424;
+            text-align: right;
             list-style: outside none none;
             margin: 0 0 6px;
         }
@@ -11525,7 +11499,7 @@ h3.cart-page-title {
             }
 
             .grand-totall .total-shipping ul li span {
-                float: right;
+                float: left;
             }
 
 .grand-totall h4.grand-totall-title {
@@ -12490,7 +12464,7 @@ h3.cart-page-title {
             height: 18px;
             margin: 0 auto;
             position: absolute;
-            right: -2px;
+            left: -2px;
             -webkit-transition: all 0.4s ease 0s;
             -o-transition: all 0.4s ease 0s;
             transition: all 0.4s ease 0s;
