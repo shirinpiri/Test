@@ -1974,7 +1974,7 @@ a.default-btn {
 }
 
 .logo {
-    margin-top: 10px;
+    margin-top: 32px;
 }
 
 @media only screen and (min-width: 768px) and (max-width: 991px) {
@@ -2234,7 +2234,7 @@ a.default-btn {
 }
 
 .main-menu nav ul li > a {
-    font-size: 12px;
+    font-size: 15px;
     color: #555252;
     font-weight: 500;
     letter-spacing: .8px;
@@ -8396,7 +8396,6 @@ a.default-btn {
 .copyright p {
     color: #313131;
     letter-spacing: .9px;
-    text-align:right;
 }
 
     .copyright p a {
@@ -8413,12 +8412,10 @@ a.default-btn {
     color: #313131;
     margin: 0 0 16px;
     line-height: 1;
-    text-align:right;
 }
 
 .footer-widget .footer-list ul li {
     margin: 0 0 11px;
-    text-align:right;
 }
 
     .footer-widget .footer-list ul li:last-child {
@@ -12497,7 +12494,7 @@ h3.cart-page-title {
     -webkit-box-shadow: 0 0 6px rgba(0, 0, 0, 0.1);
     box-shadow: 0 0 6px rgba(0, 0, 0, 0.1);
     padding: 80px;
-    text-align: left;
+    text-align: right;
 }
 
 @media only screen and (min-width: 992px) and (max-width: 1199px) {
@@ -12518,7 +12515,7 @@ h3.cart-page-title {
     color: #333;
     font-size: 14px;
     height: 45px;
-    margin-bottom: 30px;
+    /*margin-bottom: 30px;*/
     padding: 0 15px;
 }
 
@@ -12532,6 +12529,7 @@ h3.cart-page-title {
 
 .login-register-wrapper .login-form-container .login-register-form form .button-box .login-toggle-btn {
     padding: 10px 0 19px;
+    text-align:left !important;
 }
 
     .login-register-wrapper .login-form-container .login-register-form form .button-box .login-toggle-btn label {
@@ -12811,3 +12809,16 @@ h3.cart-page-title {
         .single-my-account .myaccount-info-wrapper .entries-wrapper .entries-edit-delete a.edit:hover {
             background-color: #a749ff;
         }
+
+
+        .validation-message{
+            margin-bottom:30px;
+            color:red;
+        }
+.loginRegister-link {
+    text-align: center
+}
+.loginRegister-link a {
+    color: #a749ff !important;
+    
+}

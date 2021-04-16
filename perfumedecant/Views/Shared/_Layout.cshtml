@@ -1,4 +1,8 @@
-﻿<!doctype html>
+﻿@{ 
+    
+    string username = (string)Session["UserName"];
+}
+<!doctype html>
 <html class="no-js" lang="zxx">
 
 <head>
@@ -59,7 +63,7 @@
                             <div class="search-content">
                                 <form action="#">
                                     <button class="button-search"><i class="pe-7s-search"></i></button>
-                                    <input type="text" placeholder="جست و جو" />
+                                    <input type="text" placeholder="Search" />
                                 </form>
                             </div>
                         </div>
@@ -67,57 +71,66 @@
                             <a class="account-satting-active" href="#"><i class="pe-7s-user-female"></i></a>
                             <div class="account-dropdown">
                                 <ul>
-                                    <li><a href="login-register.html">ورود</a></li>
-                                    <li><a href="login-register.html">ثبت نام</a></li>
-                                    <li><a href="my-account.html">پروفایل</a></li>
-                                </ul>
-                            </div>
-                        </div>
+                                    @if (username == null)
+                                    {
+                                        <li><a href="/Account">ورود/ثبت‌نام</a></li>
+                                    }
+                                    else
+                                    {
+                                        <li><a href="/Account/SignOut">خروج</a></li>
+                                    }
 
-                        <div class="same-style cart-wrap">
-                            <button class="icon-cart">
-                                <i class="pe-7s-shopbag"></i>
-                                <span class="count-style">02</span>
-                            </button>
-                            <div class="shopping-cart-content">
-                                <ul>
-                                    <li class="single-shopping-cart">
-                                        <div class="shopping-cart-img">
-                                            <a href="#"><img alt="" src="~/Uploads/PerfumeImages/cart-1.png"></a>
-                                        </div>
-                                        <div class="shopping-cart-title">
-                                            <h4><a href="#">Product </a></h4>
-                                            <h6>Qty: 02</h6>
-                                            <span>$260.00</span>
-                                        </div>
-                                        <div class="shopping-cart-delete">
-                                            <a href="#"><i class="fa fa-times-circle"></i></a>
-                                        </div>
-                                    </li>
-                                    <li class="single-shopping-cart">
-                                        <div class="shopping-cart-img">
-                                            <a href="#"><img alt="" src="~/Uploads/PerfumeImages/cart-1.png"></a>
-                                        </div>
-                                        <div class="shopping-cart-title">
-                                            <h4><a href="#">Product </a></h4>
-                                            <h6>Qty: 02</h6>
-                                            <span>$260.00</span>
-                                        </div>
-                                        <div class="shopping-cart-delete">
-                                            <a href="#"><i class="fa fa-times-circle"></i></a>
-                                        </div>
-                                    </li>
+                                    <li><a href="my-account.html">ویرایش مشخصات</a></li>
                                 </ul>
-                                <div class="shopping-cart-total">
-                                    <h4>تخفیف : <span>$20.00</span></h4>
-                                    <h4>مجموع : <span class="shop-total">$260.00</span></h4>
-                                </div>
-                                <div class="shopping-cart-btn btn-hover text-center">
-                                    <a class="default-btn" href="cart-page.html">مشاهده سبد خرید</a>
-                                    <a class="default-btn" href="checkout.html">پرداخت</a>
-                                </div>
                             </div>
                         </div>
+                        @if(username != null)
+                        { 
+                            <div class="same-style cart-wrap">
+                                <button class="icon-cart">
+                                    <i class="pe-7s-shopbag"></i>
+                                    <span class="count-style">02</span>
+                                </button>
+                                <div class="shopping-cart-content">
+                                    <ul>
+                                        <li class="single-shopping-cart">
+                                            <div class="shopping-cart-img">
+                                                <a href="#"><img alt="" src="~/Uploads/PerfumeImages/cart-1.png"></a>
+                                            </div>
+                                            <div class="shopping-cart-title">
+                                                <h4><a href="#">Product </a></h4>
+                                                <h6>Qty: 02</h6>
+                                                <span>$260.00</span>
+                                            </div>
+                                            <div class="shopping-cart-delete">
+                                                <a href="#"><i class="fa fa-times-circle"></i></a>
+                                            </div>
+                                        </li>
+                                        <li class="single-shopping-cart">
+                                            <div class="shopping-cart-img">
+                                                <a href="#"><img alt="" src="~/Uploads/PerfumeImages/cart-1.png"></a>
+                                            </div>
+                                            <div class="shopping-cart-title">
+                                                <h4><a href="#">Product </a></h4>
+                                                <h6>Qty: 02</h6>
+                                                <span>$260.00</span>
+                                            </div>
+                                            <div class="shopping-cart-delete">
+                                                <a href="#"><i class="fa fa-times-circle"></i></a>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                    <div class="shopping-cart-total">
+                                        <h4>Shipping : <span>$20.00</span></h4>
+                                        <h4>Total : <span class="shop-total">$260.00</span></h4>
+                                    </div>
+                                    <div class="shopping-cart-btn btn-hover text-center">
+                                        <a class="default-btn" href="cart-page.html">view cart</a>
+                                        <a class="default-btn" href="checkout.html">checkout</a>
+                                    </div>
+                                </div>
+                            </div>
+                        }
                     </div>
                 </div>
             </div>
@@ -125,79 +138,12 @@
                 <div class="mobile-menu">
                     <nav id="mobile-menu-active">
                         <ul class="menu-overflow">
-                            <li>
-                                <a href="index.html">HOME</a>
-                                <ul>
-                                    <li><a href="index.html">home version 1</a></li>
-                                    <li><a href="index-2.html">home version 2</a></li>
-                                    <li><a href="index-3.html">home version 3</a></li>
-                                    <li><a href="index-4.html">home version 4</a></li>
-                                    <li><a href="index-5.html">home version 5</a></li>
-                                    <li><a href="index-6.html">home version 6</a></li>
-                                    <li><a href="index-7.html">home version 7</a></li>
-                                    <li><a href="index-8.html">home version 8</a></li>
-                                    <li><a href="index-9.html">home version 9</a></li>
-                                    <li><a href="index-10.html">home version 10</a></li>
-                                </ul>
-                            </li>
-                            <li>
-                                <a href="shop.html">Shop</a>
-                                <ul>
-                                    <li>
-                                        <a href="#">shop layout</a>
-                                        <ul>
-                                            <li><a href="shop.html">standard style</a></li>
-                                            <li><a href="shop-filter.html">Grid filter style</a></li>
-                                            <li><a href="shop-grid-2-col.html">Grid 2 column</a></li>
-                                            <li><a href="shop-no-sidebar.html">Grid No sidebar</a></li>
-                                            <li><a href="shop-grid-fw.html">Grid full wide </a></li>
-                                            <li><a href="shop-right-sidebar.html">Grid right sidebar</a></li>
-                                            <li><a href="shop-list.html">list 1 column box </a></li>
-                                            <li><a href="shop-list-fw.html">list 1 column full wide </a></li>
-                                            <li><a href="shop-list-fw-2col.html">list 2 column  full wide</a></li>
-                                        </ul>
-                                    </li>
-                                    <li>
-                                        <a href="#">product details</a>
-                                        <ul>
-                                            <li><a href="product-details.html">tab style 1</a></li>
-                                            <li><a href="product-details-2.html">tab style 2</a></li>
-                                            <li><a href="product-details-3.html">tab style 3</a></li>
-                                            <li><a href="product-details-4.html">sticky style</a></li>
-                                            <li><a href="product-details-5.html">gallery style </a></li>
-                                            <li><a href="product-details-slider-box.html">Slider style</a></li>
-                                            <li><a href="product-details-affiliate.html">affiliate style</a></li>
-                                            <li><a href="product-details-6.html">fixed image style </a></li>
-                                        </ul>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li><a href="shop.html">Collection</a></li>
-                            <li>
-                                <a href="#">Pages</a>
-                                <ul>
-                                    <li><a href="about.html">about us</a></li>
-                                    <li><a href="cart-page.html">cart page</a></li>
-                                    <li><a href="checkout.html">checkout </a></li>
-                                    <li><a href="wishlist.html">wishlist </a></li>
-                                    <li><a href="my-account.html">my account</a></li>
-                                    <li><a href="login-register.html">login / register </a></li>
-                                    <li><a href="contact.html">contact us </a></li>
-                                </ul>
-                            </li>
-                            <li>
-                                <a href="blog.html">Blog</a>
-                                <ul>
-                                    <li><a href="blog.html">blog standard</a></li>
-                                    <li><a href="blog-no-sidebar.html">blog no sidebar</a></li>
-                                    <li><a href="blog-right-sidebar.html">blog right sidebar</a></li>
-                                    <li><a href="blog-details.html">blog details 1</a></li>
-                                    <li><a href="blog-details-2.html">blog details 2</a></li>
-                                    <li><a href="blog-details-3.html">blog details 3</a></li>
-                                </ul>
-                            </li>
-                            <li><a href="about.html">About us</a></li>
-                            <li><a href="contact.html">Contact</a></li>
+                            <li class="active"><a href="/Home/Index">صفحه اصلی </a></li>
+                            <li><a href="@Url.Action("Perfumes", "Perfume", new { type = "handySample" })">دکانت و سمپل دست ریز</a></li>
+                            <li><a href="@Url.Action("Perfumes", "Perfume", new { type = "companySample" })">سمپل های شرکتی </a></li>
+                            <li><a href="@Url.Action("Index", "Brands" , new { type = " " })">برندها و تمام محصولات </a></li>
+                            <li><a href="/Article/Index">مقالات </a></li>
+                            <li><a href="/CommonQuestions/Index/">سوالات متداول</a></li>
                         </ul>
                     </nav>
                 </div>
@@ -215,13 +161,13 @@
                                 <img alt="" src="assets/img/logo/logo.png">
                             </a>
                         </div>
-                        <p> کلیه حقوق این سایت متعلق به <a href="#">پرفیوم دکانت </a> می باشد.</p>
+                        <p>© 2019 <a href="#">MY site </a>.<br> All Rights Reserved</p>
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-5 col-sm-5">
                     <div class="footer-widget mb-30 ml-30">
                         <div class="footer-title">
-                            <h3>درباره ی ما</h3>
+                            <h3>ABOUT US</h3>
                         </div>
                         <div class="footer-list">
                             <ul>
@@ -236,14 +182,14 @@
                 <div class="col-lg-3 col-md-5 col-sm-5">
                     <div class="footer-widget mb-30 ml-50">
                         <div class="footer-title">
-                            <h3>لینک های مفید</h3>
+                            <h3>USEFUL LINKS</h3>
                         </div>
                         <div class="footer-list">
                             <ul>
-                                <li><a href="@Url.Action("Perfumes", "Perfume", new { type = "handySample" })">دکانت و سمپل دست ریز</a></li>
-                                <li><a href="@Url.Action("Perfumes", "Perfume", new { type = "companySample" })">سمپل های شرکتی </a></li>
-                                <li><a href="@Url.Action("Index", "Brands" , new { type = " " })">برندها و تمام محصولات </a></li>
-                                <li><a href="/Article/Index">مقالات </a></li>
+                                <li><a href="#">Returns</a></li>
+                                <li><a href="#">Support Policy</a></li>
+                                <li><a href="#">Size guide</a></li>
+                                <li><a href="#">FAQs</a></li>
                             </ul>
                         </div>
                     </div>
@@ -251,7 +197,7 @@
                 <div class="col-lg-3 col-md-9 col-sm-9">
                     <div class="footer-widget mb-30 ml-75">
                         <div class="footer-title">
-                            <h3>ما را دنبال کنید</h3>
+                            <h3>FOLLOW US</h3>
                         </div>
                         <div class="footer-list">
                             <ul>
@@ -281,7 +227,7 @@
     <script src="~/Content/Scripts/ajax-mail.js"></script>
     <!-- Main JS -->
     <script src="~/Content/Scripts/main.js"></script>
-
+   
 </body>
 
 </html>
