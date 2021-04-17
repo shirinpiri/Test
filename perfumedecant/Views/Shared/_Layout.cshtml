@@ -1,8 +1,4 @@
-﻿@{ 
-    
-    string username = (string)Session["UserName"];
-}
-<!doctype html>
+﻿<!doctype html>
 <html class="no-js" lang="zxx">
 
 <head>
@@ -63,7 +59,7 @@
                             <div class="search-content">
                                 <form action="#">
                                     <button class="button-search"><i class="pe-7s-search"></i></button>
-                                    <input type="text" placeholder="Search" />
+                                    <input type="text" placeholder="جست و جو" />
                                 </form>
                             </div>
                         </div>
@@ -71,66 +67,57 @@
                             <a class="account-satting-active" href="#"><i class="pe-7s-user-female"></i></a>
                             <div class="account-dropdown">
                                 <ul>
-                                    @if (username == null)
-                                    {
-                                        <li><a href="/Account">ورود/ثبت‌نام</a></li>
-                                    }
-                                    else
-                                    {
-                                        <li><a href="/Account/SignOut">خروج</a></li>
-                                    }
-
-                                    <li><a href="my-account.html">ویرایش مشخصات</a></li>
+                                    <li><a href="login-register.html">ورود</a></li>
+                                    <li><a href="login-register.html">ثبت نام</a></li>
+                                    <li><a href="my-account.html">پروفایل</a></li>
                                 </ul>
                             </div>
                         </div>
-                        @if(username != null)
-                        { 
-                            <div class="same-style cart-wrap">
-                                <button class="icon-cart">
-                                    <i class="pe-7s-shopbag"></i>
-                                    <span class="count-style">02</span>
-                                </button>
-                                <div class="shopping-cart-content">
-                                    <ul>
-                                        <li class="single-shopping-cart">
-                                            <div class="shopping-cart-img">
-                                                <a href="#"><img alt="" src="~/Uploads/PerfumeImages/cart-1.png"></a>
-                                            </div>
-                                            <div class="shopping-cart-title">
-                                                <h4><a href="#">Product </a></h4>
-                                                <h6>Qty: 02</h6>
-                                                <span>$260.00</span>
-                                            </div>
-                                            <div class="shopping-cart-delete">
-                                                <a href="#"><i class="fa fa-times-circle"></i></a>
-                                            </div>
-                                        </li>
-                                        <li class="single-shopping-cart">
-                                            <div class="shopping-cart-img">
-                                                <a href="#"><img alt="" src="~/Uploads/PerfumeImages/cart-1.png"></a>
-                                            </div>
-                                            <div class="shopping-cart-title">
-                                                <h4><a href="#">Product </a></h4>
-                                                <h6>Qty: 02</h6>
-                                                <span>$260.00</span>
-                                            </div>
-                                            <div class="shopping-cart-delete">
-                                                <a href="#"><i class="fa fa-times-circle"></i></a>
-                                            </div>
-                                        </li>
-                                    </ul>
-                                    <div class="shopping-cart-total">
-                                        <h4>Shipping : <span>$20.00</span></h4>
-                                        <h4>Total : <span class="shop-total">$260.00</span></h4>
-                                    </div>
-                                    <div class="shopping-cart-btn btn-hover text-center">
-                                        <a class="default-btn" href="cart-page.html">view cart</a>
-                                        <a class="default-btn" href="checkout.html">checkout</a>
-                                    </div>
+
+                        <div class="same-style cart-wrap">
+                            <button class="icon-cart">
+                                <i class="pe-7s-shopbag"></i>
+                                <span class="count-style">02</span>
+                            </button>
+                            <div class="shopping-cart-content">
+                                <ul>
+                                    <li class="single-shopping-cart">
+                                        <div class="shopping-cart-img">
+                                            <a href="#"><img alt="" src="~/Uploads/PerfumeImages/cart-1.png"></a>
+                                        </div>
+                                        <div class="shopping-cart-title">
+                                            <h4><a href="#">Product </a></h4>
+                                            <h6>Qty: 02</h6>
+                                            <span>$260.00</span>
+                                        </div>
+                                        <div class="shopping-cart-delete">
+                                            <a href="#"><i class="fa fa-times-circle"></i></a>
+                                        </div>
+                                    </li>
+                                    <li class="single-shopping-cart">
+                                        <div class="shopping-cart-img">
+                                            <a href="#"><img alt="" src="~/Uploads/PerfumeImages/cart-1.png"></a>
+                                        </div>
+                                        <div class="shopping-cart-title">
+                                            <h4><a href="#">Product </a></h4>
+                                            <h6>Qty: 02</h6>
+                                            <span>$260.00</span>
+                                        </div>
+                                        <div class="shopping-cart-delete">
+                                            <a href="#"><i class="fa fa-times-circle"></i></a>
+                                        </div>
+                                    </li>
+                                </ul>
+                                <div class="shopping-cart-total">
+                                    <h4>تخفیف : <span>$20.00</span></h4>
+                                    <h4>مجموع : <span class="shop-total">$260.00</span></h4>
+                                </div>
+                                <div class="shopping-cart-btn btn-hover text-center">
+                                    <a class="default-btn" href="cart-page.html">مشاهده سبد خرید</a>
+                                    <a class="default-btn" href="checkout.html">پرداخت</a>
                                 </div>
                             </div>
-                        }
+                        </div>
                     </div>
                 </div>
             </div>
@@ -138,12 +125,12 @@
                 <div class="mobile-menu">
                     <nav id="mobile-menu-active">
                         <ul class="menu-overflow">
-                            <li class="active"><a href="/Home/Index">صفحه اصلی </a></li>
-                            <li><a href="@Url.Action("Perfumes", "Perfume", new { type = "handySample" })">دکانت و سمپل دست ریز</a></li>
-                            <li><a href="@Url.Action("Perfumes", "Perfume", new { type = "companySample" })">سمپل های شرکتی </a></li>
-                            <li><a href="@Url.Action("Index", "Brands" , new { type = " " })">برندها و تمام محصولات </a></li>
-                            <li><a href="/Article/Index">مقالات </a></li>
-                            <li><a href="/CommonQuestions/Index/">سوالات متداول</a></li>
+                                <li class="active"><a href="/Home/Index">صفحه اصلی </a></li>
+                                <li><a href="@Url.Action("Perfumes", "Perfume", new { type = "handySample" })">دکانت و سمپل دست ریز</a></li>
+                                <li><a href="@Url.Action("Perfumes", "Perfume", new { type = "companySample" })">سمپل های شرکتی </a></li>
+                                <li><a href="@Url.Action("Index", "Brands" , new { type = " " })">برندها و تمام محصولات </a></li>
+                                <li><a href="/Article/Index">مقالات </a></li>
+                                <li><a href="/CommonQuestions/Index/">سوالات متداول</a></li>
                         </ul>
                     </nav>
                 </div>
@@ -158,23 +145,30 @@
                     <div class="copyright mb-30">
                         <div class="footer-logo">
                             <a href="index.html">
-                                <img alt="" src="assets/img/logo/logo.png">
+                                <img alt="" src="~/Content/Images/logo/logo1.png">
                             </a>
                         </div>
-                        <p>© 2019 <a href="#">MY site </a>.<br> All Rights Reserved</p>
+                        <p> کلیه حقوق این سایت متعلق به <a href="#">پرفیوم دکانت </a> می باشد.</p>
+                       
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-5 col-sm-5">
                     <div class="footer-widget mb-30 ml-30">
                         <div class="footer-title">
-                            <h3>ABOUT US</h3>
+                            <h3>درباره ی ما</h3>
                         </div>
                         <div class="footer-list">
                             <ul>
-                                <li><a href="about.html">About us</a></li>
-                                <li><a href="#">Store location</a></li>
-                                <li><a href="contact.html">Contact</a></li>
-                                <li><a href="#">Orders tracking</a></li>
+                               
+                                <li>
+                                    <p>دفتر فروش: زنجان، الهیه، خیابان نیایش، پلاک 166   </p>
+                                </li>
+                                <li>
+                                    <p>تلفن: 09128774252</p>
+                                </li>
+                                <li>
+                                    <p>ایمیل:infoperfumedecant@gmail.com</p>
+                                </li>
                             </ul>
                         </div>
                     </div>
@@ -182,14 +176,14 @@
                 <div class="col-lg-3 col-md-5 col-sm-5">
                     <div class="footer-widget mb-30 ml-50">
                         <div class="footer-title">
-                            <h3>USEFUL LINKS</h3>
+                            <h3>لینک های مفید</h3>
                         </div>
                         <div class="footer-list">
                             <ul>
-                                <li><a href="#">Returns</a></li>
-                                <li><a href="#">Support Policy</a></li>
-                                <li><a href="#">Size guide</a></li>
-                                <li><a href="#">FAQs</a></li>
+                                <li><a href="@Url.Action("Perfumes", "Perfume", new { type = "handySample" })">دکانت و سمپل دست ریز</a></li>
+                                <li><a href="@Url.Action("Perfumes", "Perfume", new { type = "companySample" })">سمپل های شرکتی </a></li>
+                                <li><a href="@Url.Action("Index", "Brands" , new { type = " " })">برندها و تمام محصولات </a></li>
+                                <li><a href="/Article/Index">مقالات </a></li>
                             </ul>
                         </div>
                     </div>
@@ -197,19 +191,21 @@
                 <div class="col-lg-3 col-md-9 col-sm-9">
                     <div class="footer-widget mb-30 ml-75">
                         <div class="footer-title">
-                            <h3>FOLLOW US</h3>
+                            <h3>ما را دنبال کنید</h3>
                         </div>
                         <div class="footer-list">
                             <ul>
-                                <li><a href="#">Facebook</a></li>
-                                <li><a href="#">Twitter</a></li>
-                                <li><a href="#">Instagram</a></li>
-                                <li><a href="#">Youtube</a></li>
+                                <li><a href="https://t.me/perfumedecant"><i class="fab fa-telegram"></i>      Telegram </a></li>
+                                <li><a href="https://www.instagram.com/perfumedecantir"><i class="fa fa-instagram"></i>        Instagram</a></li>
                             </ul>
                         </div>
                     </div>
                 </div>
             </div>
+            <p>
+                گروه پرفیوم دکانت با هفت سال سابقه در زمینه واردات و فروش ادکلن. زین پس مفتخر است به صورت مستقیم و بدون واسطه در زمینه فروش ادکلن و دست ریز در خدمت شما مشتریان عزیز باشد.
+                ضمانت دایمی اصل بودن کالا دریافت کارت هدیه و شرکت دایمی در قرعه کشی مهم ترین خدمات ما به شما مشتریان گرانقدر میباشد
+            </p>
         </div>
     </footer>
 
@@ -227,7 +223,7 @@
     <script src="~/Content/Scripts/ajax-mail.js"></script>
     <!-- Main JS -->
     <script src="~/Content/Scripts/main.js"></script>
-   
+
 </body>
 
 </html>

@@ -1708,7 +1708,7 @@ textarea {
     }
 
 .mean-container a.meanmenu-reveal {
-    top: -30px;
+    top: -47px;
 }
 
 #mobile-menu-active {
@@ -1974,7 +1974,9 @@ a.default-btn {
 }
 
 .logo {
-    margin-top: 32px;
+    display:flex;
+    align-items:center;
+    height:100%;
 }
 
 @media only screen and (min-width: 768px) and (max-width: 991px) {
@@ -2234,7 +2236,7 @@ a.default-btn {
 }
 
 .main-menu nav ul li > a {
-    font-size: 15px;
+    font-size: 12px;
     color: #555252;
     font-weight: 500;
     letter-spacing: .8px;
@@ -2298,7 +2300,7 @@ a.default-btn {
 
 .stick .logo,
 .stick .header-right-wrap {
-    margin-top: 22px;
+  /*  margin-top: 22px;*/
 }
 
 @media only screen and (min-width: 768px) and (max-width: 991px) {
@@ -2350,13 +2352,15 @@ a.default-btn {
     -webkit-box-pack: end;
     -ms-flex-pack: end;
     justify-content: flex-end;
-    margin-top: 32px;
+   /* margin-top: 32px;*/
+    align-items:center;
+    height:100%;
 }
 
 @media only screen and (min-width: 768px) and (max-width: 991px) {
     .header-right-wrap {
         margin-top: 0px;
-        margin-right: 50px;
+        margin-left: 50px;
     }
 }
 
@@ -8372,7 +8376,7 @@ a.default-btn {
 /*-------- 8. Footer style  -----*/
 .copyright .footer-logo {
     margin-bottom: 12px;
-    margin-top: 41px;
+    /*margin-top: 41px;*/
 }
 
 @media only screen and (max-width: 767px) {
@@ -8389,7 +8393,7 @@ a.default-btn {
 
 @media only screen and (min-width: 992px) and (max-width: 1199px) {
     .copyright .footer-logo {
-        margin-top: 28px;
+        margin-top: 0px;
     }
 }
 
@@ -8591,7 +8595,7 @@ a.default-btn {
 }
 
 /* home 4 */
-.hm4-footer-padding .container-fluid {
+    .hm4-footer-padding .container-fluid {
     padding: 0 60px;
 }
 
