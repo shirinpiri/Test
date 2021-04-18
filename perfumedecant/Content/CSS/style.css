@@ -6099,6 +6099,11 @@ a.default-btn {
     display: flex;
 }
 
+.pro-details-text ul li{
+    float: left;
+    margin-left: 15px;
+}
+
 @media only screen and (max-width: 767px) {
     .product-details-content .pro-details-size-color {
         display: block;
@@ -6134,7 +6139,7 @@ a.default-btn {
     display: block;
     font-weight: 500;
     text-align: right;
-    margin: 0 0 15px;
+    margin: 0 0 0;
     font-size: 15px;
 }
 
@@ -6671,12 +6676,15 @@ a.default-btn {
         margin-bottom: 0px;
     }
 
-    .product-filter-wrapper .product-filter ul.color-filter li input {
+    .product-filter-wrapper .product-filter ul.color-filter li input,
+    .product-filter-wrapper .product-filter ul.gender-filter li input,
+    .product-filter-wrapper .product-filter ul.sort-by li input,
+    .product-filter-wrapper .product-filter ul.product-tags li input {
         width: 20px;
         height: 20px;
         display: inline-block;
-        float: left;
-        margin: 3px 8px 0 0;
+        float: right;
+        margin: 3px 0 0 8px;
     }
 
     .product-filter-wrapper .product-filter ul.color-filter li a {
