@@ -1,0 +1,76 @@
+﻿@using perfumedecant.Models.Repository
+
+@{
+    Layout = "~/Views/Shared/_DashboardUser.cshtml";
+    Rep_User rep_userBills = new Rep_User();
+    var qUsers = rep_userBills.Get_AllUsers();
+}
+
+<!-- Main content -->
+<section class="content">
+    <div class="container-fluid">
+
+        @if (ViewBag.result != null)
+        {
+            <div class="alert alert-danger" style="text-align:right">
+                <a class="close" style="cursor: pointer;" onclick="$('.alert').hide()">×</a>
+                @ViewBag.result
+            </div>
+        }
+
+        <button onclick="location.href='@Url.Action("AddUser", "DashboardUser")';return false;" type="submit" class="btn add-btn">افزودن</button>
+
+        <table id="users" class="display" style="width:100%">
+            <thead>
+                <tr>
+                    <th>نام و نام خانوادگی</th>
+                    <th>نام کاربری</th>
+                    <th>وضعیت کاربر</th>
+                    <th>نقش</th>
+                    <th>جزئیات</th>
+                    <th>ویرایش</th>
+                    <th>حذف</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (qUsers.Count() > 0)
+                {
+                    foreach (var item in qUsers)
+                    {
+                        <tr>
+                            <td>@Html.DisplayFor(modelItem => item.User_NameFamily)</td>
+                            <td>@Html.DisplayFor(modelItem => item.User_Username)</td>
+                            @if (item.User_Active == true)
+                            {
+                                <td>
+                                    <span class="circle"></span>
+                                </td>
+                            }
+
+                            @if (item.User_Active == false)
+                            {
+                                <td>
+                                    <span class="transparent-circle"></span>
+                                </td>
+                            }
+                            <td>@Html.DisplayFor(modelItem => item.Tbl_Role.Role_Title)</td>
+                            <td>@Html.ActionLink(" ", "UserDetails", new { id = item.User_ID }, new { data_toggle = "tooltip", title = "جزئیات", @class = "fa fa-info-circle" })</td>
+                            <td>@Html.ActionLink(" ", "EditUser", new { id = item.User_ID }, new { data_toggle = "tooltip", title = "ویرایش", @class = "fas fa-edit" })</td>
+                            <td>@Html.ActionLink(" ", "DeleteUser", new { id = item.User_ID }, new { data_toggle = "tooltip", title = "حذف", @class = "fa fa-trash", onclick = "return confirm('آیا از حذف این کاربر مطمئن هستید؟');" })</td>
+
+                        </tr>
+                    }
+                }
+                else
+                {
+                    <tr>
+                        <td colspan="7" style="color:red;font-size:14px">هیچ داده ای برای نمایش موجود نمی باشد.</td>
+                    </tr>
+                }
+
+            </tbody>
+        </table>
+
+    </div><!--/. container-fluid -->
+</section>
+<!-- /.content -->

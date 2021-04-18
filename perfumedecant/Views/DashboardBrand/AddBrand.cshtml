@@ -1,0 +1,65 @@
+﻿@model perfumedecant.Models.Domains.Tbl_Brand
+@{
+    Layout = "~/Views/Shared/_DashboardBrand.cshtml";
+}
+
+<!-- Main content -->
+<section class="content">
+    <div class="container-fluid">
+        <div class="add-box">
+            @if (ViewBag.Error != null)
+            {
+                <div class="alert alert-danger" style="text-align:right">
+                    <a class="close" style="cursor: pointer;" onclick="$('.alert').hide()">×</a>
+                    @ViewBag.Error
+                </div>
+            }
+            <div class="card card-warning">
+                <div class="card-header">
+                    <h3 class="card-title">افزودن برند </h3>
+                </div>
+                <!-- /.card-header -->
+                <div class="card-body">
+                    @using (Html.BeginForm("AddBrand", "DashboardBrand", FormMethod.Post, new { enctype = "multipart/form-data", id = "frm_add_news", Class = "addform" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        @Html.ValidationSummary(true)
+                        <!-- text input -->
+                        <div class="row">
+                            <div class="col-md-6 col-sm-12">
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.Brand_Title, new { @class = "control-label" })
+                                    <span class="red">*</span>
+                                    <br />
+                                    @Html.TextBoxFor(model => model.Brand_Title, new { @class = "form-control", placeholder = "وارد کردن اطلاعات ..." })
+                                    <p class="red">@Html.ValidationMessageFor(model => model.Brand_Title)</p>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-sm-12">
+                                <div class="form-group">
+                                    <label class="control-label">بارگذاری تصویر </label>
+                                    <div class="input-group">
+                                        <div class="fileUpload btn btn--browse">
+                                            <span>Browse</span>
+                                            <input id="BrandFile" type="file" name="PerfumeImage" class="upload" />
+                                        </div>
+                                        @Html.TextBoxFor(model => model.Brand_ImageIndex, new { @class = "uploadFileInput", @readonly = "readonly" })
+                                        <br />
+                                        <p class="red">@Html.ValidationMessageFor(model => model.Brand_ImageIndex)</p>
+                                        <br />
+                                        <img class="uploadedImage" id="uploadedBrandImage" src="/Uploads/BrandImages/@Html.DisplayFor(model => model.Brand_ImageIndex)" width="200" height="200" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <button type="submit" class="btn add-btn">ثبت </button>
+
+                    }
+                </div>
+                <!-- /.card-body -->
+            </div>
+        </div>
+    </div><!--/. container-fluid -->
+</section>
+<!-- /.content -->

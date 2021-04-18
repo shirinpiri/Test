@@ -29,7 +29,7 @@ namespace perfumedecant.Controllers
             {
                 Message = "Access denied. need login.";
                 log.addLog(Message, "AddCompanySample", "DashboardCompanySample", logStatus.EventLog);
-                return RedirectToAction("Login", "Account");
+                return RedirectToAction("Index", "Account");
             }
             else if (Session["RoleName"].ToString() == "Admin")
             {
@@ -54,7 +54,7 @@ namespace perfumedecant.Controllers
             {
                 Message = "Access denied. need login.";
                 log.addLog(Message, "AddCompanySample", "DashboardCompanySample", logStatus.EventLog);
-                return RedirectToAction("Login", "Account");
+                return RedirectToAction("Index", "Account");
             }
             else if (Session["RoleName"].ToString() == "Admin")
             {
@@ -104,7 +104,7 @@ namespace perfumedecant.Controllers
             {
                 Message = "Access denied. need login.";
                 log.addLog(Message, "EditCompanySample", "DashboardCompanySample", logStatus.EventLog);
-                return RedirectToAction("Login", "Account");
+                return RedirectToAction("Index", "Account");
             }
 
             else if (Session["RoleName"].ToString() == "Admin")
@@ -153,7 +153,7 @@ namespace perfumedecant.Controllers
             {
                 Message = "Access denied. need login.";
                 log.addLog(Message, "EditCompanySample", "DashboardCompanySample", logStatus.EventLog);
-                return RedirectToAction("Login", "Account");
+                return RedirectToAction("Index", "Account");
             }
 
             else if (Session["RoleName"].ToString() == "Admin")
@@ -216,7 +216,7 @@ namespace perfumedecant.Controllers
             {
                 Message = "Access denied. need login.";
                 log.addLog(Message, "AddCompanySample", "DashboardCompanySample", logStatus.EventLog);
-                return RedirectToAction("Login", "Account");
+                return RedirectToAction("Index", "Account");
             }
 
             else if (Session["RoleName"].ToString() == "Admin")

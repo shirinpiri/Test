@@ -1,0 +1,223 @@
+﻿@model perfumedecant.Models.Domains.Tbl_User
+
+@{
+    Layout = "~/Views/Shared/_DashboardUser.cshtml";
+}
+
+<script type="text/javascript">
+    $(document).ready(function () {
+
+        //Dropdownlist Selectedchange event
+        $(document).ready(function () {         
+        })
+    });
+</script>
+
+@using (Html.BeginForm("AddUser", "DashboardUser", FormMethod.Post, new { enctype = "multipart/form-data", id = "frm_add_user", Class = "addform" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+     <!-- Main content -->
+    <section class="content">
+        <div class="container-fluid">
+            <div class="add-box">
+                @if (ViewBag.result != null)
+                {
+                    <div class="alert alert-danger" style="text-align:right">
+                        <a class="close" style="cursor: pointer;" onclick="$('.alert').hide()">×</a>
+                        @ViewBag.result
+                    </div>
+                }
+                @if (ViewBag.success != null)
+                {
+                    <div class="alert alert-success" style="text-align:right">
+                        <a class="close" style="cursor: pointer;" onclick="$('.alert').hide()">×</a>
+                        @ViewBag.success
+                    </div>
+                }
+                <div class="card card-warning">
+                    <div class="card-header">
+                        <h3 class="card-title">افزودن کاربر  </h3>
+                    </div>
+                    <!-- /.card-header -->
+                    <div class="card-body">
+                        <form role="form">
+                            <!-- text input -->
+                            <div class="row">
+                                <div class="col-md-6 col-sm-12">
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => model.User_NameFamily, new { @class = "control-label" })<span class="red">*</span>
+                                        @Html.TextBoxFor(model => model.User_NameFamily, new { @class = "form-control", placeholder = "وارد کردن اطلاعات ..." })
+                                        <p class="red"> @Html.ValidationMessageFor(model => model.User_NameFamily)</p>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-sm-12">
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => model.User_Birthday, new { @class = "control-label" })
+                                        @Html.TextBoxFor(model => model.User_Birthday, new { @class = "form-control", placeholder = "وارد کردن اطلاعات ..." })
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6 col-sm-12">
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => model.User_Gender, new { @class = "control-label" })
+                                        @Html.DropDownListFor(model => model.User_Gender, (IEnumerable<SelectListItem>)ViewBag.Gender, new { @class = "form-control" })
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-sm-12">
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => model.User_Email, new { @class = "control-label" })<span class="red">*</span>
+                                        @Html.TextBoxFor(model => model.User_Email, new { @class = "form-control", placeholder = "وارد کردن اطلاعات ..." })
+                                        <p class="red"> @Html.ValidationMessageFor(model => model.User_Email)</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6 col-sm-12">
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => model.User_Username, new { @class = "control-label" })<span class="red">*</span>
+                                        @Html.TextBoxFor(model => model.User_Username, new { @class = "form-control", placeholder = "وارد کردن اطلاعات ..." })
+                                        <p class="red"> @Html.ValidationMessageFor(model => model.User_Username)</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6 col-sm-12">
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => model.User_Password, new { @class = "control-label" })<span class="red">*</span>
+                                        @Html.PasswordFor(model => model.User_Password, new { @class = "form-control", placeholder = "وارد کردن اطلاعات ..." })
+                                        <p class="red"> @Html.ValidationMessageFor(model => model.User_Password)</p>
+                                        
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-sm-12">
+                                    <div style="text-align:right; margin-top:30px;">
+                                        <span id="length" class="invalid"></span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row text-center align-items-center">
+                                <div class="col-md-6 col-sm-12">
+                                    <div class="form-group">
+                                        <label>تکرار کلمه عبور</label><span class="red">*</span>
+                                        <input type="password" id="confirm_password" name="confirm_password" class="form-control" placeholder="وارد کردن اطلاعات ...">
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-sm-12">
+                                    <div style="text-align:right; margin-top:30px;">
+                                        <span id='message'></span>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6 col-sm-12">
+                                    <div class="form-group">
+                                        <label>استان</label>
+                                        @Html.DropDownList("State", (IEnumerable<SelectListItem>)ViewBag.states, "انتخاب کنید", new { @class = "form-control" })
+                                        <p class="red"> @Html.ValidationMessageFor(model => model.Tbl_City.City_State_ID)</p>
+
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-sm-12">
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => model.User_City_ID, new { @class = "control-label" })
+                                        @Html.DropDownListFor(model => model.User_City_ID, new SelectList(string.Empty, "Value", "Text"), "شهر مورد نظر را انتخاب کنید", new { @class = "form-control" })
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-12 col-sm-12">
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => model.User_Address, new { @class = "control-label" })
+                                        @Html.TextBoxFor(model => model.User_Address, new { @class = "form-control", placeholder = "وارد کردن اطلاعات ..." })
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6 col-sm-12">
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => model.User_PostalCode, new { @class = "control-label" })
+                                        @Html.TextBoxFor(model => model.User_PostalCode, new { @class = "form-control", placeholder = "وارد کردن اطلاعات ...", onkeypress = "justNumberAllowed(this)" })
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-sm-12">
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => model.User_NationalCode, new { @class = "control-label" })
+                                        @Html.TextBoxFor(model => model.User_NationalCode, new { @class = "form-control", placeholder = "وارد کردن اطلاعات ..." })
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6 col-sm-12">
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => model.User_Tel, new { @class = "control-label" })
+                                        @Html.TextBoxFor(model => model.User_Tel, new { @class = "form-control", placeholder = "وارد کردن اطلاعات ..." })
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-sm-12">
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => model.User_Mobile, new { @class = "control-label" })
+                                        @Html.TextBoxFor(model => model.User_Mobile, new { @class = "form-control", placeholder = "وارد کردن اطلاعات ..." })
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6 col-sm-12">
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => model.User_Active, new { @class = "control-label" })<span class="red">*</span>
+                                        @Html.DropDownListFor(model => model.User_Active, (IEnumerable<SelectListItem>)ViewBag.activation, "انتخاب کنید", new { @class = "form-control" })
+                                        <p class="red"> @Html.ValidationMessageFor(model => model.User_Active)</p>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-sm-12">
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => model.User_Role_ID, new { @class = "control-label" })<span class="red">*</span>
+                                        @Html.DropDownListFor(model => model.User_Role_ID, (IEnumerable<SelectListItem>)ViewBag.roles, "انتخاب کنید", new { @class = "form-control" })
+                                        <p class="red"> @Html.ValidationMessageFor(model => model.User_Role_ID)</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6 col-sm-12">
+                                    <div class="form-group">
+                                        <label class="control-label">بارگذاری تصویر </label>
+                                        <div class="input-group">
+                                            <div class="fileUpload btn btn--browse">
+                                                <span>Browse</span>
+                                                <input id="profileFile" type="file" name="UserImage" class="upload" />
+                                            </div>
+                                            @Html.TextBoxFor(model => model.User_ImageIndex, new { @class = "uploadFileInput"}) 
+                                            <br />
+                                            <p class="red">@Html.ValidationMessageFor(model => model.User_ImageIndex)</p>
+                                            <br />
+                                            <img class="uploadedImage" id="uploadedProfileImage" src="/Uploads/UserImages/@Html.DisplayFor(model => model.User_ImageIndex)" width="200" height="200" />   
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <input type="submit" value="ثبت" class="btn add-btn" />
+
+                        </form>
+                    </div>
+                    <!-- /.card-body -->
+                </div>
+            </div>
+        </div><!--/. container-fluid -->
+    </section>
+    <!-- /.content -->
+   
+}
+
