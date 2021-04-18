@@ -1,0 +1,73 @@
+﻿@model perfumedecant.Models.Domains.Tbl_Cologne
+@{
+    Layout = "~/Views/Shared/_DashboardCologne.cshtml";
+}
+
+
+<!-- Main content -->
+<section class="content">
+    <div class="container-fluid">
+        <div class="add-box">
+            @if (ViewBag.Error != null)
+            {
+                <div class="alert alert-danger" style="text-align:right">
+                    <a class="close" style="cursor: pointer;" onclick="$('.alert').hide()">×</a>
+                    @ViewBag.Error
+                </div>
+            }
+            <div class="card card-warning">
+                <div class="card-header">
+                    <h3 class="card-title"> افزودن ادکلن</h3>
+                </div>
+                <!-- /.card-header -->
+                <div class="card-body">
+                    @using (Html.BeginForm("AddCologne", "Cologne", FormMethod.Post, new { enctype = "multipart/form-data", id = "frm_add_cologne" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        @Html.ValidationSummary(true)
+                    <div class="row">
+                        <div class="col-md-6 col-sm-12">
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.Cologne_Perfume_ID, new { @class = "control-label" })<span class="red">*</span>
+                                @Html.DropDownListFor(model => model.Cologne_Perfume_ID, (IEnumerable<SelectListItem>)ViewBag.perfumeList, "انتخاب کنید", new { @class = "form-control" })
+                                <p class="red">@Html.ValidationMessageFor(model => model.Cologne_Perfume_ID)</p>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 col-sm-12">
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.Cologne_Weight, new { @class = "control-label" })
+                                @Html.TextBoxFor(model => model.Cologne_Weight, new { @class = "form-control", placeholder = "وارد کردن اطلاعات ..." })
+                                <p class="red">@Html.ValidationMessageFor(model => model.Cologne_Weight)</p>
+                            </div>
+                        </div>
+                    </div>
+
+                        <div class="row">
+                            <div class="col-md-6 col-sm-12">
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.Cologne_AllCount, new { @class = "control-label" })
+                                    @Html.TextBoxFor(model => model.Cologne_AllCount, new { @class = "form-control", placeholder = "وارد کردن اطلاعات ..." })
+                                    <p class="red">@Html.ValidationMessageFor(model => model.Cologne_AllCount)</p>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-sm-12">
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.Cologne_PricePerUnit, new { @class = "control-label" })
+                                    @Html.TextBoxFor(model => model.Cologne_PricePerUnit, new { @class = "form-control", placeholder = "وارد کردن اطلاعات ..." })
+                                    <p class="red">@Html.ValidationMessageFor(model => model.Cologne_PricePerUnit)</p>
+
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <input type="submit" value="ثبت" class="btn add-btn" />
+                    }
+                </div>
+                <!-- /.card-body -->
+            </div>
+        </div>
+    </div><!--/. container-fluid -->
+</section>
+<!-- /.content -->

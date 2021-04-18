@@ -1,0 +1,76 @@
+﻿@using perfumedecant.Models.Repository
+@{
+    Layout = "~/Views/Shared/_DashboardCologne.cshtml";
+    Rep_Cologne rep_perfume = new Rep_Cologne();
+    var colognes = rep_perfume.Get_All_Colognes();
+}
+
+<!-- Main content -->
+<section class="content">
+    <div class="container-fluid">
+
+        @if (ViewBag.Error != null)
+        {
+            <div class="alert alert-danger" style="text-align:right">
+                <a class="close" style="cursor: pointer;" onclick="$('.alert').hide()">×</a>
+                @ViewBag.Error
+            </div>
+        }
+
+        @if (ViewBag.Success != null)
+        {
+            <div class="alert alert-success" style="text-align:right">
+                <a class="close" style="cursor: pointer;" onclick="$('.alert').hide()">×</a>
+                @ViewBag.Error
+            </div>
+        }
+
+
+        <button onclick="location.href='@Url.Action("AddCologne", "Cologne")';return false;" type="submit" class="btn add-btn">افزودن</button>
+
+        <table id="perfumes" class="display" style="width:100%">
+            <thead>
+                <tr>
+                    <th>تصویر</th>
+                    <th>نام</th>
+                    <th>تعداد کل</th>
+                    <th>قیمت هر واحد(تومان)</th>
+                    <th>ویرایش</th>
+                    <th>حذف</th>
+                </tr>
+            </thead>
+            <tbody>
+                @{
+                    if (colognes.Count() > 0)
+                    {
+
+                        foreach (var c in colognes)
+                        {
+                            <tr>
+                                <td>
+                                    <div class="product-img">
+                                        <img src="~/Uploads/PerfumeImages/@c.Tbl_Perfume.Perfume_ImageIndex" alt="@c.Tbl_Perfume.Perfume_Name" class="img-size-50">
+                                    </div>
+                                </td>
+                                <td>@c.Tbl_Perfume.Perfume_Name</td>
+                                <td>@c.Cologne_AllCount</td>
+                                <td>@c.Cologne_PricePerUnit</td>
+                                <td> @Html.ActionLink(" ", "EditCologne", new { cologneID = c.Cologne_ID }, new { data_toggle = "tooltip", title = "ویرایش", @class = "fas fa-edit" })</td>
+                                <td>@Html.ActionLink(" ", "DeleteCologne", new { cologneID = c.Cologne_ID }, new { data_toggle = "tooltip", title = "حذف", @class = "fa fa-trash", onclick = "return confirm('آیا از حذف این ادکلن مطمئن هستید؟');" })</td>
+                            </tr>
+                        }
+                    }
+                    else
+                    {
+                        <tr>
+                            <td colspan="7" style="color:red;font-size:14px">هیچ داده ای برای نمایش موجود نمی باشد.</td>
+                        </tr>
+                    }
+                }
+            </tbody>
+
+        </table>
+
+    </div><!--/. container-fluid -->
+</section>
+<!-- /.content -->

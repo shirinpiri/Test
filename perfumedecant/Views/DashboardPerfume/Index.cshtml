@@ -1,0 +1,79 @@
+﻿@using perfumedecant.Models.Repository
+@{
+    Layout = "~/Views/Shared/_DashboardPerfume.cshtml";
+    Rep_Perfume rep_perfume = new Rep_Perfume();
+    var perfumes = rep_perfume.Get_All_Perfumes();
+}
+
+<!-- Main content -->
+<section class="content">
+    <div class="container-fluid">
+
+        @if (ViewBag.Error != null)
+        {
+            <div class="alert alert-danger" style="text-align:right">
+                <a class="close" style="cursor: pointer;" onclick="$('.alert').hide()">×</a>
+                @ViewBag.Error
+            </div>
+        }
+
+        @if (ViewBag.Success != null)
+        {
+            <div class="alert alert-success" style="text-align:right">
+                <a class="close" style="cursor: pointer;" onclick="$('.alert').hide()">×</a>
+                @ViewBag.Error
+            </div>
+        }
+
+
+        <button onclick="location.href='@Url.Action("AddPerfume", "DashboardPerfume")';return false;" type="submit" class="btn add-btn">افزودن</button>
+
+        <table id="perfumes" class="display" style="width:100%">
+            <thead>
+                <tr>
+                    <th>تصویر</th>
+                    <th>نام</th>
+                    <th>برند</th>
+                    <th>جنسیت</th>
+                    <th>جزئیات</th>
+                    <th>ویرایش</th>
+                    <th>حذف</th>
+                </tr>
+            </thead>
+            <tbody>
+                @{
+                    if (perfumes.Count() > 0)
+                    {
+
+                        foreach (var p in perfumes)
+                        {
+                            <tr>
+                                <td>
+                                    <div class="product-img">
+                                        <img src="~/Uploads/PerfumeImages/@p.Perfume_ImageIndex" alt="@p.Perfume_Name" class="img-size-50">
+                                    </div>
+                                </td>
+                                <td>@p.Perfume_Name</td>
+                                <td>@p.Tbl_Brand.Brand_Title</td>
+                                @*<td>@p.Tbl_Category.Category_Title</td>*@
+                                <td>@p.Perfume_Gender</td>
+                                <td> @Html.ActionLink(" ", "PerfumeDetails", new { perfumeID = p.Perfume_ID }, new { data_toggle = "tooltip", title = "جزییات", @class = "fa fa-info-circle" })</td>
+                                <td> @Html.ActionLink(" ", "EditPerfume", new { perfumeID = p.Perfume_ID }, new { data_toggle = "tooltip", title = "ویرایش", @class = "fas fa-edit" })</td>
+                                <td>@Html.ActionLink(" ", "DeletePerfume", new { perfumeID = p.Perfume_ID }, new { data_toggle = "tooltip", title = "حذف", @class = "fa fa-trash", onclick = "return confirm('آیا از حذف این محصول مطمئن هستید؟');" })</td>
+                            </tr>
+                        }
+                    }
+                    else
+                    {
+                        <tr>
+                            <td colspan="7" style="color:red;font-size:14px">هیچ داده ای برای نمایش موجود نمی باشد.</td>
+                        </tr>
+                    }
+                }
+            </tbody>
+
+        </table>
+
+    </div><!--/. container-fluid -->
+</section>
+<!-- /.content -->

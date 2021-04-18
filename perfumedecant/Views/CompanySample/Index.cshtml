@@ -1,0 +1,77 @@
+﻿@using perfumedecant.Models.Repository
+@{
+    Layout = "~/Views/Shared/_DashboardCompanySample.cshtml";
+    Rep_CompanySample rep_companySample = new Rep_CompanySample();
+    var samples = rep_companySample.Get_All_CompanySamples();
+}
+
+<!-- Main content -->
+<section class="content">
+    <div class="container-fluid">
+
+        @if (ViewBag.Error != null)
+        {
+            <div class="alert alert-danger" style="text-align:right">
+                <a class="close" style="cursor: pointer;" onclick="$('.alert').hide()">×</a>
+                @ViewBag.Error
+            </div>
+        }
+
+        @if (ViewBag.Success != null)
+        {
+            <div class="alert alert-success" style="text-align:right">
+                <a class="close" style="cursor: pointer;" onclick="$('.alert').hide()">×</a>
+                @ViewBag.Error
+            </div>
+        }
+
+
+        <button onclick="location.href='@Url.Action("AddCompanySample", "CompanySample")';return false;" type="submit" class="btn add-btn">افزودن</button>
+
+        <table id="perfumes" class="display" style="width:100%">
+            <thead>
+                <tr>
+                    <th>تصویر</th>
+                    <th>نام</th>
+                    <th>تعداد کل </th>
+                    <th>قیمت (تومان)</th>
+                    <th>حجم(میل) </th>
+                    <th>ویرایش</th>
+                    <th>حذف</th>
+                </tr>
+            </thead>
+            <tbody>
+                @{
+                    if (samples.Count() > 0)
+                    {
+                        foreach (var s in samples)
+                        {
+                            <tr>
+                                <td>
+                                    <div class="product-img">
+                                        <img src="~/Uploads/PerfumeImages/@s.Tbl_Perfume.Perfume_ImageIndex" alt="@s.Tbl_Perfume.Perfume_Name" class="img-size-50">
+                                    </div>
+                                </td>
+                                <td>@s.Tbl_Perfume.Perfume_Name</td>
+                                <td>@s.CompanySample_AllCount</td>
+                                <td>@s.CompanySample_Price</td>
+                                <td>@s.CompanySample_Weight</td>
+                                <td> @Html.ActionLink(" ", "EditCompanySample", new { sampleID = s.CompanySample_ID }, new { data_toggle = "tooltip", title = "ویرایش", @class = "fas fa-edit" })</td>
+                                <td>@Html.ActionLink(" ", "DeleteCompanySample", new { sampleID = s.CompanySample_ID }, new { data_toggle = "tooltip", title = "حذف", @class = "fa fa-trash", onclick = "return confirm('آیا از حذف این سمپل مطمئن هستید؟');" })</td>
+                            </tr>
+                        }
+                    }
+                    else
+                    {
+                        <tr>
+                            <td colspan="7" style="color:red;font-size:14px">هیچ داده ای برای نمایش موجود نمی باشد.</td>
+                        </tr>
+                    }
+                }
+            </tbody>
+
+        </table>
+
+    </div><!--/. container-fluid -->
+</section>
+<!-- /.content -->

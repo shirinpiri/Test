@@ -1,0 +1,255 @@
+﻿@using perfumedecant.Models.Repository
+@{
+    Rep_User rep_user = new Rep_User();
+    var admin = rep_user.Get_AdminUser();
+}
+<!DOCTYPE html>
+<html lang="en" dir="rtl">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+
+    <title>مدیریت محصولات</title>
+
+    <!-- Theme style -->
+    <link rel="stylesheet" href="~/Content/CSS/Dashboard/adminlte.css">
+    <!-- Google Font: Source Sans Pro -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="~/Content/CSS/Dashboard/jquery.dataTables.min.css">
+
+    <!-- template rtl version -->
+    <link rel="stylesheet" href="~/Content/CSS/Dashboard/custom-style.css">
+
+</head>
+<body class="hold-transition sidebar-mini">
+    <div class="wrapper">
+        <!-- Navbar -->
+        <nav class="main-header navbar navbar-expand bg-white navbar-light border-bottom">
+            <!-- Left navbar links -->
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" data-widget="pushmenu" href="#"><i class="fa fa-bars"></i></a>
+                </li>
+                <li class="nav-item d-none d-sm-inline-block">
+                    <a href="@Url.Action("Index", "Dashboard")" class="nav-link">صفحه اصلی</a>
+                </li>
+            </ul>
+        </nav>
+        <!-- /.navbar -->
+        <!-- Main Sidebar Container -->
+        <aside class="main-sidebar sidebar-dark-primary elevation-4">
+            <!-- Brand Logo -->
+            <a href="@Url.Action("Index", "Dashboard")" class="brand-link">
+
+                <span class="brand-text font-weight-light">پرفیوم دکانت</span>
+            </a>
+
+            <!-- Sidebar -->
+            <div class="sidebar">
+                <div>
+                    <!-- Sidebar user panel (optional) -->
+                    <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+                        <div class="image">
+                            <img src="~/Uploads/UserImages/@admin.User_ImageIndex" class="img-circle elevation-2" alt="User Image">
+                        </div>
+                        <div class="info">
+                            <a href="#" class="d-block">@admin.User_NameFamily</a>
+                        </div>
+                    </div>
+
+                    <!-- Sidebar Menu -->
+                    <nav class="mt-2">
+                        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+                            <!-- Add icons to the links using the .nav-icon class
+         with font-awesome or any other icon font library -->
+                            <li class="nav-item">
+                                <a href="@Url.Action("Index", "Dashboard")" class="nav-link">
+                                    <i class="nav-icon 	fa fa-cog"></i>
+                                    داشبورد
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="@Url.Action("Index", "DashboardUser")" class="nav-link">
+                                    <i class="nav-icon 	fa fa-users"></i>
+                                    کاربران
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="@Url.Action("Index", "DashboardPerfume")" class="nav-link active">
+                                    <i class="nav-icon fa fa-gift"></i>
+                                    محصولات
+                                </a>
+                                <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false" style="width:80%; font-size:12px; float:left">
+                                    <li class="nav-item">
+                                        <a href="@Url.Action("Index", "Cologne")" class="nav-link">
+                                            <img src="~/Content/images/dashboard_images/perfume1.png" style="padding-left:10px">
+                                            ادکلن
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="@Url.Action("Index", "HandySample")" class="nav-link">
+                                            <img src="~/Content/images/dashboard_images/perfume2.png" style="padding-left:10px">
+                                            سمپل دست ریز
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="@Url.Action("Index", "CompanySample")" class="nav-link">
+                                            <img src="~/Content/images/dashboard_images/perfume3.png" style="padding-left:10px">
+                                            سمپل شرکتی
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="nav-item">
+                                <a href="@Url.Action("Index", "DashboardBrand")" class="nav-link">
+                                    <i class="nav-icon fas fa-industry"></i>
+                                    برندها
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="@Url.Action("Index", "DashboardOrder")" class="nav-link">
+                                    <i class="nav-icon fa fa-shopping-basket"></i>
+                                    سفارشات
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="@Url.Action("Index", "DashboardArticles")" class="nav-link">
+                                    <i class="nav-icon fa fa-shopping-basket"></i>
+                                    مقالات
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href='@Url.Action("Logout", "Account")' class="nav-link">
+                                    <i class="nav-icon fa fa-power-off"></i>
+                                    خروج
+                                </a>
+                            </li>
+                        </ul>
+                    </nav>
+                    <!-- /.sidebar-menu -->
+                </div>
+            </div>
+            <!-- /.sidebar -->
+        </aside>
+
+        <!-- Content Wrapper. Contains page content -->
+        <div class="content-wrapper">
+
+            @RenderBody()
+        </div>
+        <!-- /.content-wrapper -->
+        <!-- Main Footer -->
+        <footer class="main-footer">
+            <!-- To the right -->
+            <!-- Default to the left -->
+            <p>©تمامی حقوق این سایت محفوظ و متعلق به پرفیوم دکانت می باشد. </p>
+        </footer>
+    </div>
+    <!-- ./wrapper -->
+    <!-- REQUIRED SCRIPTS -->
+    <!-- jQuery -->
+
+    <script type="text/javascript" charset="utf8" src="https://code.jquery.com/jquery-3.3.1.js"></script>
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+    <script src="~/Content/Scripts/vendor/bootstrap.min.js"></script><!-- AdminLTE App -->
+    <script src="~/Content/Scripts/adminlte.js"></script>
+    <script src="~/Content/Scripts/dashboard.js"></script>
+    <script>
+
+        $(document).ready(function () {
+            $('div.dataTables_filter input').css('font-size', '12px');
+            $('#perfumes').DataTable({
+                language: {
+                    "search": "جست و جو:",
+                    "sLengthMenu": "نمایش _MENU_ آیتم در هر صفحه",
+                    "info": "نمایش _START_ تا _END_ از _TOTAL_ آیتم",
+                },
+                "scrollX": true
+            });
+        });
+        //---- Upload user profile image ----//
+        document.getElementById("perfumeFile").onchange = function () {
+            document.getElementById("Perfume_ImageIndex").value = this.value.replace("C:\\fakepath\\", "");
+            $("#uploadedPerfumeImage").attr("src", this.value);
+            $("#uploadedPerfumeImage").css("display", "block");
+
+        };
+
+        function showImage(src, target) {
+            var fr = new FileReader();
+            // when image is loaded, set the src of the image where you want to display it
+            fr.onload = function (e) { target.src = this.result; };
+            src.addEventListener("change", function () {
+                // fill fr with image data
+                fr.readAsDataURL(src.files[0]);
+            });
+        }
+
+        var src = document.getElementById("perfumeFile");
+        var target = document.getElementById("uploadedPerfumeImage");
+        showImage(src, target);
+
+        document.getElementById("file").onchange = function () {
+            document.getElementById("uploadFile").value = this.value.replace("C:\\fakepath\\", "");
+        };
+
+        //******** NEW ********//
+        //add image for perfume dynamically
+
+        function readURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                var rowNumber = input.parentNode.parentNode.parentNode.rowIndex + 1;
+               
+                reader.onload = function (e) {
+                    $('#uploadedImage' + rowNumber)
+                        .attr('src', e.target.result)
+                        .width(100)
+                        .height(100);
+                };
+
+                reader.readAsDataURL(input.files[0]);
+                $('#spanImage' + rowNumber).text(input.files[0].name);
+            }
+        }
+
+        function addField(n) {
+            var rowNumber = $('#tbl tr').length + 1;
+            var str = "<tr id='row" + rowNumber + "'>"
+                      + ""
+                      + "<td><div class='fileUpload btn btn--browse'><span>Browse</span><input type='file' name='files' id='image" + rowNumber + "' onchange='readURL(this);' class='upload'/></div></td>"
+                      + "<td><p id='spanImage" + rowNumber + "' ></p></td>"
+                      + "<td><img class='uploadedImage1' id='uploadedImage" + rowNumber + "'/></td>"
+                      + "<td><i class='fa fa-plus-circle fa-lg' onclick='addField(this);'></i> </td>"
+                      + '</tr>';
+            $("#tbl").append(str);
+
+        }
+
+        function removeField(input) {
+            var rowNumber = input.parentNode.parentNode.rowIndex + 1;
+            $('table#tbl tr#row' + rowNumber).remove();
+        }
+
+        function myFunction(imgs) {
+            var expandImg = document.getElementById("expandedImg");
+            var imgText = document.getElementById("imgtext");
+            expandImg.src = imgs.src;
+            imgText.innerHTML = imgs.alt;
+            expandImg.parentElement.style.display = "block";
+        }
+
+        //******** NEW ********//
+
+        document.getElementById("img1").onchange = function () {
+            document.getElementById("img1").value = this.value.replace("C:\\fakepath\\", "");
+            $("#uploadedImg").attr("src", this.value);
+            $("#uploadedImg").css("display", "block");
+
+        };
+    </script>
+
+</body>
+</html>

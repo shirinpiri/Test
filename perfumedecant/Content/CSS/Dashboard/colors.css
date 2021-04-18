@@ -1,0 +1,33 @@
+/* Colors */
+
+/* :root {
+ --dark_theme: #d3a917;
+ --theme: #e6ba23;
+ --light_theme: #eac443;
+ --low_light-theme: #fbe498;
+} */
+
+/* :root {
+--dark_theme: #d0b416;
+--theme: #e8cb27;
+--light_theme: #ecd346;
+--low_light-theme: #f0de75;
+} */
+
+/* :root {
+ --dark_theme: #d3a917;
+ --theme: #1abc9c;
+ --light_theme: #46bfa9;
+ --low_light-theme: #e9f0fd;
+} */
+
+:root {
+--theme: #ff9933;
+--light_theme: #e8cb27;
+--low_light-theme: #f0de75;
+--gradiant:linear-gradient(to bottom right, #ff9933 0%, #e8cb27 100%);
+--top_gradiant: linear-gradient(
+      #ff9933, #e8cb27
+    );
+--low_gradiant:linear-gradient(to bottom right, #ffb366 0%, #eed85d 100%);
+}

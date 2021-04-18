@@ -1,0 +1,300 @@
+﻿@model perfumedecant.Models.Domains.Tbl_Perfume
+@using perfumedecant.Models.Repository
+@{
+    Layout = "~/Views/Shared/_DashboardPerfume.cshtml";
+    Rep_Perfume rep_perfume = new Rep_Perfume();
+    Rep_PerfumeImages rep_images = new Rep_PerfumeImages();
+    var images = rep_images.Get_PerfumeImages(Model.Perfume_ID);
+}
+
+<!-- Main content -->
+<section class="content">
+
+
+    <div class="container-fluid">
+        <div class="add-box">
+            @if (ViewBag.Error != null)
+            {
+                <div class="alert alert-danger" style="text-align:right">
+                    <a class="close" style="cursor: pointer;" onclick="$('.alert').hide()">×</a>
+                    @ViewBag.Error
+                </div>
+            }
+            <div class="card card-warning">
+                <div class="card-header">
+                    <h3 class="card-title"> ویرایش محصول</h3>
+                </div>
+                <!-- /.card-header -->
+                <div class="card-body">
+                    @using (Html.BeginForm("EditPerfume", "DashboardPerfume", FormMethod.Post, new { enctype = "multipart/form-data", id = "frm_add_perfume" }))
+                    {@Html.AntiForgeryToken()
+                        @Html.ValidationSummary(true)
+                        @Html.HiddenFor(model => model.Perfume_ID)
+                        <div class="row">
+                            <div class="col-md-6 col-sm-12">
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.Perfume_Name, new { @class = "control-label" })<span class="red">*</span>
+                                    @Html.TextBoxFor(model => model.Perfume_Name, new { @class = "form-control", placeholder = "وارد کردن اطلاعات ..." })
+                                    <p class="red">@Html.ValidationMessageFor(model => model.Perfume_Name)</p>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-sm-12">
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.Perfume_Brand_ID, new { @class = "control-label" })<span class="red">*</span>
+                                    @Html.DropDownListFor(model => model.Perfume_Brand_ID, (IEnumerable<SelectListItem>)ViewBag.brand, "انتخاب کنید", new { @class = "form-control" })
+                                    <p class="red">@Html.ValidationMessageFor(model => model.Perfume_Brand_ID)</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6 col-sm-12">
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.Perfume_Type_ID, new { @class = "control-label" })<span class="red">*</span>
+                                    @Html.DropDownListFor(model => model.Perfume_Type_ID, (IEnumerable<SelectListItem>)ViewBag.types, "انتخاب کنید", new { @class = "form-control" })
+                                    <p class="red">@Html.ValidationMessageFor(model => model.Perfume_Type_ID)</p>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-sm-12">
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.Perfume_Gender, new { @class = "control-label" })<span class="red">*</span>
+                                    @Html.DropDownListFor(model => model.Perfume_Gender, (IEnumerable<SelectListItem>)ViewBag.gender, new { @class = "form-control" })
+                                    <p class="red">@Html.ValidationMessageFor(model => model.Perfume_Gender)</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+
+                            <div class="col-md-6 col-sm-12">
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.Perfume_Country, new { @class = "control-label" })<span class="red">*</span>
+                                    @Html.TextBoxFor(model => model.Perfume_Country, new { @class = "form-control", placeholder = "وارد کردن اطلاعات ..." })
+                                    <p class="red">@Html.ValidationMessageFor(model => model.Perfume_Country)</p>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6 col-sm-12">
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.Perfume_Perfumer, new { @class = "control-label" })
+                                    @Html.TextBoxFor(model => model.Perfume_Perfumer, new { @class = "form-control", placeholder = "وارد کردن اطلاعات ..." })
+                                    <p class="red">@Html.ValidationMessageFor(model => model.Perfume_Perfumer)</p>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6 col-sm-12">
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.Perfume_TemperOfPerfume, new { @class = "control-label" })
+                                    @Html.TextBoxFor(model => model.Perfume_TemperOfPerfume, new { @class = "form-control", placeholder = "وارد کردن اطلاعات ..." })
+                                    <p class="red">@Html.ValidationMessageFor(model => model.Perfume_TemperOfPerfume)</p>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-sm-12">
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.Perfume_OlfactionGroups, new { @class = "control-label" })
+                                    @Html.TextBoxFor(model => model.Perfume_OlfactionGroups, new { @class = "form-control", placeholder = "وارد کردن اطلاعات ..." })
+                                    <p class="red">@Html.ValidationMessageFor(model => model.Perfume_OlfactionGroups)</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-12 col-sm-12">
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.Perfume_Notes, new { @class = "control-label" })
+                                    @Html.TextBoxFor(model => model.Perfume_Notes, new { @class = "form-control", placeholder = "وارد کردن اطلاعات ..." })
+                                    <p class="red">@Html.ValidationMessageFor(model => model.Perfume_Notes)</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-12 col-sm-12">
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.Perfume_Description, new { @class = "control-label" })
+                                    @Html.TextAreaFor(model => model.Perfume_Description, new { @class = "form-control", placeholder = "وارد کردن اطلاعات ..." })
+                                    <p class="red">@Html.ValidationMessageFor(model => model.Perfume_Description)</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+
+                            <div class="col-md-6 col-sm-12">
+                                <div class="form-group">
+                                    <br />
+                                    @Html.CheckBoxFor(model => model.Perfume_SpecialOffer, new { id = "specialOffer", name = "specialOffer" })
+                                    آیا این محصول به عنوان پیشنهاد ویژه سایت می باشد؟
+                                    @Html.ValidationMessageFor(model => model.Perfume_SpecialOffer, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-sm-12">
+                                <div class="form-group">
+                                    <label class="control-label">فصول </label>
+                                    <br />
+                                    @{
+                        var spring = false;
+                        var summer = false;
+                        var autumn = false;
+                        var winter = false;
+                        foreach (var season in rep_perfume.Get_PerfumeSeasons(@Model.Perfume_ID))
+                        {
+                            if (@season.Season_Title == "مناسب فصل بهار")
+                            { spring = true; }
+                            if (@season.Season_Title == "مناسب فصل تابستان")
+                            { summer = true; }
+                            if (@season.Season_Title == "مناسب فصل پاییز")
+                            { autumn = true; }
+                            if (@season.Season_Title == "مناسب فصل زمستان")
+                            { winter = true; }
+
+                        }
+                                    }
+
+                                    <div class="col-md-12 col-sm-12">
+                                        @if (@spring == true)
+                                        {
+
+                                            <input id="spring" name="spring" value="1" type="checkbox" checked="checked" />
+                                        }
+                                        else
+                                        {
+                                            <input id="spring" name="spring" value="1" type="checkbox" />
+                                        }
+                                        مناسب فصل بهار
+                                        &nbsp;&nbsp;&nbsp;&nbsp;
+                                        @if (@summer == true)
+                                        {
+
+                                            <input id="summer" name="summer" value="1" type="checkbox" checked="checked" />
+                                        }
+                                        else
+                                        {
+                                            <input id="summer" name="summer" value="1" type="checkbox" />
+                                        }
+                                        مناسب فصل تابستان
+                                    </div>
+                                    <div class="col-md-12 col-sm-12">
+                                        @if (@autumn == true)
+                                        {
+                                            <input id="autumn" name="autumn" value="1" type="checkbox" checked="checked" />
+                                        }
+                                        else
+                                        {
+                                            <input id="autumn" name="autumn" value="1" type="checkbox" />
+                                        }
+                                        مناسب فصل پاییز
+                                        &nbsp;&nbsp;&nbsp;
+                                        @if (@winter == true)
+                                        {
+
+                                            <input id="winter" name="winter" value="1" type="checkbox" checked="checked" />
+                                        }
+                                        else
+                                        {
+                                            <input id="winter" name="winter" value="1" type="checkbox" />
+                                        }
+
+                                        مناسب فصل زمستان
+                                    </div>
+
+
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <br />
+                        <div class="row">
+                            <div class="col-md-6 col-sm-12">
+                                <div class="form-group">
+                                    <label class="control-label">بارگذاری تصویر </label>
+                                    <div class="input-group">
+                                        <div class="fileUpload btn btn--browse">
+                                            <span>Browse</span>
+                                            <input id="perfumeFile" type="file" name="PerfumeImage" class="upload" readonly="readonly" />
+                                        </div>
+                                        @Html.TextBoxFor(model => model.Perfume_ImageIndex, new { @class = "uploadFileInput", @readonly = "readonly" })
+                                        <br />
+                                        <p class="red">@Html.ValidationMessageFor(model => model.Perfume_ImageIndex)</p>
+                                        <br />
+                                        <img class="uploadedImage" style="display:block !important" id="uploadedPerfumeImage" src="/Uploads/PerfumeImages/@Html.DisplayFor(model => model.Perfume_ImageIndex)" width="200" height="200" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-sm-12">
+                                <div class="form-group">
+                                    <label class="control-label"> بارگذاری سایر تصاویر  </label>
+
+                                    <table id="tbl">
+                                        @{
+                                        var number = 1;
+                                        string rowNumber = "row" + number;
+                                        string imageNumber = "image" + number;
+                                        string uploadedImageNumber = "uploadedImage" + number;
+                                        string spanImageNumber = "spanImage" + number;
+
+                                        foreach (var image in images)
+                                        {
+                                            <tr id="@rowNumber">
+                                                @*<td>
+                                                        <div class="fileUpload btn btn--browse">
+                                                            <span>Browse</span>
+                                                            <input type="file" name="files1" id="@imageNumber" onchange="readURL(this);" class="upload" />
+                                                        </div>
+                                                    </td>*@
+                                                <td>
+                                                    <p id="@spanImageNumber">@image.PerfumeImages_ImageIndex</p>
+                                                </td>
+                                                <td>
+                                                    <img class="uploadedImage1" style="display:block !important" id="@uploadedImageNumber" src="/Uploads/PerfumeImages/@image.PerfumeImages_ImageIndex" width="100" height="100" />
+                                                </td>
+                                                @*<td><i class="fa fa-plus-circle fa-lg" onclick="addField(this);"></i> </td>*@
+                                                <td><a href="/DashboardPerfume/DeleteImage/@image.PerfumeImages_ID"><i class="fa fa-minus-circle fa-lg " onclick='removeField(this)'></i></a> </td>
+                                            </tr>
+                                            number = number + 1;
+                                            rowNumber = "row" + number;
+                                            imageNumber = "image" + number;
+                                            uploadedImageNumber = "uploadedImage" + number;
+                                            spanImageNumber = "spanImage" + number;
+                                        }
+                                        }
+                                        <tr id="@rowNumber">
+                                            <td>
+                                                <div class="fileUpload btn btn--browse">
+                                                    <span>Browse</span>
+                                                    <input type="file" name="files" id="@imageNumber" onchange="readURL(this);" class="upload" />
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <p id="@spanImageNumber"></p>
+                                            </td>
+                                            <td>
+                                                <img class="uploadedImage1" id="@uploadedImageNumber" />
+                                            </td>
+                                            <td><i class="fa fa-plus-circle fa-lg" onclick="addField(this);"></i> </td>
+                                            @*<td><i class="fa fa-minus-circle fa-lg" onclick="removeField(this);" ></i> </td>*@
+                                        </tr>
+
+                                    </table>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <div class="row">
+
+                        </div>
+                        <input type="submit" value="ثبت" class="btn add-btn" />
+
+                    }
+                </div>
+                <!-- /.card-body -->
+            </div>
+        </div>
+    </div><!--/. container-fluid -->
+</section>
+<!-- /.content -->
