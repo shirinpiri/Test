@@ -1,0 +1,62 @@
+﻿@using perfumedecant.Models.Repository
+
+@{
+    ViewBag.Title = "مقالات";
+    Layout = "~/Views/Shared/_DashboardArticles.cshtml";
+    Rep_Article rep_article = new Rep_Article();
+    var articles = rep_article.Get_AllArticles();
+    var row = 1;
+}
+
+<!-- Main content -->
+<section class="content">
+    <div class="container-fluid">
+        @if (ViewBag.Error != null)
+        {
+            <div class="alert alert-danger" style="text-align:right">
+                <a class="close" style="cursor: pointer;" onclick="$('.alert').hide()">×</a>
+                @ViewBag.Error
+            </div>
+        }
+        <button onclick="location.href='@Url.Action("AddArticle", "DashboardArticles")';return false;" type="submit" class="btn add-btn">افزودن</button>
+
+        <table id="users" class="display" style="width:100%">
+            <thead>
+                <tr>
+                    <th>ردیف</th>
+                    <th>عنوان</th>
+                    <th>فایل</th>
+                    <th></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+
+                @if (articles.Count() > 0)
+                {
+                    foreach (var article in articles)
+                    {
+                        <tr>
+                            <td>@row</td>
+                            <td> @article.Article_Title</td>
+                            <td> @article.Article_Path</td>
+
+                            <td><a href="@Url.Action("ArticleDetails", "DashboardArticles", new { fileName = article.Article_Path })" target="_blank"><i class="fa fa-info-circle"></i></a></td>
+                            @*<td>@Html.ActionLink(" ", "ArticleDetails", new { fileName = article.Article_Path }, new { data_toggle = "tooltip", title = "جزئیات", @class = "fa fa-info-circle" })</td>*@
+                            <td>@Html.ActionLink(" ", "DeleteArticle", new { ArticleID = article.Article_ID }, new { data_toggle = "tooltip", title = "حذف", @class = "fa fa-trash", onclick = "return confirm('آیا از حذف این مقاله مطمئن هستید؟');" })</td>
+                        </tr>
+                    }
+                }
+                else
+                {
+                    <tr>
+                        <td colspan="5" style="color:red;font-size:14px">هیچ داده ای برای نمایش موجود نمی باشد.</td>
+                    </tr>
+                }
+
+            </tbody>
+        </table>
+
+    </div><!--/. container-fluid -->
+</section>
+<!-- /.content -->

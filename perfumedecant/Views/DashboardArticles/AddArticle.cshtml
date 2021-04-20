@@ -1,0 +1,66 @@
+﻿@model perfumedecant.Models.Domains.Tbl_Article
+
+@{
+    ViewBag.Title = "افزودن مقاله";
+    Layout = "~/Views/Shared/_DashboardArticles.cshtml";
+}
+
+
+<!-- Main content -->
+<section class="content">
+
+
+    <div class="container-fluid">
+        <div class="add-box">
+            @if (ViewBag.Error != null)
+            {
+                <div class="alert alert-danger" style="text-align:right">
+                    <a class="close" style="cursor: pointer;" onclick="$('.alert').hide()">×</a>
+                    @ViewBag.Error
+                </div>
+            }
+            <div class="card card-warning">
+                <div class="card-header">
+                    <h3 class="card-title"> افزودن مقاله</h3>
+                </div>
+                <!-- /.card-header -->
+                <div class="card-body">
+                    @using (Html.BeginForm("AddArticle", "DashboardArticles", FormMethod.Post, new { enctype = "multipart/form-data", id = "frm_add_article" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        @Html.ValidationSummary(true)
+                        <div class="row">
+                            <div class="col-md-6 col-sm-12">
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.Article_Title, new { @class = "control-label" })<span class="red">*</span>
+                                    @Html.TextBoxFor(model => model.Article_Title, new { @class = "form-control", placeholder = "وارد کردن اطلاعات ..." })
+                                    <p class="red">@Html.ValidationMessageFor(model => model.Article_Title)</p>
+                                </div>
+                            </div>
+                   
+                            <div class="col-md-6 col-sm-12">
+                                <div class="form-group">
+                                    <label class="control-label"> بارگذاری فایل </label>
+                                    <div class="input-group">
+                                        <div class="fileUpload btn btn--browse">
+                                            <span>Browse</span>
+                                            <input id="articleFile" type="file" name="articleFile" class="upload" />
+                                        </div>
+                                        @Html.TextBoxFor(model => model.Article_Path, new { @class = "uploadFileInput", @readonly = "readonly" })
+                                        <br />
+                                        <p class="red">@Html.ValidationMessageFor(model => model.Article_Path)</p>
+                                        <br />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <input type="submit" value="ثبت" class="btn add-btn" />
+                    }
+                </div>
+                <!-- /.card-body -->
+            </div>
+        </div>
+    </div><!--/. container-fluid -->
+</section>
+<!-- /.content -->

@@ -1,0 +1,146 @@
+﻿@model perfumedecant.Models.Domains.Tbl_UserBills
+@using perfumedecant.Models.Domains
+@using perfumedecant.Models.Plugins
+
+
+@{
+    Layout = "~/Views/Shared/_DashboardOrder.cshtml";
+}
+
+<!-- Main content -->
+<section class="content">
+    <div class="container-fluid">
+
+        @if (ViewBag.result != null)
+        {
+            <div class="alert alert-danger" style="text-align:right">
+                <a class="close" style="cursor: pointer;" onclick="$('.alert').hide()">×</a>
+                @ViewBag.result
+            </div>
+        }
+
+        <div class="add-box">
+            <div class="card card-warning">
+                <div class="card-header">
+                    <h3 class="card-title">جزئیات سفارش    </h3>
+                </div>
+                <!-- /.card-header -->
+                <div class="card-body">
+                    <form role="form">
+
+                        <h3 style="text-align:right"> فاكتور شماره @Model.Tbl_Bill.Bill_InvoiceNumber</h3>
+                        <div class="row">
+                            <div class="col-md-6 col-sm-12">
+                                <div class="detail-perfume-box1">
+                                    <p>نام و نام خانوادگی کاربر : <span> @Model.Tbl_InterimBill.Tbl_User.User_NameFamily </span> </p>
+                                    <p> نحوه ارسال سفارش: <span> @Model.Tbl_Bill.Tbl_PostType.PostType_Title </span> </p>
+                                    <p> وضعيت سفارش: <span>@Model.Tbl_Bill.Tbl_PostStatus.PostStatus_Title  </span> </p>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6 col-sm-12">
+                                <div class="detail-perfume-box1">
+                                    <p> تاریخ سفارش: <span>@PersianDateExtensionMethods.ToPeString(Model.Tbl_Bill.Bill_Date, "yyyy/MM/dd")</span> </p>
+
+                                    <p>نام كاربري: <span> @Model.Tbl_InterimBill.Tbl_User.User_Username </span> </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <br />
+
+                      
+
+                        <div class="row">
+                            <div class="table-responsive">
+                                <table class="table table-condensed" style="width:60%">
+                                    <thead>
+                                        <tr>
+                                            <td style="border-top:none"><h5> @Model.Tbl_InterimBill.Tbl_Perfume.Perfume_Name </h5></td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+
+                                        <tr>
+                                            <td rowspan="4">قیمت (تومان)</td>
+                                            <td class="highrow">هزینه خالص </td>
+                                            <td class="highrow text-center">@Model.Tbl_InterimBill.InterimBill_Price  </td>
+                                        </tr>
+
+                                        <tr>
+                                            <td>هزینه ارسال </td>
+
+                                            <td class="text-center">@ViewBag.PostPrice </td>
+                                        </tr>
+                                        <tr>
+                                            <td>سایر هزینه ها</td>
+                                            <td class="text-center">@Model.Tbl_Bill.Bill_OtherPrice </td>
+                                        </tr>
+
+                                        <tr>
+                                            <td>مبلغ تخفیف</td>
+                                            <td class="text-center">@Model.Tbl_Bill.Bill_Off </td>
+                                        </tr>
+
+                                        <tr style="background-color: #dee2e6">
+                                            <td><strong>مجموع قیمت (تومان)</strong></td>
+                                            <td></td>
+                                            <td class="text-center">@ViewBag.finalPrice</td>
+                                        </tr>
+
+                                    </tbody>
+                                </table>
+
+                                <div class="row">
+                                    <div class="col-md-6 col-sm-12">
+                                        <div class="detail-perfume-box1">
+                                            <p>نوع سفارش : <span> @Model.Tbl_InterimBill.Tbl_Category.Category_Title </span> </p>
+                                            <p> حجم سفارش: <span> @Model.Tbl_InterimBill.InterimBill_Weight میل</span> </p>
+                                            <p> تعداد سفارش: <span>@Model.Tbl_InterimBill.InterimBill_Count  عدد</span> </p>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        <p style="color:gray; font-weight:bold;text-align:right"><i class="fa fa-check" aria-hidden="true"></i> نحوه ارسال این سفارش بصورت <span style="color:green">@Model.Tbl_Bill.Tbl_PostType.PostType_Title </span> می باشد.</p>
+                        <p style="color: red; text-align: right"><i class="fa fa-check" aria-hidden="true"></i>   این فاکتور تا تاریخ @PersianDateExtensionMethods.ToPeString(Model.Tbl_InterimBill.InterimBill_ExpDate, "yyyy/MM/dd") معتبر می باشد.</p>
+
+                    </form>
+                </div>
+                <!-- /.card-body -->
+            </div>
+        </div>
+
+        <div class="add-box">
+            <div class="card card-warning">
+                <div class="card-header">
+                    <h3 class="card-title"> مشخصات محصول</h3>
+                </div>
+                <!-- /.card-header -->
+                <div class="card-body">
+                    <form role="form">
+                        <!-- text input -->
+                        <div class="row">
+                            <div class="col-md-6 col-sm-12">
+                                <div class="detail-perfume-box1">
+                                    <h3>@Model.Tbl_InterimBill.Tbl_Perfume.Perfume_Name</h3>
+                                    <p>نام برند: <span>@Model.Tbl_InterimBill.Tbl_Perfume.Tbl_Brand.Brand_Title </span> </p>
+                                    <p> كشور سازنده: <span> @Model.Tbl_InterimBill.Tbl_Perfume.Perfume_Country </span> </p>
+                                    <p> جنسیت: <span>@Model.Tbl_InterimBill.Tbl_Perfume.Perfume_Gender </span> </p>
+                                    <p> غلظت: <span> @Model.Tbl_InterimBill.Tbl_Perfume.Tbl_PerfumeType.PerfumeType_Title </span> </p>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-sm-12 img-magnifier-container">
+                                <img id="myimage" src="~/Content/Images/dashboard_images/product61.jpg" class="img-fluid mx-auto d-block img-thumbnail" with="400" height="400">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <!-- /.card-body -->
+            </div>
+        </div>
+
+    </div><!--/. container-fluid -->
+</section>
+<!-- /.content -->

@@ -1,0 +1,65 @@
+﻿@using perfumedecant.Models.Repository
+
+@{
+    Layout = "~/Views/Shared/_DashboardOrder.cshtml";
+    Rep_UserBills rep_userBills = new Rep_UserBills();
+    var qUserBills = rep_userBills.Get_AllUserBills();
+}
+
+<!-- Main content -->
+<section class="content">
+    <div class="container-fluid">
+
+        @if (ViewBag.result != null)
+        {
+            <div class="alert alert-danger" style="text-align:right">
+                <a class="close" style="cursor: pointer;" onclick="$('.alert').hide()">×</a>
+                @ViewBag.result
+            </div>
+        }
+
+
+        <table id="users" class="display" style="width:100%">
+            <thead>
+                <tr>
+                    <th>شماره فاکتور</th>
+                    <th>نام کاربری سفارش دهنده</th>
+                    <th>نام محصول</th>
+                    <th>قیمت</th>
+                    <th>جزئیات</th>
+                    <th>حذف</th>
+                    <th>  تغییر وضعیت سفارش</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (qUserBills.Count() > 0)
+                {
+                    foreach (var item in qUserBills)
+                    {
+                        <tr>
+                            <td>@Html.DisplayFor(modelItem => item.Tbl_Bill.Bill_InvoiceNumber)</td>
+                            <td>@Html.DisplayFor(modelItem => item.Tbl_InterimBill.Tbl_User.User_Username)</td>
+                            <td>@Html.DisplayFor(modelItem => item.Tbl_InterimBill.Tbl_Perfume.Perfume_Name)</td>
+                            <td>@Html.DisplayFor(modelItem => item.Tbl_InterimBill.InterimBill_Price)</td>
+                            <td>@Html.ActionLink(" ", "OrderDetails", new { id = item.UserBills_ID }, new { data_toggle = "tooltip", title = "جزئیات", @class = "fa fa-info-circle" })</td>
+                            <td>@Html.ActionLink(" ", "DeleteOrder", new { id = item.UserBills_ID }, new { data_toggle = "tooltip", title = "حذف", @class = "fa fa-trash", onclick = "return confirm('آیا از حذف این سفارش مطمئن هستید؟');" })</td>
+                            <td style="display:flex;">
+                                @Html.DropDownListFor(model => item.Tbl_Bill.Bill_PostStatus_ID, (IEnumerable<SelectListItem>)ViewBag.postStatuses, @item.Tbl_Bill.Tbl_PostStatus.PostStatus_Title, new { @class = "form-control", id = "statusID" })
+
+                                <a href="#" class="far fa-save" id="SaveStatus" data-toggle="tooltip" title="ذخیره" onclick="ChangeStatus('@item.Tbl_Bill.Bill_ID')"></a>
+                            </td>
+                        </tr>
+                    }
+                }
+                else
+                {
+                    <tr>
+                        <td colspan="7" style="color:red;font-size:14px">هیچ داده ای برای نمایش موجود نمی باشد.</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+    </div><!--/. container-fluid -->
+</section>
+<!-- /.content -->

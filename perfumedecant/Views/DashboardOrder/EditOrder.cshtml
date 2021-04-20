@@ -1,0 +1,122 @@
+﻿@model perfumedecant.Models.Domains.Tbl_UserBills
+@using perfumedecant.Models.Domains
+
+@{
+    Layout = "~/Views/Shared/_DashboardOrder.cshtml";
+}
+
+@using (Html.BeginForm("EditOrder", "DashboardOrder", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary(true)
+            @Html.HiddenFor(model => model.UserBills_ID)
+    
+            <!-- Main content -->
+            <section class="content">
+                <div class="container-fluid">
+                    <div class="add-box">
+                        <div class="card card-warning">
+                            <div class="card-header">
+                                <h3 class="card-title">ویرایش سفارش    </h3>
+                            </div>
+                            <!-- /.card-header -->
+                            <div class="card-body">
+                                <form role="form">
+                                    <!-- text input -->
+                                    <div class="row">
+                                        <div class="col-md-6 col-sm-12">
+                                            <div class="form-group">
+                                                @Html.LabelFor(model => model.Tbl_InterimBill.Tbl_User.User_NameFamily, new { @class = "control-label" })
+                                                @Html.TextBoxFor(model => model.Tbl_InterimBill.Tbl_User.User_NameFamily, new { @class = "form-control", placeholder = "وارد کردن اطلاعات ..." })
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 col-sm-12">
+                                            <div class="form-group">
+                                                @Html.LabelFor(model => model.Tbl_InterimBill.Tbl_User.User_Username, new { @class = "control-label" })<span class="red">*</span>
+                                                @Html.TextBoxFor(model => model.Tbl_InterimBill.Tbl_User.User_Username, new { @class = "form-control", placeholder = "وارد کردن اطلاعات ..." })
+                                                <p class="red"> @Html.ValidationMessageFor(model => model.Tbl_InterimBill.Tbl_User.User_Username)</p>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-6 col-sm-12">
+                                            <div class="form-group">
+                                                @Html.LabelFor(model => model.Tbl_Bill.Bill_Date, new { @class = "control-label" })
+                                                @Html.TextBoxFor(model => model.Tbl_Bill.Bill_Date, new { @class = "form-control", placeholder = "وارد کردن اطلاعات ..." })
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 col-sm-12">
+                                            <div class="form-group">
+                                                @Html.LabelFor(model => model.Tbl_Bill.Tbl_PostStatus.PostStatus_Title, new { @class = "control-label" })
+                                                @Html.DropDownListFor(model => model.Tbl_Bill.Tbl_PostStatus.PostStatus_Title, (IEnumerable<SelectListItem>)ViewBag.postTypes, new { @class = "form-control" })
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-6 col-sm-12">
+                                            <div class="form-group">
+                                                @Html.LabelFor(model => model.Tbl_Bill.Bill_PayPrice, new { @class = "control-label" })
+                                                @Html.TextBoxFor(model => model.Tbl_Bill.Bill_PayPrice, new { @class = "form-control", placeholder = "وارد کردن اطلاعات ..." })
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 col-sm-12">
+                                            <div class="form-group">
+                                               @Html.LabelFor(model => model.Tbl_Bill.Bill_InvoiceNumber, new { @class = "control-label" })
+                                               @Html.TextBoxFor(model => model.Tbl_Bill.Bill_InvoiceNumber, new { @class = "form-control", placeholder = "وارد کردن اطلاعات ..." })
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-6 col-sm-12">
+                                            <div class="form-group">
+                                                @Html.LabelFor(model => model.Tbl_Bill.Bill_TrackingCode, new { @class = "control-label" })
+                                                @Html.TextBoxFor(model => model.Tbl_Bill.Bill_TrackingCode, new { @class = "form-control", placeholder = "وارد کردن اطلاعات ..." })
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 col-sm-12">
+                                            <div class="form-group">
+                                                @Html.LabelFor(model => model.Tbl_Bill.Tbl_PostType.PostType_Title, new { @class = "control-label" })
+                                                @Html.DropDownListFor(model => model.Tbl_Bill.Tbl_PostType.PostType_Title, (IEnumerable<SelectListItem>)ViewBag.postStatuses, new { @class = "form-control" })
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-6 col-sm-12">
+                                            <div class="form-group">
+                                                @Html.LabelFor(model => model.Tbl_Bill.Bill_RefID, new { @class = "control-label" })
+                                                @Html.TextBoxFor(model => model.Tbl_Bill.Bill_RefID, new { @class = "form-control", placeholder = "وارد کردن اطلاعات ..." })
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 col-sm-12">
+                                            <div class="form-group">
+                                                @Html.LabelFor(model => model.Tbl_Bill.Bill_TransNo, new { @class = "control-label" })
+                                                @Html.TextBoxFor(model => model.Tbl_Bill.Bill_TransNo, new { @class = "form-control", placeholder = "وارد کردن اطلاعات ..." })
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-6 col-sm-12">
+                                            <div class="form-group">
+                                                @Html.LabelFor(model => model.Tbl_Bill.Bill_RefNo, new { @class = "control-label" })
+                                                @Html.TextBoxFor(model => model.Tbl_Bill.Bill_RefNo, new { @class = "form-control", placeholder = "وارد کردن اطلاعات ..." })
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <button type="submit" class="btn add-btn">ثبت </button>
+
+                                </form>
+                            </div>
+                            <!-- /.card-body -->
+                        </div>
+                    </div>
+                </div><!--/. container-fluid -->
+            </section>
+            <!-- /.content -->
+        }
+  
