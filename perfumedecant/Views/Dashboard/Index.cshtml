@@ -1,0 +1,325 @@
+﻿@using perfumedecant.Models.Repository
+@using perfumedecant.Models.Plugins;
+
+@{
+    Layout = "~/Views/Shared/_DashboardMain.cshtml";
+    Rep_Bill rep_bill = new Rep_Bill();
+    var newBills = rep_bill.Get_NewBills();
+    Rep_Perfume rep_perfume = new Rep_Perfume();
+    Rep_User rep_user = new Rep_User();
+}
+
+<!-- Main content -->
+<section class="content">
+    <div class="container-fluid">
+        <!-- Info boxes -->
+        <div class="row">
+            <div class="col-12 col-sm-6 col-md-3">
+                <div class="info-box">
+                    <span class="info-box-icon bg-info elevation-1"><i class="fa fa-gift"></i></span>
+                    <div class="info-box-content">
+                        <span class="info-box-text"> محصولات</span>
+                        <span class="info-box-number">
+                            @rep_perfume.Get_Perfume_Count()
+                        </span>
+                    </div>
+                    <!-- /.info-box-content -->
+                </div>
+                <!-- /.info-box -->
+            </div>
+            <!-- /.col -->
+            <div class="col-12 col-sm-6 col-md-3">
+                <div class="info-box mb-3">
+                    <span class="info-box-icon bg-danger elevation-1"><i class="fa fa-heart"></i></span>
+                    <div class="info-box-content">
+                        <span class="info-box-text">لایک‌ها</span>
+                        <span class="info-box-number">0</span>
+                    </div>
+                    <!-- /.info-box-content -->
+                </div>
+                <!-- /.info-box -->
+            </div>
+            <!-- /.col -->
+            <!-- fix for small devices only -->
+            <div class="clearfix hidden-md-up"></div>
+            <div class="col-12 col-sm-6 col-md-3">
+                <div class="info-box mb-3">
+                    <span class="info-box-icon bg-success elevation-1"><i class="fa fa-shopping-cart"></i></span>
+                    <div class="info-box-content">
+                        <span class="info-box-text">فروش</span>
+                        <span class="info-box-number">@rep_bill.Get_Bill_Count()</span>
+                    </div>
+                    <!-- /.info-box-content -->
+                </div>
+                <!-- /.info-box -->
+            </div>
+            <!-- /.col -->
+            <div class="col-12 col-sm-6 col-md-3">
+                <div class="info-box mb-3">
+                    <span class="info-box-icon bg-warning elevation-1"><i class="fa fa-users"></i></span>
+                    <div class="info-box-content">
+                        <span class="info-box-text">اعضا</span>
+                        <span class="info-box-number">@rep_user.Get_UserCount()</span>
+                    </div>
+                    <!-- /.info-box-content -->
+                </div>
+                <!-- /.info-box -->
+            </div>
+            <!-- /.col -->
+        </div>
+        <!-- /.row -->
+        @*<div class="row">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5 class="card-title">گزارش ماهیانه</h5>
+                        </div>
+                        <div class="card-footer">
+                            <div class="row">
+                                <div class="col-sm-3 col-6">
+                                    <div class="description-block border-right">
+                                        <span class="description-percentage text-success"><i class="fa fa-caret-up"></i> 17%</span>
+                                        <h5 class="description-header">تومان 35,210.43</h5>
+                                        <span class="description-text">کل گردش حساب</span>
+                                    </div>
+                                    <!-- /.description-block -->
+                                </div>
+                                <!-- /.col -->
+                                <div class="col-sm-3 col-6">
+                                    <div class="description-block border-right">
+                                        <span class="description-percentage text-warning"><i class="fa fa-caret-left"></i> 0%</span>
+                                        <h5 class="description-header">تومان 10,390.90</h5>
+                                        <span class="description-text">فروش کل</span>
+                                    </div>
+                                    <!-- /.description-block -->
+                                </div>
+                                <!-- /.col -->
+                                <div class="col-sm-3 col-6">
+                                    <div class="description-block border-right">
+                                        <span class="description-percentage text-success"><i class="fa fa-caret-up"></i> 20%</span>
+                                        <h5 class="description-header">تومان 24,813.53</h5>
+                                        <span class="description-text">سود کل</span>
+                                    </div>
+                                    <!-- /.description-block -->
+                                </div>
+                            </div>
+                            <!-- /.row -->
+                        </div>
+                        <!-- /.card-footer -->
+                    </div>
+                    <!-- /.card -->
+                </div>
+                <!-- /.col -->
+            </div>*@
+        <!-- /.row -->
+        <!-- Main row -->
+        <div class="row">
+            <!-- Left col -->
+            <div class="col-md-12">
+                <!-- TABLE: LATEST ORDERS -->
+                <div class="card">
+                    <div class="card-header border-transparent">
+                        <h3 class="card-title">آخرین سفارشات</h3>
+                        <div class="card-tools">
+                            <button type="button" class="btn btn-tool" data-widget="collapse">
+                                <i class="fa fa-minus"></i>
+                            </button>
+                            <button type="button" class="btn btn-tool" data-widget="remove">
+                                <i class="fa fa-times"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <!-- /.card-header -->
+                    <div class="card-body p-0">
+                        <div class="table-responsive">
+                            <table class="table m-0">
+                                <thead>
+                                    <tr>
+                                        <th>شماره فاکتور</th>
+                                        <th>محصول</th>
+                                        <th>وضعیت</th>
+                                        <th>قیمت</th>
+                                        <th>كاربر</th>
+                                        <th>تاریخ سفارش</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var newBill in newBills)
+                                    {
+                                        <tr>
+                                            <td>@newBill.Tbl_Bill.Bill_InvoiceNumber</td>
+                                            <td>@newBill.Tbl_InterimBill.Tbl_Perfume.Perfume_Name</td>
+                                            <td>
+                                                @{
+                                                    if (newBill.Tbl_Bill.Tbl_PostStatus.PostStatus_Title == "در انتظار")
+                                                    { <span class="badge badge-info">@newBill.Tbl_Bill.Tbl_PostStatus.PostStatus_Title</span>}
+                                                else if (newBill.Tbl_Bill.Tbl_PostStatus.PostStatus_Title == "در حال پردازش")
+                                                {<span class="badge badge-warning">@newBill.Tbl_Bill.Tbl_PostStatus.PostStatus_Title</span>}
+                                            else if (newBill.Tbl_Bill.Tbl_PostStatus.PostStatus_Title == "ارسال شده")
+                                            {<span class="badge badge-success">@newBill.Tbl_Bill.Tbl_PostStatus.PostStatus_Title</span>}
+                                        else if (newBill.Tbl_Bill.Tbl_PostStatus.PostStatus_Title == "تحویل داده شده")
+                                        {<span class="badge badge-danger">@newBill.Tbl_Bill.Tbl_PostStatus.PostStatus_Title</span>}
+                                                }
+                                            </td>
+                                            <td>
+                                                <div class="sparkbar" data-color="#00a65a" data-height="20">@newBill.Tbl_InterimBill.InterimBill_Price</div>
+                                            </td>
+                                            <td>
+                                                <div class="sparkbar" data-color="#00a65a" data-height="20">@newBill.Tbl_InterimBill.Tbl_User.User_Username</div>
+                                            </td>
+                                            <td>@PersianDateExtensionMethods.ToPeString(@newBill.Tbl_Bill.Bill_Date, "yyyy/MM/dd")</td>
+
+                                        </tr>
+                                    }
+
+                                </tbody>
+                            </table>
+                        </div>
+                        <!-- /.table-responsive -->
+                    </div>
+                    <!-- /.card-body -->
+                    <div class="card-footer clearfix">
+                        <a href="@Url.Action("Index", "DashboardOrder")" class="btn btn-sm btn-secondary float-right">مشاهده همه سفارش ها</a>
+                    </div>
+                    <!-- /.card-footer -->
+                </div>
+                <!-- /.card -->
+            </div>
+            <!-- /.col -->
+            <div class="col-md-12">
+                <!-- PRODUCT LIST -->
+                <div class="card">
+                    <div class="card-header border-transparent">
+                        <h3 class="card-title">محصولات تازه اضافه شده</h3>
+                        <div class="card-tools">
+                            <button type="button" class="btn btn-tool" data-widget="collapse">
+                                <i class="fa fa-minus"></i>
+                            </button>
+                            <button type="button" class="btn btn-tool" data-widget="remove">
+                                <i class="fa fa-times"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <!-- /.card-header -->
+                    <div class="card-body p-0">
+                        <div class="table-responsive">
+                            <table class="table m-0">
+                                <thead>
+                                    <tr>
+                                        <th>تصوير</th>
+                                        <th>نام محصول</th>
+                                        <th>غلظت</th>
+                                        <th>برند</th>
+                                        <th>جنسیت</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @{
+                                        foreach (var perfume in rep_perfume.Get_NewPerfume().Take(4))
+                                        {
+                                            <tr>
+                                                <td>
+                                                    <div class="product-img">
+                                                        <img src="~/Uploads/PerfumeImages/@perfume.Perfume_ImageIndex" alt="@perfume.Perfume_Name" class="img-size-50">
+                                                    </div>
+                                                </td>
+                                                <td>@perfume.Perfume_Name</td>
+                                                <td> @perfume.Tbl_PerfumeType.PerfumeType_Title</td>
+                                                <td>@perfume.Tbl_Brand.Brand_Title</td>
+                                                <td>@perfume.Perfume_Gender</td>
+                                            </tr>
+
+                                        }
+                                    }
+
+
+                                </tbody>
+                            </table>
+                        </div>
+                        <!-- /.table-responsive -->
+                    </div>
+                    <!-- /.card-body -->
+                    <div class="card-footer clearfix">
+                        <a href="@Url.Action("Index", "DashboardPerfume")" class="btn btn-sm btn-secondary float-right">مشاهده همه محصولات</a>
+                    </div>
+                    <!-- /.card-footer -->
+                </div>
+                <!-- /.card -->
+            </div>
+            <div class="col-md-12">
+                <!-- PRODUCT LIST -->
+                <div class="card">
+                    <div class="card-header border-transparent">
+                        <h3 class="card-title">کاربران تازه اضافه شده</h3>
+                        <div class="card-tools">
+                            <button type="button" class="btn btn-tool" data-widget="collapse">
+                                <i class="fa fa-minus"></i>
+                            </button>
+                            <button type="button" class="btn btn-tool" data-widget="remove">
+                                <i class="fa fa-times"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <!-- /.card-header -->
+                    <div class="card-body p-0">
+                        <div class="table-responsive">
+                            <table class="table m-0">
+                                <thead>
+                                    <tr>
+                                        <th>ردیف</th>
+                                        <th>نام کاربری</th>
+                                        <th>وضعیت کاربر</th>
+                                        <th>ایمیل</th>
+                                        <th>نقش کاربر</th>
+                                        <th>تاریخ ثبت نام</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @{
+                                        var counter = 1;
+                                        foreach (var user in rep_user.Get_AllUsers().Take(4))
+                                        {
+                                            <tr>
+                                                <td>@counter</td>
+                                                <td> @user.User_Username</td>
+                                                @if (user.User_Active == true)
+                                                {
+                                                    <td>
+                                                        <span class="circle"></span>
+                                                    </td>
+                                                }
+
+                                                @if (user.User_Active == false)
+                                                {
+                                                    <td>
+                                                        <span class="transparent-circle"></span>
+                                                    </td>
+                                                }
+                                                <td> @user.User_Email</td>
+                                                <td>@Html.DisplayFor(modelItem => user.Tbl_Role.Role_Title)</td>
+                                                <td>@PersianDateExtensionMethods.ToPeString(@user.User_Date, "yyyy/MM/dd")</td>
+                                            </tr>
+                                            counter++;
+                                        }
+
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                        <!-- /.table-responsive -->
+                    </div>
+                    <!-- /.card-body -->
+                    <div class="card-footer clearfix">
+                        <a href="@Url.Action("Index", "DashboardUser")" class="btn btn-sm btn-secondary float-right">مشاهده همه کاربران</a>
+                    </div>
+                    <!-- /.card-footer -->
+                </div>
+                <!-- /.card -->
+            </div>
+
+            <!-- /.col -->
+        </div>
+        <!-- /.row -->
+    </div><!--/. container-fluid -->
+</section>
+<!-- /.content -->

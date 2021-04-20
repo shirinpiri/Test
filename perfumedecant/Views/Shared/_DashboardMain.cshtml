@@ -10,15 +10,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
 
-    <title>مدیریت محصولات</title>
+    <title>پنل مدیریت</title>
 
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="plugins/font-awesome/css/font-awesome.min.css">
     <!-- Theme style -->
     <link rel="stylesheet" href="~/Content/CSS/Dashboard/adminlte.css">
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
-
-    <link rel="stylesheet" href="~/Content/CSS/Dashboard/jquery.dataTables.min.css">
-
+    <!-- bootstrap rtl -->
+    <link rel="stylesheet" href="~/Content/CSS/Dashboard/bootstrap-rtl.min.css">
     <!-- template rtl version -->
     <link rel="stylesheet" href="~/Content/CSS/Dashboard/custom-style.css">
 
@@ -42,10 +43,8 @@
         <aside class="main-sidebar sidebar-dark-primary elevation-4">
             <!-- Brand Logo -->
             <a href="@Url.Action("Index", "Dashboard")" class="brand-link">
-
                 <span class="brand-text font-weight-light">پرفیوم دکانت</span>
             </a>
-
             <!-- Sidebar -->
             <div class="sidebar">
                 <div>
@@ -58,14 +57,13 @@
                             <a href="#" class="d-block">@admin.User_NameFamily</a>
                         </div>
                     </div>
-
                     <!-- Sidebar Menu -->
                     <nav class="mt-2">
                         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                             <!-- Add icons to the links using the .nav-icon class
          with font-awesome or any other icon font library -->
                             <li class="nav-item">
-                                <a href="@Url.Action("Index", "Dashboard")" class="nav-link">
+                                <a href="@Url.Action("Index", "Dashboard")" class="nav-link active">
                                     <i class="nav-icon 	fa fa-cog"></i>
                                     داشبورد
                                 </a>
@@ -77,7 +75,7 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="@Url.Action("Index", "DashboardPerfume")" class="nav-link ">
+                                <a href="@Url.Action("Index", "DashboardPerfume")" class="nav-link">
                                     <i class="nav-icon fa fa-gift"></i>
                                     محصولات
                                 </a>
@@ -89,7 +87,7 @@
                                         </a>
                                     </li>
                                     <li class="nav-item">
-                                        <a href="@Url.Action("Index", "HandySample")" class="nav-link active">
+                                        <a href="@Url.Action("Index", "HandySample")" class="nav-link">
                                             <img src="~/Content/images/dashboard_images/perfume2.png" style="padding-left:10px">
                                             سمپل دست ریز
                                         </a>
@@ -121,7 +119,7 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href='@Url.Action("SignOut", "Account")' class="nav-link">
+                                <a href='@Url.Action("Logout", "Account")' class="nav-link">
                                     <i class="nav-icon fa fa-power-off"></i>
                                     خروج
                                 </a>
@@ -133,11 +131,9 @@
             </div>
             <!-- /.sidebar -->
         </aside>
-
         <!-- Content Wrapper. Contains page content -->
         <div class="content-wrapper">
-
-            @RenderBody()
+          @RenderBody()
         </div>
         <!-- /.content-wrapper -->
         <!-- Main Footer -->
@@ -150,51 +146,11 @@
     <!-- ./wrapper -->
     <!-- REQUIRED SCRIPTS -->
     <!-- jQuery -->
-
-    <script type="text/javascript" charset="utf8" src="https://code.jquery.com/jquery-3.3.1.js"></script>
-    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+   
+    <script src="~/Content/Scripts/vendor/jquery-1.11.2.min.js"></script>
     <script src="~/Content/Scripts/vendor/bootstrap.min.js"></script><!-- AdminLTE App -->
     <script src="~/Content/Scripts/adminlte.js"></script>
     <script src="~/Content/Scripts/dashboard.js"></script>
-    <script>
-        $(document).ready(function () {
-            $('div.dataTables_filter input').css('font-size', '12px');
-            $('#perfumes').DataTable({
-                language: {
-                    "search": "جست و جو:",
-                    "sLengthMenu": "نمایش _MENU_ آیتم در هر صفحه",
-                    "info": "نمایش _START_ تا _END_ از _TOTAL_ آیتم",
-                },
-                "scrollX": true
-            });
-        });
-        //---- Upload user profile image ----//
-        document.getElementById("perfumeFile").onchange = function () {
-            document.getElementById("Perfume_ImageIndex").value = this.value.replace("C:\\fakepath\\", "");
-            $("#uploadedPerfumeImage").attr("src", this.value);
-            $("#uploadedPerfumeImage").css("display", "block");
 
-        };
-
-        function showImage(src, target) {
-            var fr = new FileReader();
-            // when image is loaded, set the src of the image where you want to display it
-            fr.onload = function (e) { target.src = this.result; };
-            src.addEventListener("change", function () {
-                // fill fr with image data
-                fr.readAsDataURL(src.files[0]);
-            });
-        }
-
-        var src = document.getElementById("perfumeFile");
-        var target = document.getElementById("uploadedPerfumeImage");
-        showImage(src, target);
-
-        document.getElementById("file").onchange = function () {
-            document.getElementById("uploadFile").value = this.value.replace("C:\\fakepath\\", "");
-        };
-
-
-    </script>
 </body>
 </html>

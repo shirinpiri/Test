@@ -33,7 +33,7 @@ namespace UserDecant.Controllers
             {
                 Message = "Access denied. need login.";
                 log.addLog(Message, "AddUser", "DashboardUser", logStatus.EventLog);
-                return RedirectToAction("Login", "Account");
+                return RedirectToAction("Index", "Account");
             }
             else if (Session["RoleName"].ToString() == "Admin")
             {
@@ -59,7 +59,7 @@ namespace UserDecant.Controllers
             {
                 Message = "Access denied. need login.";
                 log.addLog(Message, "AddUser", "DashboardUser", logStatus.EventLog);
-                return RedirectToAction("Login", "Account");
+                return RedirectToAction("Index", "Account");
             }
 
             else if (Session["RoleName"].ToString() == "Admin")
@@ -154,7 +154,7 @@ namespace UserDecant.Controllers
             {
                 Message = "Access denied. need login.";
                 log.addLog(Message, "EditUser", "DashboardUser", logStatus.EventLog);
-                return RedirectToAction("Login", "Account");
+                return RedirectToAction("Index", "Account");
             }
 
             else if (Session["RoleName"].ToString() == "Admin")
@@ -201,7 +201,7 @@ namespace UserDecant.Controllers
             {
                 Message = "Access denied. need login.";
                 log.addLog(Message, "EditUser", "DashboardUser", logStatus.EventLog);
-                return RedirectToAction("Login", "Account");
+                return RedirectToAction("Index", "Account");
             }
 
             else if (Session["RoleName"].ToString() == "Admin")
@@ -239,8 +239,9 @@ namespace UserDecant.Controllers
                   oldUser.User_NationalCode = user.User_NationalCode;
                   oldUser.User_PostalCode = user.User_PostalCode;
                   oldUser.User_Tel = user.User_Tel;
+                    oldUser.User_Password = Crypto.Hash(user.User_Password);
 
-                  var uploadFiles = Request.Files[0];
+                    var uploadFiles = Request.Files[0];
                   Random rnd = new Random();
 
                   if (uploadFiles != null && uploadFiles.ContentLength > 0)
@@ -294,8 +295,9 @@ namespace UserDecant.Controllers
                   }
 
                 }
-                catch
+                catch (Exception ex)
                 {
+                    string e = ex.ToString();
                     Message = "edited User with userName " + user.User_Username + " failed.";
                     log.addLog(Message, "EditUser", "DashboardUser", logStatus.ErrorLog);
                     ViewBag.result = "کاربر ویرایش نشد، لطفا دوباره تلاش کنید.";
@@ -337,7 +339,7 @@ namespace UserDecant.Controllers
             {
                 Message = "Access denied. need login.";
                 log.addLog(Message, "DeleteUser", "DashboardUser", logStatus.EventLog);
-                return RedirectToAction("Login", "Account");
+                return RedirectToAction("Index", "Account");
             }
 
             else if (Session["RoleName"].ToString() == "Admin")
@@ -402,14 +404,14 @@ namespace UserDecant.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [ValidateInput(false)]
-        public ActionResult ChangePassword(int id = 0,String confirm_password = "")
+        public ActionResult ChangePassword(int id = 0, string confirm_password = "")
         {
             String Message = "";
             if (Session["UserName"] == null)
             {
                 Message = "Access denied. need login.";
                 log.addLog(Message, "ChangePassword", "DashboardUser", logStatus.EventLog);
-                return RedirectToAction("Login", "Account");
+                return RedirectToAction("Index", "Account");
             }
 
             else if (Session["RoleName"].ToString() == "Admin")
@@ -417,7 +419,7 @@ namespace UserDecant.Controllers
                 try
                 {
                     var qUser = db.Tbl_User.Where(a => a.User_ID == id).SingleOrDefault();
-                    qUser.User_Password = confirm_password;
+                    qUser.User_Password = Crypto.Hash(confirm_password); ;
                     db.Tbl_User.Attach(qUser);
                     db.Entry(qUser).State = System.Data.Entity.EntityState.Modified;
 

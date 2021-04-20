@@ -64,7 +64,7 @@
                     <nav class="mt-2">
                         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                             <!-- Add icons to the links using the .nav-icon class
-         with font-awesome or any other icon font library -->
+                            with font-awesome or any other icon font library -->
                             <li class="nav-item">
                                 <a href="@Url.Action("Index", "Dashboard")" class="nav-link">
                                     <i class="nav-icon 	fa fa-cog"></i>
@@ -123,7 +123,7 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href='@Url.Action("Logout", "Account")' class="nav-link">
+                                <a href='@Url.Action("SignOut", "Account")' class="nav-link">
                                     <i class="nav-icon fa fa-power-off"></i>
                                     خروج
                                 </a>
@@ -139,7 +139,7 @@
         <!-- Content Wrapper. Contains page content -->
         <div class="content-wrapper">
 
-         @RenderBody()
+            @RenderBody()
         </div>
         <!-- /.content-wrapper -->
         <!-- Main Footer -->
@@ -153,8 +153,9 @@
     <!-- REQUIRED SCRIPTS -->
     <!-- jQuery -->
 
-    <script type="text/javascript" charset="utf8" src="https://code.jquery.com/jquery-3.3.1.js"></script>
-    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+    <script src="~/Content/Scripts/jquery-3.3.1.js"></script>
+    <script src="~/Content/Scripts/jquery.dataTables.min.js"></script>
+    @*<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>*@
     <script src="~/Content/Scripts/vendor/bootstrap.min.js"></script><!-- AdminLTE App -->
     <script src="~/Content/Scripts/adminlte.js"></script>
     <script src="~/Content/Scripts/dashboard.js"></script>
@@ -254,7 +255,7 @@
         document.getElementById("profileFile").onchange = function () {
             document.getElementById("User_ImageIndex").value = this.value.replace("C:\\fakepath\\", "");
             $("#uploadedProfileImage").attr("src", this.value);
-            $("#uploadedProfileImage").css("display", "block");            
+            $("#uploadedProfileImage").css("display", "block");
         };
 
        // document.getElementById("profileEditFile").onchange = function () {
