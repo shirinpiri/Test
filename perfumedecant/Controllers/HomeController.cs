@@ -1,4 +1,5 @@
-﻿using System;
+﻿using perfumedecant.Models.Domains;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -8,6 +9,8 @@ namespace perfumedecant.Controllers
 {
     public class HomeController : Controller
     {
+        PD_DB db = new PD_DB();
+
         // GET: Home
         public ActionResult Index()
         {
