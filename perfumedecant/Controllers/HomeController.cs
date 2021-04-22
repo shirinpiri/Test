@@ -16,5 +16,11 @@ namespace perfumedecant.Controllers
         {
             return View();
         }
+
+        [HttpPost]
+        public ActionResult Index(int PerfumeID)
+        {
+            return View();
+        }
     }
 }

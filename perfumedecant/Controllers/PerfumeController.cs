@@ -1,4 +1,5 @@
-﻿using perfumedecant.Models;
+﻿using Newtonsoft.Json;
+using perfumedecant.Models;
 using perfumedecant.Models.Domains;
 using perfumedecant.Models.Repository;
 using System;
@@ -16,13 +17,56 @@ namespace perfumedecant.Controllers
         Log log = new Log();
         LogStatus logStatus = new LogStatus();
 
-        public ActionResult PerfumeDetails(int PerfumeID)
+        public JsonResult PerfumeDetails(int PerfumeID)
+        {
+            String Message = "";
+            IEnumerable<Tbl_Season> pfs = new List<Tbl_Season>();
+            List<SelectListItem> seasons = new List<SelectListItem>();
+
+            var perfume = db.Tbl_Perfume.Where(a => a.Perfume_ID == PerfumeID).SingleOrDefault();
+            if (perfume != null)
+            {
+                InitDropdownLists(PerfumeID);
+                Rep_Perfume rp = new Rep_Perfume();
+                var seasonList = rp.Get_PerfumeSeasons(PerfumeID);
+                foreach (var item in seasonList)
+                {
+                    seasons.Add(new SelectListItem { Text = item.Season_Title, Value = item.Season_ImageIndex });
+                }
+
+            }
+            else
+            {
+                Message = "perfume with ID" + PerfumeID + "not found.";
+                log.addLog(Message, "AddCart", "Cart", logStatus.EventLog);
+                ViewBag.Error = "محصول پیدا نشد، لطفا دوباره تلاش کنید.";
+            }
+
+            return Json(
+                new
+                {
+                Perfume_Name = perfume.Perfume_Name,
+                Perfume_Gender = perfume.Perfume_Gender,
+                Brand_Title = perfume.Tbl_Brand.Brand_Title,
+                Perfume_Country = perfume.Perfume_Country,
+                Perfume_Description = perfume.Perfume_Description,
+                Perfume_Notes = perfume.Perfume_Notes,
+                Perfume_OlfactionGroups = perfume.Perfume_OlfactionGroups,
+                Perfume_Perfumer = perfume.Perfume_Perfumer,
+                Perfume_TemperOfPerfume = perfume.Perfume_TemperOfPerfume,
+                PerfumeType_Title = perfume.Tbl_PerfumeType.PerfumeType_Title,
+                seasons = new SelectList(seasons, "Value", "Text")
+                },
+                 JsonRequestBehavior.AllowGet);
+        }
+
+     /*   public ActionResult PerfumeDetails(int PerfumeID)
         {
             String Message = "";
             var perfume = db.Tbl_Perfume.Where(a => a.Perfume_ID == PerfumeID).SingleOrDefault();
             if (perfume != null)
             {
-             //   InitDropdownLists(PerfumeID);
+                InitDropdownLists(PerfumeID);
                 return View(perfume);
             }
             else
@@ -32,7 +76,7 @@ namespace perfumedecant.Controllers
                 ViewBag.Error = "محصول پیدا نشد، لطفا دوباره تلاش کنید.";
                 return RedirectToAction("Index", "Home");
             }
-        }
+        }*/
 
         public ActionResult Perfumes(int brandID = 0 , String type = "" , int currentPageIndex = 1)
         {          
