@@ -1,0 +1,192 @@
+﻿@using perfumedecant.Models.Repository
+@using perfumedecant.Models.Plugins
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    Rep_User rep_user = new Rep_User();
+    var username = Session["UserName"].ToString();
+    Rep_Cart rep_cart = new Rep_Cart();
+    var carts = rep_cart.Get_UserCart(username);
+
+    Rep_PostType rep_postType = new Rep_PostType();
+    var types = rep_postType.Get_AllPostTypes();
+
+    var totalPrice = 0;
+}
+<div class="breadcrumb-area pt-35 pb-35 bg-gray-3">
+    <div class="container">
+        <div class="breadcrumb-content text-center">
+            <ul>
+                <li>
+                    <a href="index.html"> صفحه اصلی </a>
+                </li>
+                <li class="active">سبد خرید </li>
+            </ul>
+        </div>
+    </div>
+</div>
+<div class="cart-main-area pt-50 pb-100">
+    <div class="container">
+        @if (ViewBag.Error != null)
+        {
+            <div class="alert alert-danger">
+                <a class="close" style="cursor:pointer;" onclick="$('.alert').hide()">×</a>
+                @ViewBag.Error
+            </div>
+        }
+        @if (ViewBag.message != null)
+        {
+            <div class="alert alert-danger">
+                <a class="close" style="cursor:pointer;" onclick="$('.alert').hide()">×</a>
+                @ViewBag.message
+            </div>
+        }
+
+
+        @if (carts.Count() > 0)
+        {
+
+            <h3 class="cart-page-title"> جزئیات سبد  خرید شما </h3>
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-12">
+                    <form action="#">
+                        <div class="table-content table-responsive cart-table-content">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>تصویر </th>
+                                        <th>نام محصول </th>
+                                        <th>تعداد </th>
+                                        <th>مبلغ(تومان) </th>
+                                        <th>  </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+
+                                    @foreach (var cart in carts)
+                                    {
+                                        <tr>
+
+                                            <td class="product-thumbnail">
+                                                <a href="#"><img src="~/Uploads/PerfumeImages/@cart.Tbl_Perfume.Perfume_ImageIndex" alt=""></a>
+                                            </td>
+                                            <td class="product-name">
+                                                @if (cart.InterimBill_Weight == null || cart.InterimBill_Weight == 0)
+                                                {
+                                                    <span>  @cart.Tbl_Category.Category_Title &nbsp; @cart.Tbl_Perfume.Perfume_Name</span>
+                                                }
+                                                else
+                                                {
+                                            <span style="text-align:right">
+                                                @cart.Tbl_Category.Category_Title &nbsp; @cart.Tbl_Perfume.Perfume_Name &nbsp;
+                                                @cart.InterimBill_Weight &nbsp; میل
+                                            </span>
+                                                        }
+
+                                                </td>
+                                            <td class="product-quantity">
+                                                @*<input type="hidden" value="@cart.InterimBill_ID" />*@
+                                                @*<div class="cart-plus-minus">*@
+                                                    @*<input class="cart-plus-minus-box" type="text" name="qtybutton" value="@cart.InterimBill_Count">*@
+                                                   <span> @cart.InterimBill_Count </span>
+                                                @*</div>*@
+                                            </td>
+                                            <td class="product-price-cart">
+                                                <span class="amount">@String.Format("{0:n0}", cart.InterimBill_Price)</span>
+                                            </td>
+                                            @*<td class="product-subtotal">$260.00</td>*@
+                                        <td class="product-remove">
+                                            @*<a href="#"><i class="fa fa-pencil"></i></a>*@
+                                            @*<a href="#"><i class="fa fa-trash"></i></a>*@
+                                            @Html.ActionLink(" ", "DeleteCart", new { id = cart.InterimBill_ID }, new { data_toggle = "tooltip", title = "حذف", @class = "fa fa-trash", onclick = "return confirm('آیا از حذف این محصول مطمئن هستید؟');" })
+                                        </td>
+                                        </tr>
+                                        totalPrice = totalPrice + (int)cart.InterimBill_Price;
+                                    }
+
+                                </tbody>
+                            </table>
+                        </div>
+                        @*<div class="row">
+                                <div class="col-lg-12">
+                                    <div class="cart-shiping-update-wrapper">
+                                        <div class="cart-clear">
+                                            <button>بروزرسانی سبد خرید </button>
+                                            <a href="#">پاک کردن سبد خرید </a>
+                                        </div>
+
+                                        <div class="cart-shiping-update">
+                                            <a href="#">ادامه خرید</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>*@
+                    </form>
+                    <div class="row mt-30">
+                        <div class="col-lg-4 col-md-6">
+
+                        </div>
+                        <div class="col-lg-4 col-md-6">
+                            @using (Html.BeginForm("PayPrice", "Pay", FormMethod.Post, new { enctype = "multipart/form-data", id = "frm_add_film", Class = "addform" }))
+                            {
+                                <div class="grand-totall">
+                                    <div class="title-wrap">
+                                        <h4 class="cart-bottom-title section-bg-gary-cart">مبلغ سبد خرید </h4>
+                                    </div>
+                                    <h5><span>@string.Format("{0:0,0}", totalPrice) تومان</span> مبلغ کل </h5>
+                                    <div class="total-shipping">
+                                        <h5>نحوه ارسال </h5>
+                                        <ul>
+                                            @foreach (var type in types)
+                                            {
+                                                if (type.PostType_isDefault)
+                                                {
+                                                    <li><input name="post_type" type="radio" value="@type.PostType_Price" onchange="radioSelect();" checked> @type.PostType_Title <span>@string.Format("{0:0,0}", type.PostType_Price) تومان</span></li>
+                                                }
+                                                else
+                                                {
+                                                    <li><input name="post_type" type="radio" value="@type.PostType_Price" onchange="radioSelect();"> @type.PostType_Title <span>@string.Format("{0:0,0}", type.PostType_Price) تومان</span></li>
+                                                }
+                                            }
+
+                                        </ul>
+                                    </div>
+                                    <h4 class="grand-totall-title">مبلغ قابل پرداخت(تومان)  <span id="final_price"></span></h4>
+                                    <input name="final_price" type="hidden" id="hidden_final_price" value="" />
+                                    <input type="submit" value="پرداخت" class="payButton" />
+                                </div>
+                            }
+                            </div>
+                        <div class="col-lg-4 col-md-12">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+        else
+        {
+            <div style="text-align:center">
+                <img src="~/Content/Images/icon-img/empty_cart.png" />
+                <p>سبد خرید شما خالی می‌باشد!</p>
+            </div>
+        }
+    </div>
+</div>
+
+<script src="~/Scripts/jquery-3.3.1.min.js"></script>
+<script>
+    $(document).ready(function () {
+        radioSelect();
+    });
+
+    function radioSelect() {
+        var total_price = '@totalPrice';
+        var section = $('input:radio[name=post_type]:checked').val();
+        var p = parseFloat(total_price) + parseFloat(section);
+        var price = p.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        document.getElementById("final_price").innerHTML = price;
+        document.getElementById("hidden_final_price").value = price;
+        
+    }
+
+</script>
