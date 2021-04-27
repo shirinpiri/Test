@@ -251,6 +251,11 @@ a:hover {
     .mt-80 {
         margin-top: 60px;
     }
+    .card-body {
+        -ms-flex: 1 1 auto;
+        flex: 1 1 auto;
+        padding: 1.25rem !important
+    }
 }
 
 .mt-90 {
@@ -1412,7 +1417,7 @@ textarea:-ms-input-placeholder {
 input {
     background: #eceff8;
     border: 2px solid #eceff8;
-    height: 45px;
+    height: 48px;
     -webkit-box-shadow: none;
     box-shadow: none;
     padding-left: 10px;
@@ -11521,9 +11526,24 @@ h3.cart-page-title {
     margin: 0 0 25px;
 }
 
+    /*//shirin*/
     .grand-totall h4.grand-totall-title span {
-        float: right;
+        float: left;
     }
+
+.payButton {
+    background-color: #a749ff;
+    border-radius: 50px;
+    color: #fff;
+    display: block;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 1;
+    padding: 18px 10px 17px;
+    text-align: center;
+    text-transform: uppercase;
+    height:auto;
+}
 
 .grand-totall a {
     background-color: #a749ff;
@@ -11536,6 +11556,7 @@ h3.cart-page-title {
     padding: 18px 10px 17px;
     text-align: center;
     text-transform: uppercase;
+    /*height:50px;*/
 }
 
     .grand-totall a:hover {
@@ -12838,3 +12859,54 @@ h3.cart-page-title {
 .img-thumbnail{
     margin-left:10px;
 }
+
+.fileUpload {
+    position: relative;
+    overflow: hidden;
+}
+
+    .fileUpload input.upload {
+        position: absolute;
+        top: 0;
+        right: 0;
+        margin: 0;
+        padding: 0;
+        font-size: 20px;
+        cursor: pointer;
+        opacity: 0;
+        filter: alpha(opacity=0);
+    }
+
+
+.uploadFileInput {
+    direction: ltr;
+    height: 40.87px;
+    text-align: -webkit-right;
+    display:none
+}
+
+.btn--browse {
+    border: 2px solid #1F2D3D;
+    border-radius: 6px;
+    background-color: #1F2D3D;
+    color: #fff;
+    font-weight: 800;
+    font-size: 14px;
+    height: 40.87px;
+    padding: 10px 14px;
+}
+
+    .btn--browse:hover {
+        color: #fff;
+    }
+
+.uploadedImage {
+    border: 6px ridge #dfd6d6;
+    padding: 5px;
+    width: 150px;
+    height: 170px;
+    /*display: none;*/
+    margin-right: 10px;
+}
+
+@media

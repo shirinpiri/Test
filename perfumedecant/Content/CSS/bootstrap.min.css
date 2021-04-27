@@ -1982,7 +1982,7 @@ pre {
     }
 
 select.form-control:not([size]):not([multiple]) {
-    height: calc(2.25rem + 2px)
+    /*height: calc(2.25rem + 2px)*/
 }
 
 select.form-control:focus::-ms-value {
@@ -4047,7 +4047,7 @@ tbody.collapse.show {
     word-wrap: break-word;
     background-color: #fff;
     background-clip: border-box;
-    border: 1px solid rgba(0,0,0,.125);
+    /*border: 1px solid rgba(0,0,0,.125);*/
     border-radius: .25rem
 }
 
@@ -4069,7 +4069,7 @@ tbody.collapse.show {
 .card-body {
     -ms-flex: 1 1 auto;
     flex: 1 1 auto;
-    padding: 1.25rem
+    padding: 1.25rem 12em
 }
 
 .card-title {

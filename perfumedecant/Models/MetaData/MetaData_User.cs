@@ -56,11 +56,11 @@ namespace perfumedecant.Models.Domains
         public System.DateTime User_Date { get; set; }
 
         [Display(Name = "وضعیت کاربر")]
-        [Required(AllowEmptyStrings = false, ErrorMessage = "لطفاً وضعیت کاربر را انتخاب نمائید.")]
+        //[Required(AllowEmptyStrings = false, ErrorMessage = "لطفاً وضعیت کاربر را انتخاب نمائید.")]
         public bool User_Active { get; set; }
 
         [Display(Name = "نقش")]
-        [Required(AllowEmptyStrings = false, ErrorMessage = "لطفاً نقش کاربر را انتخاب نمائید.")]
+        //[Required(AllowEmptyStrings = false, ErrorMessage = "لطفاً نقش کاربر را انتخاب نمائید.")]
         public int User_Role_ID { get; set; }
 
         [StringLength(10, ErrorMessage = "مقدار وارد شده بیش از 10 کاراکتر است.")]

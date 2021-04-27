@@ -1,0 +1,349 @@
+﻿@model perfumedecant.Models.Domains.Tbl_User
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+    <link href="~/Content/CSS/persian-datepicker.css" rel="stylesheet" />
+
+    <div class="breadcrumb-area pt-35 pb-35 bg-gray-3">
+        <div class="container">
+            <div class="breadcrumb-content text-center">
+                <ul>
+                    <li>
+                        <a href="index.html"> سبد خرید </a>
+                    </li>
+                    <li class="active">ویرایش پروفایل </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+@using (Html.BeginForm("EditProfile", "Account", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+    @Html.HiddenFor(model => model.User_ID)
+
+    <!-- Main content -->
+    <section class="content">
+        <div class="container-fluid">
+            <div class="add-box">
+                @if (ViewBag.result != null)
+                {
+                    <div class="alert alert-danger" style="text-align:right">
+                        <a class="close" style="cursor: pointer;" onclick="$('.alert').hide()">×</a>
+                        @ViewBag.result
+                    </div>
+                }
+                @if (ViewBag.success != null)
+                {
+                    <div class="alert alert-success" style="text-align:right">
+                        <a class="close" style="cursor: pointer;" onclick="$('.alert').hide()">×</a>
+                        @ViewBag.success
+                    </div>
+                }
+
+                <div class="card card-warning">
+                    @*<div class="card-header">
+                        <h3 class="card-title">ویرایش پروفایل   </h3>
+                    </div>*@
+                    <!-- /.card-header -->
+                    <div class="card-body">
+                        <form role="form">
+                            <div class="row">
+                                <div class="col-md-6 col-sm-12">
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => model.User_NameFamily, new { @class = "control-label" })<span class="red">*</span>
+                                        @Html.TextBoxFor(model => model.User_NameFamily, new { @class = "form-control", placeholder = "وارد کردن اطلاعات ..." })
+                                        <p class="red"> @Html.ValidationMessageFor(model => model.User_NameFamily)</p>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-sm-12">
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => model.User_Birthday, new { @class = "control-label" })
+                                        @Html.TextBoxFor(model => model.User_Birthday, new { @class = "form-control", placeholder = "وارد کردن اطلاعات ..." })
+                                        <p class="red"> @Html.ValidationMessageFor(model => model.User_Birthday)</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6 col-sm-12">
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => model.User_Gender, new { @class = "control-label" })
+                                        @Html.DropDownListFor(model => model.User_Gender, (IEnumerable<SelectListItem>)ViewBag.Gender, new { @class = "form-control" })
+                                        <p class="red"> @Html.ValidationMessageFor(model => model.User_Gender)</p>
+
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-sm-12">
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => model.User_Email, new { @class = "control-label" })<span class="red">*</span>
+                                        @Html.TextBoxFor(model => model.User_Email, new { @class = "form-control", placeholder = "وارد کردن اطلاعات ..." })
+                                        <p class="red"> @Html.ValidationMessageFor(model => model.User_Email)</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6 col-sm-12">
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => model.User_Username, new { @class = "control-label" })<span class="red">*</span>
+                                        @Html.TextBoxFor(model => model.User_Username, new { @class = "form-control", placeholder = "وارد کردن اطلاعات ..." })
+                                        <p class="red"> @Html.ValidationMessageFor(model => model.User_Username)</p>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-sm-12">
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => model.User_Password, new { @class = "control-label" })<span class="red">*</span>
+                                        @Html.PasswordFor(model => model.User_Password, new { @class = "form-control", placeholder = "وارد کردن اطلاعات ..." })
+                                        <p class="red"> @Html.ValidationMessageFor(model => model.User_Password)</p>
+                                        <div style="text-align:right; margin-top:30px;">
+                                            <span id="length" class="invalid"></span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            @*<div class="row">
+
+        @*<div class="col-md-6 col-sm-12">
+            <div class="form-group">
+                <label>تکرار کلمه عبور</label><span class="red">*</span>
+                <input type="password" id="confirm_password" name="confirm_password" class="form-control" placeholder="وارد کردن اطلاعات ...">
+                <div style="text-align:right; margin-top:30px;">
+                    <span id='message'></span>
+                </div>
+            </div>
+        </div>*@
+
+
+
+
+                            <div class="row">
+                                <div class="col-md-6 col-sm-12">
+                                    <div class="form-group">
+                                        <label>استان</label><span class="red">*</span>
+                                        @*@if (state_title != "")
+                    {*@
+                                        @Html.DropDownList("State", (IEnumerable<SelectListItem>)ViewBag.states, "انتخاب کنید", new { @class = "form-control" })
+                                        @*}
+                    else
+                    {
+                        @Html.DropDownList("State", (IEnumerable<SelectListItem>)ViewBag.states, "انتخاب کنید", new { @class = "form-control" })
+
+                    }*@
+                                        @*<p class="red"> @Html.ValidationMessageFor(model => model.Tbl_City.City_State_ID)</p>*@
+
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-sm-12">
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => model.User_City_ID, new { @class = "control-label" })<span class="red">*</span>
+                                        @Html.DropDownListFor(model => model.User_City_ID, new SelectList(string.Empty, "Value", "Text"), "شهر مورد نظر را انتخاب کنید", new { @class = "form-control" })
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-12 col-sm-12">
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => model.User_Address, new { @class = "control-label" })<span class="red">*</span>
+                                        @Html.TextBoxFor(model => model.User_Address, new { @class = "form-control", placeholder = "وارد کردن اطلاعات ..." })
+                                        <p class="red"> @Html.ValidationMessageFor(model => model.User_Address)</p>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6 col-sm-12">
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => model.User_Tel, new { @class = "control-label" })<span class="red">*</span>
+                                        @Html.TextBoxFor(model => model.User_Tel, new { @class = "form-control", placeholder = "وارد کردن اطلاعات ..." })
+                                        <p class="red"> @Html.ValidationMessageFor(model => model.User_Tel)</p>
+
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-sm-12">
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => model.User_Mobile, new { @class = "control-label" })<span class="red">*</span>
+                                        @Html.TextBoxFor(model => model.User_Mobile, new { @class = "form-control", placeholder = "وارد کردن اطلاعات ..." })
+                                        <p class="red"> @Html.ValidationMessageFor(model => model.User_Mobile)</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6 col-sm-12">
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => model.User_PostalCode, new { @class = "control-label" })<span class="red">*</span>
+                                        @Html.TextBoxFor(model => model.User_PostalCode, new { @class = "form-control", placeholder = "وارد کردن اطلاعات ...", onkeypress = "justNumberAllowed(this)" })
+                                        <p class="red"> @Html.ValidationMessageFor(model => model.User_PostalCode)</p>
+
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6 col-sm-12">
+                                    <div class="form-group">
+                                        <label class="control-label">بارگذاری تصویر </label>
+                                        <div class="input-group">
+                                            <div class="fileUpload btn btn--browse">
+                                                <span>Browse</span>
+                                                <input id="profileFile" type="file" name="UserImage" class="upload" />
+                                            </div>
+                                            @Html.TextBoxFor(model => model.User_ImageIndex, new { @class = "uploadFileInput" })
+                                            <br />
+                                            <p class="red">@Html.ValidationMessageFor(model => model.User_ImageIndex)</p>
+                                            <br />
+                                            <img class="uploadedImage" id="uploadedProfileImage" src="/Uploads/UserImages/@Html.DisplayFor(model => model.User_ImageIndex)" width="200" height="200" />
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <input type="submit" value="ثبت" class="payButton" />
+
+                        </form>
+                    </div>
+                    <!-- /.card-body -->
+                </div>
+            </div>
+        </div><!--/. container-fluid -->
+    </section>
+    <!-- /.content -->
+
+}
+
+@section edit_profile
+{
+    <script src="~/Scripts/jquery-3.3.1.js"></script>
+    <script src="~/Content/Scripts/jquery.dataTables.min.js"></script>
+    <script src="~/Content/Scripts/persian-datepicker.min.js"></script>
+    <script src="~/Content/Scripts/persian-date.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            $('div.dataTables_filter input').css('font-size', '12px');
+            $('#users').DataTable({
+                language: {
+                    "search": "جست و جو:",
+                    "sLengthMenu": "نمایش _MENU_ آیتم در هر صفحه",
+                    "info": "نمایش _START_ تا _END_ از _TOTAL_ آیتم",
+                },
+                "scrollX": true
+            });
+
+
+            //--------set city when change state in AddUser page -----//
+            $('#State').on('change', function () {
+
+                $("#User_City_ID").empty();
+                $.ajax({
+                    type: 'POST',
+                    url: '@Url.Action("GetCities","DashboardUser")', // we are calling json method
+                    dataType: 'json',
+                    data: { id: $("#State").val() },
+                    success: function (cities) {
+                        // states contains the JSON formatted list
+                        // of states passed from the controller
+                        $("#User_City_ID").empty();
+                        $.each(cities, function (i, city) {
+                            $("#User_City_ID").append('<option value="' + city.Value + '">' + city.Text + '</option>');
+                        }); // here we are adding option for States
+                    },
+                    error: function (ex) {
+                        alert('Failed to retrieve states.' + ex);
+                    }
+                });
+            });
+        });
+
+        $(function () {                       //run when the DOM is ready
+            $(".click-changePass").click(function () {  //use a class, since your ID gets mangled
+                $("#changePass").addClass("active");      //add the class to the clicked element
+                $("#moreInfo").removeClass("active");
+            });
+
+            $(".click-moreInfo").click(function () {  //use a class, since your ID gets mangled
+                $("#changePass").removeClass("active");      //add the class to the clicked element
+                $("#moreInfo").addClass("active");
+            });
+        });
+
+        //-----add user birthday datepicker-----//
+        $('#User_Birthday').persianDatepicker({
+            format: 'YYYY/MM/DD',
+            initialValue: false
+        });
+
+        //------validate password and confirm password----//
+        var length = document.getElementById("length");
+
+        $('#User_Password, #confirm_password').on('keyup', function () {
+
+            if ($('#User_Password').val() == $('#confirm_password').val()) {
+
+                $('#message').html('');
+                if ($('#User_Password').val().length >= 6) {
+                    $('#length').html('');
+                    length.classList.remove("invalid");
+                    length.classList.add("valid");
+                    document.getElementById("save").disabled = false;
+                } else {
+                    $('#length').html('حداقل <b>6 کاراکتر</b>').css('color', 'red');
+                    length.classList.remove("valid");
+                    length.classList.add("invalid");
+                }
+
+            } else {
+
+                $('#message').html('<p>مطابقت ندارند.</p>').css('color', 'red');
+                if ($('#User_Password').val().length >= 6) {
+                    $('#length').html('');
+                    length.classList.remove("invalid");
+                    length.classList.add("valid");
+                } else {
+                    $('#length').html('حداقل <b>6 کاراکتر</b>').css('color', 'red');
+                    length.classList.remove("valid");
+                    length.classList.add("invalid");
+                }
+            }
+
+        });
+
+        //---- Upload user profile image ----//
+        document.getElementById("profileFile").onchange = function () {
+            document.getElementById("User_ImageIndex").value = this.value.replace("C:\\fakepath\\", "");
+            $("#uploadedProfileImage").attr("src", this.value);
+            $("#uploadedProfileImage").css("display", "block");
+        };
+
+       // document.getElementById("profileEditFile").onchange = function () {
+       //     document.getElementById("User_ImageIndex").value = this.value.replace("C:\\fakepath\\", "");
+       //     $("#uploadedImageEditUser").attr("src", this.value);
+       //     $("#uploadedImageEditUser").css("display", "block");
+
+      //  };
+
+        function showImage(src, target) {
+            var fr = new FileReader();
+            // when image is loaded, set the src of the image where you want to display it
+            fr.onload = function (e) { target.src = this.result; };
+            src.addEventListener("change", function () {
+                // fill fr with image data
+                fr.readAsDataURL(src.files[0]);
+            });
+        }
+
+        var addUserImageSrc = document.getElementById("profileFile");
+       // var editUserImageSrc = document.getElementById("profileFile");
+        var addUserImageTarget = document.getElementById("uploadedProfileImage");
+       // var editUserImageTarget = document.getElementById("uploadedImageEditUser");
+        showImage(addUserImageSrc, addUserImageTarget);
+       // showImage(editUserImageSrc, editUserImageTarget);
+
+    </script>
+}

@@ -38,10 +38,10 @@ namespace PerfumeDecant.Controllers
                     var username = Session["UserName"].ToString();
 
                     var user = db.Tbl_User.Where(a => a.User_Username == username).SingleOrDefault();
-                    //if (user.User_Address == null || user.User_Address == "")
-                    //{
-                    //    return RedirectToAction("EditProfile", "Account");
-                    //}
+                    if (user.User_Address == null || user.User_Address == "")
+                    {
+                        return RedirectToAction("EditProfile", "Account");
+                    }
                     //if (PostagePrice == 1)
                     //{
                     //    TempData["PostageType"] = "لطفا نحوه ارسال را انتخاب نمایید.";

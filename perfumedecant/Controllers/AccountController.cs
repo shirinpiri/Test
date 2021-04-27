@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Mail;
@@ -319,6 +320,213 @@ namespace perfumedecant.Controllers
             Message = "ChangeUserPassword function Done successfully.";
             log.addLog(Message, "ChangeUserPassword", "Account", logStatus.EventLog);
             return ExecuteSP("spChangePassword", paramList);
+        }
+
+
+        public ActionResult EditProfile(int userID = 3)
+        {
+            string Message = "";
+            if (Session["UserName"] == null)
+            {
+                Message = "Access denied. need login.";
+                log.addLog(Message, "AddBrand", "DashboardBrand", logStatus.EventLog);
+                return RedirectToAction("Index", "Account");
+            }
+            try
+            {
+                InitDropdownLists();
+
+                var username = Session["UserName"].ToString();
+                var user = db.Tbl_User.Where(a => a.User_Username == username).SingleOrDefault();
+                if (user != null)
+                {
+                    //Tbl_User vm_user = new Tbl_User();
+                    //vm_user.User_Active = user.User_Active;
+                    //vm_user.User_Address = user.User_Address;
+                    //vm_user.User_Birthday = user.User_Birthday;
+                    //vm_user.User_City_ID = user.User_City_ID;
+                    //vm_user.User_Date = user.User_Date;
+                    //vm_user.User_Email = user.User_Email;
+                    //vm_user.User_Gender = user.User_Gender;
+                    //vm_user.User_ID = user.User_ID;
+                    //vm_user.User_ImageIndex = user.User_ImageIndex;
+                    //vm_user.User_Mobile = user.User_Mobile;
+                    //vm_user.User_NameFamily = user.User_NameFamily;
+                    //vm_user.User_NationalCode = user.User_NationalCode;
+                    //vm_user.User_Password = user.User_Password;
+                    //vm_user.User_PostalCode = user.User_PostalCode;
+                    //vm_user.User_Role_ID = user.User_Role_ID;
+                    //vm_user.User_Tel = user.User_Tel;
+                    //vm_user.User_Username = user.User_Username;
+
+                    return View(user);
+                }
+                else
+                {
+                    Message = "User with ID" + userID + "not found.";
+                    log.addLog(Message, "EditProfile", "Account", logStatus.EventLog);
+                    ViewBag.result = "کاربر پیدا نشد، لطفا دوباره تلاش کنید.";
+                    return RedirectToAction("Index", "Cart");
+                }
+            }
+            catch
+            {
+                Message = "User with ID" + userID + "not found.";
+                log.addLog(Message, "EditProfile", "Account", logStatus.EventLog);
+                ViewBag.result = "کاربر پیدا نشد، لطفا دوباره تلاش کنید.";
+                return RedirectToAction("Index", "Cart");
+            }
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [ValidateInput(false)]
+        public ActionResult EditProfile(Tbl_User user)
+        {
+            InitDropdownLists();
+
+            if (!ModelState.IsValid)
+            {
+                return View(user);
+            }
+            String Message = "";
+            if (Session["UserName"] == null)
+            {
+                Message = "Access denied. need login.";
+                log.addLog(Message, "EditProfile", "Account", logStatus.EventLog);
+                return RedirectToAction("Index", "Account");
+            }
+
+            Tbl_User oldUser = new Tbl_User();
+            try
+            {
+                var validImageTypes = new string[]
+                {
+                    "image/gif",
+                    "image/jpg",
+                    "image/jpeg",
+                    "image/pjpeg",
+                    "image/png"
+                };
+
+                oldUser = db.Tbl_User.Where(a => a.User_ID == user.User_ID).SingleOrDefault();
+
+                if (oldUser == null)
+                {
+                    Message = "User with ID" + user.User_ID + "not found.";
+                    log.addLog(Message, "EditProfile", "Account", logStatus.EventLog);
+                    ViewBag.result = "کاربر یافت نشد. لطفاً دوباره تلاش کنید.";
+                    return RedirectToAction("Index", "Cart");
+                }
+                string oldImageName = oldUser.User_ImageIndex;
+
+                oldUser.User_Address = user.User_Address;
+                oldUser.User_Birthday = user.User_Birthday;
+                oldUser.User_Email = user.User_Email;
+                oldUser.User_Gender = user.User_Gender;
+                oldUser.User_Mobile = user.User_Mobile;
+                oldUser.User_NameFamily = user.User_NameFamily;
+                oldUser.User_Tel = user.User_Tel;
+                oldUser.User_Username = user.User_Username;
+                oldUser.User_Password = Crypto.Hash(user.User_Password);
+                oldUser.User_City_ID = user.User_City_ID;
+                oldUser.User_PostalCode = user.User_PostalCode;
+
+                var uploadFiles = Request.Files[0];
+                Random rnd = new Random();
+
+                if (uploadFiles != null && uploadFiles.ContentLength > 0)
+                {
+                    if (!validImageTypes.Contains(uploadFiles.ContentType))
+                    {
+                        Message = "invalid image format.";
+                        log.addLog(Message, "EditProfile", "Account", logStatus.EventLog);
+                        ViewBag.result = "عکس آپلود شده باید از نوع jpg ویا png باشد.";
+                        return View(oldUser);
+                    }
+
+                    //add new image
+                    var fileName = rnd.Next().ToString() + ".jpg";
+                    oldUser.User_ImageIndex = fileName;
+
+                    var path = Path.Combine(System.Web.HttpContext.Current.Server.MapPath("/Uploads/UserImages/"), fileName);
+                    //var path = Path.Combine(Server.MapPath("/Uploads/UserImages/"), fileName);
+                    uploadFiles.SaveAs(path);
+                    Message = "Image save successfully for Users with userName " + oldUser.User_Username + ".";
+                    log.addLog(Message, "EditProfile", "Account", logStatus.EventLog);
+
+                }
+                else
+                {
+                    oldUser.User_ImageIndex = user.User_ImageIndex;
+                }
+
+                db.Tbl_User.Attach(oldUser);
+                db.Entry(oldUser).State = System.Data.Entity.EntityState.Modified;
+                if (Convert.ToBoolean(db.SaveChanges() > 0))
+                {
+                    //delete old image
+                    //var oldFile = Path.Combine(Server.MapPath("/Uploads/UserImages/"), oldImageName);
+                    if (user.User_ImageIndex != oldImageName)
+                    {
+                        var oldFile = Path.Combine(System.Web.HttpContext.Current.Server.MapPath("/Uploads/UserImages/"), oldImageName);
+
+                        if (System.IO.File.Exists(oldFile))
+                        {
+                            System.IO.File.Delete(oldFile);
+                            Message = "Delete image for Users with ID " + oldUser.User_ID + " Done successfully.";
+                            log.addLog(Message, "EditProfile", "Account", logStatus.EventLog);
+                            ViewBag.success = "ویرایش با موفقیت انجام شد.";
+                        }
+                    }
+                    return RedirectToAction("Index", "Cart");
+                }
+                else
+                {
+                    Message = "edited User with userName " + user.User_Username + " failed.";
+                    log.addLog(Message, "EditProfile", "Account", logStatus.ErrorLog);
+                    ViewBag.result = "ویرایش با موفقیت انجام نشد، لطفا دوباره تلاش کنید.";
+                    return View(user);
+                }
+
+            }
+            catch
+            {
+                Message = "edited User with userName " + user.User_Username + " failed.";
+                log.addLog(Message, "EditProfile", "Account", logStatus.ErrorLog);
+                ViewBag.result = "ویرایش با موفقیت انجام نشد، لطفا دوباره تلاش کنید.";
+                return View(user);
+            }
+            return View(user);
+        }
+
+        public void InitDropdownLists()
+        {
+            //state list
+            var stateList = db.Tbl_State.OrderBy(r => r.State_Title).ToList().Select(rr =>
+                new SelectListItem { Value = rr.State_ID.ToString(), Text = rr.State_Title }).ToList();
+            ViewBag.states = stateList;
+
+            //gender list
+            var genderList = new List<SelectListItem>
+                    {
+                        new SelectListItem{ Text="مرد", Value = "مرد" , Selected = true},
+                        new SelectListItem{ Text="زن", Value = "زن" }
+                    };
+            ViewBag.Gender = genderList;
+
+            //activation list
+            var activationList = new List<SelectListItem>
+                    {
+                        new SelectListItem{ Text="فعال", Value = "true" , Selected = true},
+                        new SelectListItem{ Text="غیر فعال", Value = "false" }
+                    };
+            ViewBag.activation = activationList;
+
+            //roles list
+            var rolesList = db.Tbl_Role.OrderBy(r => r.Role_Title).ToList().Select(rr =>
+                new SelectListItem { Value = rr.Role_ID.ToString(), Text = rr.Role_Title }).ToList();
+            ViewBag.roles = rolesList;
         }
 
     }
