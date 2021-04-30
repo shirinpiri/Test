@@ -1,0 +1,52 @@
+﻿@using perfumedecant.Models.Repository
+@{
+    ViewBag.Title = "مقالات";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    Rep_Article rep_article = new Rep_Article();
+    var articles = rep_article.Get_AllArticles();
+}
+
+<section class="content">
+    <div class="container-fluid">
+        <div class="add-box">
+            <div class="card card-warning">
+                <div class="breadcrumb-area pt-35 pb-35 bg-gray-3">
+                    <div class="container">
+                        <div class="breadcrumb-content text-center">
+                           <h3>مقالات</h3>
+                        </div>
+                    </div>
+                </div>
+                <div style="direction:rtl;margin-right:50px;margin-bottom:200px">
+
+                    @foreach (var article in articles)
+                    {
+                        <div class="question">
+                            <p  style="color:darkslategrey !important">
+                                <i class="fas fa-check-square"></i>
+                                @article.Article_Title
+
+                                <a href="@Url.Action("ArticleDetails", "DashboardArticles", new { fileName = article.Article_Path })" target="_blank">(مشاهده و دانلود)</a>
+
+                            </p>
+                        </div>
+                    }
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<div class="container" style="direction:rtl !important">
+    <div class="row" style="margin-left:15px;">
+        <div class="col-md-12">
+
+        </div>
+    </div>
+</div>
+
+
+
+

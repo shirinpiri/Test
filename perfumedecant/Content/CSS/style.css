@@ -12909,4 +12909,32 @@ h3.cart-page-title {
     margin-right: 10px;
 }
 
-@media
+.question {
+    font-size: 16px;
+    font-weight: 900;
+    color: #a749ff;
+    margin-top: 30px;
+}
+
+.question a{
+    font-size: 16px;
+    font-weight: 900;
+    color: #a749ff;
+    margin-top: 30px;
+}
+
+    .question p {
+        font-size: 16px;
+        font-weight: 900;
+        color: #a749ff;
+        margin-top: 30px;
+    }
+
+.answer {
+    margin-right: 20px;
+    font-size: 14px;
+    color: darkslategrey;
+}
+.answer p{
+    color: darkslategrey;
+}
