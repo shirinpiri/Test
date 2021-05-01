@@ -1,0 +1,385 @@
+﻿@model perfumedecant.Models.PerfumeModel
+@using perfumedecant.Models.Repository;
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    Rep_Brand repBrand = new Rep_Brand();
+    var brandName = repBrand.GetBrandName(Model.brandID);
+}
+
+<div class="breadcrumb-area pt-35 pb-35 bg-gray-3">
+    <div class="container">
+        <div class="breadcrumb-content text-center">
+            <ul>
+                <li>
+                    <a href="index.html"> صفحه اصلی </a>
+                </li>
+                <li class="active">لیست محصولات برند @brandName</li>
+            </ul>
+        </div>
+    </div>
+</div>
+<div class="shop-area pt-95 pb-100 section-padding-1 list2-col-style">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="shop-top-bar mb-35">
+                    <div class="select-shoing-wrap">
+                        <p>Showing 1–12 of 20 result</p>
+                    </div>
+                    <div class="filter-active">
+                        <a href="#"><i class="fa fa-plus"></i> فیلتر</a>
+                    </div>
+                </div>
+                <div class="product-filter-wrapper">
+                    <div class="row">
+                        <!-- Product Filter -->
+                        <div class="col-md-3 col-sm-6 col-xs-12 mb-30">
+                            <div class="product-filter">
+                                <h5>مناسب فصل</h5>
+                                <ul class="sort-by">
+                                    <li><input type="checkbox" name="season" value="بهار"> <a href="#">بهار</a></li>
+                                    <li><input type="checkbox" name="season" value="تابستان"> <a href="#">تابستان</a></li>
+                                    <li><input type="checkbox" name="season" value="پاییز"> <a href="#">پاییز</a></li>
+                                    <li><input type="checkbox" name="season" value="زمستان"> <a href="#">زمستان</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <!-- Product Filter -->
+                        <div class="col-md-3 col-sm-6 col-xs-12 mb-30">
+                            <div class="product-filter">
+                                <h5>گروه بویایی</h5>
+                                <ul class="color-filter">
+                                    <li><input type="checkbox" name="OlfactionGroup" value="شرقی"> <a href="#">شرقی</a></li>
+                                    <li><input type="checkbox" name="OlfactionGroup" value="گلی"> <a href="#">گلی</a></li>
+                                    <li><input type="checkbox" name="OlfactionGroup" value="مرکباتی"> <a href="#">مرکباتی</a></li>
+                                    <li><input type="checkbox" name="OlfactionGroup" value="میوه ای"> <a href="#">میوه ای</a></li>
+                                    <li><input type="checkbox" name="OlfactionGroup" value="گل میوه ای"> <a href="#">گل میوه ای</a></li>
+                                    <li><input type="checkbox" name="OlfactionGroup" value="چوبی"> <a href="#">چوبی</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <!-- Product Filter -->
+                        <div class="col-md-3 col-sm-6 col-xs-12 mb-30">
+                            <div class="product-filter">
+                                <h5>طبع و رایحه</h5>
+                                <ul class="product-tags">
+                                    <li><input type="checkbox" name="TemperOfPerfume" value="گرم"><a href="#">گرم</a></li>
+                                    <li><input type="checkbox" name="TemperOfPerfume" value="ملایم"><a href="#">ملایم</a></li>
+                                    <li><input type="checkbox" name="TemperOfPerfume" value="خنک"><a href="#">خنک</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <!-- gender Filter -->
+                        <div class="col-md-3 col-sm-6 col-xs-12 mb-30">
+                            <div class="product-filter">
+                                <h5>جنسیت</h5>
+                                <ul class="gender-filter">
+                                    <li><input class="gender" type="radio" id="male" name="gender" value="مردانه"><a href="#">مردانه</a></li>
+                                    <li><input class="gender" type="radio" id="female" name="gender" value="زنانه"><a href="#">زنانه</a></li>
+                                    <li><input class="gender" type="radio" id="unisex" name="gender" value="یونیسکس"><a href="#">یونیسکس</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="product-filter">
+                            <h5>برند (حرف اول برند مورد نظر را انتخاب کنید )</h5>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="product-tab-list-2 nav">
+                            <a href="#brand-A" data-toggle="tab" onclick="FindBrands('A','a')">
+                                <h4> A </h4>
+                            </a>
+                            <a href="#brand-B" data-toggle="tab" onclick="FindBrands('B','b')">
+                                <h4> B </h4>
+                            </a>
+                            <a href="#brand-C" data-toggle="tab" onclick="FindBrands('C','c')">
+                                <h4> C </h4>
+                            </a>
+                            <a href="#brand-D" data-toggle="tab" onclick="FindBrands('D','d')">
+                                <h4> D </h4>
+                            </a>
+                            <a href="#brand-E" data-toggle="tab" onclick="FindBrands('E','e')">
+                                <h4> E </h4>
+                            </a>
+                            <a href="#brand-F" data-toggle="tab" onclick="FindBrands('F','f')">
+                                <h4> F </h4>
+                            </a>
+                            <a href="#brand-G" data-toggle="tab" onclick="FindBrands('G','g')">
+                                <h4> G </h4>
+                            </a>
+                            <a href="#brand-H" data-toggle="tab" onclick="FindBrands('H','h')">
+                                <h4> H </h4>
+                            </a>
+                            <a href="#brand-I" data-toggle="tab" onclick="FindBrands('I','i')">
+                                <h4> I </h4>
+                            </a>
+                            <a href="#brand-J" data-toggle="tab" onclick="FindBrands('J','j')">
+                                <h4> J </h4>
+                            </a>
+                            <a href="#brand-K" data-toggle="tab" onclick="FindBrands('K','k')">
+                                <h4> K </h4>
+                            </a>
+                            <a href="#brand-L" data-toggle="tab" onclick="FindBrands('L','l')">
+                                <h4> L </h4>
+                            </a>
+                            <a href="#brand-M" data-toggle="tab" onclick="FindBrands('M','m')">
+                                <h4> M </h4>
+                            </a>
+                            <a href="#brand-N" data-toggle="tab" onclick="FindBrands('N','n')">
+                                <h4> N </h4>
+                            </a>
+                            <a href="#brand-O" data-toggle="tab" onclick="FindBrands('O','o')">
+                                <h4> O </h4>
+                            </a>
+                            <a href="#brand-P" data-toggle="tab" onclick="FindBrands('P','p')">
+                                <h4> P </h4>
+                            </a>
+                            <a href="#brand-Q" data-toggle="tab" onclick="FindBrands('Q','q')">
+                                <h4> Q </h4>
+                            </a>
+                            <a href="#brand-R" data-toggle="tab" onclick="FindBrands('R','r')">
+                                <h4> R </h4>
+                            </a>
+                            <a href="#brand-Z" data-toggle="tab" onclick="FindBrands('S','s')">
+                                <h4> S </h4>
+                            </a>
+                            <a href="#brand-T" data-toggle="tab" onclick="FindBrands('T','t')">
+                                <h4> T </h4>
+                            </a>
+                            <a href="#brand-U" data-toggle="tab" onclick="FindBrands('U','u')">
+                                <h4> U </h4>
+                            </a>
+                            <a href="#brand-V" data-toggle="tab" onclick="FindBrands('V','v')">
+                                <h4> V </h4>
+                            </a>
+                            <a href="#brand-W" data-toggle="tab" onclick="FindBrands('W','w')">
+                                <h4> W </h4>
+                            </a>
+                            <a href="#brand-X" data-toggle="tab" onclick="FindBrands('X','x')">
+                                <h4> X </h4>
+                            </a>
+                            <a href="#brand-Y" data-toggle="tab" onclick="FindBrands('Y','y')">
+                                <h4> Y </h4>
+                            </a>
+                            <a href="#brand-Z" data-toggle="tab" onclick="FindBrands('Z','z')">
+                                <h4> Z </h4>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                            <div class="tab-content jump" id="product-tabs">
+                                <div class="tab-pane" id="brand-A">
+                                </div>
+                                <div class="tab-pane" id="brand-B">
+                                </div>
+                                <div class="tab-pane" id="brand-C">
+                                </div>
+                                <div class="tab-pane" id="brand-D">
+                                </div>
+                                <div class="tab-pane" id="brand-E">
+                                </div>
+                                <div class="tab-pane" id="brand-F">
+                                </div>
+                                <div class="tab-pane" id="brand-G">
+                                </div>
+                                <div class="tab-pane" id="brand-H">
+                                </div>
+                                <div class="tab-pane" id="brand-I">
+                                </div>
+                                <div class="tab-pane" id="brand-J">
+                                </div>
+                                <div class="tab-pane" id="brand-K">
+                                </div>
+                                <div class="tab-pane" id="brand-L">
+                                </div>
+                                <div class="tab-pane" id="brand-M">
+                                </div>
+                                <div class="tab-pane" id="brand-N">
+                                </div>
+                                <div class="tab-pane" id="brand-O">
+                                </div>
+                                <div class="tab-pane" id="brand-P">
+                                </div>
+                                <div class="tab-pane" id="brand-Q">
+                                </div>
+                                <div class="tab-pane" id="brand-R">
+                                </div>
+                                <div class="tab-pane" id="brand-S">
+                                </div>
+                                <div class="tab-pane" id="brand-T">
+                                </div>
+                                <div class="tab-pane" id="brand-U">
+                                </div>
+                                <div class="tab-pane" id="brand-V">
+                                </div>
+                                <div class="tab-pane" id="brand-W">
+                                </div>
+                                <div class="tab-pane" id="brand-X">
+                                </div>
+                                <div class="tab-pane" id="brand-Y">
+                                </div>
+                                <div class="tab-pane" id="brand-Z">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                            <div class="filter-search-icon">
+                                <a title="جست و جو" href="#" onclick="filtering()">جست و جو<i class="fa fa-search" style=""></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="shop-bottom-area">
+                    <div class="row">
+                        @if (Model.Perfumes.Count() > 0)
+                        {
+                            double delay = 0.0;
+                            foreach (var perfume in Model.Perfumes)
+                            {
+                                delay = delay + 0.2;
+                                string delay1 = delay + "s";
+
+                                <div class="col-lg-6 col-md-12 col-12">
+                                    <div class="shop-list-wrap mb-30 scroll-zoom">
+                                        <div class="row">
+                                            <div class="col-xl-8 col-lg-7 col-md-7 col-sm-6">
+                                                <div class="shop-list-content">
+                                                    <h3><a href="#">@perfume.Perfume_Name</a></h3>
+                                                    <div><span>جنسیت : @perfume.Perfume_Gender </span></div>
+                                                    <div><span>گروه بویایی:@perfume.Perfume_OlfactionGroups</span></div>
+                                                    <div><span>طبع و رایحه: @perfume.Perfume_TemperOfPerfume</span></div>
+                                                    <p>@perfume.Perfume_Description</p>
+                                                    <div class="shop-list-btn btn-hover">
+                                                        <a href="#">افزودن به سبد خرید</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-xl-4 col-lg-5 col-md-5 col-sm-6">
+                                                <div class="product-wrap">
+                                                    <div class="product-img">
+                                                        <a href="#">
+                                                            <img class="default-img" src="~/Uploads/PerfumeImages/@perfume.Perfume_ImageIndex" alt="">
+                                                            <img class="hover-img" src="~/Uploads/PerfumeImages/@perfume.Perfume_ImageIndex" alt="">
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                        }
+                        else
+                        {
+                            <p style="direction:rtl">محصولی برای نمایش موجود نمی باشد.</p>
+                        }
+                    </div>
+                    <div class="pro-pagination-style text-center mt-30">
+                        <ul>
+                            <li><a class="prev" href="#"><i class="fa fa-angle-double-left"></i></a></li>
+                            <li><a class="active" href="#">1</a></li>
+                            <li><a href="#">2</a></li>
+                            <li><a class="next" href="#"><i class="fa fa-angle-double-right"></i></a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function FindBrands(captal_letter, small_letter) {
+        $.ajax({
+            type: "POST",
+            traditional: true,
+            async: false,
+            cache: false,
+            url: '/Brands/GetBrandsByLetter',
+            context: document.body,
+            data: { captal_letter: captal_letter, small_letter: small_letter },
+            success: function (result) {
+                var str = '<div class="row brand-letter-item"><div class="col-md-12 col-sm-12 col-xs-12" ><ul>';
+                $.each(result.filteredBrands, function (i, brand) {
+                    str = str + '<li><a href="Perfume/PerfumesBrand?brandId=' + brand.Value + '">' + brand.Text + '</a></li>'
+                });
+                str = str + '</ul></div></div>';
+                document.getElementById("brand-" + captal_letter).innerHTML = str;
+            },
+            error: function (xhr) {
+                //debugger;
+                console.log(xhr.responseText);
+                alert("Error has occurred..");
+            }
+        });
+    }
+
+    function filtering() {
+        $("#product-tabs").css("display", "none");
+        var gender = $('input[name=gender]:checked').val();
+        var TemperOfPerfumes = [];
+        $("input:checkbox[name=TemperOfPerfume]:checked").each(function () {
+            TemperOfPerfumes.push($(this).val());
+        });
+        if (!TemperOfPerfumes.length > 0) TemperOfPerfumes = null;
+
+        var OlfactionGroups = [];
+        $("input:checkbox[name=OlfactionGroup]:checked").each(function () {
+            OlfactionGroups.push($(this).val());
+        });
+        if (!OlfactionGroups.length > 0) OlfactionGroups = null;
+
+        var seasons = [];
+        $("input:checkbox[name=season]:checked").each(function () {
+            seasons.push($(this).val());
+        });
+        if (!seasons.length > 0) seasons = null;
+
+        $.ajax({
+            type: "POST",
+            traditional: true,
+            async: false,
+            cache: false,
+            url: '/Perfume/PerfumeFilterring',
+            context: document.body,
+            data: { seasons: seasons, OlfactionGroups: OlfactionGroups, TemperOfPerfumes: TemperOfPerfumes, gender: gender },
+            success: function (result) {
+                if (result.perfumeIDs.length > 0) {
+                    $("#filterResult").css("display", "block");
+                    $("#NoResult").css("display", "none");
+                    var str = "";
+                    for (var i = 0; i < result.perfumeIDs.length; i++) {
+                        str = str + ' <div class="col-xl-3 col-md-6 col-lg-4 col-sm-6"><div class="product-wrap-2 mb-25 scroll-zoom">' +
+                            ' <div class="product-img" ><a href="product-details.html">' +
+                            '<img class="default-img" src="Uploads/PerfumeImages/' + result.perfumeImages[i] + '" alt="">' +
+                            '<img class="hover-img" src="Uploads/PerfumeImages/' + result.perfumeImages[i] + '" alt="">' +
+                            '</a><div class="product-action-2" ><a title="Add To Cart" href="#"><i class="fa fa-shopping-cart"></i></a>' +
+                            '<a title="Quick View" class="Quick_View" href="#" data-toggle="modal" onclick="showModal(' + result.perfumeIDs[i] + ')"><i class="fa fa-eye"></i></a>' +
+                            '</div></div ><div class="product-content-2"><div class="title-price-wrap-2"><h3><a href="product-details.html">' + result.perfumeNames[i] +
+                            '</a></h3></div></div></div></div>';
+                    }
+                    document.getElementById("filterResultRow").innerHTML = str;
+                }
+                else {
+                    $("#filterResult").css("display", "none");
+                    $("#NoResult").css("display", "block");
+                }
+
+
+
+            },
+            error: function (xhr) {
+                //debugger;
+                console.log(xhr.responseText);
+                alert("Error has occurred..");
+            }
+        });
+    }
+</script>

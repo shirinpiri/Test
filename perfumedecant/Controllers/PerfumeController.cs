@@ -17,21 +17,129 @@ namespace perfumedecant.Controllers
         Log log = new Log();
         LogStatus logStatus = new LogStatus();
 
+        public JsonResult PerfumeFilterring(Array seasons ,Array OlfactionGroups,Array TemperOfPerfumes ,String gender)
+        {
+            List<int> perfumeIDs = new List<int>();
+            List<String> perfumeImages = new List<String>();
+            List<String> perfumeNames = new List<String>();
+            List<Tbl_Perfume> perfume = new List<Tbl_Perfume>();
+
+            foreach (var seasonItem in seasons)
+            {
+                if (seasonItem.ToString() == "")
+                {
+                    perfume = db.Tbl_Perfume.OrderByDescending(a => a.Perfume_ID).ToList();
+                    break;
+                }
+                var seasonid = db.Tbl_Season.Where(a => a.Season_Title == seasonItem.ToString()).FirstOrDefault();
+                List<Tbl_PerfumeSeason> perfume_seasons = new List<Tbl_PerfumeSeason>();
+                perfume_seasons = db.Tbl_PerfumeSeason.Where(a => a.PerfumeSeason_Season_ID == seasonid.Season_ID).ToList();
+                foreach (var perfume_season in perfume_seasons)
+                {
+                    var res = db.Tbl_Perfume.Where(a => a.Perfume_ID == perfume_season.PerfumeSeason_Perfume_ID).FirstOrDefault();
+                    perfume.Add(res);
+                }
+            }
+
+            if (perfume.Count > 0)
+            {
+                foreach (var perfumeItem in perfume.ToList())
+                {
+                    var OlfactionGroupflag = false;
+                    var OlfactionGroupEmpty = false;
+                    foreach (var OlfactionGroupItem in OlfactionGroups)
+                    {
+                        if (OlfactionGroupItem.ToString() == "")
+                        {
+                            OlfactionGroupEmpty = true;
+                            break;
+                        }
+                        if (perfumeItem.Perfume_OlfactionGroups.ToString().Contains(OlfactionGroupItem.ToString())) OlfactionGroupflag = true;
+                    }
+                    if (OlfactionGroupEmpty == true) break;
+                    if (OlfactionGroupflag == false)
+                        perfume.Remove(perfumeItem);
+                }
+            }
+
+            if (perfume.Count > 0)
+            {
+                foreach (var perfumeItem in perfume.ToList())
+                {
+                    var TemperOfPerfumeflag = false;
+                    var TemperOfPerfumeEmpty = false;
+                    foreach (var TemperOfPerfumeItem in TemperOfPerfumes)
+                    {
+                        if (TemperOfPerfumeItem.ToString() == "")
+                        {
+                            TemperOfPerfumeEmpty = true;
+                            break;
+                        }
+                        if (perfumeItem.Perfume_TemperOfPerfume.ToString().Contains(TemperOfPerfumeItem.ToString())) TemperOfPerfumeflag = true;
+                    }
+                    if (TemperOfPerfumeEmpty == true) break;
+                    if (TemperOfPerfumeflag == false)
+                        perfume.Remove(perfumeItem);
+                }
+            }
+
+            if (gender != "")
+            {
+                if (perfume.Count > 0)
+                {
+                    foreach (var perfumeItem in perfume.ToList())
+                    {
+                        var genderflag = false;
+                        if (perfumeItem.Perfume_Gender.ToString() == gender.ToString()) genderflag = true;
+                        if (genderflag == false)
+                            perfume.Remove(perfumeItem);
+                    }
+                }
+            }
+
+            if (perfume.Count > 0)
+            {
+                foreach (var perfumeItem in perfume)
+                {
+                    perfumeIDs.Add(perfumeItem.Perfume_ID);
+                    perfumeImages.Add(perfumeItem.Perfume_ImageIndex);
+                    perfumeNames.Add(perfumeItem.Perfume_Name);
+                }
+            }
+                    
+            return Json(new
+            {
+                perfumeIDs = perfumeIDs,
+                perfumeImages = perfumeImages,
+                perfumeNames = perfumeNames
+            }, JsonRequestBehavior.AllowGet);
+        }
+
         public JsonResult PerfumeDetails(int PerfumeID)
         {
             String Message = "";
             IEnumerable<Tbl_Season> pfs = new List<Tbl_Season>();
             List<SelectListItem> seasons = new List<SelectListItem>();
+            PriceModel prices = new PriceModel();
+            List<SelectListItem> images = new List<SelectListItem>();
 
             var perfume = db.Tbl_Perfume.Where(a => a.Perfume_ID == PerfumeID).SingleOrDefault();
             if (perfume != null)
             {
-                InitDropdownLists(PerfumeID);
+                prices = InitDropdownLists(PerfumeID);
+
                 Rep_Perfume rp = new Rep_Perfume();
                 var seasonList = rp.Get_PerfumeSeasons(PerfumeID);
                 foreach (var item in seasonList)
                 {
                     seasons.Add(new SelectListItem { Text = item.Season_Title, Value = item.Season_ImageIndex });
+                }
+
+                Rep_PerfumeImages rep_images = new Rep_PerfumeImages();
+                var imgs = rep_images.Get_PerfumeImages(PerfumeID);
+                foreach (var item in imgs)
+                {
+                    images.Add(new SelectListItem { Text = item.PerfumeImages_ImageIndex, Value = item.PerfumeImages_ID.ToString() });
                 }
 
             }
@@ -55,28 +163,19 @@ namespace perfumedecant.Controllers
                 Perfume_Perfumer = perfume.Perfume_Perfumer,
                 Perfume_TemperOfPerfume = perfume.Perfume_TemperOfPerfume,
                 PerfumeType_Title = perfume.Tbl_PerfumeType.PerfumeType_Title,
-                seasons = new SelectList(seasons, "Value", "Text")
+                seasons = new SelectList(seasons, "Value", "Text"),
+                CategoryList = prices.CategoryList,
+                ColognePrice= prices.ColognePrice,
+                CologneWeightList = prices.CologneWeightList,
+                CompanySamplePrice = prices.CompanySamplePrice,
+                CompanySampleWeightList = prices.CompanySampleWeightList,
+                HandySamplePrice = prices.HandySamplePrice,
+                HandySampleWeightList = prices.HandySampleWeightList,
+                Perfume_ImageIndex = perfume.Perfume_ImageIndex,
+                images = new SelectList(images, "Value", "Text")
                 },
                  JsonRequestBehavior.AllowGet);
         }
-
-     /*   public ActionResult PerfumeDetails(int PerfumeID)
-        {
-            String Message = "";
-            var perfume = db.Tbl_Perfume.Where(a => a.Perfume_ID == PerfumeID).SingleOrDefault();
-            if (perfume != null)
-            {
-                InitDropdownLists(PerfumeID);
-                return View(perfume);
-            }
-            else
-            {
-                Message = "perfume with ID" + PerfumeID + "not found.";
-                log.addLog(Message, "AddCart", "Cart", logStatus.EventLog);
-                ViewBag.Error = "محصول پیدا نشد، لطفا دوباره تلاش کنید.";
-                return RedirectToAction("Index", "Home");
-            }
-        }*/
 
         public ActionResult Perfumes(int brandID = 0 , String type = "" , int currentPageIndex = 1)
         {          
@@ -181,8 +280,7 @@ namespace perfumedecant.Controllers
             return perfumeModel;
         }
 
-
-        public void InitDropdownLists(int perfumeID)
+        public PriceModel InitDropdownLists(int perfumeID)
         {
             var categoryList = new List<SelectListItem>();
             Int32 cologne_price = 0;
@@ -233,42 +331,44 @@ namespace perfumedecant.Controllers
                 ViewBag.categoryCount = 0;
             }
 
-            ViewBag.cologne_price = cologne_price;
+            PriceModel prices = new PriceModel();
+            prices.CategoryList = categoryList;
+            prices.ColognePrice= cologne_price;
+            prices.HandySamplePrice = handySample_price;
+            prices.CompanySamplePrice = companySample_price;
+            prices.CologneWeightList = cologne_weightList;
+            prices.HandySampleWeightList = handySample_weightList;
+            prices.CompanySampleWeightList = companySample_weightList;
+
+            return (prices);
+        /*    ViewBag.cologne_price = cologne_price;
             ViewBag.handySample_price = handySample_price;
             ViewBag.companySample_price = companySample_price;
             ViewBag.cologne_weightList = cologne_weightList;
             ViewBag.handySample_weightList = handySample_weightList;
-            ViewBag.companySample_weightList = companySample_weightList;
+            ViewBag.companySample_weightList = companySample_weightList;*/
         }
 
-        public JsonResult GetWeights(string category, int perfumeID)
+        public ActionResult PerfumesBrand(int brandID = 0, String type = "", int currentPageIndex = 1)
         {
-            List<SelectListItem> weights = new List<SelectListItem>();
-            switch (category)
-            {
-                case "ادکلن":
-                    weights = db.Tbl_Cologne.Where(a => a.Cologne_Perfume_ID == perfumeID).ToList().Select(rr =>
-                                      new SelectListItem { Value = rr.Cologne_Weight.ToString(), Text = rr.Cologne_Weight.ToString() }).ToList();
-                    break;
-                case "سمپل شرکتی":
-                    weights = db.Tbl_CompanySample.Where(a => a.CompanySample_Perfume_ID == perfumeID).ToList().Select(rr =>
-                  new SelectListItem { Value = rr.CompanySample_Weight.ToString(), Text = rr.CompanySample_Weight.ToString() }).ToList();
-                    break;
+            int maxRows = 8;
+            List<Tbl_Perfume> perfumes = new List<Tbl_Perfume>();
+            perfumes = db.Tbl_Perfume.Where(a => a.Perfume_Brand_ID == brandID).ToList();
+            PerfumeModel perfumeModel = new PerfumeModel();
 
-                case "سمپل دست ریز":
-                    weights = new List<SelectListItem>
-                    {
-                        new SelectListItem{ Text="3", Value = "3" , Selected = true},
-                        new SelectListItem{ Text="5", Value = "5" },
-                        new SelectListItem{ Text="10", Value = "10"},
-                        new SelectListItem{ Text="15", Value = "15" },
-                        new SelectListItem{ Text="20", Value = "20" },
-                        new SelectListItem{ Text="25", Value = "25" },
-                    };
-                    break;
-            }
+            perfumeModel.Perfumes = perfumes
+                        .OrderBy(a => a.Perfume_ID)
+                        .Skip((currentPageIndex - 1) * maxRows)
+                        .Take(maxRows).ToList();
 
-            return Json(new SelectList(weights, "Value", "Text"));
+            double pageCount = (double)((decimal)perfumes.Count() / Convert.ToDecimal(maxRows));
+            perfumeModel.PageCount = (int)Math.Ceiling(pageCount);
+
+            perfumeModel.CurrentPageIndex = currentPageIndex;
+            perfumeModel.brandID = brandID;
+            perfumeModel.type = type;
+
+            return View(perfumeModel);
         }
     }
 }

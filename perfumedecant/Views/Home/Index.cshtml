@@ -3,6 +3,8 @@
 }
 @using perfumedecant.Models.Domains;
 @using perfumedecant.Models.Repository;
+@model perfumedecant.Models.Domains.Tbl_Perfume
+
 @{
     PD_DB db = new PD_DB();
     Rep_Perfume rep_perfume = new Rep_Perfume();
@@ -13,6 +15,7 @@
     var newSeason = rep_season.Get_SeasonPerfumes();
     var allNewPerfume = rep_perfume.Get_NewPerfume();
     int newCount = newWomen.Count() + newMen.Count() + newSeason.Count() + newUniSex.Count();
+    Rep_PerfumeImages rep_images = new Rep_PerfumeImages();
 }
 <div class="slider-area">
     <div class="slider-active owl-carousel nav-style-1">
@@ -34,7 +37,7 @@
                     <div class="support-content-2">
                         <img class="animated" src="Content/Images/icon-img/support-1.png" alt="">
                         <h5>ارسال رایگان</h5>
-                        <p>برای خریدهای بالای 500 هزار تومان ارسال رایگان است.</p>   
+                        <p>برای خریدهای بالای 500 هزار تومان ارسال رایگان است.</p>
                     </div>
                 </div>
             </div>
@@ -63,7 +66,7 @@
     <div class="container">
         <div class="tab-filter-wrap mb-60">
             <div class="product-tab-list-2 nav">
-                
+
                 <a class="active" href="#product-1" data-toggle="tab">
                     <h4>جدیدترین زنانه </h4>
                 </a>
@@ -76,7 +79,7 @@
                 <a href="#product-4" data-toggle="tab">
                     <h4> عطر مناسب فصل </h4>
                 </a>
-               
+
             </div>
             <div class="filter-active">
                 <a href="#"> فیلتر <i class="fa fa-plus"></i></a>
@@ -89,11 +92,10 @@
                     <div class="product-filter">
                         <h5>مناسب فصل</h5>
                         <ul class="sort-by">
-                            <li><input type="checkbox" value=""> <a href="#">چهارفصل</a></li>
-                            <li><input type="checkbox" value=""> <a href="#">بهار</a></li>
-                            <li><input type="checkbox" value=""> <a href="#">تابستان</a></li>
-                            <li><input type="checkbox" value=""> <a href="#">پاییز</a></li>
-                            <li><input type="checkbox" value=""> <a href="#">زمستان</a></li>
+                            <li><input type="checkbox" name="season" value="بهار"> <a href="#">بهار</a></li>
+                            <li><input type="checkbox" name="season" value="تابستان"> <a href="#">تابستان</a></li>
+                            <li><input type="checkbox" name="season" value="پاییز"> <a href="#">پاییز</a></li>
+                            <li><input type="checkbox" name="season" value="زمستان"> <a href="#">زمستان</a></li>
                         </ul>
                     </div>
                 </div>
@@ -102,12 +104,12 @@
                     <div class="product-filter">
                         <h5>گروه بویایی</h5>
                         <ul class="color-filter">
-                            <li><input type="checkbox" value=""> <a href="#">شرقی</a></li>
-                            <li><input type="checkbox" value=""> <a href="#">گلی</a></li>
-                            <li><input type="checkbox" value=""> <a href="#">مرکباتی</a></li>
-                            <li><input type="checkbox" value=""> <a href="#">میوه ای</a></li>
-                            <li><input type="checkbox" value=""> <a href="#">گل میوه ای</a></li>
-                            <li><input type="checkbox" value=""> <a href="#">چوبی</a></li>
+                            <li><input type="checkbox" name="OlfactionGroup" value="شرقی"> <a href="#">شرقی</a></li>
+                            <li><input type="checkbox" name="OlfactionGroup" value="گلی"> <a href="#">گلی</a></li>
+                            <li><input type="checkbox" name="OlfactionGroup" value="مرکباتی"> <a href="#">مرکباتی</a></li>
+                            <li><input type="checkbox" name="OlfactionGroup" value="میوه ای"> <a href="#">میوه ای</a></li>
+                            <li><input type="checkbox" name="OlfactionGroup" value="گل میوه ای"> <a href="#">گل میوه ای</a></li>
+                            <li><input type="checkbox" name="OlfactionGroup" value="چوبی"> <a href="#">چوبی</a></li>
                         </ul>
                     </div>
                 </div>
@@ -116,166 +118,203 @@
                     <div class="product-filter">
                         <h5>طبع و رایحه</h5>
                         <ul class="product-tags">
-                            <li><input type="checkbox" value=""><a href="#">گرم</a></li>
-                            <li><input type="checkbox" value=""><a href="#">ملایم</a></li>
-                            <li><input type="checkbox" value=""><a href="#">خنک</a></li>
+                            <li><input type="checkbox" name="TemperOfPerfume" value="گرم"><a href="#">گرم</a></li>
+                            <li><input type="checkbox" name="TemperOfPerfume" value="ملایم"><a href="#">ملایم</a></li>
+                            <li><input type="checkbox" name="TemperOfPerfume" value="خنک"><a href="#">خنک</a></li>
                         </ul>
                     </div>
                 </div>
-                <!-- Product Filter -->
+                <!-- gender Filter -->
                 <div class="col-md-3 col-sm-6 col-xs-12 mb-30">
                     <div class="product-filter">
                         <h5>جنسیت</h5>
                         <ul class="gender-filter">
-                            <li><input class="gender" type="radio" id="male" name="gender" value="male"><a href="#">مردانه</a></li>
-                            <li><input class="gender" type="radio" id="female" name="gender" value="female"><a href="#">زنانه</a></li>
+                            <li><input class="gender" type="radio" id="male" name="gender" value="مردانه"><a href="#">مردانه</a></li>
+                            <li><input class="gender" type="radio" id="female" name="gender" value="زنانه"><a href="#">زنانه</a></li>
+                            <li><input class="gender" type="radio" id="unisex" name="gender" value="یونیسکس"><a href="#">یونیسکس</a></li>
                         </ul>
                     </div>
                 </div>
             </div>
+            <div class="row">
+                <div class="product-filter">
+                    <h5>برند (حرف اول برند مورد نظر را انتخاب کنید )</h5>
+                </div>
+            </div>
+            <div class="row">
+                <div class="product-tab-list-2 nav">
+                    <a href="#brand-A" data-toggle="tab" onclick="FindBrands('A','a')">
+                        <h4> A </h4>
+                    </a>
+                    <a href="#brand-B" data-toggle="tab" onclick="FindBrands('B','b')">
+                        <h4> B </h4>
+                    </a>
+                    <a href="#brand-C" data-toggle="tab" onclick="FindBrands('C','c')">
+                        <h4> C </h4>
+                    </a>
+                    <a href="#brand-D" data-toggle="tab" onclick="FindBrands('D','d')">
+                        <h4> D </h4>
+                    </a>
+                    <a href="#brand-E" data-toggle="tab" onclick="FindBrands('E','e')">
+                        <h4> E </h4>
+                    </a>
+                    <a href="#brand-F" data-toggle="tab" onclick="FindBrands('F','f')">
+                        <h4> F </h4>
+                    </a>
+                    <a href="#brand-G" data-toggle="tab" onclick="FindBrands('G','g')">
+                        <h4> G </h4>
+                    </a>
+                    <a href="#brand-H" data-toggle="tab" onclick="FindBrands('H','h')">
+                        <h4> H </h4>
+                    </a>
+                    <a href="#brand-I" data-toggle="tab" onclick="FindBrands('I','i')">
+                        <h4> I </h4>
+                    </a>
+                    <a href="#brand-J" data-toggle="tab" onclick="FindBrands('J','j')">
+                        <h4> J </h4>
+                    </a>
+                    <a href="#brand-K" data-toggle="tab" onclick="FindBrands('K','k')">
+                        <h4> K </h4>
+                    </a>
+                    <a href="#brand-L" data-toggle="tab" onclick="FindBrands('L','l')">
+                        <h4> L </h4>
+                    </a>
+                    <a href="#brand-M" data-toggle="tab" onclick="FindBrands('M','m')">
+                        <h4> M </h4>
+                    </a>
+                    <a href="#brand-N" data-toggle="tab" onclick="FindBrands('N','n')">
+                        <h4> N </h4>
+                    </a>
+                    <a href="#brand-O" data-toggle="tab" onclick="FindBrands('O','o')">
+                        <h4> O </h4>
+                    </a>
+                    <a href="#brand-P" data-toggle="tab" onclick="FindBrands('P','p')">
+                        <h4> P </h4>
+                    </a>
+                    <a href="#brand-Q" data-toggle="tab" onclick="FindBrands('Q','q')">
+                        <h4> Q </h4>
+                    </a>
+                    <a href="#brand-R" data-toggle="tab" onclick="FindBrands('R','r')">
+                        <h4> R </h4>
+                    </a>
+                    <a href="#brand-Z" data-toggle="tab" onclick="FindBrands('S','s')">
+                        <h4> S </h4>
+                    </a>
+                    <a href="#brand-T" data-toggle="tab" onclick="FindBrands('T','t')">
+                        <h4> T </h4>
+                    </a>
+                    <a href="#brand-U" data-toggle="tab" onclick="FindBrands('U','u')">
+                        <h4> U </h4>
+                    </a>
+                    <a href="#brand-V" data-toggle="tab" onclick="FindBrands('V','v')">
+                        <h4> V </h4>
+                    </a>
+                    <a href="#brand-W" data-toggle="tab" onclick="FindBrands('W','w')">
+                        <h4> W </h4>
+                    </a>
+                    <a href="#brand-X" data-toggle="tab" onclick="FindBrands('X','x')">
+                        <h4> X </h4>
+                    </a>
+                    <a href="#brand-Y" data-toggle="tab" onclick="FindBrands('Y','y')">
+                        <h4> Y </h4>
+                    </a>
+                    <a href="#brand-Z" data-toggle="tab" onclick="FindBrands('Z','z')">
+                        <h4> Z </h4>
+                    </a>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                    <div class="tab-content jump" id="product-tabs">
+                        <div class="tab-pane" id="brand-A">
+                        </div>
+                        <div class="tab-pane" id="brand-B">
+                        </div>
+                        <div class="tab-pane" id="brand-C">
+                        </div>
+                        <div class="tab-pane" id="brand-D">
+                        </div>
+                        <div class="tab-pane" id="brand-E">
+                        </div>
+                        <div class="tab-pane" id="brand-F">
+                        </div>
+                        <div class="tab-pane" id="brand-G">
+                        </div>
+                        <div class="tab-pane" id="brand-H">
+                        </div>
+                        <div class="tab-pane" id="brand-I">
+                        </div>
+                        <div class="tab-pane" id="brand-J">
+                        </div>
+                        <div class="tab-pane" id="brand-K">
+                        </div>
+                        <div class="tab-pane" id="brand-L">
+                        </div>
+                        <div class="tab-pane" id="brand-M">
+                        </div>
+                        <div class="tab-pane" id="brand-N">
+                        </div>
+                        <div class="tab-pane" id="brand-O">
+                        </div>
+                        <div class="tab-pane" id="brand-P">
+                        </div>
+                        <div class="tab-pane" id="brand-Q">
+                        </div>
+                        <div class="tab-pane" id="brand-R">
+                        </div>
+                        <div class="tab-pane" id="brand-S">
+                        </div>
+                        <div class="tab-pane" id="brand-T">
+                        </div>
+                        <div class="tab-pane" id="brand-U">
+                        </div>
+                        <div class="tab-pane" id="brand-V">
+                        </div>
+                        <div class="tab-pane" id="brand-W">
+                        </div>
+                        <div class="tab-pane" id="brand-X">
+                        </div>
+                        <div class="tab-pane" id="brand-Y">
+                        </div>
+                        <div class="tab-pane" id="brand-Z">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                    <div class="filter-search-icon">
+                        <a title="جست و جو" href="#" onclick="filtering()">جست و جو<i class="fa fa-search" style=""></i></a>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="tab-content jump">
+        <div class="tab-content jump" id="product-tabs">
             <div class="tab-pane" id="product-1">
                 <div class="row">
                     @if (newWomen.Count() > 0)
                     {
                         foreach (var women in newWomen)
                         {
-                            string modalId = "exampleModal" + @women.Perfume_ID;
-                            
                             <div class="col-xl-3 col-md-6 col-lg-4 col-sm-6">
                                 <div class="product-wrap-2 mb-25 scroll-zoom">
                                     <div class="product-img">
                                         <a href="product-details.html">
-                                            <img class="default-img" src="Content/Images/product/hm2-pro-5.jpg" alt="">
-                                            <img class="hover-img" src="Content/Images/product/hm2-pro-5.jpg" alt="">
+                                            <img class="default-img" src="~/Uploads/PerfumeImages/@women.Perfume_ImageIndex" alt="">
+                                            <img class="hover-img" src="~/Uploads/PerfumeImages/@women.Perfume_ImageIndex" alt="">
                                         </a>
                                         <div class="product-action-2">
                                             <a title="Add To Cart" href="@Url.Action("PerfumeDetails", "Perfume", new { PerfumeID = women.Perfume_ID })"><i class="fa fa-shopping-cart"></i></a>
-                                            <a title="Quick View" href="#" data-toggle="modal" data-target="#@modalId"><i class="fa fa-eye"></i></a>
+                                            <a title="Quick View" class="Quick_View" href="#" data-toggle="modal" onclick="showModal(@women.Perfume_ID)"><i class="fa fa-eye"></i></a>
                                         </div>
                                     </div>
                                     <div class="product-content-2">
                                         <div class="title-price-wrap-2">
                                             <h3><a href="product-details.html">@women.Perfume_Name</a></h3>
-                                            <div class="price-2">
-                                                <span>$ 60.00</span>
-                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-
-                            <!-- Modal -->
-                            <div class="modal fade" id="@modalId" tabindex="-1" role="dialog">
-                                <div class="modal-dialog" role="document">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">x</span></button>
-                                        </div>
-                                        <div class="modal-body">
-                                            <div class="row">
-                                                <div class="col-md-5 col-sm-12 col-xs-12">
-                                                    <div class="tab-content quickview-big-img">
-                                                        <div id="pro-1" class="tab-pane fade show active">
-                                                            <img src="Content/Images/product/quickview-l1.jpg" alt="">
-                                                        </div>
-                                                        <div id="pro-2" class="tab-pane fade">
-                                                            <img src="Content/Images/product/quickview-l2.jpg" alt="">
-                                                        </div>
-                                                        <div id="pro-3" class="tab-pane fade">
-                                                            <img src="Content/Images/product/quickview-l3.jpg" alt="">
-                                                        </div>
-                                                        <div id="pro-4" class="tab-pane fade">
-                                                            <img src="Content/Images/product/quickview-l2.jpg" alt="">
-                                                        </div>
-                                                    </div>
-                                                    <!-- Thumbnail Large Image End -->
-                                                    <!-- Thumbnail Image End -->
-                                                    <div class="quickview-wrap mt-15">
-                                                        <div class="quickview-slide-active owl-carousel nav nav-style-1" role="tablist">
-                                                            <a class="active" data-toggle="tab" href="#pro-1"><img src="Content/Images/product/quickview-s1.jpg" alt=""></a>
-                                                            <a data-toggle="tab" href="#pro-2"><img src="Content/Images/product/quickview-s2.jpg" alt=""></a>
-                                                            <a data-toggle="tab" href="#pro-3"><img src="Content/Images/product/quickview-s3.jpg" alt=""></a>
-                                                            <a data-toggle="tab" href="#pro-4"><img src="Content/Images/product/quickview-s2.jpg" alt=""></a>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-7 col-sm-12 col-xs-12">
-                                                    <div class="product-details-content quickview-content">
-                                                        <h2>@women.Perfume_Name</h2>
-                                                        <div class="product-details-price">
-                                                            <span>$18.00 </span>
-                                                        </div>
-                                                        <p>@women.Perfume_Description</p>
-                                                        <div class="pro-details-list">
-                                                            <ul>
-                                                                <li>- کشور سازنده: @women.Perfume_Country</li>
-                                                                <li>- عطار: @women.Perfume_Perfumer</li>
-                                                                <li>- غلظت: @women.Tbl_PerfumeType.PerfumeType_Title</li>
-                                                            </ul>
-                                                        </div>
-                                                        <div class="pro-details-size-color">
-                                                            <span>برند : <a href="#">@women.Tbl_Brand.Brand_Title</a></span>
-                                                        </div>
-                                                        <div class="pro-details-size-color">
-                                                            <span>جنسیت : <a href="#">@women.Perfume_Gender</a></span>
-                                                        </div>
-
-                                                        <div class="pro-details-size-color">
-                                                            <div class="pro-details-text">
-                                                                <ul>
-                                                                    @foreach (var season in rep_perfume.Get_PerfumeSeasons(women.Perfume_ID))
-                                                                    {
-                                                                        <li>
-                                                                            <img id="myimage" src="~/Content/Images/dashboard_images/@season.Season_ImageIndex" class="img-fluid img-thumbnail" width="48" height="48" data-toggle="tooltip" data-placement="top" title="@season.Season_Title">
-                                                                        </li>
-                                                                    }
-                                                                   
-                                                                    <li>مناسب فصل: </li>
-                                                                </ul>
-                                                            </div>
-                                                        </div>
-                                                        <div class="pro-details-quality">
-                                                            <div class="cart-plus-minus">
-                                                                <input class="cart-plus-minus-box" type="text" name="qtybutton" value="2">
-                                                            </div>
-                                                            <div class="pro-details-cart btn-hover">
-                                                                <a href="#">افزودن به سبد خرید</a>
-                                                            </div>
-                                                        </div>
-                                                        <div class="pro-details-meta">
-                                                            <span>گروه بویایی: </span>
-                                                            <ul>
-                                                                <li>@women.Perfume_OlfactionGroups</li>
-                                                            </ul>
-                                                        </div>
-                                                        <div class="pro-details-meta">
-                                                            <span>طبع و رایحه:</span>
-                                                            <ul>
-                                                                <li>@women.Perfume_TemperOfPerfume</li>
-                                                            </ul>
-                                                        </div>
-                                                        <div class="pro-details-meta">
-                                                            <span> نت ها:</span>
-                                                            <ul>
-                                                                <li>@women.Perfume_Notes</li>
-                                                            </ul>
-                                                        </div>
-                                                        <div class="pro-details-social">
-                                                            <ul>
-                                                                <li><a href="https://t.me/perfumedecant"><i class="fab fa-telegram"></i></a></li>
-                                                                <li><a href="https://www.instagram.com/perfumedecantir"><i class="fa fa-instagram"></i></a></li>
-                                                            </ul>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- Modal end -->
                         }
                     }
                 </div>
@@ -286,135 +325,27 @@
                     {
                         foreach (var men in newMen)
                         {
-                            string modalId = "exampleModal" + @men.Perfume_ID;
+
                             <div class="col-xl-3 col-md-6 col-lg-4 col-sm-6">
                                 <div class="product-wrap-2 mb-25 scroll-zoom">
                                     <div class="product-img">
                                         <a href="product-details.html">
-                                            <img class="default-img" src="Content/Images/product/hm2-pro-1.jpg" alt="">
-                                            <img class="hover-img" src="Content/Images/product/hm2-pro-1.jpg" alt="">
+                                            <img class="default-img" src="~/Uploads/PerfumeImages/@men.Perfume_ImageIndex" alt="">
+                                            <img class="hover-img" src="~/Uploads/PerfumeImages/@men.Perfume_ImageIndex" alt="">
                                         </a>
 
                                         <div class="product-action-2">
                                             <a title="Add To Cart" href="@Url.Action("PerfumeDetails", "Perfume", new { PerfumeID = men.Perfume_ID })"><i class="fa fa-shopping-cart"></i></a>
-                                            <a title="Quick View" href="#" data-toggle="modal" data-target="#@modalId"><i class="fa fa-eye"></i></a>
+                                            <a title="Quick View" class="Quick_View" href="#" data-toggle="modal" onclick="showModal(@men.Perfume_ID)"><i class="fa fa-eye"></i></a>
                                         </div>
                                     </div>
                                     <div class="product-content-2">
                                         <div class="title-price-wrap-2">
                                             <h3><a href="product-details.html">@men.Perfume_Name</a></h3>
-                                            <div class="price-2">
-                                                <span>$ 60.00</span>
-                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-
-                            <!-- Modal -->
-                            <div class="modal fade" id="@modalId" tabindex="-1" role="dialog">
-                                <div class="modal-dialog" role="document">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">x</span></button>
-                                        </div>
-                                        <div class="modal-body">
-                                            <div class="row">
-                                                <div class="col-md-5 col-sm-12 col-xs-12">
-                                                    <div class="tab-content quickview-big-img">
-                                                        <div id="pro-1" class="tab-pane fade show active">
-                                                            <img src="Content/Images/product/quickview-l1.jpg" alt="">
-                                                        </div>
-                                                        <div id="pro-2" class="tab-pane fade">
-                                                            <img src="Content/Images/product/quickview-l2.jpg" alt="">
-                                                        </div>
-                                                        <div id="pro-3" class="tab-pane fade">
-                                                            <img src="Content/Images/product/quickview-l3.jpg" alt="">
-                                                        </div>
-                                                        <div id="pro-4" class="tab-pane fade">
-                                                            <img src="Content/Images/product/quickview-l2.jpg" alt="">
-                                                        </div>
-                                                    </div>
-                                                    <!-- Thumbnail Large Image End -->
-                                                    <!-- Thumbnail Image End -->
-                                                    <div class="quickview-wrap mt-15">
-                                                        <div class="quickview-slide-active owl-carousel nav nav-style-1" role="tablist">
-                                                            <a class="active" data-toggle="tab" href="#pro-1"><img src="Content/Images/product/quickview-s1.jpg" alt=""></a>
-                                                            <a data-toggle="tab" href="#pro-2"><img src="Content/Images/product/quickview-s2.jpg" alt=""></a>
-                                                            <a data-toggle="tab" href="#pro-3"><img src="Content/Images/product/quickview-s3.jpg" alt=""></a>
-                                                            <a data-toggle="tab" href="#pro-4"><img src="Content/Images/product/quickview-s2.jpg" alt=""></a>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-7 col-sm-12 col-xs-12">
-                                                    <div class="product-details-content quickview-content">
-                                                        <h2>@men.Perfume_Name</h2>
-                                                        <div class="product-details-price">
-                                                            <span>$18.00 </span>
-                                                        </div>
-                                                        <p>@men.Perfume_Description</p>
-                                                        <div class="pro-details-list">
-                                                            <ul>
-                                                                <li>- کشور سازنده: @men.Perfume_Country</li>
-                                                                <li>- عطار: @men.Perfume_Perfumer</li>
-                                                                <li>- غلظت: @men.Tbl_PerfumeType.PerfumeType_Title</li>
-                                                            </ul>
-                                                        </div>
-                                                        <div class="pro-details-size-color">
-                                                            <span>برند : <a href="#">@men.Tbl_Brand.Brand_Title</a></span>
-                                                        </div>
-                                                        <div class="pro-details-size-color">
-                                                            <span>جنسیت : <a href="#">@men.Perfume_Gender</a></span>
-                                                        </div>
-
-                                                        <div class="pro-details-size-color">
-                                                            <div class="pro-details-text">
-                                                                <ul>
-                                                                    @foreach (var season in rep_perfume.Get_PerfumeSeasons(men.Perfume_ID))
-                                                                    {
-                                                                        <li>
-                                                                            <img id="myimage" src="~/Content/Images/dashboard_images/@season.Season_ImageIndex" class="img-fluid img-thumbnail" width="48" height="48" data-toggle="tooltip" data-placement="top" title="@season.Season_Title">
-                                                                        </li>
-                                                                    }
-
-                                                                    <li>مناسب فصل: </li>
-                                                                </ul>
-                                                            </div>
-                                                        </div>
-                                                        <div class="pro-details-quality">
-                                                            <div class="cart-plus-minus">
-                                                                <input class="cart-plus-minus-box" type="text" name="qtybutton" value="2">
-                                                            </div>
-                                                            <div class="pro-details-cart btn-hover">
-                                                                <a href="#">افزودن به سبد خرید</a>
-                                                            </div>
-                                                        </div>
-                                                        <div class="pro-details-meta">
-                                                            <span>گروه بویایی: </span>
-                                                            <ul>
-                                                                <li>@men.Perfume_OlfactionGroups</li>
-                                                            </ul>
-                                                        </div>
-                                                        <div class="pro-details-meta">
-                                                            <span>طبع و رایحه:</span>
-                                                            <ul>
-                                                                <li>@men.Perfume_TemperOfPerfume</li>
-                                                            </ul>
-                                                        </div>
-                                                        <div class="pro-details-social">
-                                                            <ul>
-                                                                <li><a href="https://t.me/perfumedecant"><i class="fab fa-telegram"></i></a></li>
-                                                                <li><a href="https://www.instagram.com/perfumedecantir"><i class="fa fa-instagram"></i></a></li>
-                                                            </ul>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- Modal end -->
                         }
                     }
                 </div>
@@ -425,134 +356,26 @@
                     {
                         foreach (var newuni in newUniSex)
                         {
-                            string modalId = "exampleModal" + @newuni.Perfume_ID;
-
                             <div class="col-xl-3 col-md-6 col-lg-4 col-sm-6">
                                 <div class="product-wrap-2 mb-25 scroll-zoom">
                                     <div class="product-img">
                                         <a href="product-details.html">
-                                            <img class="default-img" src="Content/Images/product/hm2-pro-8.jpg" alt="">
-                                            <img class="hover-img" src="Content/Images/product/hm2-pro-8.jpg" alt="">
+                                            <img class="default-img" src="~/Uploads/PerfumeImages/@newuni.Perfume_ImageIndex" alt="">
+                                            <img class="hover-img" src="~/Uploads/PerfumeImages/@newuni.Perfume_ImageIndex" alt="">
                                         </a>
 
                                         <div class="product-action-2">
                                             <a title="Add To Cart" href="@Url.Action("PerfumeDetails", "Perfume", new { PerfumeID = newuni.Perfume_ID })"><i class="fa fa-shopping-cart"></i></a>
-                                            <a title="Quick View" href="#" data-toggle="modal" data-target="#@modalId"><i class="fa fa-eye"></i></a>
+                                            <a title="Quick View" class="Quick_View" href="#" data-toggle="modal" onclick="showModal(@newuni.Perfume_ID)"><i class="fa fa-eye"></i></a>
                                         </div>
                                     </div>
                                     <div class="product-content-2">
                                         <div class="title-price-wrap-2">
                                             <h3><a href="product-details.html">@newuni.Perfume_Name</a></h3>
-                                            <div class="price-2">
-                                                <span>$ 60.00</span>
-                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <!-- Modal -->
-                            <div class="modal fade" id="@modalId" tabindex="-1" role="dialog">
-                                <div class="modal-dialog" role="document">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">x</span></button>
-                                        </div>
-                                        <div class="modal-body">
-                                            <div class="row">
-                                                <div class="col-md-5 col-sm-12 col-xs-12">
-                                                    <div class="tab-content quickview-big-img">
-                                                        <div id="pro-1" class="tab-pane fade show active">
-                                                            <img src="Content/Images/product/quickview-l1.jpg" alt="">
-                                                        </div>
-                                                        <div id="pro-2" class="tab-pane fade">
-                                                            <img src="Content/Images/product/quickview-l2.jpg" alt="">
-                                                        </div>
-                                                        <div id="pro-3" class="tab-pane fade">
-                                                            <img src="Content/Images/product/quickview-l3.jpg" alt="">
-                                                        </div>
-                                                        <div id="pro-4" class="tab-pane fade">
-                                                            <img src="Content/Images/product/quickview-l2.jpg" alt="">
-                                                        </div>
-                                                    </div>
-                                                    <!-- Thumbnail Large Image End -->
-                                                    <!-- Thumbnail Image End -->
-                                                    <div class="quickview-wrap mt-15">
-                                                        <div class="quickview-slide-active owl-carousel nav nav-style-1" role="tablist">
-                                                            <a class="active" data-toggle="tab" href="#pro-1"><img src="Content/Images/product/quickview-s1.jpg" alt=""></a>
-                                                            <a data-toggle="tab" href="#pro-2"><img src="Content/Images/product/quickview-s2.jpg" alt=""></a>
-                                                            <a data-toggle="tab" href="#pro-3"><img src="Content/Images/product/quickview-s3.jpg" alt=""></a>
-                                                            <a data-toggle="tab" href="#pro-4"><img src="Content/Images/product/quickview-s2.jpg" alt=""></a>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-7 col-sm-12 col-xs-12">
-                                                    <div class="product-details-content quickview-content">
-                                                        <h2>@newuni.Perfume_Name</h2>
-                                                        <div class="product-details-price">
-                                                            <span>$18.00 </span>
-                                                        </div>
-                                                        <p>@newuni.Perfume_Description</p>
-                                                        <div class="pro-details-list">
-                                                            <ul>
-                                                                <li>- کشور سازنده: @newuni.Perfume_Country</li>
-                                                                <li>- عطار: @newuni.Perfume_Perfumer</li>
-                                                                <li>- غلظت: @newuni.Tbl_PerfumeType.PerfumeType_Title</li>
-                                                            </ul>
-                                                        </div>
-                                                        <div class="pro-details-size-color">
-                                                            <span>برند : <a href="#">@newuni.Tbl_Brand.Brand_Title</a></span>
-                                                        </div>
-                                                        <div class="pro-details-size-color">
-                                                            <span>جنسیت : <a href="#">@newuni.Perfume_Gender</a></span>
-                                                        </div>
-
-                                                        <div class="pro-details-size-color">
-                                                            <div class="pro-details-text">
-                                                                <ul>
-                                                                    @foreach (var season in rep_perfume.Get_PerfumeSeasons(newuni.Perfume_ID))
-                                                                    {
-                                                                        <li>
-                                                                            <img id="myimage" src="~/Content/Images/dashboard_images/@season.Season_ImageIndex" class="img-fluid img-thumbnail" width="48" height="48" data-toggle="tooltip" data-placement="top" title="@season.Season_Title">
-                                                                        </li>
-                                                                    }
-                                                                    <li>مناسب فصل: </li>
-                                                                </ul>
-                                                            </div>
-                                                        </div>
-                                                        <div class="pro-details-quality">
-                                                            <div class="cart-plus-minus">
-                                                                <input class="cart-plus-minus-box" type="text" name="qtybutton" value="2">
-                                                            </div>
-                                                            <div class="pro-details-cart btn-hover">
-                                                                <a href="#">افزودن به سبد خرید</a>
-                                                            </div>
-                                                        </div>
-                                                        <div class="pro-details-meta">
-                                                            <span>گروه بویایی: </span>
-                                                            <ul>
-                                                                <li>@newuni.Perfume_OlfactionGroups</li>
-                                                            </ul>
-                                                        </div>
-                                                        <div class="pro-details-meta">
-                                                            <span>طبع و رایحه:</span>
-                                                            <ul>
-                                                                <li>@newuni.Perfume_TemperOfPerfume</li>
-                                                            </ul>
-                                                        </div>
-                                                        <div class="pro-details-social">
-                                                            <ul>
-                                                                <li><a href="https://t.me/perfumedecant"><i class="fab fa-telegram"></i></a></li>
-                                                                <li><a href="https://www.instagram.com/perfumedecantir"><i class="fa fa-instagram"></i></a></li>
-                                                            </ul>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- Modal end -->
                         }
                     }
                 </div>
@@ -563,141 +386,44 @@
                     {
                         foreach (var seasonPerfume in newSeason)
                         {
-                            string modalId = "exampleModal" + @seasonPerfume.Perfume_ID;
-
                             <div class="col-xl-3 col-md-6 col-lg-4 col-sm-6">
                                 <div class="product-wrap-2 mb-25 scroll-zoom">
                                     <div class="product-img">
                                         <a href="product-details.html">
-                                            <img class="default-img" src="Content/Images/product/hm2-pro-8.jpg" alt="">
-                                            <img class="hover-img" src="Content/Images/product/hm2-pro-8.jpg" alt="">
+                                            <img class="default-img" src="~/Uploads/PerfumeImages/@seasonPerfume.Perfume_ImageIndex" alt="">
+                                            <img class="hover-img" src="~/Uploads/PerfumeImages/@seasonPerfume.Perfume_ImageIndex" alt="">
                                         </a>
 
                                         <div class="product-action-2">
                                             <a title="Add To Cart" href="@Url.Action("PerfumeDetails", "Perfume", new { PerfumeID = seasonPerfume.Perfume_ID })"><i class="fa fa-shopping-cart"></i></a>
-                                            <a title="Quick View" href="#" data-toggle="modal" data-target="#@modalId"><i class="fa fa-eye"></i></a>
+                                            <a title="Quick View" class="Quick_View" href="#" data-toggle="modal" onclick="showModal(@seasonPerfume.Perfume_ID)"><i class="fa fa-eye"></i></a>
                                         </div>
                                     </div>
                                     <div class="product-content-2">
                                         <div class="title-price-wrap-2">
                                             <h3><a href="product-details.html">@seasonPerfume.Perfume_Name</a></h3>
-                                            <div class="price-2">
-                                                <span>$ 60.00</span>
-                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <!-- Modal -->
-                            <div class="modal fade" id="@modalId" tabindex="-1" role="dialog">
-                                <div class="modal-dialog" role="document">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">x</span></button>
-                                        </div>
-                                        <div class="modal-body">
-                                            <div class="row">
-                                                <div class="col-md-5 col-sm-12 col-xs-12">
-                                                    <div class="tab-content quickview-big-img">
-                                                        <div id="pro-1" class="tab-pane fade show active">
-                                                            <img src="Content/Images/product/quickview-l1.jpg" alt="">
-                                                        </div>
-                                                        <div id="pro-2" class="tab-pane fade">
-                                                            <img src="Content/Images/product/quickview-l2.jpg" alt="">
-                                                        </div>
-                                                        <div id="pro-3" class="tab-pane fade">
-                                                            <img src="Content/Images/product/quickview-l3.jpg" alt="">
-                                                        </div>
-                                                        <div id="pro-4" class="tab-pane fade">
-                                                            <img src="Content/Images/product/quickview-l2.jpg" alt="">
-                                                        </div>
-                                                    </div>
-                                                    <!-- Thumbnail Large Image End -->
-                                                    <!-- Thumbnail Image End -->
-                                                    <div class="quickview-wrap mt-15">
-                                                        <div class="quickview-slide-active owl-carousel nav nav-style-1" role="tablist">
-                                                            <a class="active" data-toggle="tab" href="#pro-1"><img src="Content/Images/product/quickview-s1.jpg" alt=""></a>
-                                                            <a data-toggle="tab" href="#pro-2"><img src="Content/Images/product/quickview-s2.jpg" alt=""></a>
-                                                            <a data-toggle="tab" href="#pro-3"><img src="Content/Images/product/quickview-s3.jpg" alt=""></a>
-                                                            <a data-toggle="tab" href="#pro-4"><img src="Content/Images/product/quickview-s2.jpg" alt=""></a>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-7 col-sm-12 col-xs-12">
-                                                    <div class="product-details-content quickview-content">
-                                                        <h2>@seasonPerfume.Perfume_Name</h2>
-                                                        <div class="product-details-price">
-                                                            <span>$18.00 </span>
-                                                        </div>
-                                                        <p>@seasonPerfume.Perfume_Description</p>
-                                                        <div class="pro-details-list">
-                                                            <ul>
-                                                                <li>- کشور سازنده: @seasonPerfume.Perfume_Country</li>
-                                                                <li>- عطار: @seasonPerfume.Perfume_Perfumer</li>
-                                                                <li>- غلظت: @seasonPerfume.Tbl_PerfumeType.PerfumeType_Title</li>
-                                                            </ul>
-                                                        </div>
-                                                        <div class="pro-details-size-color">
-                                                            <span>برند : <a href="#">@seasonPerfume.Tbl_Brand.Brand_Title</a></span>
-                                                        </div>
-                                                        <div class="pro-details-size-color">
-                                                            <span>جنسیت : <a href="#">@seasonPerfume.Perfume_Gender</a></span>
-                                                        </div>
-
-                                                        <div class="pro-details-size-color">
-                                                            <div class="pro-details-text">
-                                                                <ul>
-                                                                    @foreach (var season in rep_perfume.Get_PerfumeSeasons(seasonPerfume.Perfume_ID))
-                                                                    {
-                                                                        <li>
-                                                                            <img id="myimage" src="~/Content/Images/dashboard_images/@season.Season_ImageIndex" class="img-fluid img-thumbnail" width="48" height="48" data-toggle="tooltip" data-placement="top" title="@season.Season_Title">
-                                                                        </li>
-                                                                    }
-                                                                    <li>مناسب فصل: </li>
-                                                                </ul>
-                                                            </div>
-                                                        </div>
-                                                        <div class="pro-details-quality">
-                                                            <div class="cart-plus-minus">
-                                                                <input class="cart-plus-minus-box" type="text" name="qtybutton" value="2">
-                                                            </div>
-                                                            <div class="pro-details-cart btn-hover">
-                                                                <a href="#">افزودن به سبد خرید</a>
-                                                            </div>
-                                                        </div>
-                                                        <div class="pro-details-meta">
-                                                            <span>گروه بویایی: </span>
-                                                            <ul>
-                                                                <li>@seasonPerfume.Perfume_OlfactionGroups</li>
-                                                            </ul>
-                                                        </div>
-                                                        <div class="pro-details-meta">
-                                                            <span>طبع و رایحه:</span>
-                                                            <ul>
-                                                                <li>@seasonPerfume.Perfume_TemperOfPerfume</li>
-                                                            </ul>
-                                                        </div>
-                                                        <div class="pro-details-social">
-                                                            <ul>
-                                                                <li><a href="https://t.me/perfumedecant"><i class="fab fa-telegram"></i></a></li>
-                                                                <li><a href="https://www.instagram.com/perfumedecantir"><i class="fa fa-instagram"></i></a></li>
-                                                            </ul>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- Modal end -->
                         }
                     }
                 </div>
             </div>
         </div>
+        <div>
+            <div id="filterResult" style="display:none">
+                <div class="row" id="filterResultRow">
+
+                </div>
+            </div>
+            <div id="NoResult" style="display:none">
+                محصولی یافت نشد!
+            </div>
+        </div>
     </div>
-</div>
+
+            </div>
 <div class="blog-area pb-55">
     <div class="container">
         <div class="section-title text-center mb-55">
@@ -749,3 +475,378 @@
         </div>
     </div>
 </div>
+
+<!-- Modal -->
+<input type="hidden" id="ColognePrice" />
+<input type="hidden" id="CompanySamplePrice" />
+<input type="hidden" id="HandySamplePrice" />
+<input type="hidden" id="PerfumeID" />
+<div class="modal fade" id="mymodal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">x</span></button>
+            </div>
+            <div class="modal-body">
+                <input type="hidden" id="PerfumeID" />
+                <div class="row">
+                    <div class="col-md-5 col-sm-12 col-xs-12">
+                        <div class="tab-content quickview-big-img">
+                            <div id="pro-1" class="tab-pane fade show active">
+                                <img id="Perfume_ImageIndex" alt="">
+                            </div>
+                            <div id="pro-2" class="tab-pane fade">
+                                <img src="Content/Images/product/quickview-l2.jpg" alt="">
+                            </div>
+                            <div id="pro-3" class="tab-pane fade">
+                                <img src="Content/Images/product/quickview-l3.jpg" alt="">
+                            </div>
+                            <div id="pro-4" class="tab-pane fade">
+                                <img src="Content/Images/product/quickview-l2.jpg" alt="">
+                            </div>
+                        </div>
+                        <!-- Thumbnail Large Image End -->
+                        <!-- Thumbnail Image End -->
+                        <div class="quickview-wrap mt-15">
+                            <div class="quickview-slide-active owl-carousel nav nav-style-1" role="tablist">
+                                <a class="active" data-toggle="tab" href="#pro-1"><img  alt=""></a>
+                                <a data-toggle="tab" href="#pro-2"><img src="Content/Images/product/quickview-s2.jpg" alt=""></a>
+                                <a data-toggle="tab" href="#pro-3"><img src="Content/Images/product/quickview-s3.jpg" alt=""></a>
+                                <a data-toggle="tab" href="#pro-4"><img src="Content/Images/product/quickview-s2.jpg" alt=""></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-7 col-sm-12 col-xs-12">
+                        <div class="product-details-content quickview-content">
+                            <h2><span id="Perfume_Name"></span></h2>
+                            <p><span id="Perfume_Description"></span></p>
+                            <div class="pro-details-list">
+                                <ul>
+                                    <li>- کشور سازنده: <span id="Perfume_Country"> </span></li>
+                                    <li>- عطار: <span id="Perfume_Perfumer"></span></li>
+                                    <li>- غلظت:<span id="PerfumeType_Title"></span> </li>
+                                </ul>
+                            </div>
+                            <div class="pro-details-size-color">
+                                <span>برند : <a href="#" id="Brand_Title"></a></span>
+                            </div>
+                            <div class="pro-details-size-color">
+                                <span>جنسیت : <span id="Perfume_Gender"></span> </span>
+                            </div>
+                            <div class="pro-details-meta">
+                                <span>گروه بویایی: </span>
+                                <ul>
+                                    <li id="Perfume_OlfactionGroups">بویایی</li>
+                                </ul>
+                            </div>
+                            <div class="pro-details-meta">
+                                <span>طبع و رایحه:</span>
+                                <ul>
+                                    <li id="Perfume_TemperOfPerfume">طبع</li>
+                                </ul>
+                            </div>
+                            <div class="pro-details-meta">
+                                <span>نت ها:</span>
+                                <ul>
+                                    <li id="Perfume_Notes">طبع</li>
+                                </ul>
+                            </div>
+                            <div class="pro-details-size-color">
+                                <div class="pro-details-text">
+                                    <span>مناسب فصل: </span>
+                                    <ul>
+                                        <li id="Perfume_Season"></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="pro-details-meta">
+                                <span>دسته بندی:</span>  
+                                <select class="small-size-item" name="Category_Title" id="CategoryList" onchange="showCategory(this.options[this.selectedIndex].value)"></select>
+                            </div>
+                            <div class="pro-details-meta card_price">
+                                <span>قیمت واحد :</span>
+                                <input type="text" id="Price" value=" 0 تومان" class="small-size-item" disabled />     
+                            </div>
+                            <div class="pro-details-meta">
+                                <span>حجم ( میل) :</span>
+                                <select name="null_Weight" id="null_Weight" class="small-size-item">
+                                    <option value="0">انتخاب کنید</option>
+                                </select>
+                                <select name="CologneWeightList" id="CologneWeightList" onchange="showOther()" style="display:none" class="small-size-item"></select>
+                                <select name="CompanySampleWeightList" id="CompanySampleWeightList" onchange="showOther()" style="display:none" class="small-size-item"></select>
+                                <select name="HandySampleWeightList" id="HandySampleWeightList" onchange="showOther()" style="display:none" class="small-size-item"></select>
+                            </div>
+                            <div class="pro-details-meta">
+                                <span>تعداد :</span>
+                                    <div class="pro-details-meta">
+                                        <input id="Count" type="number" name="Count" value="1" step="1" onchange="showOther()">
+                                    </div>
+                            </div>
+                            <div class="pro-details-meta">
+                                <span>قیمت نهایی:</span>
+                               
+                                    <input type="text" class="small-size-item" id="finalPrice" value=" 0 تومان" disabled  />
+                              
+                            </div>    
+                                
+                            <div class="pro-details-quality">
+                                    <div class="pro-details-cart btn-hover">
+                                        <a href="#">افزودن به سبد خرید</a>
+                                    </div>
+                                </div>
+
+                                <div class="pro-details-social">
+                                    <ul>
+                                        <li><a href="https://t.me/perfumedecant"><i class="fab fa-telegram"></i></a></li>
+                                        <li><a href="https://www.instagram.com/perfumedecantir"><i class="fa fa-instagram"></i></a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal end -->
+<script>
+    function FindBrands(captal_letter,small_letter){
+        $.ajax({
+            type: "POST",
+            traditional: true,
+            async: false,
+            cache: false,
+            url: '/Brands/GetBrandsByLetter',
+            context: document.body,
+            data: { captal_letter: captal_letter, small_letter: small_letter  },
+            success: function (result) {
+                var str = '<div class="row brand-letter-item"><div class="col-md-12 col-sm-12 col-xs-12" ><ul>';
+                $.each(result.filteredBrands, function (i, brand) {
+                    str = str + '<li><a href="Perfume/PerfumesBrand?brandId=' + brand.Value+'">' + brand.Text+'</a></li>'
+                });
+                str = str + '</ul></div></div>';
+                document.getElementById("brand-" + captal_letter).innerHTML = str;
+            },
+            error: function (xhr) {
+                //debugger;
+                console.log(xhr.responseText);
+                alert("Error has occurred..");
+            }
+        });
+    }
+
+    function filtering() {
+        $("#product-tabs").css("display", "none");
+        var gender = $('input[name=gender]:checked').val();
+        var TemperOfPerfumes = [];
+        $("input:checkbox[name=TemperOfPerfume]:checked").each(function () {
+            TemperOfPerfumes.push($(this).val());
+        });
+        if (!TemperOfPerfumes.length > 0) TemperOfPerfumes = null;
+
+        var OlfactionGroups = [];
+        $("input:checkbox[name=OlfactionGroup]:checked").each(function () {
+            OlfactionGroups.push($(this).val());
+        });
+        if (!OlfactionGroups.length > 0) OlfactionGroups = null;
+
+        var seasons = [];
+        $("input:checkbox[name=season]:checked").each(function () {
+            seasons.push($(this).val());
+        });
+        if (!seasons.length > 0) seasons = null;
+
+        $.ajax({
+            type: "POST",
+            traditional: true,
+            async: false,
+            cache: false,
+            url: '/Perfume/PerfumeFilterring',
+            context: document.body,
+            data: { seasons: seasons, OlfactionGroups: OlfactionGroups, TemperOfPerfumes: TemperOfPerfumes, gender: gender },
+            success: function (result) {
+                if (result.perfumeIDs.length > 0) {
+                    $("#filterResult").css("display", "block");
+                    $("#NoResult").css("display", "none");
+                    var str = "";
+                    for (var i = 0; i < result.perfumeIDs.length; i++) {
+                        str = str + ' <div class="col-xl-3 col-md-6 col-lg-4 col-sm-6"><div class="product-wrap-2 mb-25 scroll-zoom">' +
+                            ' <div class="product-img" ><a href="product-details.html">' +
+                            '<img class="default-img" src="Uploads/PerfumeImages/' + result.perfumeImages[i] + '" alt="">' +
+                            '<img class="hover-img" src="Uploads/PerfumeImages/' + result.perfumeImages[i] + '" alt="">' +
+                            '</a><div class="product-action-2" ><a title="Add To Cart" href="#"><i class="fa fa-shopping-cart"></i></a>' +
+                            '<a title="Quick View" class="Quick_View" href="#" data-toggle="modal" onclick="showModal(' + result.perfumeIDs[i] + ')"><i class="fa fa-eye"></i></a>' +
+                            '</div></div ><div class="product-content-2"><div class="title-price-wrap-2"><h3><a href="product-details.html">' + result.perfumeNames[i] +
+                            '</a></h3></div></div></div></div>';
+                    }
+                    document.getElementById("filterResultRow").innerHTML = str;
+                }
+                else {
+                    $("#filterResult").css("display", "none");
+                    $("#NoResult").css("display", "block");
+                }
+
+
+
+            },
+            error: function (xhr) {
+                //debugger;
+                console.log(xhr.responseText);
+                alert("Error has occurred..");
+            }
+        });
+    }
+
+    function showModal(perfumeId) {
+
+        $.ajax({
+            type: "POST",
+            traditional: true,
+            async: false,
+            cache: false,
+            url: '/Perfume/PerfumeDetails',
+            context: document.body,
+            data: { PerfumeID: perfumeId },
+            success: function (result) {
+                document.getElementById("PerfumeID").innerHTML = perfumeId;
+                document.getElementById("Perfume_Name").innerHTML = result.Perfume_Name;
+                document.getElementById("Perfume_Gender").innerHTML = result.Perfume_Gender;
+                document.getElementById("Brand_Title").innerHTML = result.Brand_Title;
+                document.getElementById("Perfume_Country").innerHTML = result.Perfume_Country;
+                document.getElementById("Perfume_Description").innerHTML = result.Perfume_Description;
+                document.getElementById("Perfume_Notes").innerHTML = result.Perfume_Notes;
+                document.getElementById("Perfume_OlfactionGroups").innerHTML = result.Perfume_OlfactionGroups;
+                document.getElementById("Perfume_Perfumer").innerHTML = result.Perfume_Perfumer;
+                document.getElementById("Perfume_TemperOfPerfume").innerHTML = result.Perfume_TemperOfPerfume;
+                document.getElementById("PerfumeType_Title").innerHTML = result.PerfumeType_Title;
+                $("#ColognePrice").val(result.ColognePrice);
+                $("#CompanySamplePrice").val(result.CompanySamplePrice);
+                $("#HandySamplePrice").val(result.HandySamplePrice);
+                $("#Perfume_ImageIndex").attr("src", "Uploads/PerfumeImages/" + result.Perfume_ImageIndex);
+
+                var seasonsString = "";
+                $.each(result.seasons, function (i, season) {
+                    seasonsString = seasonsString + '<img id="myimage" src="Content/Images/dashboard_images/' + season.Value + '" class="img-fluid img-thumbnail" margin-left="10px" width="48" height="48" data-toggle="tooltip" data-placement="top" title="' + season.Text + '">';
+
+                });
+                document.getElementById("Perfume_Season").innerHTML = seasonsString;
+
+                var categoriesString = '<option value="0"> لطفاً انتخاب کنید </option>';
+                $.each(result.CategoryList, function (i, category) {
+                    categoriesString = categoriesString + '<option value="' + category.Value + '">'+category.Value+'</option>';
+                });
+                document.getElementById("CategoryList").innerHTML = categoriesString;
+
+                if (result.CologneWeightList.length > 0) {
+                    var cologneWeightString = '<option value="0"> لطفاً انتخاب کنید </option>';
+                    $.each(result.CologneWeightList, function (i, cologneWeight) {
+                        cologneWeightString = cologneWeightString + '<option value="' + cologneWeight.Value + '">' + cologneWeight.Value+'</option>';
+                    });
+                    document.getElementById("CologneWeightList").innerHTML = cologneWeightString;
+                }
+
+                if (result.CompanySampleWeightList.length > 0) {
+                    var companyWeightString = '<option value="0"> لطفاً انتخاب کنید </option>';
+                    $.each(result.CompanySampleWeightList, function (i, companyWeight) {
+                        companyWeightString = companyWeightString + '<option value="' + companyWeight.Value + '">' + companyWeight.Value +'</option>';
+                    });
+                    document.getElementById("CompanySampleWeightList").innerHTML = companyWeightString;
+                }
+
+
+                if (result.HandySampleWeightList.length > 0) {
+                    var handyWeightString = '<option value="0"> لطفاً انتخاب کنید </option>';
+                    $.each(result.HandySampleWeightList, function (i, handyWeight) {
+                        handyWeightString = handyWeightString + '<option value="' + handyWeight.Value + '">' + handyWeight.Value+'</option>';
+                    });
+                    document.getElementById("HandySampleWeightList").innerHTML = handyWeightString;
+                }
+
+                $("#mymodal").modal("show");
+            },
+            error: function (xhr) {
+                //debugger;
+                console.log(xhr.responseText);
+                alert("Error has occurred..");
+            }
+        });
+
+
+    }
+
+    function showCategory(select_item) {
+        var cologne_price = $("#ColognePrice").val();
+        var companySample_price = $("#CompanySamplePrice").val();
+        var handySample_price = $("#HandySamplePrice").val();
+
+        if (select_item == "انتخاب کنید") {
+            $("#null_Weight").css("display", "block");
+            $("#CologneWeightList").css("display", "none");
+            $("#CompanySampleWeightList").css("display", "none");
+            $("#HandySampleWeightList").css("display", "none");
+            $("#Price").val(0 + " تومان ");
+            $("#finalPrice").val(0 + " تومان ");
+        }
+        else if (select_item == "ادکلن") {
+            $("#null_Weight").css("display", "none");
+            $("#CologneWeightList").css("display", "block");
+            $("#CompanySampleWeightList").css("display", "none");
+            $("#HandySampleWeightList").css("display", "none");
+
+            showFinalPrice(cologne_price, companySample_price, handySample_price);
+
+            $("#Price").val(cologne_price + " تومان ");
+
+            Form.fileURL.focus();
+        }
+        else if (select_item == "سمپل شرکتی") {
+            $("#null_Weight").css("display", "none");
+            $("#CologneWeightList").css("display", "none");
+            $("#CompanySampleWeightList").css("display", "block");
+            $("#HandySampleWeightList").css("display", "none");
+
+            showFinalPrice(cologne_price, companySample_price, handySample_price);
+
+            $("#Price").val(companySample_price + " تومان ");
+        }
+        else if (select_item == "سمپل دست ریز") {
+            $("#null_Weight").css("display", "none");
+            $("#CologneWeightList").css("display", "none");
+            $("#CompanySampleWeightList").css("display", "none");
+            $("#HandySampleWeightList").css("display", "block");
+
+            showFinalPrice(cologne_price, companySample_price, handySample_price);
+
+            $("#Price").val(handySample_price + " تومان ");
+
+        }
+    }
+
+    function showOther() {
+        var categoryTitle = $('#CategoryList option:selected').val();
+        showCategory(categoryTitle);
+    }
+
+    function showFinalPrice(cologne_price, companySample_price, handySample_price) {
+
+        var categoryTitle = $('#CategoryList option:selected').val();
+        var count = $('#Count').val();
+        var finalPrice = 0;
+
+        if ((categoryTitle == "ادکلن") && (count != "")) {
+            finalPrice = parseInt(cologne_price) * parseInt(count);
+            $("#finalPrice").val(finalPrice + " تومان ");
+        }
+        else if ((categoryTitle == "سمپل شرکتی") && (count != "")) {
+            finalPrice = parseInt(companySample_price) * parseInt(count);
+            $("#finalPrice").val(finalPrice + " تومان ");
+        }
+        else if ((categoryTitle == "سمپل دست ریز") && (count != "") && (weight != "")) {
+
+            var weight = $('#HandySampleWeightList option:selected').val();
+            finalPrice = parseFloat(handySample_price) * parseFloat(weight) * parseFloat(count);
+            $("#finalPrice").val(finalPrice + " تومان ");
+        }
+    }
+
+</script>
