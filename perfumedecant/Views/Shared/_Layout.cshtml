@@ -1,6 +1,9 @@
-﻿@{
+﻿@using perfumedecant.Models.Repository
+@{
 
     string username = (string)Session["UserName"];
+    string role_name = (string)Session["RoleName"];
+
 }
 <!doctype html>
 <html class="no-js" lang="zxx">
@@ -61,12 +64,12 @@
                         <div class="same-style header-search">
                             <a class="search-active" href="#"><i class="pe-7s-search"></i></a>
                             <div class="search-content">
-                                <div >
-                                   
-                                    <button class="button-search"  onclick="changeHref()"><i class="pe-7s-search"></i></button>
-                                    <input type="text" placeholder="جست و جو" id="searchTerm"/>
+                                <div>
+
+                                    <button class="button-search" onclick="changeHref()"><i class="pe-7s-search"></i></button>
+                                    <input type="text" placeholder="جست و جو" id="searchTerm" />
                                 </div>
-                              
+
                             </div>
                         </div>
                         <div class="same-style account-satting">
@@ -79,59 +82,65 @@
                                     }
                                     else
                                     {
+                                        if (role_name != null && role_name == "Admin")
+                                        {
+                                            <li><a href="/Dashboard">داشبورد مدیریت</a></li>
+                                        }
+                                        <li><a href="/Account/EditProfile">ویرایش مشخصات</a></li>
                                         <li><a href="/Account/SignOut">خروج</a></li>
                                     }
-
-                                    <li><a href="my-account.html">ویرایش مشخصات</a></li>
                                 </ul>
                             </div>
                         </div>
                         @if (username != null)
                         {
-                            <div class="same-style cart-wrap">
-                                <button class="icon-cart">
-                                    <i class="pe-7s-shopbag"></i>
-                                    <span class="count-style">02</span>
-                                </button>
-                                <div class="shopping-cart-content">
-                                    <ul>
+                            Rep_Cart rep_cart = new Rep_Cart();
+                            var carts = rep_cart.Get_UserCart(username);
+                    <div class="same-style cart-wrap">
+                        <button class="icon-cart">
+                            <i class="pe-7s-shopbag"></i>
+                            <span class="count-style">@carts.Count()</span>
+                        </button>
+                        @if (carts != null && carts.Count() > 0)
+                        {
+                             var totalPrice = 0;
+                            <div class="shopping-cart-content">
+
+                                <ul>
+
+
+                                    @foreach (var cart in carts)
+                                    {
                                         <li class="single-shopping-cart">
                                             <div class="shopping-cart-img">
-                                                <a href="#"><img alt="" src="~/Uploads/PerfumeImages/cart-1.png"></a>
+                                                <a href="#"><img alt="" src="~/Uploads/PerfumeImages/@cart.Tbl_Perfume.Perfume_ImageIndex"></a>
                                             </div>
                                             <div class="shopping-cart-title">
-                                                <h4><a href="#">Product </a></h4>
-                                                <h6>Qty: 02</h6>
-                                                <span>$260.00</span>
+                                                <h4>@cart.Tbl_Perfume.Perfume_Name</h4>
+                                                <h6>برند: @cart.Tbl_Perfume.Tbl_Brand.Brand_Title</h6>
+                                                <span>تعداد: @cart.InterimBill_Count</span>
                                             </div>
                                             <div class="shopping-cart-delete">
-                                                <a href="#"><i class="fa fa-times-circle"></i></a>
+                                                @*<a href="#"><i class="fa fa-times-circle"></i></a>*@
+                                                @Html.ActionLink(" ", "DeleteCart", "Cart", new { id = cart.InterimBill_ID }, new { data_toggle = "tooltip", title = "حذف", @class = "fa fa-times-circle" })
+
                                             </div>
                                         </li>
-                                        <li class="single-shopping-cart">
-                                            <div class="shopping-cart-img">
-                                                <a href="#"><img alt="" src="~/Uploads/PerfumeImages/cart-1.png"></a>
-                                            </div>
-                                            <div class="shopping-cart-title">
-                                                <h4><a href="#">Product </a></h4>
-                                                <h6>Qty: 02</h6>
-                                                <span>$260.00</span>
-                                            </div>
-                                            <div class="shopping-cart-delete">
-                                                <a href="#"><i class="fa fa-times-circle"></i></a>
-                                            </div>
-                                        </li>
-                                    </ul>
-                                    <div class="shopping-cart-total">
-                                        <h4>تخفیف : <span>$20.00</span></h4>
-                                        <h4>مجموع : <span class="shop-total">$260.00</span></h4>
-                                    </div>
-                                    <div class="shopping-cart-btn btn-hover text-center">
-                                        <a class="default-btn" href="cart-page.html">مشاهده سبد خرید</a>
-                                        <a class="default-btn" href="checkout.html">پرداخت</a>
-                                    </div>
+                                         totalPrice = totalPrice + (int)cart.InterimBill_Price;
+                                    }
+
+                                </ul>
+                                <div class="shopping-cart-total">
+                                    <h4>مجموع : <span class="shop-total">@string.Format("{0:0,0}", totalPrice) تومان</span></h4>
                                 </div>
+                                <div class="shopping-cart-btn btn-hover text-center">
+                                    <a class="default-btn" href="/Cart">مشاهده سبد خرید و پرداخت</a>
+                                </div>
+
+                               
                             </div>
+                            }
+                        </div>
                         }
                     </div>
                 </div>
