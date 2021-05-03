@@ -1,0 +1,46 @@
+﻿@using perfumedecant.Models.Repository
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<section class="content">
+    <div class="container-fluid">
+        <div class="add-box">
+            <div class="card card-warning">
+                <div class="card-header">
+                    <h5 class="card-title"><span style="color:white; font-size:20px;">@ViewBag.searchTerm</span> </h5>
+                </div>
+            </div>
+            <div class="card-body" style="direction:rtl;margin-right:50px">
+                <!-- text input -->
+                <div class="row">
+                    <div class="col-md-12 col-sm-12">
+                        <div class="detail-perfume-box1">
+                            <div class="search-box">
+                                <input type="hidden" id="searchString" value="@ViewBag.searchTerm" />
+
+                                @foreach (var perfume in Model)
+                                {
+                                    <div class="row">
+                                        <a href="@Url.Action("PerfumeDetails", "Perfume", new { PerfumeID = perfume.Perfume_ID })">
+                                            <div class="col-md-12">
+                                                <p class="searchRes">
+
+                                                    @perfume.Perfume_Name
+                                                    @*@perfume.Perfume_Country*@
+                                                    @*@perfume.Perfume_Notes*@
+                                                </p>
+                                            </div>
+                                        </a>
+                                    </div>
+                                }
+                            </div>
+                            <br /><br /><br /><br />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
