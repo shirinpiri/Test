@@ -10,19 +10,13 @@
         <div class="breadcrumb-content text-center">
             <ul>
                 <li>
-                    <a  href="@Url.Action("Index", "Home")"> صفحه اصلی </a>
+                    <a href="index.html"> صفحه اصلی </a>
                 </li>
-                <li class="active">نتایج جست وجو برای @ViewBag.searchTerm </li>
+                <li class="active">  لیست محصولات  @ViewBag.title </li>
             </ul>
         </div>
     </div>
 </div>
-
 @Html.Partial("PerfumeList_Section", Model)
 @Html.Partial("Modal_Section")
-   
-
-
-       
-
-                
+  

@@ -83,7 +83,7 @@ namespace perfumedecant.Controllers
                 }
             }
 
-            if (gender != "")
+            if (gender != null)
             {
                 if (perfume.Count > 0)
                 {

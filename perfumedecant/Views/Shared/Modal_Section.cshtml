@@ -1,0 +1,285 @@
+﻿
+<section class="Modal_Section">
+   
+    <!-- Modal -->
+    <input type="hidden" id="ColognePrice" />
+    <input type="hidden" id="CompanySamplePrice" />
+    <input type="hidden" id="HandySamplePrice" />
+    <input type="hidden" id="PerfumeID" />
+    <div class="modal fade" id="mymodal" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">x</span></button>
+                </div>
+                <div class="modal-body">
+                    <input type="hidden" id="PerfumeID" />
+                    <div class="row">
+                        <div class="col-md-5 col-sm-12 col-xs-12">
+                            <div class="tab-content quickview-big-img" id="Perfume_ImagesIndex">
+                               
+                            </div>
+                            <!-- Thumbnail Large Image End -->
+                            <!-- Thumbnail Image End -->
+                            <div class="quickview-wrap mt-15">
+                                <div class="quickview-slide-active owl-carousel nav nav-style-1" role="tablist" id="Perfume_ImagesIndex-small">
+                                    
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-7 col-sm-12 col-xs-12">
+                            <div class="product-details-content quickview-content">
+                                <h2><span id="Perfume_Name"></span></h2>
+                                <p><span id="Perfume_Description"></span></p>
+                                <div class="pro-details-list">
+                                    <ul>
+                                        <li>- کشور سازنده: <span id="Perfume_Country"> </span></li>
+                                        <li>- عطار: <span id="Perfume_Perfumer"></span></li>
+                                        <li>- غلظت:<span id="PerfumeType_Title"></span> </li>
+                                    </ul>
+                                </div>
+                                <div class="pro-details-meta">
+                                    <span>برند : </span><a href="#" id="Brand_Title"></a>
+                                </div>
+                                <div class="pro-details-meta">
+                                    <span>جنسیت : </span> <a href="#" id="Perfume_Gender"></a>
+                                </div>
+                                <div class="pro-details-meta">
+                                    <span>گروه بویایی: </span>
+                                    <ul>
+                                        <li id="Perfume_OlfactionGroups">بویایی</li>
+                                    </ul>
+                                </div>
+                                <div class="pro-details-meta">
+                                    <span>طبع و رایحه:</span>
+                                    <ul>
+                                        <li id="Perfume_TemperOfPerfume">طبع</li>
+                                    </ul>
+                                </div>
+                                <div class="pro-details-meta">
+                                    <span>نت ها:</span>
+                                    <ul>
+                                        <li id="Perfume_Notes">طبع</li>
+                                    </ul>
+                                </div>
+                                <div class="pro-details-meta">
+                                    <span>مناسب فصل: </span>
+                                    <ul>
+                                        <li id="Perfume_Season"></li>
+                                    </ul> 
+                                </div>
+                                <div class="pro-details-meta">
+                                    <span>دسته بندی:</span>
+                                    <select class="small-size-item" name="Category_Title" id="CategoryList" onchange="showCategory(this.options[this.selectedIndex].value)"></select>
+                                </div>
+                                <div class="pro-details-meta card_price">
+                                    <span>قیمت واحد :</span>
+                                    <input type="text" id="Price" value=" 0 تومان" class="small-size-item" disabled />
+                                </div>
+                                <div class="pro-details-meta">
+                                    <span>حجم ( میل) :</span>
+                                    <select name="null_Weight" id="null_Weight" class="small-size-item">
+                                        <option value="0">انتخاب کنید</option>
+                                    </select>
+                                    <select name="CologneWeightList" id="CologneWeightList" onchange="showOther()" style="display:none" class="small-size-item"></select>
+                                    <select name="CompanySampleWeightList" id="CompanySampleWeightList" onchange="showOther()" style="display:none" class="small-size-item"></select>
+                                    <select name="HandySampleWeightList" id="HandySampleWeightList" onchange="showOther()" style="display:none" class="small-size-item"></select>
+                                </div>
+                                <div class="pro-details-meta card_price">
+                                    <span> تعداد : </span>
+                                    <input type="number" id="Count" value="1" class="small-size-item" step="1" onchange="showOther()"  />
+                                </div>
+                                <div class="pro-details-meta">
+                                    <span>قیمت نهایی:</span>
+                                    <input type="text" class="small-size-item" id="finalPrice" value=" 0 تومان" disabled />
+                                </div>
+                                <div class="pro-details-quality">
+                                    <div class="pro-details-cart btn-hover">
+                                        <a href="#">افزودن به سبد خرید</a>
+                                    </div>
+                                    <div class="pro-details-social">
+                                        <ul>
+                                            <li><a href="https://t.me/perfumedecant"><i class="fab fa-telegram"></i></a></li>
+                                            <li><a href="https://www.instagram.com/perfumedecantir"><i class="fa fa-instagram"></i></a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Modal end -->
+
+    <script>
+        function showModal(perfumeId , image_src) {
+
+            $.ajax({
+                type: "POST",
+                traditional: true,
+                async: false,
+                cache: false,
+                url: '/Perfume/PerfumeDetails',
+                context: document.body,
+                data: { PerfumeID: perfumeId },
+                success: function (result) {
+                    document.getElementById("PerfumeID").innerHTML = perfumeId;
+                    document.getElementById("Perfume_Name").innerHTML = result.Perfume_Name;
+                    document.getElementById("Perfume_Gender").innerHTML = result.Perfume_Gender;
+                    document.getElementById("Brand_Title").innerHTML = result.Brand_Title;
+                    document.getElementById("Perfume_Country").innerHTML = result.Perfume_Country;
+                    document.getElementById("Perfume_Description").innerHTML = result.Perfume_Description;
+                    document.getElementById("Perfume_Notes").innerHTML = result.Perfume_Notes;
+                    document.getElementById("Perfume_OlfactionGroups").innerHTML = result.Perfume_OlfactionGroups;
+                    document.getElementById("Perfume_Perfumer").innerHTML = result.Perfume_Perfumer;
+                    document.getElementById("Perfume_TemperOfPerfume").innerHTML = result.Perfume_TemperOfPerfume;
+                    document.getElementById("PerfumeType_Title").innerHTML = result.PerfumeType_Title;
+                    $("#ColognePrice").val(result.ColognePrice);
+                    $("#CompanySamplePrice").val(result.CompanySamplePrice);
+                    $("#HandySamplePrice").val(result.HandySamplePrice);
+
+                    var seasonsString = "";
+                    $.each(result.seasons, function (i, season) {
+                        seasonsString = seasonsString + '<img id="myimage" src="Content/Images/dashboard_images/' + season.Value + '" class="img-fluid img-thumbnail" margin-left="10px" width="48" height="48" data-toggle="tooltip" data-placement="top" title="' + season.Text + '">';
+
+                    });
+                    document.getElementById("Perfume_Season").innerHTML = seasonsString;    
+
+                    var imagesString = '<div id="pro-1" class="tab-pane fade show active"><img src="' + image_src + result.Perfume_ImageIndex + '" alt=""></div>';
+                    $.each(result.images, function (i, image) {
+                        imagesString = imagesString + '<div id="pro-' + (i+2) + '" class="tab-pane fade" ><img src="' + image_src + image.Text + '" alt=""></div>';
+
+                    });
+                    document.getElementById("Perfume_ImagesIndex").innerHTML = imagesString;
+                   
+                    var imagesString ='<a class="active" data-toggle="tab" href="#pro-1"><img style="width: 100px;"s src="'+image_src + result.Perfume_ImageIndex +'" alt=""></a>';
+                    $.each(result.images, function (i, image) {
+                        imagesString = imagesString + '<a data-toggle="tab" href="#pro-' + (i + 2) + '"><img style="width: 100px;" src="' + image_src + image.Text + '" alt=""></a>';
+
+                    });
+                    document.getElementById("Perfume_ImagesIndex-small").innerHTML = imagesString;              
+                  
+                    var categoriesString = '<option value="0"> لطفاً انتخاب کنید </option>';
+                    $.each(result.CategoryList, function (i, category) {
+                        categoriesString = categoriesString + '<option value="' + category.Value + '">' + category.Value + '</option>';
+                    });
+                    document.getElementById("CategoryList").innerHTML = categoriesString;
+
+                    if (result.CologneWeightList.length > 0) {
+                        var cologneWeightString = '<option value="0"> لطفاً انتخاب کنید </option>';
+                        $.each(result.CologneWeightList, function (i, cologneWeight) {
+                            cologneWeightString = cologneWeightString + '<option value="' + cologneWeight.Value + '">' + cologneWeight.Value + '</option>';
+                        });
+                        document.getElementById("CologneWeightList").innerHTML = cologneWeightString;
+                    }
+
+                    if (result.CompanySampleWeightList.length > 0) {
+                        var companyWeightString = '<option value="0"> لطفاً انتخاب کنید </option>';
+                        $.each(result.CompanySampleWeightList, function (i, companyWeight) {
+                            companyWeightString = companyWeightString + '<option value="' + companyWeight.Value + '">' + companyWeight.Value + '</option>';
+                        });
+                        document.getElementById("CompanySampleWeightList").innerHTML = companyWeightString;
+                    }
+
+
+                    if (result.HandySampleWeightList.length > 0) {
+                        var handyWeightString = '<option value="0"> لطفاً انتخاب کنید </option>';
+                        $.each(result.HandySampleWeightList, function (i, handyWeight) {
+                            handyWeightString = handyWeightString + '<option value="' + handyWeight.Value + '">' + handyWeight.Value + '</option>';
+                        });
+                        document.getElementById("HandySampleWeightList").innerHTML = handyWeightString;
+                    }
+
+                    $("#mymodal").modal("show");
+                },
+                error: function (xhr) {
+                    //debugger;
+                    console.log(xhr.responseText);
+                    alert("Error has occurred..");
+                }
+            });
+
+
+        }
+
+        function showCategory(select_item) {
+            var cologne_price = $("#ColognePrice").val();
+            var companySample_price = $("#CompanySamplePrice").val();
+            var handySample_price = $("#HandySamplePrice").val();
+
+            if (select_item == "انتخاب کنید") {
+                $("#null_Weight").css("display", "block");
+                $("#CologneWeightList").css("display", "none");
+                $("#CompanySampleWeightList").css("display", "none");
+                $("#HandySampleWeightList").css("display", "none");
+                $("#Price").val(0 + " تومان ");
+                $("#finalPrice").val(0 + " تومان ");
+            }
+            else if (select_item == "ادکلن") {
+                $("#null_Weight").css("display", "none");
+                $("#CologneWeightList").css("display", "block");
+                $("#CompanySampleWeightList").css("display", "none");
+                $("#HandySampleWeightList").css("display", "none");
+
+                showFinalPrice(cologne_price, companySample_price, handySample_price);
+
+                $("#Price").val(cologne_price + " تومان ");
+
+                Form.fileURL.focus();
+            }
+            else if (select_item == "سمپل شرکتی") {
+                $("#null_Weight").css("display", "none");
+                $("#CologneWeightList").css("display", "none");
+                $("#CompanySampleWeightList").css("display", "block");
+                $("#HandySampleWeightList").css("display", "none");
+
+                showFinalPrice(cologne_price, companySample_price, handySample_price);
+
+                $("#Price").val(companySample_price + " تومان ");
+            }
+            else if (select_item == "سمپل دست ریز") {
+                $("#null_Weight").css("display", "none");
+                $("#CologneWeightList").css("display", "none");
+                $("#CompanySampleWeightList").css("display", "none");
+                $("#HandySampleWeightList").css("display", "block");
+
+                showFinalPrice(cologne_price, companySample_price, handySample_price);
+
+                $("#Price").val(handySample_price + " تومان ");
+
+            }
+        }
+
+        function showOther() {
+            var categoryTitle = $('#CategoryList option:selected').val();
+            showCategory(categoryTitle);
+        }
+
+        function showFinalPrice(cologne_price, companySample_price, handySample_price) {
+
+            var categoryTitle = $('#CategoryList option:selected').val();
+            var count = $('#Count').val();
+            var finalPrice = 0;
+
+            if ((categoryTitle == "ادکلن") && (count != "")) {
+                finalPrice = parseInt(cologne_price) * parseInt(count);
+                $("#finalPrice").val(finalPrice + " تومان ");
+            }
+            else if ((categoryTitle == "سمپل شرکتی") && (count != "")) {
+                finalPrice = parseInt(companySample_price) * parseInt(count);
+                $("#finalPrice").val(finalPrice + " تومان ");
+            }
+            else if ((categoryTitle == "سمپل دست ریز") && (count != "") && (weight != "")) {
+
+                var weight = $('#HandySampleWeightList option:selected').val();
+                finalPrice = parseFloat(handySample_price) * parseFloat(weight) * parseFloat(count);
+                $("#finalPrice").val(finalPrice + " تومان ");
+            }
+        }
+    </script>
+</section>
+
+
+
