@@ -251,6 +251,7 @@ a:hover {
     .mt-80 {
         margin-top: 60px;
     }
+
     .card-body {
         -ms-flex: 1 1 auto;
         flex: 1 1 auto;
@@ -1417,7 +1418,7 @@ textarea:-ms-input-placeholder {
 input {
     background: #eceff8;
     border: 2px solid #eceff8;
-    height: 48px;
+    height: 45px;
     -webkit-box-shadow: none;
     box-shadow: none;
     padding-left: 10px;
@@ -1979,9 +1980,9 @@ a.default-btn {
 }
 
 .logo {
-    display:flex;
-    align-items:center;
-    height:100%;
+    display: flex;
+    align-items: center;
+    height: 100%;
 }
 
 @media only screen and (min-width: 768px) and (max-width: 991px) {
@@ -2305,7 +2306,7 @@ a.default-btn {
 
 .stick .logo,
 .stick .header-right-wrap {
-  /*  margin-top: 22px;*/
+    /*  margin-top: 22px;*/
 }
 
 @media only screen and (min-width: 768px) and (max-width: 991px) {
@@ -2357,9 +2358,9 @@ a.default-btn {
     -webkit-box-pack: end;
     -ms-flex-pack: end;
     justify-content: flex-end;
-   /* margin-top: 32px;*/
-    align-items:center;
-    height:100%;
+    /* margin-top: 32px;*/
+    align-items: center;
+    height: 100%;
 }
 
 @media only screen and (min-width: 768px) and (max-width: 991px) {
@@ -2593,6 +2594,7 @@ a.default-btn {
         font-size: 15px;
         line-height: 16px;
         margin: 0;
+        color: #a749ff;
     }
 
         .header-right-wrap .same-style.cart-wrap .shopping-cart-content ul li .shopping-cart-title h4 a {
@@ -2714,11 +2716,11 @@ a.default-btn {
     }
 }
 
-.header-right-wrap .same-style.header-search .search-content form {
+.header-right-wrap .same-style.header-search .search-content div {
     position: relative;
 }
 
-    .header-right-wrap .same-style.header-search .search-content form input {
+    .header-right-wrap .same-style.header-search .search-content div input {
         border: 1px solid #d3d3d3;
         outline: medium none;
         padding: 5px 15px 5px 72px;
@@ -2730,7 +2732,7 @@ a.default-btn {
         background: transparent;
     }
 
-    .header-right-wrap .same-style.header-search .search-content form .button-search {
+    .header-right-wrap .same-style.header-search .search-content div .button-search {
         background: #a749ff;
         border-color: #ce9634;
         color: #ffffff;
@@ -2748,7 +2750,7 @@ a.default-btn {
         transition: all 0.4s ease 0s;
     }
 
-        .header-right-wrap .same-style.header-search .search-content form .button-search:hover {
+        .header-right-wrap .same-style.header-search .search-content div .button-search:hover {
             background-color: #000;
         }
 
@@ -6102,9 +6104,10 @@ a.default-btn {
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
+    margin: 0 0 10px;
 }
 
-.pro-details-text ul li{
+.pro-details-text ul li {
     float: left;
     margin-left: 15px;
 }
@@ -8608,7 +8611,7 @@ a.default-btn {
 }
 
 /* home 4 */
-    .hm4-footer-padding .container-fluid {
+.hm4-footer-padding .container-fluid {
     padding: 0 60px;
 }
 
@@ -11519,6 +11522,11 @@ h3.cart-page-title {
                 float: left;
             }
 
+.pro-details-text ul li {
+    margin: 0 0 25px;
+}
+
+
 .grand-totall h4.grand-totall-title {
     color: #a749ff;
     font-size: 20px;
@@ -11526,7 +11534,6 @@ h3.cart-page-title {
     margin: 0 0 25px;
 }
 
-    /*//shirin*/
     .grand-totall h4.grand-totall-title span {
         float: left;
     }
@@ -11542,7 +11549,7 @@ h3.cart-page-title {
     padding: 18px 10px 17px;
     text-align: center;
     text-transform: uppercase;
-    height:auto;
+    height: auto;
 }
 
 .grand-totall a {
@@ -11561,6 +11568,7 @@ h3.cart-page-title {
 
     .grand-totall a:hover {
         background-color: #333;
+        margin-left: 10px;
     }
 
 @media only screen and (max-width: 767px) {
@@ -12562,7 +12570,7 @@ h3.cart-page-title {
 
 .login-register-wrapper .login-form-container .login-register-form form .button-box .login-toggle-btn {
     padding: 10px 0 19px;
-    text-align:left !important;
+    text-align: left !important;
 }
 
     .login-register-wrapper .login-form-container .login-register-form form .button-box .login-toggle-btn label {
@@ -12844,20 +12852,21 @@ h3.cart-page-title {
         }
 
 
-        .validation-message{
-            margin-bottom:30px;
-            color:red;
-        }
+.validation-message {
+    margin-bottom: 30px;
+    color: red;
+}
+
 .loginRegister-link {
     text-align: center
 }
-.loginRegister-link a {
-    color: #a749ff !important;
-    
-}
 
-.img-thumbnail{
-    margin-left:10px;
+    .loginRegister-link a {
+        color: #a749ff !important;
+    }
+
+.img-thumbnail {
+    margin-left: 10px;
 }
 
 .fileUpload {
@@ -12865,25 +12874,40 @@ h3.cart-page-title {
     overflow: hidden;
 }
 
-    .fileUpload input.upload {
-        position: absolute;
-        top: 0;
-        right: 0;
-        margin: 0;
-        padding: 0;
-        font-size: 20px;
-        cursor: pointer;
-        opacity: 0;
-        filter: alpha(opacity=0);
-    }
+.small-size-item {
+    width: 70%;
+}
+
+.fileUpload input.upload {
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: 0;
+    padding: 0;
+    font-size: 20px;
+    cursor: pointer;
+    opacity: 0;
+    filter: alpha(opacity=0);
+}
 
 
 .uploadFileInput {
     direction: ltr;
     height: 40.87px;
     text-align: -webkit-right;
-    display:none
+    display: none
 }
+
+.filter-search-icon {
+    float: left;
+    margin: 0 0 20px;
+}
+
+    .filter-search-icon > a i {
+        font-size: 25px;
+        float: right;
+        margin: 0 0 0 10px;
+    }
 
 .btn--browse {
     border: 2px solid #1F2D3D;
@@ -12916,12 +12940,12 @@ h3.cart-page-title {
     margin-top: 30px;
 }
 
-.question a{
-    font-size: 16px;
-    font-weight: 900;
-    color: #a749ff;
-    margin-top: 30px;
-}
+    .question a {
+        font-size: 16px;
+        font-weight: 900;
+        color: #a749ff;
+        margin-top: 30px;
+    }
 
     .question p {
         font-size: 16px;
@@ -12935,6 +12959,22 @@ h3.cart-page-title {
     font-size: 14px;
     color: darkslategrey;
 }
-.answer p{
-    color: darkslategrey;
+
+    .answer p {
+        color: darkslategrey;
+    }
+
+.brand-letter {
+    text-align: center;
+    padding: 20px 0 20px 0;
 }
+
+.brand-letter-item {
+    padding: 30px 0;
+    float: left;
+}
+
+    .brand-letter-item ul li {
+        float: left;
+        padding: 0 20px;
+    }

@@ -323,7 +323,7 @@ namespace perfumedecant.Controllers
         }
 
 
-        public ActionResult EditProfile(int userID = 3)
+        public ActionResult EditProfile()
         {
             string Message = "";
             if (Session["UserName"] == null)
@@ -363,7 +363,7 @@ namespace perfumedecant.Controllers
                 }
                 else
                 {
-                    Message = "User with ID" + userID + "not found.";
+                    Message = "User with username" + user.User_Username + "not found.";
                     log.addLog(Message, "EditProfile", "Account", logStatus.EventLog);
                     ViewBag.result = "کاربر پیدا نشد، لطفا دوباره تلاش کنید.";
                     return RedirectToAction("Index", "Cart");
@@ -371,7 +371,7 @@ namespace perfumedecant.Controllers
             }
             catch
             {
-                Message = "User with ID" + userID + "not found.";
+                Message = "User with username" + "" + "not found.";
                 log.addLog(Message, "EditProfile", "Account", logStatus.EventLog);
                 ViewBag.result = "کاربر پیدا نشد، لطفا دوباره تلاش کنید.";
                 return RedirectToAction("Index", "Cart");
