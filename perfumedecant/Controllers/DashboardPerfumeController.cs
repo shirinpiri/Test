@@ -519,8 +519,9 @@ namespace perfumedecant.Controllers
                         return RedirectToAction("Index", "DashboardPerfume");
                     }
                 }
-                catch
+                catch(Exception e)
                 {
+                    string error = e.ToString();
                     Message = "delete Perfume with ID " + perfumeID + " failed.";
                     log.addLog(Message, "DeletePerfume", "DashboardPerfume", logStatus.ErrorLog);
                     ViewBag.Error = "محصول حذف نشد، لطفا دوباره تلاش کنید.";
