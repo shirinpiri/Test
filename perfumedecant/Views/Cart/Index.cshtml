@@ -70,17 +70,17 @@
                                                 <a href="#"><img src="~/Uploads/PerfumeImages/@cart.Tbl_Perfume.Perfume_ImageIndex" alt=""></a>
                                             </td>
                                             <td class="product-name">
-                                                @if (cart.InterimBill_Weight == null || cart.InterimBill_Weight == 0)
+                                                @*@if (cart.InterimBill_Weight == null || cart.InterimBill_Weight == 0)
                                                 {
                                                     <span>  @cart.Tbl_Category.Category_Title &nbsp; @cart.Tbl_Perfume.Perfume_Name</span>
                                                 }
                                                 else
-                                                {
+                                                {*@
                                             <span style="text-align:right">
                                                 @cart.Tbl_Category.Category_Title &nbsp; @cart.Tbl_Perfume.Perfume_Name &nbsp;
                                                 @cart.InterimBill_Weight &nbsp; میل
                                             </span>
-                                                        }
+                                                        @*}*@
 
                                                 </td>
                                             <td class="product-quantity">

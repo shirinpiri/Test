@@ -54,38 +54,31 @@ namespace perfumedecant.Controllers
             }
         }
 
-        public ActionResult AddToCart(int PerfumeID = 0, string Category_Title = "", float Weight = 0, int Count = 0)
+        public JsonResult AddToCart(int PerfumeID = 0, string Category_Title = "", float Weight = 0, int Count = 0)
         {
             String Message = "";
             if (Session["UserName"] == null)
             {
                 Message = "Access denied. need login.";
                 log.addLog(Message, "AddCart", "Cart", logStatus.EventLog);
-                return RedirectToAction("Index", "Account");
+                string message = "Login";
+                return Json(message, JsonRequestBehavior.AllowGet);
             }
             else if (Category_Title == "")
             {
                 Message = "added perfume with perfume ID " + PerfumeID + "failed";
                 log.addLog(Message, "AddToCart", "Cart", logStatus.EventLog);
-                TempData["PerfumeError"] = "محصول به سبد اضافه نشد، لطفا اطلاعات محصول را با دقت وارد نمایید.";
-                return RedirectToAction("PerfumeDetails", "Perfume", new { PerfumeID });
+                string message =  "محصول به سبد اضافه نشد، لطفا اطلاعات محصول را با دقت وارد نمایید.";
+                return Json(message, JsonRequestBehavior.AllowGet);
             }
             else
             {
                 try
                 {
                     Tbl_InterimBill ib = new Tbl_InterimBill();
-                    ib.InterimBill_Category_ID = db.Tbl_Category.Where(a => a.Category_Title == Category_Title).SingleOrDefault().Category_ID;
-                    if (Category_Title == "ادکلن")
-                    {
-                        ib.InterimBill_Count = Count;
-                        ib.InterimBill_Weight = 0;
-                    }
-                    else
-                    {
+                    ib.InterimBill_Category_ID = db.Tbl_Category.Where(a => a.Category_Title == Category_Title).SingleOrDefault().Category_ID;                                    
                         ib.InterimBill_Weight = Weight;
                         ib.InterimBill_Count = Count;
-                    }
                     ib.InterimBill_Date = DateTime.Now;
                     ib.InterimBill_ExpDate = DateTime.Now.AddDays(5);
 
@@ -96,17 +89,19 @@ namespace perfumedecant.Controllers
                     ib.InterimBill_Perfume_ID = PerfumeID;
                     if (Category_Title == "ادکلن")
                     {
-                        var cologne = db.Tbl_Cologne.Where(a => a.Cologne_Perfume_ID == PerfumeID).SingleOrDefault();
-                        ib.InterimBill_Price = (cologne.Cologne_PricePerUnit) * Count;
-                        if (Count > cologne.Cologne_AllCount)
+                        var cologne = db.Tbl_Cologne.Where(a => a.Cologne_Perfume_ID == PerfumeID && a.Cologne_Weight == Weight).SingleOrDefault();
+                        if (cologne != null)
                         {
-                            TempData["Stok"] = "تعداد انتخاب شده بیشتر از موجودی می باشد، لطفا تماس بگیرید.";
-                            return RedirectToAction("PerfumeDetails", "Perfume", new { PerfumeID = PerfumeID });
+                            ib.InterimBill_Price = (cologne.Cologne_PricePerUnit) * Count;
                         }
                         else
                         {
-                            ib.InterimBill_Count = Count;
-                            ib.InterimBill_Weight = 0;
+                            ib.InterimBill_Price = 0;
+                        }
+                        if (Count > cologne.Cologne_AllCount)
+                        {
+                            string message = "تعداد انتخاب شده بیشتر از موجودی می باشد، لطفا تماس بگیرید.(09128774252)";
+                            return Json(message, JsonRequestBehavior.AllowGet);
                         }
                     }
                     else if (Category_Title == "سمپل شرکتی")
@@ -121,11 +116,29 @@ namespace perfumedecant.Controllers
                         {
                             ib.InterimBill_Price = 0;
                         }
+                        if (Count > sample.CompanySample_AllCount)
+                        {
+                            string message = "تعداد انتخاب شده بیشتر از موجودی می باشد، لطفا تماس بگیرید.(09128774252)";
+                            return Json(message, JsonRequestBehavior.AllowGet);
+                        }
                     }
                     else
                     {
-                        int pricePerMil = db.Tbl_HandySample.Where(a => a.HandySample_Perfume_ID == PerfumeID).SingleOrDefault().HandySample_PricePerMil;
-                        ib.InterimBill_Price = Convert.ToInt32(Weight * pricePerMil * Count);
+                        var handy_sample = db.Tbl_HandySample.Where(a => a.HandySample_Perfume_ID == PerfumeID).SingleOrDefault();
+                        if (handy_sample != null)
+                        {
+                            var pricePerMil = Convert.ToInt32(handy_sample.HandySample_PricePerMil * Weight);
+                            ib.InterimBill_Price = pricePerMil * Count;
+                        }
+                        else
+                        {
+                            ib.InterimBill_Price = 0;
+                        }
+                        if (Count*Weight > handy_sample.HandySample_AllWeight)
+                        {
+                            string message = "تعداد انتخاب شده بیشتر از موجودی می باشد، لطفا تماس بگیرید.(09128774252)";
+                            return Json(message, JsonRequestBehavior.AllowGet);
+                        }
                     }
                     string username = Session["UserName"].ToString();
                     var userID = db.Tbl_User.Where(a => a.User_Username == username).SingleOrDefault().User_ID;
@@ -136,22 +149,24 @@ namespace perfumedecant.Controllers
                     {
                         Message = "perfume with perfume ID " + PerfumeID + " added to cart successfully.";
                         log.addLog(Message, "AddCart", "Cart", logStatus.EventLog);
-                        return RedirectToAction("Index", "Cart");
+                        string message = "OK";
+                        return Json(message, JsonRequestBehavior.AllowGet);
                     }
                     else
                     {
                         Message = "added perfume with perfume ID " + PerfumeID + " failed.";
                         log.addLog(Message, "AddCart", "Cart", logStatus.ErrorLog);
-                        ViewBag.Error = "محصول به سبد اضافه نشد، لطفا دوباره تلاش کنید.";
-                        return View();
+                        string message = "محصول به سبد اضافه نشد، لطفا دوباره تلاش کنید.";
+                        return Json(message, JsonRequestBehavior.AllowGet);
                     }
                 }
                 catch
                 {
                     Message = "added perfume with perfume ID " + PerfumeID + " failed.";
                     log.addLog(Message, "AddCart", "Cart", logStatus.ErrorLog);
-                    ViewBag.Error = "محصول به سبد اضافه نشد، لطفا دوباره تلاش کنید.";
-                    return View();
+                    string message = "محصول به سبد اضافه نشد، لطفا دوباره تلاش کنید.";
+                    return Json(message, JsonRequestBehavior.AllowGet);
+
                 }
             }
         }

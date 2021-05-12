@@ -290,12 +290,15 @@ namespace perfumedecant.Controllers
             var companySample_weightList = new List<SelectListItem>();
             var cologne_weightList = new List<SelectListItem>();
 
-            var cologne = db.Tbl_Cologne.Where(a => a.Cologne_Perfume_ID == perfumeID).FirstOrDefault();
+            var cologne = db.Tbl_Cologne.Where(a => a.Cologne_Perfume_ID == perfumeID && a.Cologne_AllCount > 0).ToList();
             if (cologne != null)
             {
-                cologne_price = Convert.ToInt32(cologne.Cologne_PricePerUnit);
+                cologne_weightList = db.Tbl_Cologne.Where(a => a.Cologne_Perfume_ID == perfumeID && a.Cologne_AllCount > 0).ToList().Select(rr =>
+                 new SelectListItem { Value = rr.Cologne_Weight.ToString(), Text = rr.Cologne_Weight.ToString() }).ToList();
+
+                cologne_price = Convert.ToInt32(cologne.FirstOrDefault().Cologne_PricePerUnit);
                 categoryList.Add(new SelectListItem { Text = "ادکلن", Value = "ادکلن" });
-                cologne_weightList.Add(new SelectListItem { Text = cologne.Cologne_Weight.ToString(), Value = cologne.Cologne_Weight.ToString(), Selected = true });
+                //cologne_weightList.Add(new SelectListItem { Text = cologne.Cologne_Weight.ToString(), Value = cologne.Cologne_Weight.ToString(), Selected = true });
             }
 
             var handySample = db.Tbl_HandySample.Where(a => a.HandySample_Perfume_ID == perfumeID).FirstOrDefault();
@@ -312,12 +315,14 @@ namespace perfumedecant.Controllers
 
             }
 
-            var companySample = db.Tbl_CompanySample.Where(a => a.CompanySample_Perfume_ID == perfumeID).FirstOrDefault();
-            if (companySample != null)
+            var companySample = db.Tbl_CompanySample.Where(a => a.CompanySample_Perfume_ID == perfumeID && a.CompanySample_AllCount >0).ToList();
+            if (companySample != null && companySample.Count()>0)
             {
-                companySample_price = companySample.CompanySample_Price.Value;
+                companySample_price = companySample.FirstOrDefault().CompanySample_Price.Value;
                 categoryList.Add(new SelectListItem { Text = "سمپل شرکتی", Value = "سمپل شرکتی" });
-                companySample_weightList.Add(new SelectListItem { Text = companySample.CompanySample_Weight.ToString(), Value = companySample.CompanySample_Weight.ToString(), Selected = true });
+                companySample_weightList = db.Tbl_CompanySample.Where(a => a.CompanySample_Perfume_ID == perfumeID && a.CompanySample_AllCount > 0).ToList().Select(rr =>
+                  new SelectListItem { Value = rr.CompanySample_Weight.ToString(), Text = rr.CompanySample_Weight.ToString()}).ToList();
+
             }
 
             ViewBag.categoryList = categoryList;
@@ -370,5 +375,37 @@ namespace perfumedecant.Controllers
 
             return View(perfumeModel);
         }
+   
+    public JsonResult GetPrice(int Perfume_ID,float weight, string category)
+        {
+            var price = 0;
+            if (category == "ادکلن")
+            {
+                var cologne = db.Tbl_Cologne.Where(a=>a.Cologne_Perfume_ID == Perfume_ID && a.Cologne_Weight == weight).FirstOrDefault();
+                if (cologne != null)
+                {
+                    price = cologne.Cologne_PricePerUnit;
+                }
+            }
+            else if (category == "سمپل شرکتی")
+            {
+                var company_sample = db.Tbl_CompanySample.Where(a=>a.CompanySample_Perfume_ID == Perfume_ID && weight == weight).FirstOrDefault();
+                if (company_sample != null)
+                {
+                    price = (int)company_sample.CompanySample_Price;
+                }
+            }
+            else
+            {
+                var handy_sample = db.Tbl_HandySample.Where(a=>a.HandySample_Perfume_ID == Perfume_ID).FirstOrDefault();
+                if (handy_sample != null)
+                {
+                    price = (int)handy_sample.HandySample_PricePerMil;
+                }
+            }
+                return Json(price,JsonRequestBehavior.AllowGet);
+        }
+
+
     }
 }
