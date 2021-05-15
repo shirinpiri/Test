@@ -76,7 +76,8 @@ namespace perfumedecant.Controllers
                 try
                 {
                     Tbl_InterimBill ib = new Tbl_InterimBill();
-                    ib.InterimBill_Category_ID = db.Tbl_Category.Where(a => a.Category_Title == Category_Title).SingleOrDefault().Category_ID;                                    
+                    var category = db.Tbl_Category.Where(a => a.Category_Title == Category_Title).SingleOrDefault();
+                    ib.InterimBill_Category_ID = category.Category_ID;
                         ib.InterimBill_Weight = Weight;
                         ib.InterimBill_Count = Count;
                     ib.InterimBill_Date = DateTime.Now;

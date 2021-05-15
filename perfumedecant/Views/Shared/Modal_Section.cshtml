@@ -152,7 +152,7 @@
 
                     var seasonsString = "";
                     $.each(result.seasons, function (i, season) {
-                        seasonsString = seasonsString + '<img id="myimage" src="Content/Images/dashboard_images/' + season.Value + '" class="img-fluid img-thumbnail" margin-left="10px" width="48" height="48" data-toggle="tooltip" data-placement="top" title="' + season.Text + '">';
+                        seasonsString = seasonsString + '<img id="myimage" src="/Content/Images/dashboard_images/' + season.Value + '" class="img-fluid img-thumbnail" margin-left="10px" width="48" height="48" data-toggle="tooltip" data-placement="top" title="' + season.Text + '">';
 
                     });
                     document.getElementById("Perfume_Season").innerHTML = seasonsString;
@@ -284,7 +284,7 @@
             else if ((categoryTitle == "سمپل دست ریز") && (count != "") && (weight != "")) {
 
                 var weight = $('#HandySampleWeightList option:selected').val();
-                finalPrice = parseFloat(handySample_price) * parseFloat(weight) * parseFloat(count);
+                finalPrice = parseFloat(handySample_price) * parseFloat(count);
                 $("#finalPrice").val(finalPrice + " تومان ");
             }
         }
