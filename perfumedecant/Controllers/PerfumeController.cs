@@ -17,7 +17,7 @@ namespace perfumedecant.Controllers
         Log log = new Log();
         LogStatus logStatus = new LogStatus();
 
-        public JsonResult PerfumeFilterring(Array seasons ,Array OlfactionGroups,Array TemperOfPerfumes ,String gender)
+        public JsonResult PerfumeFilterring(Array seasons, Array OlfactionGroups, Array TemperOfPerfumes, String gender)
         {
             List<int> perfumeIDs = new List<int>();
             List<String> perfumeImages = new List<String>();
@@ -54,7 +54,8 @@ namespace perfumedecant.Controllers
                             OlfactionGroupEmpty = true;
                             break;
                         }
-                        if (perfumeItem.Perfume_OlfactionGroups.ToString().Contains(OlfactionGroupItem.ToString())) OlfactionGroupflag = true;
+                        if (perfumeItem.Perfume_OlfactionGroups != null && perfumeItem.Perfume_OlfactionGroups.ToString().Contains(OlfactionGroupItem.ToString())) 
+                            OlfactionGroupflag = true;
                     }
                     if (OlfactionGroupEmpty == true) break;
                     if (OlfactionGroupflag == false)
@@ -75,7 +76,7 @@ namespace perfumedecant.Controllers
                             TemperOfPerfumeEmpty = true;
                             break;
                         }
-                        if (perfumeItem.Perfume_TemperOfPerfume.ToString().Contains(TemperOfPerfumeItem.ToString())) TemperOfPerfumeflag = true;
+                        if (perfumeItem.Perfume_TemperOfPerfume != null && perfumeItem.Perfume_TemperOfPerfume.ToString().Contains(TemperOfPerfumeItem.ToString())) TemperOfPerfumeflag = true;
                     }
                     if (TemperOfPerfumeEmpty == true) break;
                     if (TemperOfPerfumeflag == false)
@@ -106,7 +107,7 @@ namespace perfumedecant.Controllers
                     perfumeNames.Add(perfumeItem.Perfume_Name);
                 }
             }
-                    
+
             return Json(new
             {
                 perfumeIDs = perfumeIDs,
@@ -153,32 +154,32 @@ namespace perfumedecant.Controllers
             return Json(
                 new
                 {
-                Perfume_Name = perfume.Perfume_Name,
-                Perfume_Gender = perfume.Perfume_Gender,
-                Brand_Title = perfume.Tbl_Brand.Brand_Title,
-                Perfume_Country = perfume.Perfume_Country,
-                Perfume_Description = perfume.Perfume_Description,
-                Perfume_Notes = perfume.Perfume_Notes,
-                Perfume_OlfactionGroups = perfume.Perfume_OlfactionGroups,
-                Perfume_Perfumer = perfume.Perfume_Perfumer,
-                Perfume_TemperOfPerfume = perfume.Perfume_TemperOfPerfume,
-                PerfumeType_Title = perfume.Tbl_PerfumeType.PerfumeType_Title,
-                seasons = new SelectList(seasons, "Value", "Text"),
-                CategoryList = prices.CategoryList,
-                ColognePrice= prices.ColognePrice,
-                CologneWeightList = prices.CologneWeightList,
-                CompanySamplePrice = prices.CompanySamplePrice,
-                CompanySampleWeightList = prices.CompanySampleWeightList,
-                HandySamplePrice = prices.HandySamplePrice,
-                HandySampleWeightList = prices.HandySampleWeightList,
-                Perfume_ImageIndex = perfume.Perfume_ImageIndex,
-                images = new SelectList(images, "Value", "Text")
+                    Perfume_Name = perfume.Perfume_Name,
+                    Perfume_Gender = perfume.Perfume_Gender,
+                    Brand_Title = perfume.Tbl_Brand.Brand_Title,
+                    Perfume_Country = perfume.Perfume_Country,
+                    Perfume_Description = perfume.Perfume_Description,
+                    Perfume_Notes = perfume.Perfume_Notes,
+                    Perfume_OlfactionGroups = perfume.Perfume_OlfactionGroups,
+                    Perfume_Perfumer = perfume.Perfume_Perfumer,
+                    Perfume_TemperOfPerfume = perfume.Perfume_TemperOfPerfume,
+                    PerfumeType_Title = perfume.Tbl_PerfumeType.PerfumeType_Title,
+                    seasons = new SelectList(seasons, "Value", "Text"),
+                    CategoryList = prices.CategoryList,
+                    ColognePrice = prices.ColognePrice,
+                    CologneWeightList = prices.CologneWeightList,
+                    CompanySamplePrice = prices.CompanySamplePrice,
+                    CompanySampleWeightList = prices.CompanySampleWeightList,
+                    HandySamplePrice = prices.HandySamplePrice,
+                    HandySampleWeightList = prices.HandySampleWeightList,
+                    Perfume_ImageIndex = perfume.Perfume_ImageIndex,
+                    images = new SelectList(images, "Value", "Text")
                 },
                  JsonRequestBehavior.AllowGet);
         }
 
-        public ActionResult Perfumes(int brandID = 0 , String type = "" , int currentPageIndex = 1)
-        {          
+        public ActionResult Perfumes(int brandID = 0, String type = "", int currentPageIndex = 1)
+        {
             var perfumes = this.GetPerfumes(brandID, type, currentPageIndex);
             ViewBag.title = TempData["title"];
             return View(perfumes);
@@ -262,7 +263,7 @@ namespace perfumedecant.Controllers
                 TempData["title"] = "همه محصولات";
             }
 
-////////////////////////
+            ////////////////////////
             PerfumeModel perfumeModel = new PerfumeModel();
 
             perfumeModel.Perfumes = perfumes
@@ -291,7 +292,7 @@ namespace perfumedecant.Controllers
             var cologne_weightList = new List<SelectListItem>();
 
             var cologne = db.Tbl_Cologne.Where(a => a.Cologne_Perfume_ID == perfumeID && a.Cologne_AllCount > 0).ToList();
-            if (cologne != null)
+            if (cologne != null && cologne.Count() > 0)
             {
                 cologne_weightList = db.Tbl_Cologne.Where(a => a.Cologne_Perfume_ID == perfumeID && a.Cologne_AllCount > 0).ToList().Select(rr =>
                  new SelectListItem { Value = rr.Cologne_Weight.ToString(), Text = rr.Cologne_Weight.ToString() }).ToList();
@@ -315,13 +316,13 @@ namespace perfumedecant.Controllers
 
             }
 
-            var companySample = db.Tbl_CompanySample.Where(a => a.CompanySample_Perfume_ID == perfumeID && a.CompanySample_AllCount >0).ToList();
-            if (companySample != null && companySample.Count()>0)
+            var companySample = db.Tbl_CompanySample.Where(a => a.CompanySample_Perfume_ID == perfumeID && a.CompanySample_AllCount > 0).ToList();
+            if (companySample != null && companySample.Count() > 0)
             {
                 companySample_price = companySample.FirstOrDefault().CompanySample_Price.Value;
                 categoryList.Add(new SelectListItem { Text = "سمپل شرکتی", Value = "سمپل شرکتی" });
                 companySample_weightList = db.Tbl_CompanySample.Where(a => a.CompanySample_Perfume_ID == perfumeID && a.CompanySample_AllCount > 0).ToList().Select(rr =>
-                  new SelectListItem { Value = rr.CompanySample_Weight.ToString(), Text = rr.CompanySample_Weight.ToString()}).ToList();
+                  new SelectListItem { Value = rr.CompanySample_Weight.ToString(), Text = rr.CompanySample_Weight.ToString() }).ToList();
 
             }
 
@@ -338,7 +339,7 @@ namespace perfumedecant.Controllers
 
             PriceModel prices = new PriceModel();
             prices.CategoryList = categoryList;
-            prices.ColognePrice= cologne_price;
+            prices.ColognePrice = cologne_price;
             prices.HandySamplePrice = handySample_price;
             prices.CompanySamplePrice = companySample_price;
             prices.CologneWeightList = cologne_weightList;
@@ -346,15 +347,15 @@ namespace perfumedecant.Controllers
             prices.CompanySampleWeightList = companySample_weightList;
 
             return (prices);
-        /*    ViewBag.cologne_price = cologne_price;
-            ViewBag.handySample_price = handySample_price;
-            ViewBag.companySample_price = companySample_price;
-            ViewBag.cologne_weightList = cologne_weightList;
-            ViewBag.handySample_weightList = handySample_weightList;
-            ViewBag.companySample_weightList = companySample_weightList;*/
+            /*    ViewBag.cologne_price = cologne_price;
+                ViewBag.handySample_price = handySample_price;
+                ViewBag.companySample_price = companySample_price;
+                ViewBag.cologne_weightList = cologne_weightList;
+                ViewBag.handySample_weightList = handySample_weightList;
+                ViewBag.companySample_weightList = companySample_weightList;*/
         }
 
-        public ActionResult PerfumesBrand(int brandID = 0, String type = "", int currentPageIndex = 1)
+        public ActionResult PerfumesBrand(int brandID = 0, string type = "", int currentPageIndex = 1)
         {
             int maxRows = 8;
             List<Tbl_Perfume> perfumes = new List<Tbl_Perfume>();
@@ -375,13 +376,13 @@ namespace perfumedecant.Controllers
 
             return View(perfumeModel);
         }
-   
-    public JsonResult GetPrice(int Perfume_ID,float weight, string category)
+
+        public JsonResult GetPrice(int Perfume_ID, float weight, string category)
         {
             var price = 0;
             if (category == "ادکلن")
             {
-                var cologne = db.Tbl_Cologne.Where(a=>a.Cologne_Perfume_ID == Perfume_ID && a.Cologne_Weight == weight).FirstOrDefault();
+                var cologne = db.Tbl_Cologne.Where(a => a.Cologne_Perfume_ID == Perfume_ID && a.Cologne_Weight == weight).FirstOrDefault();
                 if (cologne != null)
                 {
                     price = cologne.Cologne_PricePerUnit;
@@ -389,7 +390,7 @@ namespace perfumedecant.Controllers
             }
             else if (category == "سمپل شرکتی")
             {
-                var company_sample = db.Tbl_CompanySample.Where(a=>a.CompanySample_Perfume_ID == Perfume_ID && weight == weight).FirstOrDefault();
+                var company_sample = db.Tbl_CompanySample.Where(a => a.CompanySample_Perfume_ID == Perfume_ID && a.CompanySample_Weight == weight).FirstOrDefault();
                 if (company_sample != null)
                 {
                     price = (int)company_sample.CompanySample_Price;
@@ -397,13 +398,13 @@ namespace perfumedecant.Controllers
             }
             else
             {
-                var handy_sample = db.Tbl_HandySample.Where(a=>a.HandySample_Perfume_ID == Perfume_ID).FirstOrDefault();
+                var handy_sample = db.Tbl_HandySample.Where(a => a.HandySample_Perfume_ID == Perfume_ID).FirstOrDefault();
                 if (handy_sample != null)
                 {
-                    price = (int)handy_sample.HandySample_PricePerMil;
+                    price = (int)(handy_sample.HandySample_PricePerMil * weight);
                 }
             }
-                return Json(price,JsonRequestBehavior.AllowGet);
+            return Json(price, JsonRequestBehavior.AllowGet);
         }
 
 

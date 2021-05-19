@@ -304,7 +304,7 @@
                                             <img class="hover-img" src="~/Uploads/PerfumeImages/@women.Perfume_ImageIndex" alt="">
                                         </a>
                                         <div class="product-action-2">
-                                            <a title="Add To Cart" href="@Url.Action("PerfumeDetails", "Perfume", new { PerfumeID = women.Perfume_ID })"><i class="fa fa-shopping-cart"></i></a>
+                                            <a title="Add To Cart" href="#"  onclick="showModal(@women.Perfume_ID,'../../Uploads/PerfumeImages/')"><i class="fa fa-shopping-cart"></i></a>
                                             <a title="Quick View" class="Quick_View" href="#" data-toggle="modal" onclick="showModal(@women.Perfume_ID,'../../Uploads/PerfumeImages/')"><i class="fa fa-eye"></i></a>
                                         </div>
                                     </div>
@@ -335,7 +335,7 @@
                                         </a>
 
                                         <div class="product-action-2">
-                                            <a title="Add To Cart" href="@Url.Action("PerfumeDetails", "Perfume", new { PerfumeID = men.Perfume_ID })"><i class="fa fa-shopping-cart"></i></a>
+                                            <a title="Add To Cart" href="#"  onclick="showModal(@men.Perfume_ID,'../../Uploads/PerfumeImages/')"><i class="fa fa-shopping-cart"></i></a>
                                             <a title="Quick View" class="Quick_View" href="#" data-toggle="modal" onclick="showModal(@men.Perfume_ID,'../../Uploads/PerfumeImages/')"><i class="fa fa-eye"></i></a>
                                         </div>
                                     </div>
@@ -365,7 +365,7 @@
                                         </a>
 
                                         <div class="product-action-2">
-                                            <a title="Add To Cart" href="@Url.Action("PerfumeDetails", "Perfume", new { PerfumeID = newuni.Perfume_ID })"><i class="fa fa-shopping-cart"></i></a>
+                                            <a title="Add To Cart" href="#" onclick="showModal(@newuni.Perfume_ID,'../../Uploads/PerfumeImages/')"><i class="fa fa-shopping-cart"></i></a>
                                             <a title="Quick View" class="Quick_View" href="#" data-toggle="modal" onclick="showModal(@newuni.Perfume_ID,'../../Uploads/PerfumeImages/')"><i class="fa fa-eye"></i></a>
                                         </div>
                                     </div>
@@ -395,7 +395,7 @@
                                         </a>
 
                                         <div class="product-action-2">
-                                            <a title="Add To Cart" href="@Url.Action("PerfumeDetails", "Perfume", new { PerfumeID = seasonPerfume.Perfume_ID })"><i class="fa fa-shopping-cart"></i></a>
+                                            <a title="Add To Cart" href="#" onclick="showModal(@seasonPerfume.Perfume_ID,'../../Uploads/PerfumeImages/')" ><i class="fa fa-shopping-cart"></i></a>
                                             <a title="Quick View" class="Quick_View" href="#" data-toggle="modal" onclick="showModal(@seasonPerfume.Perfume_ID,'../../Uploads/PerfumeImages/')"><i class="fa fa-eye"></i></a>
                                         </div>
                                     </div>
@@ -490,7 +490,7 @@
             success: function (result) {
                 var str = '<div class="row brand-letter-item"><div class="col-md-12 col-sm-12 col-xs-12" ><ul>';
                 $.each(result.filteredBrands, function (i, brand) {
-                    str = str + '<li><a href="Perfume/PerfumesBrand?brandId=' + brand.Value+'">' + brand.Text+'</a></li>'
+                    str = str + '<li><a href="/Perfume/PerfumesBrand?brandId=' + brand.Value+'">' + brand.Text+'</a></li>'
                 });
                 str = str + '</ul></div></div>';
                 document.getElementById("brand-" + captal_letter).innerHTML = str;
@@ -544,7 +544,7 @@
                             ' <div class="product-img" ><a href="product-details.html">' +
                             '<img class="default-img" src="Uploads/PerfumeImages/' + result.perfumeImages[i] + '" alt="">' +
                             '<img class="hover-img" src="Uploads/PerfumeImages/' + result.perfumeImages[i] + '" alt="">' +
-                            '</a><div class="product-action-2" ><a title="Add To Cart" href="#"><i class="fa fa-shopping-cart"></i></a>' +
+                            '</a><div class="product-action-2" ><a title="Add To Cart" href="#" ><i class="fa fa - shopping - cart"></i></a>' +
                             '<a title="Quick View" class="Quick_View" href="#" data-toggle="modal" onclick="showModal(' + result.perfumeIDs[i] + ')"><i class="fa fa-eye"></i></a>' +
                             '</div></div ><div class="product-content-2"><div class="title-price-wrap-2"><h3><a href="product-details.html">' + result.perfumeNames[i] +
                             '</a></h3></div></div></div></div>';

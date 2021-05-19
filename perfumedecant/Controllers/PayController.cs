@@ -92,15 +92,15 @@ namespace PerfumeDecant.Controllers
                             ZarinPal.ZarinPal zarinpal = ZarinPal.ZarinPal.Get();
 
                             String MerchantID = "91afdd4e-006f-11ea-bad7-000c295eb8fc";
-                            //String CallbackURL = "http://www.perfumedecant.ir/Pay/PaymentVerification?billID=" + bill.Bill_ID;
-                            String CallbackURL = "https://localhost:44309/Pay/PaymentVerification?billID=" + bill.Bill_ID;
+                            String CallbackURL = "http://www.perfumedecant.ir/Pay/PaymentVerification?billID=" + bill.Bill_ID;
+                            //String CallbackURL = "https://localhost:44309/Pay/PaymentVerification?billID=" + bill.Bill_ID;
                             long Amount =(long) (allPrice + postType.PostType_Price);
                             String Description = "پرداخت";
 
                             ZarinPal.PaymentRequest pr = new ZarinPal.PaymentRequest(MerchantID, Amount, CallbackURL, Description);
 
-                            //zarinpal.DisableSandboxMode();
-                            zarinpal.EnableSandboxMode();
+                            zarinpal.DisableSandboxMode();
+                            //zarinpal.EnableSandboxMode();
                             var res = zarinpal.InvokePaymentRequest(pr);
 
 
@@ -155,8 +155,8 @@ namespace PerfumeDecant.Controllers
           
             int Amount = bill.Bill_PayPrice;
             var zarinpal = ZarinPal.ZarinPal.Get();
-            //zarinpal.DisableSandboxMode();
-            zarinpal.EnableSandboxMode();
+            zarinpal.DisableSandboxMode();
+            //zarinpal.EnableSandboxMode();
             String Authority = nvc["Authority"];
             String MerchantID = "91afdd4e-006f-11ea-bad7-000c295eb8fc";
 
