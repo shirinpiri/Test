@@ -12987,7 +12987,7 @@ h3.cart-page-title {
 
     .brand-letter-item ul li {
         float: left;
-        padding: 0 20px;
+        margin: 0 20px;
         width: 25%;
     }
 
@@ -13013,4 +13013,28 @@ h3.cart-page-title {
     .brand-list-item img {
         width: 150px;
         height: auto;
+    }
+
+    div .disabled {
+        pointer-events: none;
+        opacity: 0.4;
+    }
+
+    div .enabled {
+        pointer-events: visible;
+        opacity: 1;
+    }
+
+    .filter {
+        width: 20px;
+        height: 20px;
+        display: inline-block;
+        float: right;
+        margin: 3px 0 3px 8px;
+    }
+
+    .showPart {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
     }
