@@ -58,13 +58,28 @@
                             <ul>
                                 @if (Model.CurrentPageIndex > 1)
                                 {
-                                    <li><a class="prev" href="@Url.Action("PerfumesBrand", "Perfume", new {brandID = Model.brandID,type = Model.type, currentPageIndex = (Model.CurrentPageIndex-1) })"><i class="fa fa-angle-double-right"></i></a></li>
+                                    if (Model.brandID != null && Model.brandID > 0)
+                                    {
+                                        <li><a class="prev" href="@Url.Action("PerfumesBrand", "Perfume", new {brandID = Model.brandID,type = Model.type, currentPageIndex = (Model.CurrentPageIndex-1) })"><i class="fa fa-angle-double-right"></i></a></li>
+
+                                    }
+                                    else
+                                    {
+                                        <li><a class="prev" href="@Url.Action("Perfumes", "Perfume", new {brandID = 0,type = Model.type, currentPageIndex = (Model.CurrentPageIndex-1) })"><i class="fa fa-angle-double-right"></i></a></li>
+                                    }
                                 }
                                 @for (int i = 1; i <= Model.PageCount; i++)
                                 {
                                     if (i != Model.CurrentPageIndex)
                                     {
-                                        <li><a href="@Url.Action("PerfumesBrand", "Perfume", new {brandID = Model.brandID,type = Model.type, currentPageIndex = i })">@i</a></li>
+                                        if (Model.brandID != null && Model.brandID > 0)
+                                        {
+                                            <li><a href="@Url.Action("PerfumesBrand", "Perfume", new { brandID = Model.brandID, type = Model.type, currentPageIndex = i })">@i</a></li>
+                                        }
+                                        else
+                                        {
+                                            <li><a href="@Url.Action("Perfumes", "Perfume", new { brandID = 0, type = Model.type, currentPageIndex = i })">@i</a></li>
+                                        }
                                     }
                                     else
                                     {
@@ -75,7 +90,15 @@
                                 }
                                 @if (Model.CurrentPageIndex < Model.PageCount)
                                 {
-                                    <li><a class="next" href="@Url.Action("PerfumesBrand", "Perfume", new {brandID = Model.brandID,type = Model.type, currentPageIndex = (Model.CurrentPageIndex+1) })"><i class="fa fa-angle-double-left"></i></a></li>
+                                    if (Model.brandID != null && Model.brandID > 0)
+                                    {
+                                        <li><a class="next" href="@Url.Action("PerfumesBrand", "Perfume", new { brandID = Model.brandID, type = Model.type, currentPageIndex = (Model.CurrentPageIndex + 1) })"><i class="fa fa-angle-double-left"></i></a></li>
+                                    }
+                                    else
+                                    {
+                                        <li><a class="next" href="@Url.Action("Perfumes", "Perfume", new { brandID = 0, type = Model.type, currentPageIndex = (Model.CurrentPageIndex + 1) })"><i class="fa fa-angle-double-left"></i></a></li>
+
+                                    }
                                 }
                             </ul>
                         </div>
