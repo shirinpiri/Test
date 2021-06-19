@@ -33,7 +33,7 @@ namespace UserDecant.Controllers
             {
                 Message = "Access denied. need login.";
                 log.addLog(Message, "AddUser", "DashboardUser", logStatus.EventLog);
-                return RedirectToAction("Index", "Account");
+                return RedirectToAction("Index", "Account", new { returnUrl = "/DashboardUser/Index" });
             }
             else if (Session["RoleName"].ToString() == "Admin")
             {
@@ -59,7 +59,7 @@ namespace UserDecant.Controllers
             {
                 Message = "Access denied. need login.";
                 log.addLog(Message, "AddUser", "DashboardUser", logStatus.EventLog);
-                return RedirectToAction("Index", "Account");
+                return RedirectToAction("Index", "Account", new { returnUrl = "/DashboardUser/Index" });
             }
 
             else if (Session["RoleName"].ToString() == "Admin")
@@ -154,7 +154,7 @@ namespace UserDecant.Controllers
             {
                 Message = "Access denied. need login.";
                 log.addLog(Message, "EditUser", "DashboardUser", logStatus.EventLog);
-                return RedirectToAction("Index", "Account");
+                return RedirectToAction("Index", "Account", new { returnUrl = "/DashboardUser/Index" });
             }
 
             else if (Session["RoleName"].ToString() == "Admin")
@@ -201,7 +201,7 @@ namespace UserDecant.Controllers
             {
                 Message = "Access denied. need login.";
                 log.addLog(Message, "EditUser", "DashboardUser", logStatus.EventLog);
-                return RedirectToAction("Index", "Account");
+                return RedirectToAction("Index", "Account", new { returnUrl = "/DashboardUser/Index" });
             }
 
             else if (Session["RoleName"].ToString() == "Admin")
@@ -339,7 +339,7 @@ namespace UserDecant.Controllers
             {
                 Message = "Access denied. need login.";
                 log.addLog(Message, "DeleteUser", "DashboardUser", logStatus.EventLog);
-                return RedirectToAction("Index", "Account");
+                return RedirectToAction("Index", "Account", new { returnUrl = "/DashboardUser/Index" });
             }
 
             else if (Session["RoleName"].ToString() == "Admin")
@@ -411,7 +411,7 @@ namespace UserDecant.Controllers
             {
                 Message = "Access denied. need login.";
                 log.addLog(Message, "ChangePassword", "DashboardUser", logStatus.EventLog);
-                return RedirectToAction("Index", "Account");
+                return RedirectToAction("Index", "Account", new { returnUrl = "/DashboardUser/Index" });
             }
 
             else if (Session["RoleName"].ToString() == "Admin")

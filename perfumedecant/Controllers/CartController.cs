@@ -22,7 +22,7 @@ namespace perfumedecant.Controllers
             {
                 Message = "Access denied. need login.";
                 log.addLog(Message, "Index", "Cart", logStatus.EventLog);
-                return RedirectToAction("Index", "Account");
+                return RedirectToAction("Index", "Account", new { returnUrl = "/Cart/Index"});
             }
             else
             {
@@ -37,7 +37,7 @@ namespace perfumedecant.Controllers
             {
                 Message = "Access denied. need login.";
                 log.addLog(Message, "AddCart", "Cart", logStatus.EventLog);
-                return RedirectToAction("Index", "Account");
+                return RedirectToAction("Index", "Account", new { returnUrl = "/Cart/Index" });
             }
             var perfume = db.Tbl_Perfume.Where(a => a.Perfume_ID == PerfumeID).SingleOrDefault();
             if (perfume != null)
@@ -179,9 +179,9 @@ namespace perfumedecant.Controllers
                 {
                     Message = "Access denied. need login.";
                     log.addLog(Message, "DeleteCart", "Cart", logStatus.EventLog);
-                    return RedirectToAction("Index", "Account");
-                }
-                else
+                return RedirectToAction("Index", "Account", new { returnUrl = "/Cart/Index" });
+            }
+            else
                 {
                     try
                     {

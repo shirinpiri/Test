@@ -24,8 +24,9 @@ namespace perfumedecant.Controllers
       
         
         // GET: Account
-        public ActionResult Index()
+        public ActionResult Index(string returnUrl = "")
         {
+            TempData["ReturnUrl"]= returnUrl;
             return View();
         }
 
@@ -34,6 +35,8 @@ namespace perfumedecant.Controllers
         {
             if (ModelState.IsValid)
             {
+                string returnUrl = TempData["ReturnUrl"].ToString();
+
                 if (Session["UserName"] != null)
                     return RedirectToAction("Index", "Home");
 
@@ -57,7 +60,15 @@ namespace perfumedecant.Controllers
                         Session["RoleName"] = "User";
                         String Message = "User with username " + user.User_Username + "registered successfully.";
                         log.addLog(Message, "Register", "Account", logStatus.EventLog);
-                        return RedirectToAction("Index", "Home");
+
+                        if (returnUrl != null && returnUrl != "")
+                        {
+                            return Redirect(returnUrl);
+                        }
+                        else
+                        {
+                            return RedirectToAction("Index", "Home");
+                        }
                     }
                     else
                     {
@@ -65,7 +76,6 @@ namespace perfumedecant.Controllers
                         log.addLog(Message, "Register", "Account", logStatus.ErrorLog);
                         return View("Index", userViewModel);
                     }
-
                 }
                 else
                 {
@@ -86,6 +96,8 @@ namespace perfumedecant.Controllers
         {
             if (ModelState.IsValid)
             {
+                string returnUrl = TempData["ReturnUrl"].ToString();
+
                 if (Session["UserName"] != null)
                 {
                     string Message = "Index page loaded, Because user already logined.";
@@ -100,7 +112,14 @@ namespace perfumedecant.Controllers
                     Session["RoleName"] = user1.Tbl_Role.Role_Name;
                     string Message = "User with username " + user1.User_Username + " login successfully.";
                     log.addLog(Message, "Login", "User", logStatus.EventLog);
-                    return RedirectToAction("Index", "Home");
+                    if (returnUrl != null && returnUrl != "")
+                    {
+                        return Redirect(returnUrl);
+                    }
+                    else
+                    {
+                        return RedirectToAction("Index", "Home");
+                    }
                 }
                 else
                 {

@@ -29,7 +29,7 @@ namespace perfumedecant.Controllers
             {
                 Message = "Access denied. need login.";
                 log.addLog(Message, "AddBrand", "DashboardBrand", logStatus.EventLog);
-                return RedirectToAction("Index", "Account");
+                return RedirectToAction("Index", "Account", new { returnUrl = "/DashboardBrand/Index" });
             }
             else if (Session["RoleName"].ToString() == "Admin")
             {
@@ -39,7 +39,7 @@ namespace perfumedecant.Controllers
             {
                 Message = "Access denied. need login.";
                 log.addLog(Message, "AddBrand", "DashboardBrand", logStatus.EventLog);
-                return RedirectToAction("Index", "Account");
+                return RedirectToAction("Index", "Account", new { returnUrl = "/DashboardBrand/Index" });
             }
         }
 
@@ -61,7 +61,7 @@ namespace perfumedecant.Controllers
             {
                 Message = "Access denied. need login.";
                 log.addLog(Message, "AddBrand", "DashboardBrand", logStatus.EventLog);
-                return RedirectToAction("Index", "Account");
+                return RedirectToAction("Index", "Account", new { returnUrl = "/DashboardBrand/Index" });
             }
             else if (Session["RoleName"].ToString() == "Admin")
             {
@@ -133,7 +133,7 @@ namespace perfumedecant.Controllers
             {
                 Message = "Access denied. need login.";
                 log.addLog(Message, "AddBrand", "DashboardBrand", logStatus.EventLog);
-                return RedirectToAction("Index", "Account");
+                return RedirectToAction("Index", "Account", new { returnUrl = "/DashboardBrand/Index" });
             }
         }
 
@@ -144,7 +144,7 @@ namespace perfumedecant.Controllers
             {
                 Message = "Access denied. need login.";
                 log.addLog(Message, "DeleteBrand", "DashboardBrand", logStatus.EventLog);
-                return RedirectToAction("Index", "Account");
+                return RedirectToAction("Index", "Account", new { returnUrl = "/DashboardBrand/Index" });
             }
 
             else if (Session["RoleName"].ToString() == "Admin")
@@ -201,7 +201,7 @@ namespace perfumedecant.Controllers
             {
                 Message = "Access denied. need login.";
                 log.addLog(Message, "DeleteBrand", "DashboardBrand", logStatus.EventLog);
-                return RedirectToAction("Index", "Account");
+                return RedirectToAction("Index", "Account", new { returnUrl = "/DashboardBrand/Index" });
             }
         }
     }

@@ -2,10 +2,12 @@
 
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
+        var type = ViewBag.type;
+
 }
 
 <div class="breadcrumb-area pt-35 pb-35 bg-gray-3">
-    <div class="container">
+    <div class="container  pb-100">
         <div class="breadcrumb-content text-center">
             <ul>
                 <li>
@@ -20,12 +22,12 @@
 <div class="container brand-list">
     <div class="row">
         @if (Model.Brands.Count() > 0)
+        {
+            double delay = 0.0;
+            foreach (var brand in Model.Brands)
             {
-                double delay = 0.0;
-                foreach (var brand in Model.Brands)
-                {
-                    delay = delay + 0.2;
-                    string delay1 = delay + "s";
+                delay = delay + 0.2;
+                string delay1 = delay + "s";
 
                 <div class="col-md-3 col-sm-6 wow fadeInLeft animated" data-wow-delay=0.0>
                     <div class="brand-list-item">
@@ -41,24 +43,37 @@
         }
     </div>
 
-    <div class="row" style="margin-top:100px">
+    <div class="row" style="margin-top:100px;">
         <div class="col-12 text-center">
-            <div class="custom-pagination">
-                @for (int i = 1; i <= Model.PageCount; i++)
-                {
-                    if (i != Model.CurrentPageIndex)
+            <div class="pro-pagination-style text-center mt-30">
+                <ul>
+                    @if (Model.CurrentPageIndex > 1)
                     {
-                        @*<a href="/Content/Index?currentPageIndex=@i#contents">@i</a>*@
-                        @*<a href="/Brands/@i">@i</a>*@
-                        <a href="@Url.Action("Index", "Brands", new { currentPageIndex = i , type = ViewBag.type })">@i</a>
+                        <li><a class="prev" href="@Url.Action("Index", "Brands", new {currentPageIndex = (Model.CurrentPageIndex-1), type = type })"><i class="fa fa-angle-double-right"></i></a></li>
                     }
-                    else
+                    @for (int i = 1; i <= Model.PageCount; i++)
                     {
-                        <span class="current">@i</span>
+                        if (i != Model.CurrentPageIndex)
+                        {
+
+                            <li><a href="@Url.Action("Index", "Brands", new {currentPageIndex = i, type = type })">@i</a></li>
+
+                        }
+                        else
+                        {
+                            <li><a class="active" href="#">@i</a></li>
+
+                        }
+
                     }
-                }
+                    @if (Model.CurrentPageIndex < Model.PageCount)
+                    {
+
+                        <li><a class="next" href="@Url.Action("Index", "Brands", new {currentPageIndex = (Model.CurrentPageIndex+1), type = type })"><i class="fa fa-angle-double-left"></i></a></li>
+                    }
+                </ul>
             </div>
         </div>
-    </div>        
+    </div>
 </div>
 

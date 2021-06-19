@@ -34,7 +34,7 @@ namespace perfumedecant.Controllers
             {
                 Message = "Access denied. need login.";
                 log.addLog(Message, "AddBrand", "DashboardBrand", logStatus.EventLog);
-                return RedirectToAction("Login", "Account");
+                return RedirectToAction("Index", "Account", new { returnUrl = "/DashboardArticles/Index" });
             }
             else if (Session["RoleName"].ToString() == "Admin")
             {
@@ -98,7 +98,7 @@ namespace perfumedecant.Controllers
             {
                 Message = "Access denied. need login.";
                 log.addLog(Message, "AddArticle", "DashboardArticles", logStatus.EventLog);
-                return RedirectToAction("Login", "Account");
+                return RedirectToAction("Index", "Account", new { returnUrl = "/DashboardArticles/Index" });
             }
         }
 
@@ -121,7 +121,7 @@ namespace perfumedecant.Controllers
             {
                 Message = "Access denied. need login.";
                 log.addLog(Message, "DeleteArticle", "DashboardArticles", logStatus.EventLog);
-                return RedirectToAction("Login", "Account");
+                return RedirectToAction("Index", "Account", new { returnUrl = "/DashboardArticles/Index" });
             }
 
             else if (Session["RoleName"].ToString() == "Admin")
@@ -177,7 +177,7 @@ namespace perfumedecant.Controllers
             {
                 Message = "Access denied. need login.";
                 log.addLog(Message, "DeleteArticle", "DashboardArticles", logStatus.EventLog);
-                return RedirectToAction("Login", "Account");
+                return RedirectToAction("Index", "Account", new { returnUrl = "/DashboardArticles/Index" });
             }
         }
     }

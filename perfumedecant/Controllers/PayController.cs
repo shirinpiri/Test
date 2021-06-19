@@ -31,7 +31,7 @@ namespace PerfumeDecant.Controllers
                 {
                     Message = "Access denied. need login.";
                     log.addLog(Message, "Index", "Cart", logStatus.EventLog);
-                    return RedirectToAction("Login", "Account");
+                    return RedirectToAction("Index", "Account", new { returnUrl = "/Cart/Index" });
                 }
                 else
                 {

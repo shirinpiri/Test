@@ -28,7 +28,7 @@ namespace PerfumeDecant.Controllers
             {
                 Message = "Access denied. need login.";
                 log.addLog(Message, "AddCologne", "DashboardCologne", logStatus.EventLog);
-                return RedirectToAction("Index", "Account");
+                return RedirectToAction("Index", "Account", new { returnUrl = "/Cologne/Index" });
             }
             else if (Session["RoleName"].ToString() == "Admin")
             {
@@ -53,7 +53,7 @@ namespace PerfumeDecant.Controllers
             {
                 Message = "Access denied. need login.";
                 log.addLog(Message, "AddCologne", "DashboardCologne", logStatus.EventLog);
-                return RedirectToAction("Index", "Account");
+                return RedirectToAction("Index", "Account", new { returnUrl = "/Cologne/Index" });
             }
             else if (Session["RoleName"].ToString() == "Admin")
             {
@@ -103,7 +103,7 @@ namespace PerfumeDecant.Controllers
             {
                 Message = "Access denied. need login.";
                 log.addLog(Message, "EditHandySample", "DashboardHandySample", logStatus.EventLog);
-                return RedirectToAction("Index", "Account");
+                return RedirectToAction("Index", "Account", new { returnUrl = "/Cologne/Index" });
             }
 
             else if (Session["RoleName"].ToString() == "Admin")
@@ -152,7 +152,7 @@ namespace PerfumeDecant.Controllers
             {
                 Message = "Access denied. need login.";
                 log.addLog(Message, "EditCologne", "DashboardCologne", logStatus.EventLog);
-                return RedirectToAction("Index", "Account");
+                return RedirectToAction("Index", "Account", new { returnUrl = "/Cologne/Index" });
             }
 
             else if (Session["RoleName"].ToString() == "Admin")
@@ -215,7 +215,7 @@ namespace PerfumeDecant.Controllers
             {
                 Message = "Access denied. need login.";
                 log.addLog(Message, "AddCologne", "DashboardCologne", logStatus.EventLog);
-                return RedirectToAction("Index", "Account");
+                return RedirectToAction("Index", "Account", new { returnUrl = "/Cologne/Index" });
             }
 
             else if (Session["RoleName"].ToString() == "Admin")

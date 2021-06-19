@@ -21,7 +21,7 @@ namespace PerfumeDecant.Controllers
             {
                 Message = "Redirect the user to Login page, because not logined.";
                 log.addLog(Message, "Index", "Dashboard", logStatus.EventLog);
-                return RedirectToAction("Index", "Account");
+                return RedirectToAction("Index", "Account", new { returnUrl = "/Dashboard/Index" });
             }
 
             var username = Session["UserName"].ToString();
