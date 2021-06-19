@@ -1,0 +1,288 @@
+﻿@model perfumedecant.Models.Domains.Tbl_Perfume
+@using perfumedecant.Models.Repository
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    Rep_Perfume rep_perfume = new Rep_Perfume();
+    Rep_PerfumeImages rep_images = new Rep_PerfumeImages();
+    var images = rep_images.Get_PerfumeImages(Model.Perfume_ID);
+}
+
+<div class="breadcrumb-area pt-35 pb-35 bg-gray-3">
+    <div class="container">
+        <div class="breadcrumb-content text-center">
+            <ul>
+                <li>
+                    <a href="index.html"> صفحه اصلی </a>
+                </li>
+                <li class="active">  @Model.Perfume_Name </li>
+            </ul>
+        </div>
+    </div>
+</div>
+<div class="container">
+    <div class="shop-area pt-100 pb-100">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 col-md-6">
+                    <div class="product-details dec-img-wrap">
+                        <img src="~/Uploads/PerfumeImages/@Model.Perfume_ImageIndex" alt="" style="border:1px solid #ddd;">
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6">
+                    <div class="product-details-content quickview-content">
+                        <h2><span>@Model.Perfume_Name</span></h2>
+                        <p><span>@Model.Perfume_Description</span></p>
+                        <div class="pro-details-list">
+                            <ul>
+                                <li>- کشور سازنده: <span>@Model.Perfume_Country </span></li>
+                                <li>- عطار: <span>@Model.Perfume_Perfumer</span></li>
+                                <li>- غلظت:<span>@Model.Tbl_PerfumeType.PerfumeType_Title</span> </li>
+                            </ul>
+                        </div>
+                        <div class="pro-details-meta">
+                            <span>برند : </span><a href="#">@Model.Tbl_Brand.Brand_Title</a>
+                        </div>
+                        <div class="pro-details-meta">
+                            <span>جنسیت : </span> <a href="#">@Model.Perfume_Gender</a>
+                        </div>
+                        <div class="pro-details-meta">
+                            <span>گروه بویایی: </span>
+                            <ul>
+                                <li >@Model.Perfume_OlfactionGroups</li>
+                            </ul>
+                        </div>
+                        <div class="pro-details-meta">
+                            <span>طبع و رایحه:</span>
+                            <ul>
+                                <li>@Model.Perfume_TemperOfPerfume</li>
+                            </ul>
+                        </div>
+                        <div class="pro-details-meta">
+                            <span>نت ها:</span>
+                            <ul>
+                                <li>@Model.Perfume_Notes</li>
+                            </ul>
+                        </div>
+                        <div class="pro-details-meta">
+                            <span>مناسب فصل: </span>
+                            <ul>
+                                @foreach (var season in rep_perfume.Get_PerfumeSeasons(@Model.Perfume_ID))
+                                {
+                                    <li>
+                                        <img id="myimage" src="~/Content/Images/dashboard_images/@season.Season_ImageIndex" class="img-fluid img-thumbnail" width="48" height="48" data-toggle="tooltip" data-placement="top" title="@season.Season_Title">
+                                    </li>
+                                }
+                            </ul>
+                        </div>
+                        <div class="pro-details-meta">
+                            <span>دسته بندی:</span>
+                            <select class="small-size-item" name="Category_Title" id="CategoryList" onchange="showCategory(this.options[this.selectedIndex].value)"></select>
+                        </div>
+                        <div class="pro-details-meta">
+                            <span>حجم ( میل) :</span>
+                            <select name="null_Weight" id="null_Weight" class="small-size-item">
+                                <option value="0">انتخاب کنید</option>
+                            </select>
+                            <select name="CologneWeightList" id="CologneWeightList" onchange="showPrice()" style="display:none" class="small-size-item"></select>
+                            <select name="CompanySampleWeightList" id="CompanySampleWeightList" onchange="showPrice()" style="display:none" class="small-size-item"></select>
+                            <select name="HandySampleWeightList" id="HandySampleWeightList" onchange="showPrice()" style="display:none" class="small-size-item"></select>
+                        </div>
+
+                        <div class="pro-details-meta card_price">
+                            <span>قیمت واحد :</span>
+                            <input type="text" id="Price" value=" 0 تومان" class="small-size-item" disabled />
+                        </div>
+                        <div class="pro-details-meta card_price">
+                            <span> تعداد : </span>
+                            <input type="number" id="Count" value="1" class="small-size-item" step="1" onchange="showOther()" />
+                        </div>
+                        <div class="pro-details-meta">
+                            <span>قیمت نهایی:</span>
+                            <input type="text" class="small-size-item" id="finalPrice" value=" 0 تومان" disabled />
+                        </div>
+                        <p id="message" style="color:red"></p>
+                        <div class="pro-details-quality">
+                            <div class="pro-details-cart btn-hover">
+                                <a href="#" onclick="Save()">افزودن به سبد خرید</a>
+                            </div>
+                            <div class="pro-details-social">
+                                <ul>
+                                    <li><a href="https://t.me/perfumedecant"><i class="fab fa-telegram"></i></a></li>
+                                    <li><a href="https://www.instagram.com/perfumedecantir"><i class="fa fa-instagram"></i></a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+
+    function showPrice() {
+        var Category_Title = $('#CategoryList option:selected').val();
+        var weight;
+        if (Category_Title == "ادکلن") {
+            weight = $('#CologneWeightList option:selected').val();
+        }
+        else if (Category_Title == "سمپل شرکتی") {
+            weight = weight = $('#CompanySampleWeightList option:selected').val();
+        }
+        else if (Category_Title == "سمپل دست ریز") {
+
+            weight = $('#HandySampleWeightList option:selected').val();
+        }
+
+        var id = $("#PerfumeID");
+        var Perfume_ID = id[0].innerText;
+
+        $.ajax({
+            type: 'POST',
+            url: '@Url.Action("GetPrice","Perfume")', // we are calling json method
+                dataType: 'json',
+                data: { Perfume_ID: Perfume_ID, weight: weight, category: Category_Title },
+                success: function (price) {
+
+                    if (Category_Title == "ادکلن") {
+                        $("#ColognePrice").val(price);
+            }
+                    else if (Category_Title == "سمپل شرکتی") {
+                        $("#CompanySamplePrice").val(price);
+            }
+            else if (Category_Title == "سمپل دست ریز") {
+
+               $("#HandySamplePrice").val(price);
+            }
+
+                    showOther();
+                    },
+                    error: function (ex) {
+                        alert('Failed to retrieve states.' + ex);
+                    }
+                });
+    }
+
+            function showCategory(select_item) {
+                var cologne_price = $("#ColognePrice").val();
+                var companySample_price = $("#CompanySamplePrice").val();
+                var handySample_price = $("#HandySamplePrice").val();
+
+                if (select_item == "انتخاب کنید") {
+                    $("#null_Weight").css("display", "block");
+                    $("#CologneWeightList").css("display", "none");
+                    $("#CompanySampleWeightList").css("display", "none");
+                    $("#HandySampleWeightList").css("display", "none");
+                    $("#Price").val(0 + " تومان ");
+                    $("#finalPrice").val(0 + " تومان ");
+                }
+                else if (select_item == "ادکلن") {
+                    $("#null_Weight").css("display", "none");
+                    $("#CologneWeightList").css("display", "block");
+                    $("#CompanySampleWeightList").css("display", "none");
+                    $("#HandySampleWeightList").css("display", "none");
+
+                    showFinalPrice(cologne_price, companySample_price, handySample_price);
+
+                    $("#Price").val(cologne_price + " تومان ");
+
+                    Form.fileURL.focus();
+                }
+                else if (select_item == "سمپل شرکتی") {
+                    $("#null_Weight").css("display", "none");
+                    $("#CologneWeightList").css("display", "none");
+                    $("#CompanySampleWeightList").css("display", "block");
+                    $("#HandySampleWeightList").css("display", "none");
+
+                    showFinalPrice(cologne_price, companySample_price, handySample_price);
+
+                    $("#Price").val(companySample_price + " تومان ");
+                }
+                else if (select_item == "سمپل دست ریز") {
+                    $("#null_Weight").css("display", "none");
+                    $("#CologneWeightList").css("display", "none");
+                    $("#CompanySampleWeightList").css("display", "none");
+                    $("#HandySampleWeightList").css("display", "block");
+
+                    showFinalPrice(cologne_price, companySample_price, handySample_price);
+
+                    $("#Price").val(handySample_price + " تومان ");
+
+                }
+            }
+
+            function showOther() {
+                var categoryTitle = $('#CategoryList option:selected').val();
+                showCategory(categoryTitle);
+            }
+
+            function showFinalPrice(cologne_price, companySample_price, handySample_price) {
+
+                var categoryTitle = $('#CategoryList option:selected').val();
+                var count = $('#Count').val();
+                var finalPrice = 0;
+
+                if ((categoryTitle == "ادکلن") && (count != "")) {
+                    finalPrice = parseInt(cologne_price) * parseInt(count);
+                    $("#finalPrice").val(finalPrice + " تومان ");
+                }
+                else if ((categoryTitle == "سمپل شرکتی") && (count != "")) {
+                    finalPrice = parseInt(companySample_price) * parseInt(count);
+                    $("#finalPrice").val(finalPrice + " تومان ");
+                }
+                else if ((categoryTitle == "سمپل دست ریز") && (count != "") && (weight != "")) {
+
+                    var weight = $('#HandySampleWeightList option:selected').val();
+                    finalPrice = parseFloat(handySample_price) * parseFloat(count);
+                    $("#finalPrice").val(finalPrice + " تومان ");
+                }
+            }
+
+    function Save() {
+            var baseUrl = '/Cart/AddToCart';
+            var Category_Title = $('#CategoryList option:selected').val();
+            var weight;
+            if (Category_Title == "ادکلن") {
+                weight = $('#CologneWeightList option:selected').val();
+            }
+            else if (Category_Title == "سمپل شرکتی") {
+                weight = weight = $('#CompanySampleWeightList option:selected').val();
+            }
+            else if (Category_Title == "سمپل دست ریز") {
+
+                weight = $('#HandySampleWeightList option:selected').val();
+            }
+
+            var Count = $("#Count").val();
+            var id = $("#PerfumeID");
+            var Perfume_ID = id[0].innerText;
+            //alert(weight);
+            //alert(Count);
+            //alert(Perfume_ID)
+            event.preventDefault();
+            //window.location = baseUrl + "/?PerfumeID=" + Perfume_ID + '&Category_Title=' + Category_Title + "&Weight=" + weight + '&Count=' + Count;
+
+             $.ajax({
+                    type: 'POST',
+                    url: '@Url.Action("AddToCart","Cart")', // we are calling json method
+                 dataType: 'json',
+                 data: { PerfumeID: Perfume_ID, Category_Title: Category_Title, Weight: weight, Count: Count },
+                success: function (message) {
+                    if (message == "OK") {
+                        window.location = "/Cart/Index";
+                    }
+                    else if (message == "Login") {
+                        window.location = "/Account/Index";
+                    }
+                    else {
+                        document.getElementById("message").innerHTML = message;
+                    }
+                    },
+                    error: function (ex) {
+                        alert('Failed to retrieve states.' + ex);
+                    }
+                });
+
+        }
+</script>

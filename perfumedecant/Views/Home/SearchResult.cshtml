@@ -20,6 +20,22 @@
 
 @Html.Partial("PerfumeList_Section", Model)
 @Html.Partial("Modal_Section")
+
+<script>
+        var inputSearch = document.getElementById("searchTerm");
+        inputSearch.addEventListener("keyup", function (event) {
+            if (event.keyCode === 13) {
+                event.preventDefault();
+                changeHref();
+            }
+        });
+
+    function changeHref() {
+            var url = '@Url.Action("SearchResult", "Home")';
+            var txtVal = $('#searchTerm').val();
+            window.location.href = url + '/?searchTerm=' + txtVal;
+        }
+</script>
    
 
 

@@ -19,5 +19,15 @@
         </div>
     </div>
 </div>
-@Html.Partial("PerfumeList_Section",Model)   
-@Html.Partial("Modal_Section")   
+
+<div class="container">
+    <div class="tab-filter-wrap mb-60 pt-40">
+
+        <div class="filter-active">
+            <a href="#"> فیلتر <i class="fa fa-plus"></i></a>
+        </div>
+    </div>
+    @Html.Partial("Filter_Section")
+    @Html.Partial("PerfumeList_Section", Model)
+    @Html.Partial("Modal_Section")
+</div>

@@ -116,6 +116,24 @@ namespace perfumedecant.Controllers
             }, JsonRequestBehavior.AllowGet);
         }
 
+        public ActionResult Perfume_Details(int PerfumeID)
+        {
+            String Message = "";
+            var perfume = db.Tbl_Perfume.Where(a => a.Perfume_ID == PerfumeID).SingleOrDefault();
+            if (perfume != null)
+            {
+                InitDropdownLists(PerfumeID);
+                return View(perfume);
+            }
+            else
+            {
+                Message = "perfume with ID" + PerfumeID + "not found.";
+                log.addLog(Message, "AddCart", "Cart", logStatus.EventLog);
+                ViewBag.Error = "محصول پیدا نشد، لطفا دوباره تلاش کنید.";
+                return RedirectToAction("Index", "Home");
+            }
+        }
+
         public JsonResult PerfumeDetails(int PerfumeID)
         {
             String Message = "";

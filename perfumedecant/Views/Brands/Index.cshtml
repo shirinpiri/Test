@@ -4,18 +4,22 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-
-<section class="new-section">
+<div class="breadcrumb-area pt-35 pb-35 bg-gray-3">
     <div class="container">
-        <div class="row" style="margin-bottom:40px;">
-            <div class="col-md-12">
-                <div class="titie-section wow fadeInDown animated ">
-                    <h1>لیست برندها</h1>
-                </div>
-            </div>
+        <div class="breadcrumb-content text-center">
+            <ul>
+                <li>
+                    <a  href="@Url.Action("Index", "Home")"> صفحه اصلی </a>
+                </li>
+                <li class="active"> لیست برندها</li>
+            </ul>
         </div>
-        <div class="row">
-            @if (Model.Brands.Count() > 0)
+    </div>
+</div>
+
+<div class="container brand-list">
+    <div class="row">
+        @if (Model.Brands.Count() > 0)
             {
                 double delay = 0.0;
                 foreach (var brand in Model.Brands)
@@ -23,40 +27,38 @@
                     delay = delay + 0.2;
                     string delay1 = delay + "s";
 
-                    <div class="col-md-3 col-sm-6 wow fadeInLeft animated" data-wow-delay=0.0>
-                        <div class="product-item">
-                            <a href="@Url.Action("Perfumes", "Perfume", new { brandID = brand.Brand_ID , type = ViewBag.type })"><img src="~/Uploads/BrandImages/@brand.Brand_ImageIndex" class="img-responsive" width="255" height="322" alt=""> </a>
-                        </div>
+                <div class="col-md-3 col-sm-6 wow fadeInLeft animated" data-wow-delay=0.0>
+                    <div class="brand-list-item">
+                        <a href="@Url.Action("Perfumes", "Perfume", new { brandID = brand.Brand_ID , type = ViewBag.type })"><img src="~/Uploads/BrandImages/@brand.Brand_ImageIndex" class="img-responsive" width="255" height="322" alt=""> </a>
                     </div>
+                </div>
 
-                }
             }
-            else
-            {
-                <p>محصولی برای نمایش موجود نمی باشد.</p>
-            }
-        </div>
+        }
+        else
+        {
+            <p>محصولی برای نمایش موجود نمی باشد.</p>
+        }
+    </div>
 
-        <div class="row" style="margin-top:100px">
-            <div class="col-12 text-center">
-                <div class="custom-pagination">
-                    @for (int i = 1; i <= Model.PageCount; i++)
+    <div class="row" style="margin-top:100px">
+        <div class="col-12 text-center">
+            <div class="custom-pagination">
+                @for (int i = 1; i <= Model.PageCount; i++)
+                {
+                    if (i != Model.CurrentPageIndex)
                     {
-                        if (i != Model.CurrentPageIndex)
-                        {
-                            @*<a href="/Content/Index?currentPageIndex=@i#contents">@i</a>*@
-                            @*<a href="/Brands/@i">@i</a>*@
-                            <a href="@Url.Action("Index", "Brands", new { currentPageIndex = i , type = ViewBag.type })">@i</a>
-                                }
-                                else
-                                {
-                                <span class="current">@i</span>
-                                }
-                                }
-                        </div>
+                        @*<a href="/Content/Index?currentPageIndex=@i#contents">@i</a>*@
+                        @*<a href="/Brands/@i">@i</a>*@
+                        <a href="@Url.Action("Index", "Brands", new { currentPageIndex = i , type = ViewBag.type })">@i</a>
+                    }
+                    else
+                    {
+                        <span class="current">@i</span>
+                    }
+                }
             </div>
         </div>
+    </div>        
+</div>
 
-
-    </div>
-</section>
