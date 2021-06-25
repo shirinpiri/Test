@@ -122,7 +122,18 @@ namespace perfumedecant.Controllers
             var perfume = db.Tbl_Perfume.Where(a => a.Perfume_ID == PerfumeID).SingleOrDefault();
             if (perfume != null)
             {
-                InitDropdownLists(PerfumeID);
+                Rep_Perfume rep_Perfume = new Rep_Perfume();
+                var seasons = rep_Perfume.Get_PerfumeSeasons(PerfumeID);
+                ViewBag.seasonCount = seasons.Count();
+
+                PriceModel prices = new PriceModel();
+                prices = InitDropdownLists(PerfumeID);
+                ViewBag.cologne_price = prices.ColognePrice;
+                ViewBag.handySample_price = prices.HandySamplePrice;
+                ViewBag.companySample_price = prices.CompanySamplePrice;
+                ViewBag.cologne_weightList = prices.CologneWeightList;
+                ViewBag.handySample_weightList = prices.HandySampleWeightList;
+                ViewBag.companySample_weightList = prices.CompanySampleWeightList;
                 return View(perfume);
             }
             else
@@ -134,7 +145,7 @@ namespace perfumedecant.Controllers
             }
         }
 
-        public JsonResult PerfumeDetails(int PerfumeID)
+        public JsonResult PerfumeModalDetails(int PerfumeID)
         {
             String Message = "";
             IEnumerable<Tbl_Season> pfs = new List<Tbl_Season>();
@@ -365,12 +376,6 @@ namespace perfumedecant.Controllers
             prices.CompanySampleWeightList = companySample_weightList;
 
             return (prices);
-            /*    ViewBag.cologne_price = cologne_price;
-                ViewBag.handySample_price = handySample_price;
-                ViewBag.companySample_price = companySample_price;
-                ViewBag.cologne_weightList = cologne_weightList;
-                ViewBag.handySample_weightList = handySample_weightList;
-                ViewBag.companySample_weightList = companySample_weightList;*/
         }
 
         public ActionResult PerfumesBrand(int brandID = 0, string type = "", int currentPageIndex = 1)

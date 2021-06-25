@@ -64,6 +64,8 @@
                                 <li>@Model.Perfume_Notes</li>
                             </ul>
                         </div>
+                        @if (ViewBag.seasonCount > 0)
+                        {
                         <div class="pro-details-meta">
                             <span>مناسب فصل: </span>
                             <ul>
@@ -75,44 +77,57 @@
                                 }
                             </ul>
                         </div>
-                        <div class="pro-details-meta">
-                            <span>دسته بندی:</span>
-                            <select class="small-size-item" name="Category_Title" id="CategoryList" onchange="showCategory(this.options[this.selectedIndex].value)"></select>
-                        </div>
-                        <div class="pro-details-meta">
-                            <span>حجم ( میل) :</span>
-                            <select name="null_Weight" id="null_Weight" class="small-size-item">
-                                <option value="0">انتخاب کنید</option>
-                            </select>
-                            <select name="CologneWeightList" id="CologneWeightList" onchange="showPrice()" style="display:none" class="small-size-item"></select>
-                            <select name="CompanySampleWeightList" id="CompanySampleWeightList" onchange="showPrice()" style="display:none" class="small-size-item"></select>
-                            <select name="HandySampleWeightList" id="HandySampleWeightList" onchange="showPrice()" style="display:none" class="small-size-item"></select>
-                        </div>
+                        }
+                        @if (ViewBag.categoryCount > 0)
+                        {
+                            <div class="pro-details-meta">
+                                <span>دسته بندی:</span>
+                                @Html.DropDownList("CategoryList", (IEnumerable<SelectListItem>)ViewBag.categoryList, "انتخاب کنید", new { @class = "small-size-item", onchange = "java_script_:showCategory(this.options[this.selectedIndex].value)" })
+                            </div>
+                            <div class="pro-details-meta">
+                                <span>حجم ( میل) :</span>
+                                @Html.DropDownList("null_Weight", new List<SelectListItem> { new SelectListItem { Text = "انتخاب کنید", Value = "0" } }, new { @class = "small-size-item" })
+                                @Html.DropDownList("CologneWeightList", (IEnumerable<SelectListItem>)ViewBag.cologne_weightList, new { @class = "small-size-item", @style = "display:none", onchange = "java_script_:showOther()" })
+                                @Html.DropDownList("CompanySampleWeightList", (IEnumerable<SelectListItem>)ViewBag.companySample_weightList, new { @class = "small-size-item", @style = "display:none", onchange = "java_script_:showOther()" })
+                                @Html.DropDownList("HandySampleWeightList", (IEnumerable<SelectListItem>)ViewBag.handySample_weightList, new { @class = "small-size-item", @style = "display:none", onchange = "java_script_:showOther()" })
 
-                        <div class="pro-details-meta card_price">
-                            <span>قیمت واحد :</span>
-                            <input type="text" id="Price" value=" 0 تومان" class="small-size-item" disabled />
-                        </div>
-                        <div class="pro-details-meta card_price">
-                            <span> تعداد : </span>
-                            <input type="number" id="Count" value="1" class="small-size-item" step="1" onchange="showOther()" />
-                        </div>
-                        <div class="pro-details-meta">
-                            <span>قیمت نهایی:</span>
-                            <input type="text" class="small-size-item" id="finalPrice" value=" 0 تومان" disabled />
-                        </div>
-                        <p id="message" style="color:red"></p>
-                        <div class="pro-details-quality">
-                            <div class="pro-details-cart btn-hover">
-                                <a href="#" onclick="Save()">افزودن به سبد خرید</a>
                             </div>
-                            <div class="pro-details-social">
-                                <ul>
-                                    <li><a href="https://t.me/perfumedecant"><i class="fab fa-telegram"></i></a></li>
-                                    <li><a href="https://www.instagram.com/perfumedecantir"><i class="fa fa-instagram"></i></a></li>
-                                </ul>
+
+                            <div class="pro-details-meta card_price">
+                                <span>قیمت واحد :</span>
+                                <input type="text" id="Price" class="small-size-item" disabled />
                             </div>
-                        </div>
+                            <div class="pro-details-meta card_price">
+                                <span> تعداد : </span>
+                                <input type="number" id="Count" value="1" class="small-size-item" step="1" onchange="showOther()" />
+                            </div>
+                            <div class="pro-details-meta">
+                                <span>قیمت نهایی:</span>
+                                <input type="text" class="small-size-item" id="finalPrice" value=" 0 تومان" disabled />
+                            </div>
+                            <p id="message" style="color:red"></p>
+                            <div class="pro-details-quality">
+                                <div class="pro-details-cart btn-hover">
+                                    <a href="#" onclick="Save()">افزودن به سبد خرید</a>
+                                </div>
+                                <div class="pro-details-social">
+                                    <ul>
+                                        <li><a href="https://t.me/perfumedecant"><i class="fab fa-telegram"></i></a></li>
+                                        <li><a href="https://www.instagram.com/perfumedecantir"><i class="fa fa-instagram"></i></a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        }
+                        else
+                        {
+                            <center>
+                                <div class="card_price" style="width: max-content; ">
+                                    لطفا تماس بگیرید،   09128774252
+                                </div>
+
+                            </center>
+                        }
+
                     </div>
                 </div>
             </div>
@@ -165,9 +180,6 @@
     }
 
             function showCategory(select_item) {
-                var cologne_price = $("#ColognePrice").val();
-                var companySample_price = $("#CompanySamplePrice").val();
-                var handySample_price = $("#HandySamplePrice").val();
 
                 if (select_item == "انتخاب کنید") {
                     $("#null_Weight").css("display", "block");
@@ -183,9 +195,8 @@
                     $("#CompanySampleWeightList").css("display", "none");
                     $("#HandySampleWeightList").css("display", "none");
 
-                    showFinalPrice(cologne_price, companySample_price, handySample_price);
-
-                    $("#Price").val(cologne_price + " تومان ");
+                    showFinalPrice( @ViewBag.cologne_price,  @ViewBag.companySample_price,  @ViewBag.handySample_price);
+                    $("#Price").val( @ViewBag.cologne_price  +" تومان ");
 
                     Form.fileURL.focus();
                 }
@@ -195,9 +206,9 @@
                     $("#CompanySampleWeightList").css("display", "block");
                     $("#HandySampleWeightList").css("display", "none");
 
-                    showFinalPrice(cologne_price, companySample_price, handySample_price);
-
-                    $("#Price").val(companySample_price + " تومان ");
+                    showFinalPrice( @ViewBag.cologne_price,  @ViewBag.companySample_price,  @ViewBag.handySample_price);
+                
+                    $("#Price").val( @ViewBag.companySample_price  +" تومان ");
                 }
                 else if (select_item == "سمپل دست ریز") {
                     $("#null_Weight").css("display", "none");
@@ -205,9 +216,10 @@
                     $("#CompanySampleWeightList").css("display", "none");
                     $("#HandySampleWeightList").css("display", "block");
 
-                    showFinalPrice(cologne_price, companySample_price, handySample_price);
+                    showFinalPrice(@ViewBag.cologne_price, @ViewBag.companySample_price, @ViewBag.handySample_price);
+                   
+                    $("#Price").val( @ViewBag.handySample_price +" تومان ");
 
-                    $("#Price").val(handySample_price + " تومان ");
 
                 }
             }
@@ -218,7 +230,7 @@
             }
 
             function showFinalPrice(cologne_price, companySample_price, handySample_price) {
-
+      
                 var categoryTitle = $('#CategoryList option:selected').val();
                 var count = $('#Count').val();
                 var finalPrice = 0;
@@ -234,7 +246,8 @@
                 else if ((categoryTitle == "سمپل دست ریز") && (count != "") && (weight != "")) {
 
                     var weight = $('#HandySampleWeightList option:selected').val();
-                    finalPrice = parseFloat(handySample_price) * parseFloat(count);
+
+                    finalPrice = parseFloat(handySample_price) * parseFloat(weight) * parseFloat(count);
                     $("#finalPrice").val(finalPrice + " تومان ");
                 }
             }
