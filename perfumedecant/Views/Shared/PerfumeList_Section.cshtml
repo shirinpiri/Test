@@ -18,35 +18,39 @@
                                 {
                                     delay = delay + 0.2;
                                     string delay1 = delay + "s";
+                                <div class="col-lg-6 col-md-12 col-12">
+                                    <div class="shop-list-wrap mb-30 scroll-zoom">
+                                        <div class="row">
+                                            <div class="col-xl-8 col-lg-7 col-md-7 col-sm-6">
+                                                <div class="shop-list-content">
+                                                    <a href='@Url.Action("Perfume_Details", "Perfume", new { perfumeID = perfume.Perfume_ID })'>
 
-                                    <div class="col-lg-6 col-md-12 col-12">
-                                        <div class="shop-list-wrap mb-30 scroll-zoom">
-                                            <div class="row">
-                                                <div class="col-xl-8 col-lg-7 col-md-7 col-sm-6">
-                                                    <div class="shop-list-content">
-                                                        <h3><a class="search-box-item" href="#" data-toggle="modal" onclick="showModal(@perfume.Perfume_ID, '../../Uploads/PerfumeImages/')">@perfume.Perfume_Name</a></h3>
+                                                        <h3>@perfume.Perfume_Name</h3>
                                                         <div><span>جنسیت : @perfume.Perfume_Gender </span></div>
                                                         <div><span>گروه بویایی:@perfume.Perfume_OlfactionGroups</span></div>
                                                         <div><span>طبع و رایحه: @perfume.Perfume_TemperOfPerfume</span></div>
                                                         <p class="showPart">@perfume.Perfume_Description</p>
-                                                        <div class="shop-list-btn btn-hover">
+                                                       
+                                                        </a>
+                                                    <div class="shop-list-btn btn-hover">
                                                             <a href='@Url.Action("Perfume_Details", "Perfume", new { perfumeID = perfume.Perfume_ID })'>افزودن به سبد خرید</a>
                                                         </div>
-                                                    </div>
                                                 </div>
-                                                <div class="col-xl-4 col-lg-5 col-md-5 col-sm-6">
-                                                    <div class="product-wrap">
-                                                        <div class="product-img">
-                                                            <a href="#">
-                                                                <img class="default-img" src="~/Uploads/PerfumeImages/@perfume.Perfume_ImageIndex" alt="">
-                                                                <img class="hover-img" src="~/Uploads/PerfumeImages/@perfume.Perfume_ImageIndex" alt="">
-                                                            </a>
-                                                        </div>
-                                                    </div>
+                                            </div>
+                                            <div class="col-xl-4 col-lg-5 col-md-5 col-sm-6">
+                                                <div class="product-wrap">
+                                                    <div class="product-img">
+                                                        <a href='@Url.Action("Perfume_Details", "Perfume", new { perfumeID = perfume.Perfume_ID })'>
+
+                                                            <img class="default-img" src="~/Uploads/PerfumeImages/@perfume.Perfume_ImageIndex" alt="">
+                                                            <img class="hover-img" src="~/Uploads/PerfumeImages/@perfume.Perfume_ImageIndex" alt="">
+                                                   </a>
+                                                            </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
+                                </div>
                                 }
                             }
                             else

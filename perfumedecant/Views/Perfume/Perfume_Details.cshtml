@@ -10,12 +10,15 @@
 
 <div class="breadcrumb-area pt-35 pb-35 bg-gray-3">
     <div class="container">
+
         <div class="breadcrumb-content text-center">
+            <input type="hidden" id="PerfumeID" value="@Model.Perfume_ID" />
             <ul>
                 <li>
                     <a href="index.html"> صفحه اصلی </a>
                 </li>
                 <li class="active">  @Model.Perfume_Name </li>
+
             </ul>
         </div>
     </div>
@@ -49,7 +52,7 @@
                         <div class="pro-details-meta">
                             <span>گروه بویایی: </span>
                             <ul>
-                                <li >@Model.Perfume_OlfactionGroups</li>
+                                <li>@Model.Perfume_OlfactionGroups</li>
                             </ul>
                         </div>
                         <div class="pro-details-meta">
@@ -66,17 +69,17 @@
                         </div>
                         @if (ViewBag.seasonCount > 0)
                         {
-                        <div class="pro-details-meta">
-                            <span>مناسب فصل: </span>
-                            <ul>
-                                @foreach (var season in rep_perfume.Get_PerfumeSeasons(@Model.Perfume_ID))
-                                {
-                                    <li>
-                                        <img id="myimage" src="~/Content/Images/dashboard_images/@season.Season_ImageIndex" class="img-fluid img-thumbnail" width="48" height="48" data-toggle="tooltip" data-placement="top" title="@season.Season_Title">
-                                    </li>
-                                }
-                            </ul>
-                        </div>
+                            <div class="pro-details-meta">
+                                <span>مناسب فصل: </span>
+                                <ul>
+                                    @foreach (var season in rep_perfume.Get_PerfumeSeasons(@Model.Perfume_ID))
+                                    {
+                                        <li>
+                                            <img id="myimage" src="~/Content/Images/dashboard_images/@season.Season_ImageIndex" class="img-fluid img-thumbnail" width="48" height="48" data-toggle="tooltip" data-placement="top" title="@season.Season_Title">
+                                        </li>
+                                    }
+                                </ul>
+                            </div>
                         }
                         @if (ViewBag.categoryCount > 0)
                         {
@@ -87,9 +90,9 @@
                             <div class="pro-details-meta">
                                 <span>حجم ( میل) :</span>
                                 @Html.DropDownList("null_Weight", new List<SelectListItem> { new SelectListItem { Text = "انتخاب کنید", Value = "0" } }, new { @class = "small-size-item" })
-                                @Html.DropDownList("CologneWeightList", (IEnumerable<SelectListItem>)ViewBag.cologne_weightList, new { @class = "small-size-item", @style = "display:none", onchange = "java_script_:showOther()" })
-                                @Html.DropDownList("CompanySampleWeightList", (IEnumerable<SelectListItem>)ViewBag.companySample_weightList, new { @class = "small-size-item", @style = "display:none", onchange = "java_script_:showOther()" })
-                                @Html.DropDownList("HandySampleWeightList", (IEnumerable<SelectListItem>)ViewBag.handySample_weightList, new { @class = "small-size-item", @style = "display:none", onchange = "java_script_:showOther()" })
+                                @Html.DropDownList("CologneWeightList", (IEnumerable<SelectListItem>)ViewBag.cologne_weightList, new { @class = "small-size-item", @style = "display:none", onchange = "java_script_:showPrice()" })
+                                @Html.DropDownList("CompanySampleWeightList", (IEnumerable<SelectListItem>)ViewBag.companySample_weightList, new { @class = "small-size-item", @style = "display:none", onchange = "java_script_:showPrice()" })
+                                @Html.DropDownList("HandySampleWeightList", (IEnumerable<SelectListItem>)ViewBag.handySample_weightList, new { @class = "small-size-item", @style = "display:none", onchange = "java_script_:showPrice()" })
 
                             </div>
 
@@ -136,49 +139,6 @@
 </div>
 <script>
 
-    function showPrice() {
-        var Category_Title = $('#CategoryList option:selected').val();
-        var weight;
-        if (Category_Title == "ادکلن") {
-            weight = $('#CologneWeightList option:selected').val();
-        }
-        else if (Category_Title == "سمپل شرکتی") {
-            weight = weight = $('#CompanySampleWeightList option:selected').val();
-        }
-        else if (Category_Title == "سمپل دست ریز") {
-
-            weight = $('#HandySampleWeightList option:selected').val();
-        }
-
-        var id = $("#PerfumeID");
-        var Perfume_ID = id[0].innerText;
-
-        $.ajax({
-            type: 'POST',
-            url: '@Url.Action("GetPrice","Perfume")', // we are calling json method
-                dataType: 'json',
-                data: { Perfume_ID: Perfume_ID, weight: weight, category: Category_Title },
-                success: function (price) {
-
-                    if (Category_Title == "ادکلن") {
-                        $("#ColognePrice").val(price);
-            }
-                    else if (Category_Title == "سمپل شرکتی") {
-                        $("#CompanySamplePrice").val(price);
-            }
-            else if (Category_Title == "سمپل دست ریز") {
-
-               $("#HandySamplePrice").val(price);
-            }
-
-                    showOther();
-                    },
-                    error: function (ex) {
-                        alert('Failed to retrieve states.' + ex);
-                    }
-                });
-    }
-
             function showCategory(select_item) {
 
                 if (select_item == "انتخاب کنید") {
@@ -196,8 +156,7 @@
                     $("#HandySampleWeightList").css("display", "none");
 
                     showFinalPrice( @ViewBag.cologne_price,  @ViewBag.companySample_price,  @ViewBag.handySample_price);
-                    $("#Price").val( @ViewBag.cologne_price  +" تومان ");
-
+                    $("#Price").val(@ViewBag.cologne_price + " تومان ");
                     Form.fileURL.focus();
                 }
                 else if (select_item == "سمپل شرکتی") {
@@ -207,8 +166,7 @@
                     $("#HandySampleWeightList").css("display", "none");
 
                     showFinalPrice( @ViewBag.cologne_price,  @ViewBag.companySample_price,  @ViewBag.handySample_price);
-                
-                    $("#Price").val( @ViewBag.companySample_price  +" تومان ");
+                    $("#Price").val(@ViewBag.companySample_price + " تومان ");
                 }
                 else if (select_item == "سمپل دست ریز") {
                     $("#null_Weight").css("display", "none");
@@ -217,10 +175,8 @@
                     $("#HandySampleWeightList").css("display", "block");
 
                     showFinalPrice(@ViewBag.cologne_price, @ViewBag.companySample_price, @ViewBag.handySample_price);
-                   
-                    $("#Price").val( @ViewBag.handySample_price +" تومان ");
-
-
+                    var weight = $('#HandySampleWeightList option:selected').val();
+                    $("#Price").val(@ViewBag.handySample_price * weight + " تومان ");
                 }
             }
 
@@ -230,7 +186,7 @@
             }
 
             function showFinalPrice(cologne_price, companySample_price, handySample_price) {
-      
+
                 var categoryTitle = $('#CategoryList option:selected').val();
                 var count = $('#Count').val();
                 var finalPrice = 0;
@@ -268,8 +224,8 @@
             }
 
             var Count = $("#Count").val();
-            var id = $("#PerfumeID");
-            var Perfume_ID = id[0].innerText;
+                            var Perfume_ID = document.getElementById("PerfumeID").value;
+
             //alert(weight);
             //alert(Count);
             //alert(Perfume_ID)
@@ -286,7 +242,7 @@
                         window.location = "/Cart/Index";
                     }
                     else if (message == "Login") {
-                        window.location = "/Account/Index";
+                        window.location = "/Account/Index?returnUrl=/Cart/Index";
                     }
                     else {
                         document.getElementById("message").innerHTML = message;
@@ -297,5 +253,47 @@
                     }
                 });
 
+            }
+
+    function showPrice() {
+        var Category_Title = $('#CategoryList option:selected').val();
+            var weight;
+            if (Category_Title == "ادکلن") {
+                weight = $('#CologneWeightList option:selected').val();
+            }
+            else if (Category_Title == "سمپل شرکتی") {
+                weight = weight = $('#CompanySampleWeightList option:selected').val();
+            }
+            else if (Category_Title == "سمپل دست ریز") {
+
+                weight = $('#HandySampleWeightList option:selected').val();
+            }
+
+            var PerfumeID = document.getElementById('PerfumeID').value;
+
+            $.ajax({
+                    type: 'POST',
+                    url: '@Url.Action("GetPrice","Perfume")', // we are calling json method
+                dataType: 'json',
+                data: { Perfume_ID: PerfumeID, weight: weight, category: Category_Title },
+                success: function (price) {
+
+                    if (Category_Title == "ادکلن") {
+                        $("#ColognePrice").val(price);
+            }
+                    else if (Category_Title == "سمپل شرکتی") {
+                        $("#CompanySamplePrice").val(price);
+            }
+            else if (Category_Title == "سمپل دست ریز") {
+
+               $("#HandySamplePrice").val(price);
+            }
+
+                    showOther();
+                    },
+                    error: function (ex) {
+                        alert('Failed to retrieve states.' + ex);
+                    }
+                });
         }
 </script>

@@ -18,6 +18,12 @@ namespace perfumedecant
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
             );
+
+            routes.MapRoute(
+                name: "PerfumeDetails",
+                url: "Perfume_Details/{PerfumeID}",
+                defaults: new { controller = "Perfume", action = "Perfume_Details", id = UrlParameter.Optional }
+            );
         }
     }
 }
