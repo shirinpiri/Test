@@ -1,70 +1,71 @@
 ﻿<section class="Filter_Section">
     
     <div class="product-filter-wrapper">
-        <input checked="checked" name="filter" type="radio" value="FilterByOther" class="filter" onclick="check(this.value)"><a href="#">فیلتر بر اساس</a><p>&nbsp;</p>
-        <div id="FilterByOther" class="enabled">
-            <div class="row">
+        <div id="all-filter">
+            <input checked="checked" name="filter" type="radio" value="FilterByOther" class="filter" onclick="check(this.value)"><a href="#">فیلتر بر اساس</a><p>&nbsp;</p>
+            <div id="FilterByOther" class="enabled">
+                <div class="row">
 
-                <!-- Product Filter -->
-                <div class="col-md-3 col-sm-6 col-xs-12 mb-30">
-                    <div class="product-filter">
-                        <h5>مناسب فصل</h5>
-                        <ul class="sort-by">
-                            <li><input type="checkbox" name="season" value="بهار"> <a href="#">بهار</a></li>
-                            <li><input type="checkbox" name="season" value="تابستان"> <a href="#">تابستان</a></li>
-                            <li><input type="checkbox" name="season" value="پاییز"> <a href="#">پاییز</a></li>
-                            <li><input type="checkbox" name="season" value="زمستان"> <a href="#">زمستان</a></li>
-                        </ul>
+                    <!-- Product Filter -->
+                    <div class="col-md-3 col-sm-6 col-xs-12 mb-30">
+                        <div class="product-filter">
+                            <h5>مناسب فصل</h5>
+                            <ul class="sort-by">
+                                <li><input type="checkbox" name="season" value="بهار"> <a href="#">بهار</a></li>
+                                <li><input type="checkbox" name="season" value="تابستان"> <a href="#">تابستان</a></li>
+                                <li><input type="checkbox" name="season" value="پاییز"> <a href="#">پاییز</a></li>
+                                <li><input type="checkbox" name="season" value="زمستان"> <a href="#">زمستان</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <!-- Product Filter -->
+                    <div class="col-md-3 col-sm-6 col-xs-12 mb-30">
+                        <div class="product-filter">
+                            <h5>گروه بویایی</h5>
+                            <ul class="color-filter">
+                                <li><input type="checkbox" name="OlfactionGroup" value="شرقی"> <a href="#">شرقی</a></li>
+                                <li><input type="checkbox" name="OlfactionGroup" value="گلی"> <a href="#">گلی</a></li>
+                                <li><input type="checkbox" name="OlfactionGroup" value="مرکباتی"> <a href="#">مرکباتی</a></li>
+                                <li><input type="checkbox" name="OlfactionGroup" value="میوه ای"> <a href="#">میوه ای</a></li>
+                                <li><input type="checkbox" name="OlfactionGroup" value="گل میوه ای"> <a href="#">گل میوه ای</a></li>
+                                <li><input type="checkbox" name="OlfactionGroup" value="چوبی"> <a href="#">چوبی</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <!-- Product Filter -->
+                    <div class="col-md-3 col-sm-6 col-xs-12 mb-30">
+                        <div class="product-filter">
+                            <h5>طبع و رایحه</h5>
+                            <ul class="product-tags">
+                                <li><input type="checkbox" name="TemperOfPerfume" value="گرم"><a href="#">گرم</a></li>
+                                <li><input type="checkbox" name="TemperOfPerfume" value="ملایم"><a href="#">ملایم</a></li>
+                                <li><input type="checkbox" name="TemperOfPerfume" value="خنک"><a href="#">خنک</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <!-- gender Filter -->
+                    <div class="col-md-3 col-sm-6 col-xs-12 mb-30">
+                        <div class="product-filter">
+                            <h5>جنسیت</h5>
+                            <ul class="gender-filter">
+                                <li><input class="gender" type="radio" id="male" name="gender" value="مردانه"><a href="#">مردانه</a></li>
+                                <li><input class="gender" type="radio" id="female" name="gender" value="زنانه"><a href="#">زنانه</a></li>
+                                <li><input class="gender" type="radio" id="unisex" name="gender" value="یونیسکس"><a href="#">یونیسکس</a></li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
-                <!-- Product Filter -->
-                <div class="col-md-3 col-sm-6 col-xs-12 mb-30">
-                    <div class="product-filter">
-                        <h5>گروه بویایی</h5>
-                        <ul class="color-filter">
-                            <li><input type="checkbox" name="OlfactionGroup" value="شرقی"> <a href="#">شرقی</a></li>
-                            <li><input type="checkbox" name="OlfactionGroup" value="گلی"> <a href="#">گلی</a></li>
-                            <li><input type="checkbox" name="OlfactionGroup" value="مرکباتی"> <a href="#">مرکباتی</a></li>
-                            <li><input type="checkbox" name="OlfactionGroup" value="میوه ای"> <a href="#">میوه ای</a></li>
-                            <li><input type="checkbox" name="OlfactionGroup" value="گل میوه ای"> <a href="#">گل میوه ای</a></li>
-                            <li><input type="checkbox" name="OlfactionGroup" value="چوبی"> <a href="#">چوبی</a></li>
-                        </ul>
-                    </div>
-                </div>
-                <!-- Product Filter -->
-                <div class="col-md-3 col-sm-6 col-xs-12 mb-30">
-                    <div class="product-filter">
-                        <h5>طبع و رایحه</h5>
-                        <ul class="product-tags">
-                            <li><input type="checkbox" name="TemperOfPerfume" value="گرم"><a href="#">گرم</a></li>
-                            <li><input type="checkbox" name="TemperOfPerfume" value="ملایم"><a href="#">ملایم</a></li>
-                            <li><input type="checkbox" name="TemperOfPerfume" value="خنک"><a href="#">خنک</a></li>
-                        </ul>
-                    </div>
-                </div>
-                <!-- gender Filter -->
-                <div class="col-md-3 col-sm-6 col-xs-12 mb-30">
-                    <div class="product-filter">
-                        <h5>جنسیت</h5>
-                        <ul class="gender-filter">
-                            <li><input class="gender" type="radio" id="male" name="gender" value="مردانه"><a href="#">مردانه</a></li>
-                            <li><input class="gender" type="radio" id="female" name="gender" value="زنانه"><a href="#">زنانه</a></li>
-                            <li><input class="gender" type="radio" id="unisex" name="gender" value="یونیسکس"><a href="#">یونیسکس</a></li>
-                        </ul>
+                <div class="row">
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                        <div class="filter-search-icon">
+                            <a title="جست و جو" href="#" onclick="filtering()">جست و جو<i class="fa fa-search" style=""></i></a>
+                        </div>
                     </div>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-md-12 col-sm-12 col-xs-12">
-                    <div class="filter-search-icon">
-                        <a title="جست و جو" href="#" onclick="filtering()">جست و جو<i class="fa fa-search" style=""></i></a>
-                    </div>
-                </div>
-            </div>
+
+            <input name="filter" type="radio" value="BrandFilter" class="filter" onclick="check(this.value)"><a href="#">فیلتر بر اساس</a><p>&nbsp;</p>
         </div>
-
-        <input name="filter" type="radio" value="BrandFilter" class="filter" onclick="check(this.value)"><a href="#">فیلتر بر اساس</a><p>&nbsp;</p>
-
         <div id="BrandFilter" class="disabled">
             <div class="row">
                 <div class="product-filter">
@@ -211,8 +212,8 @@
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
+        </div>            
+     </div>
 
     <script>
 

@@ -4040,39 +4040,98 @@ a.default-btn {
     height: 750px;
 }
 
-@media only screen and (min-width: 1200px) and (max-width: 1365px) {
+@media only screen and (min-width: 1903) {
     .slider-height-1 {
-        height: 650px;
+        height: 741px;
     }
 }
 
-@media only screen and (min-width: 992px) and (max-width: 1199px) {
+@media only screen and (min-width: 1640px) and (max-width: 1902px) {
     .slider-height-1 {
-        height: 520px;
+        height: 681px;
     }
 }
 
-@media only screen and (min-width: 768px) and (max-width: 991px) {
+@media only screen and (min-width: 1495px) and (max-width: 1639px) {
     .slider-height-1 {
-        height: 450px;
+        height: 621px;
     }
 }
 
-@media only screen and (max-width: 767px) {
+@media only screen and (min-width: 1368px) and (max-width: 1494px) {
     .slider-height-1 {
-        height: 595px;
+        height: 568px;
     }
 }
 
-@media only screen and (min-width: 576px) and (max-width: 767px) {
+@media only screen and (min-width: 1347px) and (max-width: 1367px) {
     .slider-height-1 {
-        height: 300px;
+        height: 559px;
+    }
+}
+
+@media only screen and (min-width: 1220px) and (max-width: 1346px) {
+    .slider-height-1 {
+        height: 507px;
+    }
+}
+
+@media only screen and (min-width: 1099px) and (max-width: 1219px) {
+    .slider-height-1 {
+        height: 456px;
+    }
+}
+
+@media only screen and (min-width: 898px) and (max-width: 1098px) {
+    .slider-height-1 {
+        height: 373px;
+    }
+}
+
+@media only screen and (min-width: 697px) and (max-width: 897px) {
+    .slider-height-1 {
+        height: 289px;
+    }
+}
+
+@media only screen and (min-width: 656px) and (max-width: 696px) {
+    .slider-height-1 {
+        height: 289px;
+    }
+}
+
+@media only screen and (min-width: 535px) and (max-width: 655px) {
+    .slider-height-1 {
+        height: 237px;
+    }
+}
+
+@media only screen and (min-width: 500px) and (max-width: 534px) {
+    .slider-height-1 {
+        height: 207px;
+    }
+}
+
+@media only screen and (min-width: 400px) and (max-width: 499px) {
+    .slider-height-1 {
+        height: 166px;
+    }
+}
+
+@media only screen and (min-width: 300px) and (max-width: 399px) {
+    .slider-height-1 {
+        height: 124px;
+    }
+}
+
+@media only screen and (min-width: 250px) and (max-width: 299px) {
+    .slider-height-1 {
+        height: 100px;
     }
 }
 
 @media only screen and (max-width: 767px) {
     .slider-height-1.slider-height-res {
-        height: 400px;
         position: relative;
     }
 
