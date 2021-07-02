@@ -10,7 +10,7 @@
         <div class="breadcrumb-content text-center">
             <ul>
                 <li>
-                    <a href="index.html"> صفحه اصلی </a>
+                    <a href="@Url.Action("Index", "Home")"> صفحه اصلی </a>
                 </li>
                 <li class="active">  لیست محصولات  @ViewBag.title </li>
             </ul>
@@ -26,5 +26,15 @@
     </div>
     @Html.Partial("Filter_Section")
     @Html.Partial("PerfumeList_Section", Model)
+    <div>
+        <div id="filterResult" style="display:none; padding-bottom:30px;">
+            <div class="row" id="filterResultRow">
+
+            </div>
+        </div>
+        <div id="NoResult" style="display:none; padding-bottom:30px;">
+            محصولی یافت نشد!
+        </div>
+    </div>
     @Html.Partial("Modal_Section")
 </div>

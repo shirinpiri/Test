@@ -281,6 +281,7 @@
             if (!seasons.length > 0) seasons = null;
 
             $("#product-tabs").css("display", "none");
+
             $.ajax({
                 type: "POST",
                 traditional: true,
@@ -302,9 +303,10 @@
                                 '<img class="hover-img" src="Uploads/PerfumeImages/' + result.perfumeImages[i] + '" alt="">' +
                                 '</a><div class="product-action-2" ><a title="Add To Cart" href="#" ><i class="fa fa - shopping - cart"></i></a>' +
                                 '<a title="Quick View" class="Quick_View" href="#" data-toggle="modal" onclick="showModal(' + result.perfumeIDs[i] + ')"><i class="fa fa-eye"></i></a>' +
-                                '</div></div ><div class="product-content-2"><div class="title-price-wrap-2"><h3><a href="product-details.html">' + result.perfumeNames[i] +
+                                '</div></div ><div class="product-content-2"><div class="title-price-wrap-2"><h3><a href="/Perfume/Perfume_Details?PerfumeID=' + result.perfumeIDs[i]+'">' + result.perfumeNames[i] +
                                 '</a></h3></div></div></div></div>';
                         }
+
                         document.getElementById("filterResultRow").innerHTML = str;
                     }
                     else {
@@ -316,10 +318,10 @@
 
                 },
                 error: function (xhr) {
-                    //debugger;
-                    console.log(xhr.responseText);
-                    alert("Error has occurred..");
-                }
+                                        //debugger;
+                                        console.log(xhr.responseText);
+                                        alert("Error has occurred..");
+                                    }
             });
         }
     </script>
