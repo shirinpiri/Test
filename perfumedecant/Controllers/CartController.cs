@@ -15,18 +15,28 @@ namespace perfumedecant.Controllers
         LogStatus logStatus = new LogStatus();
         //
         // GET: /Cart/
-        public ActionResult Index()
+        public ActionResult Index(string returnUrl = "")
         {
             String Message = "";
             if (Session["UserName"] == null)
             {
                 Message = "Access denied. need login.";
                 log.addLog(Message, "Index", "Cart", logStatus.EventLog);
-                return RedirectToAction("Index", "Account", new { returnUrl = "/Cart/Index"});
+                string url = "/Cart/Index?returnUrl=" + returnUrl; 
+                return RedirectToAction("Index", "Account", new { returnUrl = url});
             }
             else
             {
-            return View();
+                if (returnUrl != "")
+                {
+                    returnUrl = returnUrl.Replace("amp;","");
+                    ViewBag.ContinueBtn = returnUrl;
+                }
+                else
+                {
+                    ViewBag.ContinueBtn = "/Home/Index";
+                }
+                return View();
             }
         }
 
@@ -57,14 +67,8 @@ namespace perfumedecant.Controllers
         public JsonResult AddToCart(int PerfumeID = 0, string Category_Title = "", float Weight = 0, int Count = 0)
         {
             String Message = "";
-            if (Session["UserName"] == null)
-            {
-                Message = "Access denied. need login.";
-                log.addLog(Message, "AddCart", "Cart", logStatus.EventLog);
-                string message = "Login";
-                return Json(message, JsonRequestBehavior.AllowGet);
-            }
-            else if (Category_Title == "")
+           
+           if (Category_Title == "")
             {
                 Message = "added perfume with perfume ID " + PerfumeID + "failed";
                 log.addLog(Message, "AddToCart", "Cart", logStatus.EventLog);
@@ -141,10 +145,22 @@ namespace perfumedecant.Controllers
                             return Json(message, JsonRequestBehavior.AllowGet);
                         }
                     }
+                    ib.InterimBill_Status = false;
+
+                    if (Session["UserName"] == null)
+                    {
+                        Message = "Access denied. need login.";
+                        log.addLog(Message, "AddCart", "Cart", logStatus.EventLog);
+                        string message = "Login";
+
+                        TempData["Cart"] = ib;
+                        return Json(message, JsonRequestBehavior.AllowGet);
+                    }
+
                     string username = Session["UserName"].ToString();
                     var userID = db.Tbl_User.Where(a => a.User_Username == username).SingleOrDefault().User_ID;
                     ib.InterimBill_User_ID = userID;
-                    ib.InterimBill_Status = false;
+                   
                     db.Tbl_InterimBill.Add(ib);
                     if (Convert.ToBoolean(db.SaveChanges() > 0))
                     {

@@ -33,10 +33,13 @@ namespace perfumedecant.Controllers
         [HttpPost]
         public ActionResult Register(UserViewModel userViewModel)
         {
-            if (ModelState.IsValid)
-            {
-                string returnUrl = TempData["ReturnUrl"].ToString();
+            string returnUrl = TempData["ReturnUrl"].ToString();
+            Tbl_InterimBill ib = (Tbl_InterimBill)TempData["Cart"];
 
+            if (userViewModel.User_Email != null && userViewModel.User_Email != ""
+                && userViewModel.User_Password != null && userViewModel.User_Password != "" &&
+                userViewModel.User_Username != null && userViewModel.User_Username != "")
+            {
                 if (Session["UserName"] != null)
                     return RedirectToAction("Index", "Home");
 
@@ -63,6 +66,14 @@ namespace perfumedecant.Controllers
 
                         if (returnUrl != null && returnUrl != "")
                         {
+                            if (ib != null)
+                            {
+                                ib.InterimBill_User_ID = user.User_ID;
+
+                                db.Tbl_InterimBill.Add(ib);
+                                db.SaveChanges();
+
+                            }
                             return Redirect(returnUrl);
                         }
                         else
@@ -74,6 +85,9 @@ namespace perfumedecant.Controllers
                     {
                         String Message = "register User with username " + user.User_Username + "failed.";
                         log.addLog(Message, "Register", "Account", logStatus.ErrorLog);
+                        TempData["ReturnUrl"] = returnUrl;
+                        TempData["Cart"] = ib;
+                        ViewBag.Register = true;
                         return View("Index", userViewModel);
                     }
                 }
@@ -82,21 +96,31 @@ namespace perfumedecant.Controllers
                     String Message = "register User with username " + userViewModel.User_Username + "failed.";
                     log.addLog(Message, "Register", "Account", logStatus.EventLog);
                     ViewBag.result = "قبلا با این نام کاربری و ایمیل ثبت نام شده است.";
+                    TempData["ReturnUrl"] = returnUrl;
+                    TempData["Cart"] = ib;
+                    ViewBag.Register = true;
                     return View("Index", userViewModel);
                 }
             }
             else
+            {
+                TempData["ReturnUrl"] = returnUrl;
+                TempData["Cart"] = ib;
+                ViewBag.Register = true;
+                ViewBag.result = "لطفا همه فیلدها را پر کنید.";
                 return View("Index");
-
+            }
         }
 
 
         [HttpPost]
         public ActionResult Login(UserViewModel user)
         {
+            string returnUrl = TempData["ReturnUrl"].ToString();
+            Tbl_InterimBill ib = (Tbl_InterimBill)TempData["Cart"];
+
             if (ModelState.IsValid)
             {
-                string returnUrl = TempData["ReturnUrl"].ToString();
 
                 if (Session["UserName"] != null)
                 {
@@ -114,6 +138,15 @@ namespace perfumedecant.Controllers
                     log.addLog(Message, "Login", "User", logStatus.EventLog);
                     if (returnUrl != null && returnUrl != "")
                     {
+                        if (ib != null)
+                        {
+                            ib.InterimBill_User_ID = user1.User_ID;
+                            db.Tbl_InterimBill.Add(ib);
+                            db.SaveChanges();
+
+                        }
+
+                        returnUrl = returnUrl.Replace("amp;", "");
                         return Redirect(returnUrl);
                     }
                     else
@@ -127,11 +160,18 @@ namespace perfumedecant.Controllers
                     string Message = "User with username " + user.User_Username + " login failed. Username or password worng.";
                     log.addLog(Message, "Login", "User", logStatus.EventLog);
                     ViewBag.result = "نام کاربری و یا کلمه عبور اشتباه است! ";
-                    return View("Index",user);
+                    TempData["ReturnUrl"] = returnUrl;
+                    TempData["Cart"] = ib;
+                    return View("Index", user);
                 }
             }
             else
+            {
+                TempData["ReturnUrl"] = returnUrl;
+                TempData["Cart"] = ib;
+
                 return View("Index");
+            }
         }
 
         public ActionResult SignOut()

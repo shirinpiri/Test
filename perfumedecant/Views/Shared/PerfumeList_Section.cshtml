@@ -23,7 +23,7 @@
                                         <div class="row">
                                             <div class="col-xl-8 col-lg-7 col-md-7 col-sm-6">
                                                 <div class="shop-list-content">
-                                                    <a href='@Url.Action("Perfume_Details", "Perfume", new { perfumeID = perfume.Perfume_ID })'>
+                                                    <a href='@Url.Action("Perfume_Details", "Perfume", new { perfumeID = perfume.Perfume_ID,brandID = Model.brandID,type = Model.type, currentPageIndex = Model.CurrentPageIndex })'>
 
                                                         <h3>@perfume.Perfume_Name</h3>
                                                         <div><span>جنسیت : @perfume.Perfume_Gender </span></div>
@@ -33,14 +33,14 @@
                                                        
                                                         </a>
                                                     <div class="shop-list-btn btn-hover">
-                                                            <a href='@Url.Action("Perfume_Details", "Perfume", new { perfumeID = perfume.Perfume_ID })'>افزودن به سبد خرید</a>
+                                                            <a href='@Url.Action("Perfume_Details", "Perfume", new { perfumeID = perfume.Perfume_ID,brandID = Model.brandID,type = Model.type, currentPageIndex = Model.CurrentPageIndex  })'>افزودن به سبد خرید</a>
                                                         </div>
                                                 </div>
                                             </div>
                                             <div class="col-xl-4 col-lg-5 col-md-5 col-sm-6">
                                                 <div class="product-wrap">
                                                     <div class="product-img">
-                                                        <a href='@Url.Action("Perfume_Details", "Perfume", new { perfumeID = perfume.Perfume_ID })'>
+                                                        <a href='@Url.Action("Perfume_Details", "Perfume", new { perfumeID = perfume.Perfume_ID,brandID = Model.brandID,type = Model.type, currentPageIndex = Model.CurrentPageIndex  })'>
 
                                                             <img class="default-img" src="~/Uploads/PerfumeImages/@perfume.Perfume_ImageIndex" alt="">
                                                             <img class="hover-img" src="~/Uploads/PerfumeImages/@perfume.Perfume_ImageIndex" alt="">

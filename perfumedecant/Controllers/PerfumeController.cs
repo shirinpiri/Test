@@ -116,7 +116,7 @@ namespace perfumedecant.Controllers
             }, JsonRequestBehavior.AllowGet);
         }
 
-        public ActionResult Perfume_Details(int PerfumeID)
+        public ActionResult Perfume_Details(int PerfumeID, int brandID = 0, String type = "", int currentPageIndex = 1)
         {
             String Message = "";
             var perfume = db.Tbl_Perfume.Where(a => a.Perfume_ID == PerfumeID).SingleOrDefault();
@@ -134,6 +134,10 @@ namespace perfumedecant.Controllers
                 ViewBag.cologne_weightList = prices.CologneWeightList;
                 ViewBag.handySample_weightList = prices.HandySampleWeightList;
                 ViewBag.companySample_weightList = prices.CompanySampleWeightList;
+
+                string returnURl = "/Perfumes/"+brandID + "/" + type + "/"+currentPageIndex;
+                ViewBag.returnURL = returnURl;
+
                 return View(perfume);
             }
             else

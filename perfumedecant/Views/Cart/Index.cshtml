@@ -11,6 +11,8 @@
     var types = rep_postType.Get_AllPostTypes();
 
     var totalPrice = 0;
+
+    string continue_btn = (string)ViewBag.ContinueBtn;
 }
 <div class="breadcrumb-area pt-35 pb-35 bg-gray-3">
     <div class="container">
@@ -128,33 +130,42 @@
                         <div class="col-lg-4 col-md-6">
                             @using (Html.BeginForm("PayPrice", "Pay", FormMethod.Post, new { enctype = "multipart/form-data", id = "frm_add_film", Class = "addform" }))
                             {
-                                <div class="grand-totall">
-                                    <div class="title-wrap">
-                                        <h4 class="cart-bottom-title section-bg-gary-cart">مبلغ سبد خرید </h4>
-                                    </div>
-                                    <h5><span>@string.Format("{0:0,0}", totalPrice) تومان</span> مبلغ کل </h5>
-                                    <div class="total-shipping">
-                                        <h5>نحوه ارسال </h5>
-                                        <ul>
-                                            @foreach (var type in types)
-                                            {
-                                                if (type.PostType_isDefault)
-                                                {
-                                                    <li><input name="post_type" type="radio" value="@type.PostType_Price" onchange="radioSelect();" checked> @type.PostType_Title <span>@string.Format("{0:0,0}", type.PostType_Price) تومان</span></li>
-                                                }
-                                                else
-                                                {
-                                                    <li><input name="post_type" type="radio" value="@type.PostType_Price" onchange="radioSelect();"> @type.PostType_Title <span>@string.Format("{0:0,0}", type.PostType_Price) تومان</span></li>
-                                                }
-                                            }
-
-                                        </ul>
-                                    </div>
-                                    <h4 class="grand-totall-title">مبلغ قابل پرداخت(تومان)  <span id="final_price"></span></h4>
-                                    <input name="final_price" type="hidden" id="hidden_final_price" value="" />
-                                    <input type="submit" value="پرداخت" class="payButton" />
-                                    <a href="@Url.Action("Index", "Home")">ادامه خرید</a>
+                            <div class="grand-totall">
+                                <div class="title-wrap">
+                                    <h4 class="cart-bottom-title section-bg-gary-cart">مبلغ سبد خرید </h4>
                                 </div>
+                                <h5><span>@string.Format("{0:0,0}", totalPrice) تومان</span> مبلغ کل </h5>
+                                <div class="total-shipping">
+                                    <h5>نحوه ارسال </h5>
+                                    <ul>
+                                        @foreach (var type in types)
+                                        {
+                                            if (type.PostType_isDefault)
+                                            {
+                                                <li><input name="post_type" type="radio" value="@type.PostType_Price" onchange="radioSelect();" checked> @type.PostType_Title <span>@string.Format("{0:0,0}", type.PostType_Price) تومان</span></li>
+                                            }
+                                            else
+                                            {
+                                                <li><input name="post_type" type="radio" value="@type.PostType_Price" onchange="radioSelect();"> @type.PostType_Title <span>@string.Format("{0:0,0}", type.PostType_Price) تومان</span></li>
+                                            }
+                                        }
+
+                                    </ul>
+                                </div>
+                                <h4 class="grand-totall-title">مبلغ قابل پرداخت(تومان)  <span id="final_price"></span></h4>
+                                <input name="final_price" type="hidden" id="hidden_final_price" value="" />
+                                <input type="submit" value="پرداخت" class="payButton" />
+
+                                @if (continue_btn != null && continue_btn != "")
+                                {
+                                    <a href="@continue_btn">ادامه خرید</a>
+
+                                }
+                                else
+                                {
+                                    <a href="@Url.Action("Index", "Home")">ادامه خرید</a>
+                                }
+                            </div>
                             }
                             </div>
                         <div class="col-lg-4 col-md-12">

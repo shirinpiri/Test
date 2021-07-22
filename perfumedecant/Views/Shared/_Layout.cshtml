@@ -107,9 +107,12 @@
                                     <div class="shopping-cart-content">
 
                                         <ul>
-
-
                                             @foreach (var cart in carts)
+                                            {
+                                                totalPrice = totalPrice + (int)cart.InterimBill_Price;
+                                            }
+
+                                            @foreach (var cart in carts.Take(2))
                                             {
                                                 <li class="single-shopping-cart">
                                                     <div class="shopping-cart-img">
@@ -126,7 +129,14 @@
 
                                                     </div>
                                                 </li>
-                                                totalPrice = totalPrice + (int)cart.InterimBill_Price;
+
+                                            }
+                                            @if (carts.Count() > 2)
+                                            {
+                                               <li>
+                                                   @{ var count = carts.Count() - 2;}
+                                                   <a href="/Cart" style="color:#a749ff">+ بیشتر ( @count )</a>
+                                               </li>
                                             }
 
                                         </ul>

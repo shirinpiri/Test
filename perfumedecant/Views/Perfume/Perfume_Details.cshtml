@@ -6,6 +6,8 @@
     Rep_Perfume rep_perfume = new Rep_Perfume();
     Rep_PerfumeImages rep_images = new Rep_PerfumeImages();
     var images = rep_images.Get_PerfumeImages(Model.Perfume_ID);
+
+    string return_url = (string)ViewBag.returnURL;
 }
 
 <div class="breadcrumb-area pt-35 pb-35 bg-gray-3">
@@ -209,6 +211,8 @@
             }
 
     function Save() {
+        var ret_url = '@return_url';
+        //alert(ret_url);
             var baseUrl = '/Cart/AddToCart';
             var Category_Title = $('#CategoryList option:selected').val();
             var weight;
@@ -239,10 +243,10 @@
                  data: { PerfumeID: Perfume_ID, Category_Title: Category_Title, Weight: weight, Count: Count },
                 success: function (message) {
                     if (message == "OK") {
-                        window.location = "/Cart/Index";
+                        window.location = "/Cart/Index?returnUrl=" +encodeURIComponent(ret_url);
                     }
                     else if (message == "Login") {
-                        window.location = "/Account/Index?returnUrl=/Cart/Index";
+                        window.location = "/Account/Index?returnUrl=/Cart/Index?returnUrl=" +encodeURIComponent(ret_url);
                     }
                     else {
                         document.getElementById("message").innerHTML = message;
